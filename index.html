@@ -1,128 +1,226 @@
-<style>
-body {
-  background-color: #121212;
-  color: #ffffff;
-  font-family: Arial, sans-serif;
-  padding: 15px;
-  padding-bottom: 80px;
-}
-.header-box {
-  text-align: center;
-  margin-bottom: 20px;
-  background-color: #1e1e1e;
-  padding: 20px;
-  border-radius: 12px;
-  border-bottom: 4px solid #3399ff;
-}
-.header-box h2 { color: #ffffff; margin-top: 0; font-size: 1.5em; }
-.header-box p { color: #ffcc00; font-size: 1em; font-weight: bold; margin-bottom: 15px; }
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoFix — Ремонт та Сервіс</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      transition: all 0.25s ease-in-out;
+    }
+    body {
+      background-color: #0d0f12;
+      color: #e2e8f0;
+      font-family: 'Montserrat', sans-serif;
+      padding: 15px;
+      padding-bottom: 80px;
+      margin: 0;
+    }
+    .header-box {
+      text-align: center;
+      margin-bottom: 25px;
+      background: linear-gradient(145deg, #181c24, #101216);
+      padding: 25px 15px;
+      border-radius: 16px;
+      border: 1px solid #2a3241;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .header-box h2 {
+      color: #ffffff;
+      margin-top: 0;
+      font-size: 1.6em;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+    .header-box p {
+      color: #ffcc00;
+      font-size: 0.95em;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    
+    /* Плашки переваг */
+    .features-grid {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .feature-tag {
+      background: rgba(51, 153, 255, 0.1);
+      border: 1px solid rgba(30, 144, 255, 0.4);
+      color: #38ef7d;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8em;
+      font-weight: 600;
+    }
 
-/* Поле пошуку */
-.search-box {
-  width: 100%;
-  max-width: 500px;
-  padding: 12px 15px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: 2px solid #3399ff;
-  background-color: #2a2a2a;
-  color: #ffffff;
-  outline: none;
-  box-sizing: border-box;
-}
-.search-box:focus {
-  border-color: #ffcc00;
-}
+    /* Пошук */
+    .search-box {
+      width: 100%;
+      max-width: 500px;
+      padding: 14px 18px;
+      font-size: 15px;
+      border-radius: 10px;
+      border: 1px solid #3b82f6;
+      background-color: #1a202c;
+      color: #ffffff;
+      outline: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .search-box:focus {
+      border-color: #ffcc00;
+      box-shadow: 0 0 12px rgba(255, 204, 0, 0.3);
+    }
 
-/* Кнопки фільтрів */
-.filter-btns {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 15px;
-}
-.filter-btn {
-  background-color: #2a2a2a;
-  color: #fff;
-  border: 1px solid #3399ff;
-  padding: 8px 16px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: bold;
-}
-.filter-btn:hover, .filter-btn.active {
-  background-color: #3399ff;
-  color: #000;
-}
+    /* Фільтри */
+    .filter-btns {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .filter-btn {
+      background-color: #1e293b;
+      color: #94a3b8;
+      border: 1px solid #334155;
+      padding: 9px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.85em;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      color: #ffffff;
+      border-color: #60a5fa;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+    }
 
-.section-title {
-  color: #ffcc00;
-  border-bottom: 2px solid #ffcc00;
-  padding-bottom: 5px;
-  margin-top: 30px;
-  margin-bottom: 15px;
-  font-size: 1.4em;
-}
-.car-card {
-  background-color: #1e1e1e;
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  border-left: 5px solid #3399ff;
-}
-.moto-card { border-left: 5px solid #ff3366; }
-.car-img {
-  width: 100%;
-  max-height: 250px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 12px;
-}
-h3 { color: #3399ff; font-size: 1.3em; margin-top: 5px; margin-bottom: 5px; }
-.moto-card h3 { color: #ff3366; }
-.vehicle-price {
-  color: #ffcc00;
-  font-weight: bold;
-  font-size: 0.95em;
-  margin-bottom: 15px;
-  background-color: #2a2a2a;
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 6px;
-  border: 1px solid #ffcc00;
-}
-p, ul { color: #dddddd; }
-ul { padding-left: 20px; margin: 0; line-height: 1.6; }
-li { margin-bottom: 8px; list-style-type: none; position: relative; }
-li::before { content: "•"; color: #3399ff; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }
-.moto-card li::before { color: #ff3366; }
-b { color: #ffffff; }
-.price { background-color: #2a2a2a; color: #22cc88; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.9em; margin-left: 5px; border: 1px solid #22cc88; }
+    .section-title {
+      color: #ffcc00;
+      border-bottom: 2px solid #334155;
+      padding-bottom: 8px;
+      margin-top: 35px;
+      margin-bottom: 20px;
+      font-size: 1.3em;
+      font-weight: 700;
+    }
 
-/* Кнопка запису */
-.btn-contact {
-  display: block;
-  width: 100%;
-  text-align: center;
-  background-color: #22cc88;
-  color: #000;
-  font-weight: bold;
-  padding: 10px 0;
-  border-radius: 6px;
-  text-decoration: none;
-  margin-top: 15px;
-}
-</style>
+    /* Картка */
+    .car-card {
+      background: #161b22;
+      padding: 18px;
+      border-radius: 16px;
+      margin-bottom: 22px;
+      border: 1px solid #21262d;
+      border-left: 5px solid #3b82f6;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    }
+    .car-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+      border-color: #30363d;
+      border-left-color: #60a5fa;
+    }
+    .moto-card { border-left-color: #f43f5e; }
+    .moto-card:hover { border-left-color: #fb7185; }
+
+    .car-img {
+      width: 100%;
+      max-height: 240px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 14px;
+    }
+    h3 { color: #60a5fa; font-size: 1.25em; margin: 5px 0; font-weight: 700; }
+    .moto-card h3 { color: #fb7185; }
+    
+    .vehicle-price {
+      color: #fbbf24;
+      font-weight: 700;
+      font-size: 0.85em;
+      margin-bottom: 14px;
+      background-color: #1e293b;
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid #334155;
+    }
+    ul { padding-left: 15px; margin: 0; line-height: 1.7; }
+    li { margin-bottom: 8px; list-style-type: none; font-size: 0.9em; }
+    li::before { content: "✓"; color: #38ef7d; font-weight: bold; margin-right: 8px; }
+    .price {
+      background: #064e3b;
+      color: #34d399;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.85em;
+      float: right;
+      border: 1px solid #059669;
+    }
+
+    /* Кнопка дії */
+    .btn-contact {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff;
+      font-weight: 700;
+      padding: 12px 0;
+      border-radius: 10px;
+      text-decoration: none;
+      margin-top: 18px;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+      font-size: 0.95em;
+    }
+    .btn-contact:hover {
+      background: linear-gradient(135deg, #34d399, #10b981);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+    }
+
+    /* Кнопка вгору */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #3b82f6;
+      color: #ffffff;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
 
 <div class="header-box">
-  <h2>🔧 Розумна база даних з ремонту та ціни</h2>
-  <p>🔍 Пошук по марці авто або мотоцикла:</p>
-  <input type="text" id="searchInput" class="search-box" onkeyup="filterVehicles()" placeholder="Введіть марку (наприклад: BMW, Honda)...">
+  <h2>🔧 АвтоСервіс & Розумна База Знань</h2>
+  <div class="features-grid">
+    <span class="feature-tag">⚡️ Розрахунок за 1 хв</span>
+    <span class="feature-tag">💯 Гарантія якості</span>
+    <span class="feature-tag">🛠 Професійне обладнання</span>
+  </div>
+  <p>🔍 Знайдіть необхідний ремонт чи діагностику:</p>
+  <input type="text" id="searchInput" class="search-box" onkeyup="filterVehicles()" placeholder="Введіть марку (BMW, Honda, Audi)...">
   
   <div class="filter-btns">
-    <button class="filter-btn active" onclick="filterType('all')">Усі</button>
-    <button class="filter-btn" onclick="filterType('auto')">🚗 Авто</button>
-    <button class="filter-btn" onclick="filterType('moto')">🏍 Мото</button>
+    <button class="filter-btn active" onclick="filterType('all', event)">Усі</button>
+    <button class="filter-btn" onclick="filterType('auto', event)">🚗 Авто</button>
+    <button class="filter-btn" onclick="filterType('moto', event)">🏍 Мото</button>
   </div>
 </div>
 
@@ -131,40 +229,40 @@ b { color: #ffffff; }
 
   <div class="car-card vehicle-item auto">
     <h3>🚗 BMW (5 Series / M5)</h3>
-    <div class="vehicle-price">💰 Вартість авто: ~$15,000 - $65,000</div>
+    <div class="vehicle-price">💰 Орієнтовна вартість авто: ~$15,000 - $65,000</div>
     <img class="car-img" src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800" alt="BMW">
-    <p><b>🛠 Інструкції та прайс робіт:</b></p>
+    <p><b>🛠 Прайс робіт та діагностика:</b></p>
     <ul>
-      <li><b>Команда 1:</b> Перевірка рівня мастила через iDrive <span class="price">400 грн</span></li>
-      <li><b>Команда 2:</b> Діагностика важелів та підвіски при стуку <span class="price">600 грн</span></li>
-      <li><b>Команда 3:</b> Комплексна промивка радіаторів охолодження <span class="price">2 500 грн</span></li>
+      <li>Перевірка рівня мастила через iDrive <span class="price">400 грн</span></li>
+      <li>Діагностика важелів та підвіски при стуку <span class="price">600 грн</span></li>
+      <li>Комплексна промивка радіаторів охолодження <span class="price">2 500 грн</span></li>
     </ul>
-    <a href="https://t.me/" class="btn-contact">📞 Записатися на діагностику</a>
+    <a href="https://t.me/" class="btn-contact">💬 Консультація / Записатися</a>
   </div>
 
   <div class="car-card vehicle-item auto">
     <h3>🚗 Mercedes-Benz (E-Class / AMG)</h3>
-    <div class="vehicle-price">💰 Вартість авто: ~$18,000 - $75,000</div>
+    <div class="vehicle-price">💰 Орієнтовна вартість авто: ~$18,000 - $75,000</div>
     <img class="car-img" src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800" alt="Mercedes">
-    <p><b>🛠 Інструкції та прайс робіт:</b></p>
+    <p><b>🛠 Прайс робіт та діагностика:</b></p>
     <ul>
-      <li><b>Команда 1:</b> Скидання помилок блоків SAM через Star Diagnosis <span class="price">800 грн</span></li>
-      <li><b>Команда 2:</b> Перевірка балонів підвіски Airmatic милом <span class="price">500 грн</span></li>
-      <li><b>Команда 3:</b> Заміна мастила в автоматі 7G/9G-Tronic <span class="price">3 500 грн</span></li>
+      <li>Скидання помилок SAM через Star Diagnosis <span class="price">800 грн</span></li>
+      <li>Перевірка балонів підвіски Airmatic <span class="price">500 грн</span></li>
+      <li>Заміна мастила в АКПП 7G/9G-Tronic <span class="price">3 500 грн</span></li>
     </ul>
-    <a href="https://t.me/" class="btn-contact">📞 Записатися на діагностику</a>
+    <a href="https://t.me/" class="btn-contact">💬 Консультація / Записатися</a>
   </div>
 
   <div class="car-card vehicle-item auto">
     <h3>🚗 Audi / Volkswagen / VAG</h3>
-    <div class="vehicle-price">💰 Вартість авто: ~$10,000 - $45,000</div>
+    <div class="vehicle-price">💰 Орієнтовна вартість авто: ~$10,000 - $45,000</div>
     <img class="car-img" src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=800" alt="Audi">
-    <p><b>🛠 Інструкції та прайс робіт:</b></p>
+    <p><b>🛠 Прайс робіт та діагностика:</b></p>
     <ul>
-      <li><b>Команда 1:</b> Контроль натягу ланцюга ГРМ через віконце <span class="price">700 грн</span></li>
-      <li><b>Команда 2:</b> Комп'ютерна адаптація зчеплення коробки DSG <span class="price">1 200 грн</span></li>
+      <li>Контроль натягу ланцюга ГРМ <span class="price">700 грн</span></li>
+      <li>Комп'ютерна адаптація зчеплення DSG <span class="price">1 200 грн</span></li>
     </ul>
-    <a href="https://t.me/" class="btn-contact">📞 Записатися на діагностику</a>
+    <a href="https://t.me/" class="btn-contact">💬 Консультація / Записатися</a>
   </div>
 </div>
 
@@ -173,28 +271,30 @@ b { color: #ffffff; }
 
   <div class="car-card moto-card vehicle-item moto">
     <h3>🏍 Honda Moto (CBR / Hornet)</h3>
-    <div class="vehicle-price">💰 Вартість мото: ~$3,500 - $12,000</div>
+    <div class="vehicle-price">💰 Орієнтовна вартість мото: ~$3,500 - $12,000</div>
     <img class="car-img" src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800" alt="Honda Moto">
-    <p><b>🛠 Інструкції та прайс робіт:</b></p>
+    <p><b>🛠 Прайс робіт та діагностика:</b></p>
     <ul>
-      <li><b>Команда 1:</b> Чистка та синхронізація карбюраторів / інжектора <span class="price">1 500 грн</span></li>
-      <li><b>Команда 2:</b> Обслуговування, очищення та натяг ланцюга <span class="price">350 грн</span></li>
+      <li>Чистка та синхронізація інжектора/карбюратора <span class="price">1 500 грн</span></li>
+      <li>Обслуговування та натяг ланцюга <span class="price">350 грн</span></li>
     </ul>
-    <a href="https://t.me/" class="btn-contact">📞 Записатися на обслуговування</a>
+    <a href="https://t.me/" class="btn-contact">💬 Консультація / Записатися</a>
   </div>
 
   <div class="car-card moto-card vehicle-item moto">
     <h3>🏍 Yamaha (YZF-R6 / MT-07)</h3>
-    <div class="vehicle-price">💰 Вартість мото: ~$4,500 - $14,000</div>
+    <div class="vehicle-price">💰 Орієнтовна вартість мото: ~$4,500 - $14,000</div>
     <img class="car-img" src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=800" alt="Yamaha">
-    <p><b>🛠 Інструкції та прайс робіт:</b></p>
+    <p><b>🛠 Прайс робіт та діагностика:</b></p>
     <ul>
-      <li><b>Команда 1:</b> Заміна антифризу та перевірка помпи <span class="price">600 грн</span></li>
-      <li><b>Команда 2:</b> Регулювання зазорів клапанів <span class="price">1 600 грн</span></li>
+      <li>Заміна антифризу та перевірка помпи <span class="price">600 грн</span></li>
+      <li>Регулювання зазорів клапанів <span class="price">1 600 грн</span></li>
     </ul>
-    <a href="https://t.me/" class="btn-contact">📞 Записатися на обслуговування</a>
+    <a href="https://t.me/" class="btn-contact">💬 Консультація / Записатися</a>
   </div>
 </div>
+
+<a href="#" id="backToTop" class="back-to-top">↑</a>
 
 <script>
 function filterVehicles() {
@@ -211,12 +311,14 @@ function filterVehicles() {
   }
 }
 
-function filterType(type) {
+function filterType(type, e) {
   let items = document.getElementsByClassName('vehicle-item');
   let btns = document.getElementsByClassName('filter-btn');
+  let autoSec = document.getElementById('auto-section');
+  let motoSec = document.getElementById('moto-section');
   
   for (let btn of btns) btn.classList.remove('active');
-  event.target.classList.add('active');
+  if (e && e.currentTarget) e.currentTarget.classList.add('active');
 
   for (let i = 0; i < items.length; i++) {
     if (type === 'all') {
@@ -227,5 +329,27 @@ function filterType(type) {
       items[i].style.display = "none";
     }
   }
+
+  if (type === 'all') {
+    autoSec.style.display = "";
+    motoSec.style.display = "";
+  } else if (type === 'auto') {
+    autoSec.style.display = "";
+    motoSec.style.display = "none";
+  } else if (type === 'moto') {
+    autoSec.style.display = "none";
+    motoSec.style.display = "";
+  }
 }
+
+window.onscroll = function() {
+  let topBtn = document.getElementById("backToTop");
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    topBtn.style.display = "flex";
+  } else {
+    topBtn.style.display = "none";
+  }
+};
 </script>
+</body>
+</html>
