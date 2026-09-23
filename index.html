@@ -1,159 +1,124 @@
 <style>
-search-container {
-    text-align: center;
-
-        margin-bottom: 40px;
-    }
-    .search-input {
-        width: 80%;
-        max-width: 500px;
-        padding: 15px 25px;
-        font-size: 1.2em;
-        border: 2px solid #3399ff;
-        border-radius: 50px;
-        background-color: #1e1e1e;
-        color: #ffffff;
-        outline: none;
-        box-shadow: 0 4px 15px rgba(51, 153, 255, 0.2);
-        transition: 0.3s;
-    }
-    .search-input:focus {
-        box-shadow: 0 4px 20px rgba(51, 153, 255, 0.5);
-        border-color: #ffcc00;
-    }
-
-    .car-card {
-        background-color: #1e1e1e;
-        padding: 20px;
-        border-radius: 12px;
-        margin-bottom: 20px;
-        border-left: 5px solid #3399ff;
-        transition: 0.3s;
-    }
-    h2 { color: #3399ff; margin-top: 0; display: flex; align-items: center; gap: 10px; }
-    h3 { color: #ff5555; font-size: 1em; margin-bottom: 5px; }
-    ul { padding-left: 20px; margin: 0; line-height: 1.6; }
-    li { margin-bottom: 8px; list-style-type: none; position: relative; }
-    li::before { content: "•"; color: #3399ff; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }
-    b { color: #ffcc00; }
-    
-    /* СТИЛЬ ДЛЯ ЦІНИ */
-    .price {
-        background-color: #2a2a2a;
-        color: #22cc88;
-        padding: 2px 8px;
-        border-radius: 4px;
-        font-weight: bold;
-        font-size: 0.9em;
-        margin-left: 5px;
-        border: 1px solid #22cc88;
-    }
-    
-    .no-results { text-align: center; color: #ff5555; font-size: 1.2em; display: none; margin-top: 20px; }
+.search-container {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.search-input {
+  width: 80%;
+  max-width: 500px;
+  padding: 15px 25px;
+  font-size: 1.2em;
+  border: 2px solid #3399ff;
+  border-radius: 50px;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  outline: none;
+  box-shadow: 0 4px 15px rgba(51, 153, 255, 0.2);
+  transition: 0.3s;
+}
+.search-input:focus {
+  box-shadow: 0 4px 20px rgba(51, 153, 255, 0.5);
+  border-color: #ffcc00;
+}
+.car-card {
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border-left: 5px solid #3399ff;
+  transition: 0.3s;
+}
+.car-img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+h2 { margin-top: 0; display: flex; align-items: center; gap: 10px; color: #ffffff; }
+h3 { color: #3399ff; font-size: 1.3em; margin-bottom: 8px; margin-top: 15px; }
+p, ul { color: #dddddd; }
+ul { padding-left: 20px; margin: 0; line-height: 1.6; }
+li { margin-bottom: 8px; list-style-type: none; position: relative; }
+li::before { content: "•"; color: #3399ff; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }
+b { color: #ffcc00; }
+.price { background-color: #2a2a2a; color: #22cc88; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.9em; margin-left: 5px; border: 1px solid #22cc88; }
 </style>
-<h1>🔧 Розумна база даних з ремонту та ціни</h1>
-<p class="subtitle">Впишіть марку машини нижче, щоб знайти інструкцію та вартість робіт</p>
 
-<div class="search-container">
-    <input type="text" id="carSearch" class="search-input" placeholder="Яку машину хочете справити? (наприклад: BMW, Tesla)..." onkeyup="filterCars()">
+<h2>🔧 Розумна база даних з ремонту та ціни</h2>
+<p>Впишіть марку машини нижче, щоб знайти інструкцію та вартість робіт</p>
+
+<div class="car-card">
+  <h3>🚗 BMW</h3>
+  <img class="car-img" src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800" alt="BMW">
+  <p><b>🛠 Інструкції та прайс:</b></p>
+  <ul>
+    <li><b>Команда 1:</b> Перевірка рівня мастила через iDrive <span class="price">400 грн</span></li>
+    <li><b>Команда 2:</b> Діагностика важелів та підвіски при стуку <span class="price">600 грн</span></li>
+    <li><b>Команда 3:</b> Комплексна промивка радіаторів охолодження <span class="price">2 500 грн</span></li>
+  </ul>
 </div>
 
-<div id="carsList">
-    <!-- НІМЕЦЬКІ АВТО -->
-    <div class="car-card">
-        <h2>🇩🇪 BMW</h2>
-        <h3>🛠 Інструкції та прайс:</h3>
-        <ul>
-            <li><b>Команда 1:</b> Перевірка рівня мастила через iDrive <span class="price">400 грн</span></li>
-            <li><b>Команда 2:</b> Діагностика важелів та підвіски при стуку <span class="price">600 грн</span></li>
-            <li><b>Команда 3:</b> Комплексна промивка радіаторів охолодження <span class="price">2 500 грн</span></li>
-        </ul>
-    </div>
-
-    <div class="car-card">
-        <h2>🇩🇪 Mercedes-Benz</h2>
-        <h3>🛠 Інструкції та прайс:</h3>
-        <ul>
-            <li><b>Команда 1:</b> Скидання помилок блоків SAM через Star Diagnosis <span class="price">800 грн</span></li>
-            <li><b>Команда 2:</b> Перевірка балонів підвіски Airmatic милом <span class="price">500 грн</span></li>
-            <li><b>Команда 3:</b> Заміна мастила в автоматі 7G/9G-Tronic <span class="price">3 500 грн</span></li>
-        </ul>
-    </div>
-
-    <div class="car-card">
-        <h2>🇩🇪 Audi / Volkswagen / VAG</h2>
-        <h3>🛠 Інструкції та прайс:</h3>
-        <ul>
-            <li><b>Команда 1:</b> Контроль натягу ланцюга ГРМ через віконце <span class="price">700_грн</span></li>
-            <li><b>Команда 2:</b> Комп'ютерна адаптація зчеплення коробки DSG <span class="price">1 200 грн</span></li>
-            <li><b>Команда 3:</b> Очищення впускних клапанів від нагару (TSI/TFSI) <span class="price">4 000 грн</span></li>
-        </ul>
-    </div>
-
-    <div class="car-card">
-        <h2>🇩🇪 Porsche</h2>
-        <h3>🛠 Інструкції та прайс:</h3>
-        <ul>
-            <li><b>Команда 1:</b> Перевірка керамічних гальм PCCB на тріщини <span class="price">1 500 грн</span></li>
-            <li><b>Команда 2:</b> Ендоскопія циліндрів на задири (мотор 911) <span class="price">3 000 грн</span></li>
-            <li><b>Команда 3:</b> Калібрування активних стабілізаторів PDCC <span class="price">2 000 грн</span></li>
-        </ul>
-    </div>
-
-    <!-- ЯПОНСЬКІ АВТО -->
-    <div class="car-card">
-        <h2>🇯🇵 Toyota / Lexus</h2>
-        <h3>🛠 Інструкції та прайс:</h3><ul>
-            <li><b>Команда 1:</b> Змащування напрямних пальців супортів <span class="price">450 грн</span></li>
-            <li><b>Команда 2:</b> Обслуговування та очищення вентилятора батареї гібрида <span class="price">900 грн</span></li>
-            <li><b>Команда 3:</b> Чистка дросельної заслінки <span class="price">600 грн</span></li>
-        </ul>
-    </div>
-
-    <div class="car-card">
-        <h2>🇯🇵 Honda</h2>
-        <h3>🛠 Інструкції та прайс:</h3>
-        <ul>
-            <li><b>Команда 1:</b> Регулювання зазорів клапанів i-VTEC <span class="price">1 800 грн</span></li>
-            <li><b>Команда 2:</b> Заміна рідини в редукторі DPS від писку <span class="price">1 100 грн</span></li>
-            <li><b>Команда 3:</b> Перевірка датчиків тиску оливи VTEC <span class="price">500 грн</span></li>
-        </ul>
-    </div>
-
-    <div class="car-card">
-        <h2>🇯🇵 Tesla</h2>
-        <h3>🛠 Інструкції та прайс:</h3>
-        <ul>
-            <li><b>Команда 1:</b> Діагностика та заміна низьковольтного акумулятора <span class="price">800 грн</span></li>
-            <li><b>Команда 2:</b> Профілактика та змащення гальмівних супортів <span class="price">700 грн</span></li>
-            <li><b>Команда 3:</b> Діагностика підвіски через важку батарею <span class="price">500 грн</span></li>
-        </ul>
-    </div>
+<div class="car-card">
+  <h3>🚗 Mercedes-Benz</h3>
+  <img class="car-img" src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800" alt="Mercedes">
+  <p><b>🛠 Інструкції та прайс:</b></p>
+  <ul>
+    <li><b>Команда 1:</b> Скидання помилок блоків SAM через Star Diagnosis <span class="price">800 грн</span></li>
+    <li><b>Команда 2:</b> Перевірка балонів підвіски Airmatic милом <span class="price">500 грн</span></li>
+    <li><b>Команда 3:</b> Заміна мастила в автоматі 7G/9G-Tronic <span class="price">3 500 грн</span></li>
+  </ul>
 </div>
 
-<div id="noResultsMessage" class="no-results">❌ Така машина поки не додана в базу сервісу. Спробуйте іншу!</div>
+<div class="car-card">
+  <h3>🚗 Audi / Volkswagen / VAG</h3>
+  <img class="car-img" src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=800" alt="Audi">
+  <p><b>🛠 Інструкції та прайс:</b></p>
+  <ul>
+    <li><b>Команда 1:</b> Контроль натягу ланцюга ГРМ через віконце <span class="price">700 грн</span></li>
+    <li><b>Команда 2:</b> Комп'ютерна адаптація зчеплення коробки DSG <span class="price">1 200 грн</span></li>
+    <li><b>Команда 3:</b> Очищення впускних клапанів від нагару (TSI/TFSI) <span class="price">4 000 грн</span></li>
+  </ul>
+</div>
 
-<script>
-    function filterCars() {
-        let input = document.getElementById('carSearch').value.toLowerCase();
-        let cards = document.getElementsByClassName('car-card');
-        let hasResults = false;
+<div class="car-card">
+  <h3>🚗 Porsche</h3>
+  <img class="car-img" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800" alt="Porsche">
+  <p><b>🛠 Інструкції та прайс:</b></p>
+  <ul>
+    <li><b>Команда 1:</b> Перевірка керамічних гальм PCCB на тріщини <span class="price">1 500 грн</span></li>
+    <li><b>Команда 2:</b> Ендоскопія циліндрів на задири (мотор 911) <span class="price">3 000 грн</span></li>
+    <li><b>Команда 3:</b> Калібрування активних стабілізаторів PDCC <span class="price">2 000 грн</span></li>
+  </ul>
+</div>
 
-        for (let i = 0; i < cards.length; i++) {
-            let carName = cards[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
-            if (carName.includes(input)) {
-                cards[i].style.display = "block";
-                hasResults = true;
-            } else {
-                cards[i].style.display = "none";
-            }
-        }
+<div class="car-card">
+  <h3>🚗 Toyota / Lexus</h3>
+  <img class="car-img" src="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800" alt="Toyota">
+  <p><b>🛠 Інструкції та прайс:</b></p>
+  <ul>
+    <li><b>Команда 1:</b> Змащування напрямних пальців супортів <span class="price">450 грн</span></li>
+    <li><b>Команда 2:</b> Обслуговування та очищення вентилятора батареї гібрида <span class="price">900 грн</span></li>
+    <li><b>Команда 3:</b> Чистка дросельної заслінки <span class="price">600 грн</span></li>
+  </ul>
+</div>
 
-        let message = document.getElementById('noResultsMessage');
-        if (hasResults) {
-            message.style.display = "none";
-        } else {
-            message.style.display = "block";
-        }
-    }
-</script>
+<div class="car-card">
+  <h3>🚗 Ford</h3>
+  <img class="car-img" src="https://images.unsplash.com/photo-1551830820-330a71b99659?w=800" alt="Ford">
+  <p><b>🛠 Інструкції та прайс:</b></p>
+  <ul>
+    <li><b>Команда 1:</b> Заміна заспокійливих роликів ременя <span class="price">850 грн</span></li>
+    <li><b>Команда 2:</b> Промивка форсунок дизельного двигуна TDCi <span class="price">1 800 грн</span></li>
+  </ul>
+</div>
+
+<div class="car-card">
+  <h3>🚗 Hyundai / Kia</h3>
+  <img class="car-img" src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800" alt="Hyundai">
+  <p><b>🛠 Інструкції та прайс:</b></p>
+  <ul>
+    <li><b>Команда 1:</b> Регулювання зазорів клапанів <span class="price">1 100 грн</span></li>
+    <li><b>Команда 2:</b> Заміна масла в варіаторі/АКПП <span class="price">2 200 грн</span></li>
+  </ul>
+</div>
