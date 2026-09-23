@@ -13,17 +13,8 @@ body {
   border-radius: 12px;
   border-bottom: 4px solid #3399ff;
 }
-.header-box h2 {
-  color: #ffffff;
-  margin-top: 0;
-  font-size: 1.5em;
-}
-.header-box p {
-  color: #ffcc00;
-  font-size: 1.1em;
-  font-weight: bold;
-  margin-bottom: 0;
-}
+.header-box h2 { color: #ffffff; margin-top: 0; font-size: 1.5em; }
+.header-box p { color: #ffcc00; font-size: 1.1em; font-weight: bold; margin-bottom: 0; }
 .section-title {
   color: #ffcc00;
   border-bottom: 2px solid #ffcc00;
@@ -39,9 +30,7 @@ body {
   margin-bottom: 20px;
   border-left: 5px solid #3399ff;
 }
-.moto-card {
-  border-left: 5px solid #ff3366;
-}
+.moto-card { border-left: 5px solid #ff3366; }
 .car-img {
   width: 100%;
   max-height: 250px;
@@ -49,14 +38,25 @@ body {
   border-radius: 8px;
   margin-bottom: 12px;
 }
-h3 { color: #3399ff; font-size: 1.3em; margin-top: 5px; margin-bottom: 10px; }
+h3 { color: #3399ff; font-size: 1.3em; margin-top: 5px; margin-bottom: 5px; }
 .moto-card h3 { color: #ff3366; }
+.vehicle-price {
+  color: #ffcc00;
+  font-weight: bold;
+  font-size: 0.95em;
+  margin-bottom: 15px;
+  background-color: #2a2a2a;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #ffcc00;
+}
 p, ul { color: #dddddd; }
 ul { padding-left: 20px; margin: 0; line-height: 1.6; }
 li { margin-bottom: 8px; list-style-type: none; position: relative; }
 li::before { content: "•"; color: #3399ff; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }
 .moto-card li::before { color: #ff3366; }
-b { color: #ffcc00; }
+b { color: #ffffff; }
 .price { background-color: #2a2a2a; color: #22cc88; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.9em; margin-left: 5px; border: 1px solid #22cc88; }
 </style>
 
@@ -68,9 +68,10 @@ b { color: #ffcc00; }
 <h2 class="section-title">🚗 Легкові авто</h2>
 
 <div class="car-card">
-  <h3>🚗 BMW</h3>
+  <h3>🚗 BMW (5 Series / M5)</h3>
+  <div class="vehicle-price">💰 Вартість авто: ~$15,000 - $65,000</div>
   <img class="car-img" src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800" alt="BMW">
-  <p><b>🛠 Інструкції та прайс:</b></p>
+  <p><b>🛠 Інструкції та прайс робіт:</b></p>
   <ul>
     <li><b>Команда 1:</b> Перевірка рівня мастила через iDrive <span class="price">400 грн</span></li>
     <li><b>Команда 2:</b> Діагностика важелів та підвіски при стуку <span class="price">600 грн</span></li>
@@ -79,9 +80,10 @@ b { color: #ffcc00; }
 </div>
 
 <div class="car-card">
-  <h3>🚗 Mercedes-Benz</h3>
+  <h3>🚗 Mercedes-Benz (E-Class / AMG)</h3>
+  <div class="vehicle-price">💰 Вартість авто: ~$18,000 - $75,000</div>
   <img class="car-img" src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800" alt="Mercedes">
-  <p><b>🛠 Інструкції та прайс:</b></p>
+  <p><b>🛠 Інструкції та прайс робіт:</b></p>
   <ul>
     <li><b>Команда 1:</b> Скидання помилок блоків SAM через Star Diagnosis <span class="price">800 грн</span></li>
     <li><b>Команда 2:</b> Перевірка балонів підвіски Airmatic милом <span class="price">500 грн</span></li>
@@ -91,8 +93,9 @@ b { color: #ffcc00; }
 
 <div class="car-card">
   <h3>🚗 Audi / Volkswagen / VAG</h3>
+  <div class="vehicle-price">💰 Вартість авто: ~$10,000 - $45,000</div>
   <img class="car-img" src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=800" alt="Audi">
-  <p><b>🛠 Інструкції та прайс:</b></p>
+  <p><b>🛠 Інструкції та прайс робіт:</b></p>
   <ul>
     <li><b>Команда 1:</b> Контроль натягу ланцюга ГРМ через віконце <span class="price">700 грн</span></li>
     <li><b>Команда 2:</b> Комп'ютерна адаптація зчеплення коробки DSG <span class="price">1 200 грн</span></li>
@@ -101,9 +104,21 @@ b { color: #ffcc00; }
 </div>
 
 <div class="car-card">
+  <h3>🚗 Porsche 911 / Cayenne</h3>
+  <div class="vehicle-price">💰 Вартість авто: ~$35,000 - $150,000</div>
+  <img class="car-img" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800" alt="Porsche">
+  <p><b>🛠 Інструкції та прайс робіт:</b></p>
+  <ul>
+    <li><b>Команда 1:</b> Перевірка керамічних гальм PCCB на тріщини <span class="price">1 500 грн</span></li>
+    <li><b>Команда 2:</b> Ендоскопія циліндрів на задири <span class="price">3 000 грн</span></li>
+  </ul>
+</div>
+
+<div class="car-card">
   <h3>🚗 Toyota / Lexus</h3>
+  <div class="vehicle-price">💰 Вартість авто: ~$12,000 - $50,000</div>
   <img class="car-img" src="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800" alt="Toyota">
-  <p><b>🛠 Інструкції та прайс:</b></p>
+  <p><b>🛠 Інструкції та прайс робіт:</b></p>
   <ul>
     <li><b>Команда 1:</b> Змащування напрямних пальців супортів <span class="price">450 грн</span></li>
     <li><b>Команда 2:</b> Обслуговування вентилятора батареї гібрида <span class="price">900 грн</span></li>
@@ -111,9 +126,10 @@ b { color: #ffcc00; }
 </div>
 
 <div class="car-card">
-  <h3>🚗 Honda</h3>
+  <h3>🚗 Honda Civic / Accord</h3>
+  <div class="vehicle-price">💰 Вартість авто: ~$9,000 - $28,000</div>
   <img class="car-img" src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800" alt="Honda">
-  <p><b>🛠 Інструкції та прайс:</b></p>
+  <p><b>🛠 Інструкції та прайс робіт:</b></p>
   <ul>
     <li><b>Команда 1:</b> Регулювання теплових зазорів клапанів i-VTEC <span class="price">1 200 грн</span></li>
     <li><b>Команда 2:</b> Заміна рідини в варіаторі HCF-2 <span class="price">1 800 грн</span></li>
@@ -121,39 +137,10 @@ b { color: #ffcc00; }
 </div>
 
 <div class="car-card">
-  <h3>🚗 Mazda</h3>
-  <img class="car-img" src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800" alt="Mazda">
-  <p><b>🛠 Інструкції та прайс:</b></p>
-  <ul>
-    <li><b>Команда 1:</b> Чистка шайб під форсунками SkyActiv-D <span class="price">2 200 грн</span></li>
-    <li><b>Команда 2:</b> Профілактика супортів та заміна колодок <span class="price">650 грн</span></li>
-  </ul>
-</div>
-
-<div class="car-card">
-  <h3>🚗 Nissan</h3>
-  <img class="car-img" src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=800" alt="Nissan">
-  <p><b>🛠 Інструкції та прайс:</b></p>
-  <ul>
-    <li><b>Команда 1:</b> Перевірка тиску редукційного клапана CVT <span class="price">800 грн</span></li>
-    <li><b>Команда 2:</b> Заміна свічок запалювання <span class="price">500 грн</span></li>
-  </ul>
-</div>
-
-<div class="car-card">
-  <h3>🚗 Subaru</h3>
-  <img class="car-img" src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?w=800" alt="Subaru">
-  <p><b>🛠 Інструкції та прайс:</b></p>
-  <ul>
-    <li><b>Команда 1:</b> Заміна свічок на опозитному двигуні (EJ/FA) <span class="price">1 400 грн</span></li>
-    <li><b>Команда 2:</b> Заміна мастила у редукторах <span class="price">900 грн</span></li>
-  </ul>
-</div>
-
-<div class="car-card">
-  <h3>🚗 Ford</h3>
+  <h3>🚗 Ford Mustang / Focus</h3>
+  <div class="vehicle-price">💰 Вартість авто: ~$7,000 - $35,000</div>
   <img class="car-img" src="https://images.unsplash.com/photo-1551830820-330a71b99659?w=800" alt="Ford">
-  <p><b>🛠 Інструкції та прайс:</b></p>
+  <p><b>🛠 Інструкції та прайс робіт:</b></p>
   <ul>
     <li><b>Команда 1:</b> Заміна заспокійливих роликів ременя EcoBoost <span class="price">850 грн</span></li>
     <li><b>Команда 2:</b> Адаптація коробки Powershift <span class="price">1 000 грн</span></li>
@@ -162,30 +149,22 @@ b { color: #ffcc00; }
 
 <div class="car-card">
   <h3>🚗 Hyundai / Kia</h3>
+  <div class="vehicle-price">💰 Вартість авто: ~$8,000 - $25,000</div>
   <img class="car-img" src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800" alt="Hyundai">
-  <p><b>🛠 Інструкції та прайс:</b></p>
+  <p><b>🛠 Інструкції та прайс робіт:</b></p>
   <ul>
     <li><b>Команда 1:</b> Регулювання зазорів клапанів <span class="price">1 100 грн</span></li>
     <li><b>Команда 2:</b> Заміна масла в АКПП/варіаторі <span class="price">2 200 грн</span></li>
   </ul>
 </div>
 
-<div class="car-card">
-  <h3>🚗 Skoda</h3>
-  <img class="car-img" src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=800" alt="Skoda">
-  <p><b>🛠 Інструкції та прайс:</b></p>
-  <ul>
-    <li><b>Команда 1:</b> Заміна помпи та ременя ГРМ 1.6 / 2.0 TDI <span class="price">2 600 грн</span></li>
-    <li><b>Команда 2:</b> Обслуговування механізму двірників <span class="price">400 грн</span></li>
-  </ul>
-</div>
-
 <h2 class="section-title">🏍 Мотоцикли</h2>
 
 <div class="car-card moto-card">
-  <h3>🏍 Honda Moto (CBR / Hornet / Transalp)</h3>
+  <h3>🏍 Honda Moto (CBR / Hornet)</h3>
+  <div class="vehicle-price">💰 Вартість мото: ~$3,500 - $12,000</div>
   <img class="car-img" src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800" alt="Honda Moto">
-  <p><b>🛠 Інструкції та прайс:</b></p>
+  <p><b>🛠 Інструкції та прайс робіт:</b></p>
   <ul>
     <li><b>Команда 1:</b> Чистка та синхронізація карбюраторів / інжектора <span class="price">1 500 грн</span></li>
     <li><b>Команда 2:</b> Обслуговування, очищення та натяг ланцюга <span class="price">350 грн</span></li>
@@ -194,29 +173,21 @@ b { color: #ffcc00; }
 </div>
 
 <div class="car-card moto-card">
-  <h3>🏍 Yamaha (YZF-R6 / MT-07 / Tenere)</h3>
+  <h3>🏍 Yamaha (YZF-R6 / MT-07)</h3>
+  <div class="vehicle-price">💰 Вартість мото: ~$4,500 - $14,000</div>
   <img class="car-img" src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=800" alt="Yamaha">
-  <p><b>🛠 Інструкції та прайс:</b></p>
+  <p><b>🛠 Інструкції та прайс робіт:</b></p>
   <ul>
-    <li><b>Команда 1:</b> Заміна антифризу та перевірка помпа-термостат <span class="price">600 грн</span></li>
+    <li><b>Команда 1:</b> Заміна антифризу та перевірка помпи <span class="price">600 грн</span></li>
     <li><b>Команда 2:</b> Регулювання зазорів клапанів <span class="price">1 600 грн</span></li>
   </ul>
 </div>
 
 <div class="car-card moto-card">
-  <h3>🏍 Suzuki (GSX-R / V-Strom / Bandit)</h3>
-  <img class="car-img" src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800" alt="Suzuki">
-  <p><b>🛠 Інструкції та прайс:</b></p>
-  <ul>
-    <li><b>Команда 1:</b> Заміна мастила та масляного фільтра <span class="price">450 грн</span></li>
-    <li><b>Команда 2:</b> Синхронізація заслінок дроселів SDTV <span class="price">1 200 грн</span></li>
-  </ul>
-</div>
-
-<div class="car-card moto-card">
-  <h3>🏍 Kawasaki (Ninja / Z800 / ER-6)</h3>
+  <h3>🏍 Kawasaki (Ninja / Z800)</h3>
+  <div class="vehicle-price">💰 Вартість мото: ~$4,000 - $13,000</div>
   <img class="car-img" src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=800" alt="Kawasaki">
-  <p><b>🛠 Інструкції та прайс:</b></p>
+  <p><b>🛠 Інструкції та прайс робіт:</b></p>
   <ul>
     <li><b>Команда 1:</b> Комплексна заміна масла з фільтром <span class="price">400 грн</span></li>
     <li><b>Команда 2:</b> Заміна гальмівної рідини та прокачування <span class="price">500 грн</span></li>
@@ -225,8 +196,9 @@ b { color: #ffcc00; }
 
 <div class="car-card moto-card">
   <h3>🏍 BMW Motorrad (GS / S1000RR)</h3>
+  <div class="vehicle-price">💰 Вартість мото: ~$7,000 - $22,000</div>
   <img class="car-img" src="https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?w=800" alt="BMW Moto">
-  <p><b>🛠 Інструкції та прайс:</b></p>
+  <p><b>🛠 Інструкції та прайс робіт:</b></p>
   <ul>
     <li><b>Команда 1:</b> Заміна мастила в кардані / редукторі (GS) <span class="price">700 грн</span></li>
     <li><b>Команда 2:</b> Комп'ютерне зчитування помилок (Moto Scan) <span class="price">500 грн</span></li>
@@ -234,19 +206,10 @@ b { color: #ffcc00; }
 </div>
 
 <div class="car-card moto-card">
-  <h3>🏍 KTM (Duke / Adventure / RC)</h3>
-  <img class="car-img" src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=800" alt="KTM">
-  <p><b>🛠 Інструкції та прайс:</b></p>
-  <ul>
-    <li><b>Команда 1:</b> Заміна свічки та очищення сіток масляного піддону <span class="price">650 грн</span></li>
-    <li><b>Команда 2:</b> Обслуговування зчеплення Magura/Bremo <span class="price">800 грн</span></li>
-  </ul>
-</div>
-
-<div class="car-card moto-card">
   <h3>🏍 Ducati (Monster / Panigale)</h3>
+  <div class="vehicle-price">💰 Вартість мото: ~$6,000 - $25,000</div>
   <img class="car-img" src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800" alt="Ducati">
-  <p><b>🛠 Інструкції та прайс:</b></p>
+  <p><b>🛠 Інструкції та прайс робіт:</b></p>
   <ul>
     <li><b>Команда 1:</b> Заміна ременів ГРМ Desmodromic <span class="price">3 000 грн</span></li>
     <li><b>Команда 2:</b> Заміна зчеплення у масляній/сухій ванні <span class="price">1 200 грн</span></li>
@@ -254,11 +217,23 @@ b { color: #ffcc00; }
 </div>
 
 <div class="car-card moto-card">
-  <h3>🏍 Aprilia (RSV4 / Tuono)</h3>
-  <img class="car-img" src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=800" alt="Aprilia">
-  <p><b>🛠 Інструкції та прайс:</b></p>
+  <h3>🏍 Harley-Davidson (Iron / Sportster)</h3>
+  <div class="vehicle-price">💰 Вартість мото: ~$7,500 - $20,000</div>
+  <img class="car-img" src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=800" alt="Harley">
+  <p><b>🛠 Інструкції та прайс робіт:</b></p>
   <ul>
-    <li><b>Команда 1:</b> Калібрування електроніки APRC <span class="price">1 100 грн</span></li>
-    <li><b>Команда 2:</b> Регулювання та змащування троса газу/зчеплення <span class="price">300 грн</span></li>
+    <li><b>Команда 1:</b> Обслуговування ремінної передачі (Belt Drive) <span class="price">800 грн</span></li>
+    <li><b>Команда 2:</b> Заміна мастила в трьох порожнинах (Engine/Primary/Trans) <span class="price">1 400 грн</span></li>
+  </ul>
+</div>
+
+<div class="car-card moto-card">
+  <h3>🏍 Vespa / Piaggio (Scooter)</h3>
+  <div class="vehicle-price">💰 Вартість скутера: ~$2,000 - $6,500</div>
+  <img class="car-img" src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=800" alt="Vespa">
+  <p><b>🛠 Інструкції та прайс робіт:</b></p>
+  <ul>
+    <li><b>Команда 1:</b> Заміна ременя варіатора та роликів <span class="price">700 грн</span></li>
+    <li><b>Команда 2:</b> Чистка зчеплення варіатора <span class="price">400 грн</span></li>
   </ul>
 </div>
