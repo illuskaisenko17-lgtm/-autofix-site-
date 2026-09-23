@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AutoFix — Повний каталог авто та мото</title>
+  <title>AutoFix — Каталог авто та мото</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * {
@@ -19,7 +19,6 @@
       margin: 0;
     }
     
-    /* Акційний банер */
     .promo-banner {
       background: linear-gradient(135deg, #ff9900, #ff5500);
       color: #000;
@@ -48,11 +47,10 @@
       font-weight: 800;
     }
     
-    /* Статистика */
     .stats-container {
       display: flex;
       justify-content: center;
-      gap: 15px;
+      gap: 12px;
       margin: 15px 0;
       flex-wrap: wrap;
     }
@@ -109,30 +107,44 @@
       color: #ffcc00;
       border-bottom: 2px solid #334155;
       padding-bottom: 8px;
-      margin-top: 30px;
-      margin-bottom: 15px;
-      font-size: 1.2em;
+      margin-top: 35px;
+      margin-bottom: 20px;
+      font-size: 1.3em;
       font-weight: 700;
     }
 
     .grid-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 15px;
+      gap: 20px;
     }
 
     .car-card {
       background: #161b22;
-      padding: 16px;
       border-radius: 12px;
       border: 1px solid #21262d;
       border-left: 4px solid #3b82f6;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
     .car-card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-4px);
       border-color: #30363d;
       border-left-color: #60a5fa;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+    .card-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
     }
     .moto-card { border-left-color: #f43f5e; }
     .moto-card:hover { border-left-color: #fb7185; }
@@ -140,7 +152,7 @@
     h3 { color: #60a5fa; font-size: 1.1em; margin: 0 0 8px 0; font-weight: 700; }
     .moto-card h3 { color: #fb7185; }
     
-    ul { padding-left: 15px; margin: 8px 0; line-height: 1.6; }
+    ul { padding-left: 15px; margin: 8px 0; line-height: 1.6; flex-grow: 1; }
     li { list-style-type: none; font-size: 0.85em; margin-bottom: 4px; }
     li::before { content: "✓"; color: #38ef7d; font-weight: bold; margin-right: 6px; }
     .price {
@@ -170,7 +182,6 @@
       background: linear-gradient(135deg, #34d399, #10b981);
     }
 
-    /* Блок відгуків */
     .reviews-box {
       margin-top: 40px;
       background: #161b22;
@@ -219,13 +230,13 @@
   <h2>🔧 Професійний АвтоСервіс AutoFix</h2>
   
   <div class="stats-container">
-    <div class="stat-item">🚗 1200+ авто в базі</div>
+    <div class="stat-item">🚗 1500+ авто в базі</div>
     <div class="stat-item">⚡️ Сервіс за 30 хв</div>
     <div class="stat-item">💯 Гарантія якості</div>
   </div>
 
   <p>🔍 Знайдіть бренд свого авто або мотоцикла:</p>
-  <input type="text" id="searchInput" class="search-box" onkeyup="filterVehicles()" placeholder="Введіть марку (BMW, Toyota, Zeekr, Honda)...">
+  <input type="text" id="searchInput" class="search-box" onkeyup="filterVehicles()" placeholder="Введіть марку (BMW, Toyota, Ducati, Zeekr)...">
   
   <div class="filter-btns">
     <button class="filter-btn active" onclick="filterType('all', event)">Усі</button>
@@ -237,37 +248,209 @@
 <div id="main-content">
   <h2 class="section-title">🚗 Німеччина & Європа</h2>
   <div class="grid-container">
-    <div class="car-card vehicle-item auto"><h3>🚗 BMW</h3><ul><li>Комп'ютерна діагностика <span class="price">500 грн</span></li><li>Заміна мастила та фільтрів <span class="price">800 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
-    <div class="car-card vehicle-item auto"><h3>🚗 Audi</h3><ul><li>Діагностика підвіски <span class="price">400 грн</span></li><li>Адаптація DSG <span class="price">1200 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
-    <div class="car-card vehicle-item auto"><h3>🚗 Mercedes-Benz</h3><ul><li>Скидання помилок SAM/Star <span class="price">800 грн</span></li><li>Перевірка Airmatic <span class="price">500 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
-    <div class="car-card vehicle-item auto"><h3>🚗 Volkswagen</h3><ul><li>Заміна ременя ГРМ <span class="price">2500 грн</span></li><li>Перевірка ходової <span class="price">400 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
-    <div class="car-card vehicle-item auto"><h3>🚗 Porsche</h3><ul><li>Сканування PIWIS <span class="price">1200 грн</span></li><li>Обслуговування гальм <span class="price">1500 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
-    <div class="car-card vehicle-item auto"><h3>🚗 Opel</h3><ul><li>Діагностика двигуна <span class="price">450 грн</span></li><li>Заміна модулів запалювання <span class="price">500 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
-    <div class="car-card vehicle-item auto"><h3>🚗 Skoda</h3><ul><li>Планове ТО <span class="price">700 грн</span></li><li>Діагностика турбіни <span class="price">600 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=600&q=80" class="card-img" alt="BMW">
+      <div class="card-body">
+        <h3>🚗 BMW</h3>
+        <ul><li>Діагностика <span class="price">500 грн</span></li><li>Заміна мастила <span class="price">800 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Audi">
+      <div class="card-body">
+        <h3>🚗 Audi</h3>
+        <ul><li>Діагностика ходової <span class="price">400 грн</span></li><li>Адаптація DSG <span class="price">1200 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Mercedes">
+      <div class="card-body">
+        <h3>🚗 Mercedes-Benz</h3>
+        <ul><li>Скидання помилок Star <span class="price">800 грн</span></li><li>Перевірка Airmatic <span class="price">500 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Volkswagen">
+      <div class="card-body">
+        <h3>🚗 Volkswagen</h3>
+        <ul><li>Заміна ременя ГРМ <span class="price">2500 грн</span></li><li>Перевірка підвіски <span class="price">400 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Porsche">
+      <div class="card-body">
+        <h3>🚗 Porsche</h3>
+        <ul><li>Сканування PIWIS <span class="price">1200 грн</span></li><li>Обслуговування гальм <span class="price">1500 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Opel">
+      <div class="card-body">
+        <h3>🚗 Opel</h3>
+        <ul><li>Діагностика двигуна <span class="price">450 грн</span></li><li>Модулі запалювання <span class="price">500 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Skoda">
+      <div class="card-body">
+        <h3>🚗 Skoda / SEAT / Cupra</h3>
+        <ul><li>Планове ТО <span class="price">700 грн</span></li><li>Діагностика турбіни <span class="price">600 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
   </div>
 
   <h2 class="section-title">🇯🇵 Японія</h2>
   <div class="grid-container">
-    <div class="car-card vehicle-item auto"><h3>🚗 Toyota</h3><ul><li>Обслуговування Hybrid <span class="price">1000 грн</span></li><li>Заміна мастила <span class="price">600 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
-    <div class="car-card vehicle-item auto"><h3>🚗 Lexus</h3><ul><li>Діагностика електроніки <span class="price">700 грн</span></li><li>Заміна гальмівних колодок <span class="price">600 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
-    <div class="car-card vehicle-item auto"><h3>🚗 Honda</h3><ul><li>Регулювання клапанів VTEC <span class="price">1200 грн</span></li><li>ТО варіатора <span class="price">1000 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
-    <div class="car-card vehicle-item auto"><h3>🚗 Nissan</h3><ul><li>Діагностика варіатора CVT <span class="price">800 грн</span></li><li>Чистка дроселя <span class="price">500 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Toyota">
+      <div class="card-body">
+        <h3>🚗 Toyota / Lexus</h3>
+        <ul><li>Сервіс Hybrid <span class="price">1000 грн</span></li><li>Заміна мастила <span class="price">600 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1609521263047-f8d205293f24?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Honda">
+      <div class="card-body">
+        <h3>🚗 Honda / Acura</h3>
+        <ul><li>Регулювання VTEC <span class="price">1200 грн</span></li><li>ТО варіатора <span class="price">1000 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Nissan">
+      <div class="card-body">
+        <h3>🚗 Nissan / Infiniti</h3>
+        <ul><li>Діагностика CVT <span class="price">800 грн</span></li><li>Чистка дроселя <span class="price">500 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Mazda">
+      <div class="card-body">
+        <h3>🚗 Mazda</h3>
+        <ul><li>Діагностика SkyActiv <span class="price">600 грн</span></li><li>Перевірка ходової <span class="price">400 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Subaru">
+      <div class="card-body">
+        <h3>🚗 Subaru / Mitsubishi / Suzuki / Isuzu</h3>
+        <ul><li>Сервіс AWD <span class="price">800 грн</span></li><li>Обслуговування двигуна <span class="price">1200 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
   </div>
 
   <h2 class="section-title">🇺🇸 США & Електро</h2>
   <div class="grid-container">
-    <div class="car-card vehicle-item auto"><h3>🚗 Tesla (Model 3/Y/S/X)</h3><ul><li>Діагностика батареї <span class="price">1500 грн</span></li><li>Калібрування автопілота <span class="price">1000 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
-    <div class="car-card vehicle-item auto"><h3>🚗 Ford</h3><ul><li>Прошивка PowerShift <span class="price">1000 грн</span></li><li>Діагностика EcoBoost <span class="price">600 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Tesla">
+      <div class="card-body">
+        <h3>🚗 Tesla (Model 3/Y/S/X)</h3>
+        <ul><li>Діагностика батареї <span class="price">1500 грн</span></li><li>Калібрування автопілота <span class="price">1000 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1551830820-330a71b99659?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Ford">
+      <div class="card-body">
+        <h3>🚗 Ford / Lincoln</h3>
+        <ul><li>Прошивка PowerShift <span class="price">1000 грн</span></li><li>Діагностика EcoBoost <span class="price">600 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Chevrolet">
+      <div class="card-body">
+        <h3>🚗 Chevrolet / Cadillac / Buick / GMC</h3>
+        <ul><li>Діагностика АКПП <span class="price">700 грн</span></li><li>Сканування GM <span class="price">600 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Jeep">
+      <div class="card-body">
+        <h3>🚗 Jeep / RAM / Dodge / Chrysler</h3>
+        <ul><li>Обслуговування 4x4 <span class="price">900 грн</span></li><li>Діагностика підвіски <span class="price">500 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
   </div>
 
-  <h2 class="section-title">🏍 Мотоцикли</h2>
+  <h2 class="section-title">🇨🇳 Кийтаські авто & Електро</h2>
   <div class="grid-container">
-    <div class="car-card moto-card vehicle-item moto"><h3>🏍 Honda Moto</h3><ul><li>Чистка інжектора/карбюратора <span class="price">1500 грн</span></li><li>Обслуговування ланцюга <span class="price">350 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
-    <div class="car-card moto-card vehicle-item moto"><h3>🏍 Yamaha Moto</h3><ul><li>Заміна антифризу/помпи <span class="price">600 грн</span></li><li>Клапани <span class="price">1600 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Zeekr">
+      <div class="card-body">
+        <h3>🚗 BYD / Zeekr / LiXiang / NIO / Xpeng</h3>
+        <ul><li>Діагностика софту/батареї <span class="price">1200 грн</span></li><li>Русифікація <span class="price">2000 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card vehicle-item auto">
+      <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Geely">
+      <div class="card-body">
+        <h3>🚗 Geely / Chery / Haval / Changan / GAC</h3>
+        <ul><li>Діагностика турбомоторів <span class="price">600 грн</span></li><li>Планове ТО <span class="price">800 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">🏍 Мотоцикли & Скутери</h2>
+  <div class="grid-container">
+    <div class="car-card moto-card vehicle-item moto">
+      <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Honda Moto">
+      <div class="card-body">
+        <h3>🏍 Honda Moto / Yamaha Moto</h3>
+        <ul><li>Чистка інжектора/карбюратора <span class="price">1500 грн</span></li><li>Обслуговування ланцюга <span class="price">350 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card moto-card vehicle-item moto">
+      <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Kawasaki Moto">
+      <div class="card-body">
+        <h3>🏍 Kawasaki / Suzuki Moto</h3>
+        <ul><li>Заміна антифризу/помпи <span class="price">600 грн</span></li><li>Синхронізація дроселів <span class="price">1200 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card moto-card vehicle-item moto">
+      <img src="https://images.unsplash.com/photo-1515777315835-281b94c9589f?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Ducati Moto">
+      <div class="card-body">
+        <h3>🏍 Ducati / BMW Motorrad / KTM / Aprilia</h3>
+        <ul><li>Заміна ременів Desmo <span class="price">3000 грн</span></li><li>Сканування помилок <span class="price">800 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card moto-card vehicle-item moto">
+      <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Harley-Davidson">
+      <div class="card-body">
+        <h3>🏍 Harley-Davidson / Indian / Triumph / Royal Enfield</h3>
+        <ul><li>Діагностика V-Twin <span class="price">1000 грн</span></li><li>Заміна мастила <span class="price">700 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
+    <div class="car-card moto-card vehicle-item moto">
+      <img src="https://images.unsplash.com/photo-1525160354320-d8e92641c563?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Vespa Scooter">
+      <div class="card-body">
+        <h3>🛵 Vespa / SYM / Kymco / Bajaj (Скутери)</h3>
+        <ul><li>Обслуговування варіатора <span class="price">600 грн</span></li><li>Чистка карбюратора <span class="price">500 грн</span></li></ul>
+        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- Блок відгуків -->
 <div class="reviews-box">
   <h2 style="color: #ffcc00; margin-top: 0; font-size: 1.2em;">💬 Відгуки наших клієнтів</h2>
   
