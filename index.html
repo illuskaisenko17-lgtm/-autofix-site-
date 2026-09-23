@@ -1,26 +1,189 @@
-<h2>BMW 🏁</h2>
-<p>BMW – швидкі та стильні машини.</p>
-<h3>🛠 Інструкції з ремонту BMW:</h3>
-<ul>
-    <li><b>Команда 1:</b> Перевірити рівень мастила через бортовий комп'ютер (iDrive).</li>
-    <li><b>Команда 2:</b> Діагностика підвіски при появі стуку (часта проблема важелів).</li>
-    <li><b>Команда 3:</b> Очищення системи охолодження, щоб двигун не перегрівався.</li>
-</ul>
+/* СТИЛЬ ДЛЯ КРАСИВОГО ПОЛЯ ПОШУКУ */
+    .search-container {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    .search-input {
+        width: 80%;
+        max-width: 500px;
+        padding: 15px 25px;
+        font-size: 1.2em;
+        border: 2px solid #3399ff;
+        border-radius: 50px;
+        background-color: #1e1e1e;
+        color: #ffffff;
+        outline: none;
+        box-shadow: 0 4px 15px rgba(51, 153, 255, 0.2);
+        transition: 0.3s;
+    }
+    .search-input:focus {
+        box-shadow: 0 4px 20px rgba(51, 153, 255, 0.5);
+        border-color: #ffcc00;
+    }
 
-<h2>Mercedes ⭐</h2>
-<p>Mercedes – комфортні та потужні автівки.</p>
-<h3>🛠 Інструкції з ремонту Mercedes:</h3>
-<ul>
-    <li><b>Команда 1:</b> Комп'ютерне скидання помилок електроніки через сканер OBD2.</li>
-    <li><b>Команда 2:</b> Перевірка та калібрування пневмопідвіски (якщо машина просідає).</li>
-    <li><b>Команда 3:</b> Заміна свічок запалювання для плавної роботи двигуна.</li>
-</ul>
+    /* СТИЛІ БЛОКІВ МАШИН */
+    .car-card {
+        background-color: #1e1e1e;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        border-left: 5px solid #3399ff;
+        transition: 0.3s;
+    }
+    h2 { color: #3399ff; margin-top: 0; display: flex; align-items: center; gap: 10px; }
+    h3 { color: #ff5555; font-size: 1em; margin-bottom: 5px; }
+    ul { padding-left: 20px; margin: 0; line-height: 1.6; }
+    li { margin-bottom: 5px; }
+    b { color: #ffcc00; }
+    .no-results { text-align: center; color: #ff5555; font-size: 1.2em; display: none; margin-top: 20px; }
+</style>
+<h1>🔧 Розумна база даних з ремонту авто</h1>
+<p class="subtitle">Впишіть марку машини нижче, щоб миттєво знайти інструкцію</p>
 
-<h2>Audi 🦅</h2>
-<p>Audi – технологічні автівки з повним приводом Quattro.</p>
-<h3>🛠 Інструкції з ремонту Audi:</h3>
-<ul>
-    <li><b>Команда 1:</b> Заміна ременя або ланцюга ГРМ суворо за регламентом.</li>
-    <li><b>Команда 2:</b> Обслуговування фірмового повного приводу (заміна оливи в диференціалі).</li>
-    <li><b>Команда 3:</b> Перевірка датчиків турбіни на герметичність систем наддуву.</li>
-</ul>
+<!-- ПОЛЕНЯ ДЛЯ ВВЕДЕННЯ НАЗВИ МАШИНИ -->
+<div class="search-container">
+    <input type="text" id="carSearch" class="search-input" placeholder="Яку машину хочете справити? (наприклад: BMW, Tesla)..." onkeyup="filterCars()">
+</div>
+
+<div id="carsList">
+    <!-- НІМЕЦЬКІ АВТО -->
+    <div class="car-card">
+        <h2>🇩🇪 BMW</h2>
+        <h3>🛠 Інструкції з ремонту:</h3>
+        <ul>
+            <li><b>Команда 1:</b> Перевірка рівня мастила виключно через систему iDrive.</li>
+            <li><b>Команда 2:</b> Діагностика важелів та підвіски при появі глухого стуку.</li>
+            <li><b>Команда 3:</b> Промивка радіаторів раз на рік від перегріву.</li>
+        </ul>
+    </div>
+
+    <div class="car-card">
+        <h2>🇩🇪 Mercedes-Benz</h2>
+        <h3>🛠 Інструкції з ремонту:</h3>
+        <ul>
+            <li><b>Команда 1:</b> Повне скидання помилок блоків SAM через сканер Star Diagnosis.</li>
+            <li><b>Команда 2:</b> Перевірка балонів підвіски Airmatic мильним розчином.</li>
+            <li><b>Команда 3:</b> Заміна мастила в автоматі 7G/9G-Tronic кожні 60 000 км.</li>
+        </ul>
+    </div>
+
+    <div class="car-card">
+        <h2>🇩🇪 Audi / Volkswagen / VAG</h2>
+        <h3>🛠 Інструкції з ремонту:</h3>
+        <ul>
+            <li><b>Команда 1:</b> Контроль натягу ланцюга ГРМ через оглядове віконце.</li>
+            <li><b>Команда 2:</b> Адаптація зчеплення коробки DSG через діагностичний кабель.</li>
+            <li><b>Команда 3:</b> Очищення впускних клапанів від нагару на TSI/TFSI.</li>
+        </ul>
+    </div>
+
+    <div class="car-card">
+        <h2>🇩🇪 Porsche</h2>
+        <h3>🛠 Інструкції з ремонту:</h3>
+        <ul>
+            <li><b>Команда 1:</b> Перевірка стану керамічних гальм PCCB на мікротріщини.</li>
+            <li><b>Команда 2:</b> Ендоскопія циліндрів на задири в опозитних двигунах 911.</li>
+            <li><b>Команда 3:</b> Калібрування активних стабілізаторів поперечної стійкості (PDCC).</li>
+        </ul>
+    </div>
+
+    <!-- ЯПОНСЬКІ АВТО -->
+    <div class="car-card">
+        <h2>🇯🇵 Toyota / Lexus</h2>
+        <h3>🛠 Інструкції з ремонту:</h3>
+        <ul>
+            <li><b>Команда 1:</b> Регулярне змащування напрямних пальців гальмівних супортів.</li>
+            <li><b>Команда 2:</b> Обслуговування та очищення вентилятора батареї на гібридах.</li>
+            <li><b>Команда 3:</b> Чистка дросельної заслінки при плаваючих обертах.</li>
+        </ul>
+    </div>
+
+    <div class="car-card">
+        <h2>🇯🇵 Honda</h2>
+        <h3>🛠 Інструкції з ремонту:</h3>
+        <ul>
+            <li><b>Команда 1:</b> Регулювання теплових зазорів клапанів i-VTEC кожні 40 000 км.</li><li><b>Команда 2:</b> Заміна рідини в редукторі DPS для усунення писку в поворотах.</li>
+            <li><b>Команда 3:</b> Перевірка датчиків тиску оливи в системі фаз VTEC.</li>
+        </ul>
+    </div>
+
+    <div class="car-card">
+        <h2>🇯🇵 Tesla</h2>
+        <h3>🛠 Інструкції з ремонту:</h3>
+        <ul>
+            <li><b>Команда 1:</b> Перевірка стану та заміна 12-вольтового акумулятора.</li>
+            <li><b>Команда 2:</b> Змащення супортів (через рекуперацію колодки закисають).</li>
+            <li><b>Команда 3:</b> Діагностика важелів передньої підвіски через важку батарею.</li>
+        </ul>
+    </div>
+</div>
+
+<div id="noResultsMessage" class="no-results">❌ Така машина поки не додана в базу сервісу. Спробуйте іншу!</div>
+
+<!-- МАГІЧНИЙ СКРИПТ ПОШУКУ (JAVASCRIPT) -->
+<script>
+    function filterCars() {
+        let input = document.getElementById('carSearch').value.toLowerCase();
+        let cards = document.getElementsByClassName('car-card');
+        let hasResults = false;
+
+        for (let i = 0; i < cards.length; i++) {
+            let carName = cards[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
+            if (carName.includes(input)) {
+                cards[i].style.display = "block";
+                hasResults = true;
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+
+        let message = document.getElementById('noResultsMessage');
+        if (hasResults) {
+            message.style.display = "none";
+        } else {
+            message.style.display = "block";
+        }
+    }
+</script><li><b>Команда 2:</b> Заміна рідини в редукторі DPS для усунення писку в поворотах.</li>
+            <li><b>Команда 3:</b> Перевірка датчиків тиску оливи в системі фаз VTEC.</li>
+        </ul>
+    </div>
+
+    <div class="car-card">
+        <h2>🇯🇵 Tesla</h2>
+        <h3>🛠 Інструкції з ремонту:</h3>
+        <ul>
+            <li><b>Команда 1:</b> Перевірка стану та заміна 12-вольтового акумулятора.</li>
+            <li><b>Команда 2:</b> Змащення супортів (через рекуперацію колодки закисають).</li>
+            <li><b>Команда 3:</b> Діагностика важелів передньої підвіски через важку батарею.</li>
+        </ul>
+    </div>
+</div>
+
+<div id="noResultsMessage" class="no-results">❌ Така машина поки не додана в базу сервісу. Спробуйте іншу!</div>
+
+<!-- МАГІЧНИЙ СКРИПТ ПОШУКУ (JAVASCRIPT) -->
+<script>
+    function filterCars() {
+        let input = document.getElementById('carSearch').value.toLowerCase();
+        let cards = document.getElementsByClassName('car-card');
+        let hasResults = false;
+
+        for (let i = 0; i < cards.length; i++) {
+            let carName = cards[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
+            if (carName.includes(input)) {
+                cards[i].style.display = "block";
+                hasResults = true;
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+
+        let message = document.getElementById('noResultsMessage');
+        if (hasResults) {
+            message.style.display = "none";
+        } else {
+            message.style.display = "block";
+        }
+    }
+</script>
