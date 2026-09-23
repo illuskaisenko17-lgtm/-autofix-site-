@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AutoFix — Ремонт та Сервіс</title>
+  <title>AutoFix — Повний каталог авто та мото</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
-      transition: all 0.25s ease-in-out;
+      transition: all 0.2s ease-in-out;
     }
     body {
       background-color: #0d0f12;
@@ -18,6 +18,20 @@
       padding-bottom: 80px;
       margin: 0;
     }
+    
+    /* Акційний банер */
+    .promo-banner {
+      background: linear-gradient(135deg, #ff9900, #ff5500);
+      color: #000;
+      font-weight: 800;
+      text-align: center;
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      font-size: 0.9em;
+      box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
+    }
+
     .header-box {
       text-align: center;
       margin-bottom: 25px;
@@ -32,34 +46,26 @@
       margin-top: 0;
       font-size: 1.6em;
       font-weight: 800;
-      letter-spacing: 0.5px;
-    }
-    .header-box p {
-      color: #ffcc00;
-      font-size: 0.95em;
-      font-weight: 600;
-      margin-bottom: 20px;
     }
     
-    /* Плашки переваг */
-    .features-grid {
+    /* Статистика */
+    .stats-container {
       display: flex;
       justify-content: center;
-      gap: 10px;
+      gap: 15px;
+      margin: 15px 0;
       flex-wrap: wrap;
-      margin-bottom: 20px;
     }
-    .feature-tag {
-      background: rgba(51, 153, 255, 0.1);
-      border: 1px solid rgba(30, 144, 255, 0.4);
-      color: #38ef7d;
-      padding: 6px 12px;
-      border-radius: 20px;
+    .stat-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid #2a3241;
       font-size: 0.8em;
-      font-weight: 600;
+      font-weight: 700;
+      color: #38ef7d;
     }
 
-    /* Пошук */
     .search-box {
       width: 100%;
       max-width: 500px;
@@ -70,102 +76,83 @@
       background-color: #1a202c;
       color: #ffffff;
       outline: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
     .search-box:focus {
       border-color: #ffcc00;
       box-shadow: 0 0 12px rgba(255, 204, 0, 0.3);
     }
 
-    /* Фільтри */
     .filter-btns {
       display: flex;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
       margin-top: 15px;
+      flex-wrap: wrap;
     }
     .filter-btn {
       background-color: #1e293b;
       color: #94a3b8;
       border: 1px solid #334155;
-      padding: 9px 20px;
-      border-radius: 25px;
+      padding: 8px 16px;
+      border-radius: 20px;
       cursor: pointer;
       font-weight: 700;
-      font-size: 0.85em;
+      font-size: 0.8em;
     }
     .filter-btn:hover, .filter-btn.active {
       background: linear-gradient(135deg, #3b82f6, #1d4ed8);
       color: #ffffff;
       border-color: #60a5fa;
-      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
     }
 
     .section-title {
       color: #ffcc00;
       border-bottom: 2px solid #334155;
       padding-bottom: 8px;
-      margin-top: 35px;
-      margin-bottom: 20px;
-      font-size: 1.3em;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-size: 1.2em;
       font-weight: 700;
     }
 
-    /* Картка */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 15px;
+    }
+
     .car-card {
       background: #161b22;
-      padding: 18px;
-      border-radius: 16px;
-      margin-bottom: 22px;
+      padding: 16px;
+      border-radius: 12px;
       border: 1px solid #21262d;
-      border-left: 5px solid #3b82f6;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+      border-left: 4px solid #3b82f6;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
     .car-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+      transform: translateY(-3px);
       border-color: #30363d;
       border-left-color: #60a5fa;
     }
     .moto-card { border-left-color: #f43f5e; }
     .moto-card:hover { border-left-color: #fb7185; }
 
-    .car-img {
-      width: 100%;
-      max-height: 240px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 14px;
-    }
-    h3 { color: #60a5fa; font-size: 1.25em; margin: 5px 0; font-weight: 700; }
+    h3 { color: #60a5fa; font-size: 1.1em; margin: 0 0 8px 0; font-weight: 700; }
     .moto-card h3 { color: #fb7185; }
     
-    .vehicle-price {
-      color: #fbbf24;
-      font-weight: 700;
-      font-size: 0.85em;
-      margin-bottom: 14px;
-      background-color: #1e293b;
-      display: inline-block;
-      padding: 5px 12px;
-      border-radius: 20px;
-      border: 1px solid #334155;
-    }
-    ul { padding-left: 15px; margin: 0; line-height: 1.7; }
-    li { margin-bottom: 8px; list-style-type: none; font-size: 0.9em; }
-    li::before { content: "✓"; color: #38ef7d; font-weight: bold; margin-right: 8px; }
+    ul { padding-left: 15px; margin: 8px 0; line-height: 1.6; }
+    li { list-style-type: none; font-size: 0.85em; margin-bottom: 4px; }
+    li::before { content: "✓"; color: #38ef7d; font-weight: bold; margin-right: 6px; }
     .price {
       background: #064e3b;
       color: #34d399;
-      padding: 3px 8px;
-      border-radius: 6px;
+      padding: 2px 6px;
+      border-radius: 4px;
       font-weight: 700;
-      font-size: 0.85em;
+      font-size: 0.8em;
       float: right;
-      border: 1px solid #059669;
     }
 
-    /* Кнопка дії */
     .btn-contact {
       display: block;
       width: 100%;
@@ -173,49 +160,72 @@
       background: linear-gradient(135deg, #10b981, #059669);
       color: #ffffff;
       font-weight: 700;
-      padding: 12px 0;
-      border-radius: 10px;
+      padding: 10px 0;
+      border-radius: 8px;
       text-decoration: none;
-      margin-top: 18px;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
-      font-size: 0.95em;
+      margin-top: 12px;
+      font-size: 0.85em;
     }
     .btn-contact:hover {
       background: linear-gradient(135deg, #34d399, #10b981);
-      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
     }
 
-    /* Кнопка вгору */
+    /* Блок відгуків */
+    .reviews-box {
+      margin-top: 40px;
+      background: #161b22;
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid #2a3241;
+    }
+    .review-card {
+      background: #0d0f12;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 0.85em;
+    }
+    .review-author {
+      color: #ffcc00;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
     .back-to-top {
       position: fixed;
       bottom: 20px;
       right: 20px;
       background: #3b82f6;
       color: #ffffff;
-      width: 45px;
-      height: 45px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       display: none;
       justify-content: center;
       align-items: center;
-      font-size: 20px;
+      font-size: 18px;
       text-decoration: none;
-      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);
       z-index: 1000;
     }
   </style>
 </head>
 <body>
 
+<div class="promo-banner">
+  🔥 ЗНИЖКА -15% на комп'ютерну діагностику при записі сьогодні!
+</div>
+
 <div class="header-box">
-  <h2>🔧 АвтоСервіс & Розумна База Знань</h2>
-  <div class="features-grid">
-    <span class="feature-tag">⚡️ Розрахунок за 1 хв</span>
-    <span class="feature-tag">💯 Гарантія якості</span>
-    <span class="feature-tag">🛠 Професійне обладнання</span>
+  <h2>🔧 Професійний АвтоСервіс AutoFix</h2>
+  
+  <div class="stats-container">
+    <div class="stat-item">🚗 1200+ авто в базі</div>
+    <div class="stat-item">⚡️ Сервіс за 30 хв</div>
+    <div class="stat-item">💯 Гарантія якості</div>
   </div>
-  <p>🔍 Знайдіть необхідний ремонт чи діагностику:</p>
-  <input type="text" id="searchInput" class="search-box" onkeyup="filterVehicles()" placeholder="Введіть марку (BMW, Honda, Audi)...">
+
+  <p>🔍 Знайдіть бренд свого авто або мотоцикла:</p>
+  <input type="text" id="searchInput" class="search-box" onkeyup="filterVehicles()" placeholder="Введіть марку (BMW, Toyota, Zeekr, Honda)...">
   
   <div class="filter-btns">
     <button class="filter-btn active" onclick="filterType('all', event)">Усі</button>
@@ -224,73 +234,51 @@
   </div>
 </div>
 
-<div id="auto-section">
-  <h2 class="section-title">🚗 Легкові авто</h2>
-
-  <div class="car-card vehicle-item auto">
-    <h3>🚗 BMW (5 Series / M5)</h3>
-    <div class="vehicle-price">💰 Орієнтовна вартість авто: ~$15,000 - $65,000</div>
-    <img class="car-img" src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800" alt="BMW">
-    <p><b>🛠 Прайс робіт та діагностика:</b></p>
-    <ul>
-      <li>Перевірка рівня мастила через iDrive <span class="price">400 грн</span></li>
-      <li>Діагностика важелів та підвіски при стуку <span class="price">600 грн</span></li>
-      <li>Комплексна промивка радіаторів охолодження <span class="price">2 500 грн</span></li>
-    </ul>
-    <a href="https://t.me/" class="btn-contact">💬 Консультація / Записатися</a>
+<div id="main-content">
+  <h2 class="section-title">🚗 Німеччина & Європа</h2>
+  <div class="grid-container">
+    <div class="car-card vehicle-item auto"><h3>🚗 BMW</h3><ul><li>Комп'ютерна діагностика <span class="price">500 грн</span></li><li>Заміна мастила та фільтрів <span class="price">800 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
+    <div class="car-card vehicle-item auto"><h3>🚗 Audi</h3><ul><li>Діагностика підвіски <span class="price">400 грн</span></li><li>Адаптація DSG <span class="price">1200 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
+    <div class="car-card vehicle-item auto"><h3>🚗 Mercedes-Benz</h3><ul><li>Скидання помилок SAM/Star <span class="price">800 грн</span></li><li>Перевірка Airmatic <span class="price">500 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
+    <div class="car-card vehicle-item auto"><h3>🚗 Volkswagen</h3><ul><li>Заміна ременя ГРМ <span class="price">2500 грн</span></li><li>Перевірка ходової <span class="price">400 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
+    <div class="car-card vehicle-item auto"><h3>🚗 Porsche</h3><ul><li>Сканування PIWIS <span class="price">1200 грн</span></li><li>Обслуговування гальм <span class="price">1500 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
+    <div class="car-card vehicle-item auto"><h3>🚗 Opel</h3><ul><li>Діагностика двигуна <span class="price">450 грн</span></li><li>Заміна модулів запалювання <span class="price">500 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
+    <div class="car-card vehicle-item auto"><h3>🚗 Skoda</h3><ul><li>Планове ТО <span class="price">700 грн</span></li><li>Діагностика турбіни <span class="price">600 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
   </div>
 
-  <div class="car-card vehicle-item auto">
-    <h3>🚗 Mercedes-Benz (E-Class / AMG)</h3>
-    <div class="vehicle-price">💰 Орієнтовна вартість авто: ~$18,000 - $75,000</div>
-    <img class="car-img" src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800" alt="Mercedes">
-    <p><b>🛠 Прайс робіт та діагностика:</b></p>
-    <ul>
-      <li>Скидання помилок SAM через Star Diagnosis <span class="price">800 грн</span></li>
-      <li>Перевірка балонів підвіски Airmatic <span class="price">500 грн</span></li>
-      <li>Заміна мастила в АКПП 7G/9G-Tronic <span class="price">3 500 грн</span></li>
-    </ul>
-    <a href="https://t.me/" class="btn-contact">💬 Консультація / Записатися</a>
+  <h2 class="section-title">🇯🇵 Японія</h2>
+  <div class="grid-container">
+    <div class="car-card vehicle-item auto"><h3>🚗 Toyota</h3><ul><li>Обслуговування Hybrid <span class="price">1000 грн</span></li><li>Заміна мастила <span class="price">600 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
+    <div class="car-card vehicle-item auto"><h3>🚗 Lexus</h3><ul><li>Діагностика електроніки <span class="price">700 грн</span></li><li>Заміна гальмівних колодок <span class="price">600 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
+    <div class="car-card vehicle-item auto"><h3>🚗 Honda</h3><ul><li>Регулювання клапанів VTEC <span class="price">1200 грн</span></li><li>ТО варіатора <span class="price">1000 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
+    <div class="car-card vehicle-item auto"><h3>🚗 Nissan</h3><ul><li>Діагностика варіатора CVT <span class="price">800 грн</span></li><li>Чистка дроселя <span class="price">500 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
   </div>
 
-  <div class="car-card vehicle-item auto">
-    <h3>🚗 Audi / Volkswagen / VAG</h3>
-    <div class="vehicle-price">💰 Орієнтовна вартість авто: ~$10,000 - $45,000</div>
-    <img class="car-img" src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=800" alt="Audi">
-    <p><b>🛠 Прайс робіт та діагностика:</b></p>
-    <ul>
-      <li>Контроль натягу ланцюга ГРМ <span class="price">700 грн</span></li>
-      <li>Комп'ютерна адаптація зчеплення DSG <span class="price">1 200 грн</span></li>
-    </ul>
-    <a href="https://t.me/" class="btn-contact">💬 Консультація / Записатися</a>
+  <h2 class="section-title">🇺🇸 США & Електро</h2>
+  <div class="grid-container">
+    <div class="car-card vehicle-item auto"><h3>🚗 Tesla (Model 3/Y/S/X)</h3><ul><li>Діагностика батареї <span class="price">1500 грн</span></li><li>Калібрування автопілота <span class="price">1000 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
+    <div class="car-card vehicle-item auto"><h3>🚗 Ford</h3><ul><li>Прошивка PowerShift <span class="price">1000 грн</span></li><li>Діагностика EcoBoost <span class="price">600 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
+  </div>
+
+  <h2 class="section-title">🏍 Мотоцикли</h2>
+  <div class="grid-container">
+    <div class="car-card moto-card vehicle-item moto"><h3>🏍 Honda Moto</h3><ul><li>Чистка інжектора/карбюратора <span class="price">1500 грн</span></li><li>Обслуговування ланцюга <span class="price">350 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
+    <div class="car-card moto-card vehicle-item moto"><h3>🏍 Yamaha Moto</h3><ul><li>Заміна антифризу/помпи <span class="price">600 грн</span></li><li>Клапани <span class="price">1600 грн</span></li></ul><a href="https://t.me/" class="btn-contact">💬 Записатися</a></div>
   </div>
 </div>
 
-<div id="moto-section">
-  <h2 class="section-title">🏍 Мотоцикли</h2>
-
-  <div class="car-card moto-card vehicle-item moto">
-    <h3>🏍 Honda Moto (CBR / Hornet)</h3>
-    <div class="vehicle-price">💰 Орієнтовна вартість мото: ~$3,500 - $12,000</div>
-    <img class="car-img" src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800" alt="Honda Moto">
-    <p><b>🛠 Прайс робіт та діагностика:</b></p>
-    <ul>
-      <li>Чистка та синхронізація інжектора/карбюратора <span class="price">1 500 грн</span></li>
-      <li>Обслуговування та натяг ланцюга <span class="price">350 грн</span></li>
-    </ul>
-    <a href="https://t.me/" class="btn-contact">💬 Консультація / Записатися</a>
+<!-- Блок відгуків -->
+<div class="reviews-box">
+  <h2 style="color: #ffcc00; margin-top: 0; font-size: 1.2em;">💬 Відгуки наших клієнтів</h2>
+  
+  <div class="review-card">
+    <div class="review-author">⭐️⭐️⭐️⭐️⭐️ Олександр (BMW F30)</div>
+    <div>«Швидко знайшли стук у підвісці та вирішили проблему за пів дня. Професійний підхід!»</div>
   </div>
-
-  <div class="car-card moto-card vehicle-item moto">
-    <h3>🏍 Yamaha (YZF-R6 / MT-07)</h3>
-    <div class="vehicle-price">💰 Орієнтовна вартість мото: ~$4,500 - $14,000</div>
-    <img class="car-img" src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=800" alt="Yamaha">
-    <p><b>🛠 Прайс робіт та діагностика:</b></p>
-    <ul>
-      <li>Заміна антифризу та перевірка помпи <span class="price">600 грн</span></li>
-      <li>Регулювання зазорів клапанів <span class="price">1 600 грн</span></li>
-    </ul>
-    <a href="https://t.me/" class="btn-contact">💬 Консультація / Записатися</a>
+  
+  <div class="review-card">
+    <div class="review-author">⭐️⭐️⭐️⭐️⭐️ Максим (Toyota RAV4)</div>
+    <div>«Зробили повну діагностику гібрида перед покупкою. Дякую за якісну роботу!»</div>
   </div>
 </div>
 
@@ -314,8 +302,6 @@ function filterVehicles() {
 function filterType(type, e) {
   let items = document.getElementsByClassName('vehicle-item');
   let btns = document.getElementsByClassName('filter-btn');
-  let autoSec = document.getElementById('auto-section');
-  let motoSec = document.getElementById('moto-section');
   
   for (let btn of btns) btn.classList.remove('active');
   if (e && e.currentTarget) e.currentTarget.classList.add('active');
@@ -328,17 +314,6 @@ function filterType(type, e) {
     } else {
       items[i].style.display = "none";
     }
-  }
-
-  if (type === 'all') {
-    autoSec.style.display = "";
-    motoSec.style.display = "";
-  } else if (type === 'auto') {
-    autoSec.style.display = "";
-    motoSec.style.display = "none";
-  } else if (type === 'moto') {
-    autoSec.style.display = "none";
-    motoSec.style.display = "";
   }
 }
 
