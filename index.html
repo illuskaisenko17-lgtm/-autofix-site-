@@ -3,389 +3,283 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CYBERSPACE // OMNI-HUB 3D</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <style>
-    :root {
-      --neon-cyan: #00f3ff;
-      --neon-magenta: #ff0055;
-      --neon-purple: #b000ff;
-      --bg-dark: #020208;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Rajdhani', sans-serif;
-      user-select: none;
-    }
-
-    body, html {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background-color: var(--bg-dark);
-      color: #fff;
-    }
-
-    #webgl-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
-
-    /* UI Overlay */
-    .ui-layer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 10;
-      pointer-events: none;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 30px;
-      background: radial-gradient(circle, transparent 60%, rgba(0, 0, 0, 0.8) 100%);
-    }
-
-    .interactive {
-      pointer-events: auto;
-    }
-
-    /* Header */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(0, 243, 255, 0.3);
-      padding-bottom: 15px;
-      backdrop-filter: blur(8px);
-    }
-
-    .title-box h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.2rem;
-      font-weight: 900;
-      letter-spacing: 4px;
-      background: linear-gradient(90deg, #fff, var(--neon-cyan), var(--neon-magenta));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
-    }
-
-    .title-box p {
-      font-size: 0.9rem;
-      color: var(--neon-cyan);
-      letter-spacing: 2px;
-    }
-
-    .status-panel {
-      display: flex;
-      gap: 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.85rem;
-    }
-
-    .status-item {
-      background: rgba(0, 243, 255, 0.05);
-      border: 1px solid rgba(0, 243, 255, 0.2);
-      padding: 8px 15px;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .pulse-dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--neon-cyan);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--neon-cyan);
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.3; transform: scale(0.8); }
-      50% { opacity: 1; transform: scale(1.2); }
-    }
-
-    /* Controls Panel */
-    .controls-panel {
-      align-self: flex-end;
-      background: rgba(10, 15, 25, 0.75);
-      border: 1px solid rgba(0, 243, 255, 0.3);
-      padding: 20px;
-      border-radius: 12px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(0, 243, 255, 0.1);
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      width: 280px;
-    }
-
-    .controls-panel h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1rem;
-      color: var(--neon-cyan);
-      border-bottom: 1px solid rgba(0, 243, 255, 0.2);
-      padding-bottom: 5px;
-    }
-
-    .btn {
-      background: linear-gradient(90deg, rgba(0, 243, 255, 0.1), rgba(255, 0, 85, 0.1));
-      border: 1px solid var(--neon-cyan);
-      color: #fff;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.85rem;
-      padding: 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .btn:hover {
-      background: var(--neon-cyan);
-      color: #000;
-      box-shadow: 0 0 20px var(--neon-cyan);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      border-color: var(--neon-magenta);
-    }
-
-    .btn-secondary:hover {
-      background: var(--neon-magenta);
-      color: #fff;
-      box-shadow: 0 0 20px var(--neon-magenta);
-    }
-
-    /* Footer */
-    footer {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.5);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 10px;
-    }
-  </style>
+  <title>Vehicle Tuning & Service</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Підключення футуристичного шрифту Orbitron -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <div id="webgl-container"></div>
-
-  <div class="ui-layer">
-    <header class="interactive">
-      <div class="title-box">
-        <h1>OMNI-HUB 3D</h1>
-        <p>ADVANCED QUANTUM CORE INTERACTION</p>
+  <div class="container">
+    
+    <!-- Картка 1: BMW M5 F90 Cyber -->
+    <div class="card">
+      <div class="card-image-wrapper">
+        <div class="image-placeholder">?</div>
+        <span class="badge badge-cyan">AUTOS</span>
       </div>
-      <div class="status-panel">
-        <div class="status-item">
-          <div class="pulse-dot"></div>
-          <span>CORE: ONLINE</span>
+      <h2 class="card-title">BMW M5 F90 Cyber</h2>
+      <div class="card-details">
+        <div class="detail-column">
+          <span class="label">ПОСЛУГА</span>
+          <span class="value text-white">Stage 3 + Neon</span>
         </div>
-        <div class="status-item">
-          <span id="fps-counter">FPS: 60</span>
+        <div class="detail-column align-right">
+          <span class="label">ЦІНА</span>
+          <span class="value text-cyan">18 500 UAH</span>
         </div>
       </div>
-    </header>
-
-    <div class="controls-panel interactive">
-      <h3>ПАНЕЛЬ КЕРУВАННЯ</h3>
-      <button class="btn" id="btn-warp">Гіперстрибок (Warp)</button>
-      <button class="btn btn-secondary" id="btn-color">Змінити Ядро</button>
-      <button class="btn" id="btn-speed">Прискорити Обертання</button>
+      <button class="btn-book">BOOK APPOINTMENT</button>
     </div>
 
-    <footer>
-      <span>КООРДИНАТИ: X-774 Y-102 Z-909</span>
-      <span>СИСТЕМА ГОТОВА ДО ВЗАЄМОДІЇ (КРУТІТЬ МИШКОЮ)</span>
-    </footer>
+    <!-- Картка 2: Audi R8 V10 Performance -->
+    <div class="card">
+      <div class="card-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=800&q=80" alt="Audi R8 V10 Performance" class="card-image">
+        <span class="badge badge-cyan">AUTOS</span>
+      </div>
+      <h2 class="card-title">Audi R8 V10 Performance</h2>
+      <div class="card-details">
+        <div class="detail-column">
+          <span class="label">ПОСЛУГА</span>
+          <span class="value text-white">Stage 2 Tuning</span>
+        </div>
+        <div class="detail-column align-right">
+          <span class="label">ЦІНА</span>
+          <span class="value text-cyan">22 000 UAH</span>
+        </div>
+      </div>
+      <button class="btn-book">BOOK APPOINTMENT</button>
+    </div>
+
+    <!-- Картка 3: Pitster Pro LXR 190 -->
+    <div class="card">
+      <div class="card-image-wrapper">
+        <div class="image-placeholder">?</div>
+        <span class="badge badge-green">PITBIKES</span>
+      </div>
+      <h2 class="card-title">Pitster Pro LXR 190</h2>
+      <div class="card-details">
+        <div class="detail-column">
+          <span class="label">ПОСЛУГА</span>
+          <span class="value text-white">Engine Overhaul</span>
+        </div>
+        <div class="detail-column align-right">
+          <span class="label">ЦІНА</span>
+          <span class="value text-cyan">9 500 UAH</span>
+        </div>
+      </div>
+      <button class="btn-book">BOOK APPOINTMENT</button>
+    </div>
+
+    <!-- Картка 4: Kayo Evolution 140 -->
+    <div class="card">
+      <div class="card-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80" alt="Kayo Evolution 140" class="card-image">
+        <span class="badge badge-green">PITBIKES</span>
+      </div>
+      <h2 class="card-title">Kayo Evolution 140</h2>
+      <div class="card-details">
+        <div class="detail-column">
+          <span class="label">ПОСЛУГА</span>
+          <span class="value text-white">Carb Adjustment</span>
+        </div>
+        <div class="detail-column align-right">
+          <span class="label">ЦІНА</span>
+          <span class="value text-cyan">7 500 UAH</span>
+        </div>
+      </div>
+      <button class="btn-book">BOOK APPOINTMENT</button>
+    </div>
+
+    <!-- Картка 5: Vespa Custom Neon -->
+    <div class="card">
+      <div class="card-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=800&q=80" alt="Vespa Custom Neon" class="card-image">
+        <span class="badge badge-purple">SCOOTERS</span>
+      </div>
+      <h2 class="card-title">Vespa Custom Neon</h2>
+      <div class="card-details">
+        <div class="detail-column">
+          <span class="label">ПОСЛУГА</span>
+          <span class="value text-white">CVT Tuning</span>
+        </div>
+        <div class="detail-column align-right">
+          <span class="label">ЦІНА</span>
+          <span class="value text-cyan">8 000 UAH</span>
+        </div>
+      </div>
+      <button class="btn-book">BOOK APPOINTMENT</button>
+    </div>
+
   </div>
 
-  <script>
-    // --- 3D SCENE SETUP ---
-    const container = document.getElementById('webgl-container');
-    const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x020208, 0.0015);
-
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
-    camera.position.set(0, 0, 400);
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    container.appendChild(renderer.domElement);
-
-    // --- LIGHTS ---
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
-    scene.add(ambientLight);
-
-    const pointLight1 = new THREE.PointLight(0x00f3ff, 2, 800);
-    pointLight1.position.set(200, 200, 200);
-    scene.add(pointLight1);
-
-    const pointLight2 = new THREE.PointLight(0xff0055, 2, 800);
-    pointLight2.position.set(-200, -200, -200);
-    scene.add(pointLight2);
-
-    // --- OBJECTS ---
-
-    // 1. Quantum Core (Tesseract / Hyper-Cube)
-    const coreGroup = new THREE.Group();
-    scene.add(coreGroup);
-
-    const outerGeo = new THREE.BoxGeometry(100, 100, 100);
-    const outerMat = new THREE.MeshPhongMaterial({
-      color: 0x00f3ff,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.6
-    });
-    const outerCube = new THREE.Mesh(outerGeo, outerMat);
-    coreGroup.add(outerCube);
-
-    const innerGeo = new THREE.IcosahedronGeometry(40, 2);
-    const innerMat = new THREE.MeshStandardMaterial({
-      color: 0xff0055,
-      roughness: 0.2,
-      metalness: 0.8,
-      flatShading: true
-    });
-    const innerCore = new THREE.Mesh(innerGeo, innerMat);
-    coreGroup.add(innerCore);
-
-    // 2. Neon Grid Floor
-    const gridHelper = new THREE.GridHelper(2000, 60, 0x00f3ff, 0xff0055);
-    gridHelper.position.y = -200;
-    scene.add(gridHelper);
-
-    // 3. Starfield / Particles (10,000 Particles)
-    const particleCount = 6000;
-    const particlesGeo = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-
-    for (let i = 0; i < particleCount * 3; i += 3) {
-      positions[i] = (Math.random() - 0.5) * 2000;
-      positions[i + 1] = (Math.random() - 0.5) * 2000;
-      positions[i + 2] = (Math.random() - 0.5) * 2000;
-
-      colors[i] = Math.random();
-      colors[i + 1] = Math.random() * 0.8 + 0.2;
-      colors[i + 2] = 1.0;
-    }
-
-    particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    particlesGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-    const particlesMat = new THREE.PointsMaterial({
-      size: 2.5,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.8
-    });
-
-    const starField = new THREE.Points(particlesGeo, particlesMat);
-    scene.add(starField);
-
-    // --- INTERACTION & ANIMATION VARS ---
-    let mouseX = 0, mouseY = 0;
-    let targetRotationX = 0, targetRotationY = 0;
-    let rotationSpeed = 0.005;
-    let isWarping = false;
-
-    // --- INTERACTIVITY ---
-    document.addEventListener('mousemove', (e) => {
-      mouseX = (e.clientX - window.innerWidth / 2) * 0.0008;
-      mouseY = (e.clientY - window.innerHeight / 2) * 0.0008;
-    });
-
-    // Button Actions
-    document.getElementById('btn-warp').addEventListener('click', () => {
-      isWarping = true;
-      setTimeout(() => { isWarping = false; }, 2500);
-    });
-
-    document.getElementById('btn-color').addEventListener('click', () => {
-      const randomColor1 = Math.random() * 0xffffff;
-      const randomColor2 = Math.random() * 0xffffff;
-      innerMat.color.setHex(randomColor1);
-      outerMat.color.setHex(randomColor2);
-      pointLight1.color.setHex(randomColor2);
-    });
-
-    document.getElementById('btn-speed').addEventListener('click', () => {
-      rotationSpeed = rotationSpeed === 0.005 ? 0.03 : 0.005;
-    });
-
-    // Window Resize
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    // --- ANIMATION LOOP ---
-    let clock = new THREE.Clock();
-
-    function animate() {
-      requestAnimationFrame(animate);
-
-      const time = clock.getElapsedTime();
-
-      // Smooth Mouse Control
-      targetRotationX += (mouseY - targetRotationX) * 0.05;
-      targetRotationY += (mouseX - targetRotationY) * 0.05;
-
-      coreGroup.rotation.x += rotationSpeed;
-      coreGroup.rotation.y += rotationSpeed * 1.5;
-
-      coreGroup.rotation.x += targetRotationX * 0.1;
-      coreGroup.rotation.y += targetRotationY * 0.1;
-
-      // Pulsing Inner Core
-      const scale = 1 + Math.sin(time * 3) * 0.15;
-      innerCore.scale.set(scale, scale, scale);
-
-      // Starfield movement
-      starField.rotation.y = time * 0.02;
-
-      // Warp Effect handling
-      if (isWarping) {
-        camera.position.z -= 15;
-        camera.fov = THREE.MathUtils.lerp(camera.fov, 120, 0.1);
-        gridHelper.position.z += 20;
-        if (gridHelper.position.z > 200) gridHelper.position.z = 0;
-      } else {
-        camera.position.z = THREE.MathUtils.lerp(camera.position.z, 400, 0.05);
-        camera.fov = THREE.MathUtils.lerp(camera.fov, 75, 0.05);
-      }
-      camera.updateProjectionMatrix();
-
-      // Light Movement
-      pointLight1.position.x = Math.sin(time * 0.7) * 300;
-      pointLight1.position.z = Math.cos(time * 0.5) * 300;
-      pointLight2.position.x = Math.cos(time * 0.3) * 300;
-      pointLight2.position.z = Math.sin(time * 0.8) * 300;
-
-      renderer.render(scene, camera);
-    }
-
-    animate();
-  </script>
 </body>
-</html>
+</html>/* Основні скидання та темна тема */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #0d0e15;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 20px 10px;
+}
+
+.container {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Стиль картки */
+.card {
+  background-color: #12131e;
+  border: 1px solid #1f2233;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Область зображення */
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-placeholder {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #2a6f97;
+  color: #00e5ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+}
+
+/* Теги (Badges) */
+.badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.badge-cyan {
+  border: 1px solid #00e5ff;
+  color: #00e5ff;
+  background: rgba(0, 229, 255, 0.1);
+}
+
+.badge-green {
+  border: 1px solid #00ff66;
+  color: #00ff66;
+  background: rgba(0, 255, 102, 0.1);
+}
+
+.badge-purple {
+  border: 1px solid #a100ff;
+  color: #a100ff;
+  background: rgba(161, 0, 255, 0.1);
+}
+
+/* Назва моторизованого засобу */
+.card-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+/* Секція послуги та ціни */
+.card-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.detail-column {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.label {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.value {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.text-cyan {
+  font-family: 'Orbitron', sans-serif;
+  color: #00e5ff;
+  font-size: 16px;
+}
+
+/* Кнопка запису */
+.btn-book {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(180deg, #242738 0%, #1a1c29 100%);
+  border: 1px solid #2e334a;
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-book:hover {
+  border-color: #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+  color: #00e5ff;
+}
+
