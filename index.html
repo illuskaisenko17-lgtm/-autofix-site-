@@ -3,448 +3,389 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CYBER MECHANICS HUB 2077</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <title>CYBERSPACE // OMNI-HUB 3D</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <style>
     :root {
-      --bg-dark: #05070c;
-      --panel-bg: rgba(13, 17, 28, 0.75);
-      --border-cyan: #00f3ff;
-      --border-pink: #ff007f;
-      --border-green: #00ff66;
-      --border-purple: #9d00ff;
-      --glow-cyan: 0 0 15px rgba(0, 243, 255, 0.6), 0 0 30px rgba(0, 243, 255, 0.2);
-      --glow-pink: 0 0 15px rgba(255, 0, 127, 0.6), 0 0 30px rgba(255, 0, 127, 0.2);
-      --glow-green: 0 0 15px rgba(0, 255, 102, 0.6), 0 0 30px rgba(0, 255, 102, 0.2);
-      --glow-purple: 0 0 15px rgba(157, 0, 255, 0.6), 0 0 30px rgba(157, 0, 255, 0.2);
-      --text-color: #f0f6fc;
-      --text-muted: #8b949e;
+      --neon-cyan: #00f3ff;
+      --neon-magenta: #ff0055;
+      --neon-purple: #b000ff;
+      --bg-dark: #020208;
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
       font-family: 'Rajdhani', sans-serif;
+      user-select: none;
     }
 
-    body {
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
       background-color: var(--bg-dark);
-      background-image: 
-        radial-gradient(circle at 50% 10%, rgba(157, 0, 255, 0.15), transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(0, 243, 255, 0.1), transparent 50%),
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
-      color: var(--text-color);
-      min-height: 100vh;
-      padding: 40px 20px;
+      color: #fff;
+    }
+
+    #webgl-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    /* UI Overlay */
+    .ui-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      justify-content: space-between;
+      padding: 30px;
+      background: radial-gradient(circle, transparent 60%, rgba(0, 0, 0, 0.8) 100%);
     }
 
-    .container {
-      max-width: 1400px;
-      width: 100%;
+    .interactive {
+      pointer-events: auto;
     }
 
-    /* HEADER */
+    /* Header */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
-      gap: 20px;
+      border-bottom: 1px solid rgba(0, 243, 255, 0.3);
+      padding-bottom: 15px;
+      backdrop-filter: blur(8px);
     }
 
-    .logo {
+    .title-box h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       font-weight: 900;
-      letter-spacing: 3px;
-      color: #fff;
-      text-transform: uppercase;
-      text-shadow: var(--glow-cyan);
-      background: linear-gradient(90deg, #fff, var(--border-cyan));
+      letter-spacing: 4px;
+      background: linear-gradient(90deg, #fff, var(--neon-cyan), var(--neon-magenta));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
     }
 
-    .search-wrapper {
-      position: relative;
+    .title-box p {
+      font-size: 0.9rem;
+      color: var(--neon-cyan);
+      letter-spacing: 2px;
     }
 
-    .search-input {
-      background: rgba(10, 14, 23, 0.9);
-      border: 2px solid var(--border-cyan);
-      border-radius: 8px;
-      padding: 12px 20px;
-      color: #fff;
-      font-size: 1.1rem;
+    .status-panel {
+      display: flex;
+      gap: 20px;
       font-family: 'Orbitron', sans-serif;
-      outline: none;
-      width: 320px;
-      box-shadow: var(--glow-cyan);
-      transition: all 0.3s ease;
+      font-size: 0.85rem;
     }
 
-    .search-input:focus {
-      width: 360px;
-      box-shadow: 0 0 25px rgba(0, 243, 255, 0.8);
-    }
-
-    /* CATEGORIES BAR */
-    .categories-bar {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-      margin-bottom: 40px;
-    }
-
-    .cat-btn {
-      background: var(--panel-bg);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 15px 10px;
-      color: var(--text-color);
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
+    .status-item {
+      background: rgba(0, 243, 255, 0.05);
+      border: 1px solid rgba(0, 243, 255, 0.2);
+      padding: 8px 15px;
+      border-radius: 4px;
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 8px;
     }
 
-    .cat-btn:hover, .cat-btn.active {
-      transform: translateY(-3px);
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--neon-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--neon-cyan);
+      animation: pulse 1.5s infinite;
     }
 
-    .cat-btn[data-cat="all"].active { border-color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.4); }
-    .cat-btn[data-cat="autos"].active { border-color: var(--border-cyan); box-shadow: var(--glow-cyan); color: var(--border-cyan); }
-    .cat-btn[data-cat="motos"].active { border-color: var(--border-pink); box-shadow: var(--glow-pink); color: var(--border-pink); }
-    .cat-btn[data-cat="pitbikes"].active { border-color: var(--border-green); box-shadow: var(--glow-green); color: var(--border-green); }
-    .cat-btn[data-cat="scooters"].active { border-color: var(--border-purple); box-shadow: var(--glow-purple); color: var(--border-purple); }
-
-    /* CARDS GRID */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 25px;
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
     }
 
-    .card {
-      background: var(--panel-bg);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
+    /* Controls Panel */
+    .controls-panel {
+      align-self: flex-end;
+      background: rgba(10, 15, 25, 0.75);
+      border: 1px solid rgba(0, 243, 255, 0.3);
+      padding: 20px;
+      border-radius: 12px;
       backdrop-filter: blur(12px);
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .card:hover {
-      transform: translateY(-8px) scale(1.02);
-    }
-
-    /* Glow per category on hover */
-    .card[data-cat="autos"]:hover { border-color: var(--border-cyan); box-shadow: var(--glow-cyan); }
-    .card[data-cat="motos"]:hover { border-color: var(--border-pink); box-shadow: var(--glow-pink); }
-    .card[data-cat="pitbikes"]:hover { border-color: var(--border-green); box-shadow: var(--glow-green); }
-    .card[data-cat="scooters"]:hover { border-color: var(--border-purple); box-shadow: var(--glow-purple); }
-
-    .card-image-box {
-      width: 100%;
-      height: 200px;
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
-      margin-bottom: 15px;
-      background: #000;
-    }
-
-    .card-image-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .card:hover .card-image-box img {
-      transform: scale(1.1);
-    }
-
-    .badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .card[data-cat="autos"] .badge { border-color: var(--border-cyan); color: var(--border-cyan); }
-    .card[data-cat="motos"] .badge { border-color: var(--border-pink); color: var(--border-pink); }
-    .card[data-cat="pitbikes"] .badge { border-color: var(--border-green); color: var(--border-green); }
-    .card[data-cat="scooters"] .badge { border-color: var(--border-purple); color: var(--border-purple); }
-
-    .card-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 800;
-      margin-bottom: 12px;
-      letter-spacing: 0.5px;
-    }
-
-    .card-info {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 18px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .info-group {
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(0, 243, 255, 0.1);
       display: flex;
       flex-direction: column;
+      gap: 15px;
+      width: 280px;
     }
 
-    .info-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-    }
-
-    .info-value {
-      font-size: 1rem;
-      font-weight: 700;
-    }
-
-    .price-value {
-      color: var(--border-cyan);
+    .controls-panel h3 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 800;
+      font-size: 1rem;
+      color: var(--neon-cyan);
+      border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+      padding-bottom: 5px;
     }
 
-    .btn-book {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 8px;
-      background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.15));
+    .btn {
+      background: linear-gradient(90deg, rgba(0, 243, 255, 0.1), rgba(255, 0, 85, 0.1));
+      border: 1px solid var(--neon-cyan);
       color: #fff;
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      font-size: 0.85rem;
+      padding: 12px;
+      border-radius: 6px;
       cursor: pointer;
       transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    .btn-book:hover {
-      background: var(--border-cyan);
+    .btn:hover {
+      background: var(--neon-cyan);
       color: #000;
-      border-color: var(--border-cyan);
-      box-shadow: var(--glow-cyan);
+      box-shadow: 0 0 20px var(--neon-cyan);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border-color: var(--neon-magenta);
+    }
+
+    .btn-secondary:hover {
+      background: var(--neon-magenta);
+      color: #fff;
+      box-shadow: 0 0 20px var(--neon-magenta);
+    }
+
+    /* Footer */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.5);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 10px;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <header>
-      <div class="logo">CYBER MECHANICS HUB</div>
-      <div class="search-wrapper">
-        <input type="text" id="searchInput" class="search-input" placeholder="FIND YOUR RIDE...">
+  <div id="webgl-container"></div>
+
+  <div class="ui-layer">
+    <header class="interactive">
+      <div class="title-box">
+        <h1>OMNI-HUB 3D</h1>
+        <p>ADVANCED QUANTUM CORE INTERACTION</p>
+      </div>
+      <div class="status-panel">
+        <div class="status-item">
+          <div class="pulse-dot"></div>
+          <span>CORE: ONLINE</span>
+        </div>
+        <div class="status-item">
+          <span id="fps-counter">FPS: 60</span>
+        </div>
       </div>
     </header>
 
-    <div class="categories-bar">
-      <button class="cat-btn active" data-cat="all" onclick="filterCards('all', this)">⚡ ВСІ МОДЕЛІ</button>
-      <button class="cat-btn" data-cat="autos" onclick="filterCards('autos', this)">🚗 AUTOS</button>
-      <button class="cat-btn" data-cat="motos" onclick="filterCards('motos', this)">🏍️ MOTOS</button>
-      <button class="cat-btn" data-cat="pitbikes" onclick="filterCards('pitbikes', this)">🏎️ PITBIKES</button>
-      <button class="cat-btn" data-cat="scooters" onclick="filterCards('scooters', this)">🛵 SCOOTERS</button>
+    <div class="controls-panel interactive">
+      <h3>ПАНЕЛЬ КЕРУВАННЯ</h3>
+      <button class="btn" id="btn-warp">Гіперстрибок (Warp)</button>
+      <button class="btn btn-secondary" id="btn-color">Змінити Ядро</button>
+      <button class="btn" id="btn-speed">Прискорити Обертання</button>
     </div>
 
-    <div class="cards-grid" id="cardsGrid"></div>
+    <footer>
+      <span>КООРДИНАТИ: X-774 Y-102 Z-909</span>
+      <span>СИСТЕМА ГОТОВА ДО ВЗАЄМОДІЇ (КРУТІТЬ МИШКОЮ)</span>
+    </footer>
   </div>
 
   <script>
-    const database = [
-      // AUTOS
-      {
-        id: 1,
-        title: "BMW M5 F90 Cyber",
-        cat: "autos",
-        service: "Stage 3 + Neon",
-        price: "18 500 UAH",
-        image: "https://images.unsplash.com/photo-1555215695-3004980adade?auto=format&fit=crop&w=800&q=80"
-      },
-      {
-        id: 2,
-        title: "Audi R8 V10 Performance",
-        cat: "autos",
-        service: "Engine Tuning",
-        price: "25 000 UAH",
-        image: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&q=80"
-      },
-      {
-        id: 3,
-        title: "Nissan GT-R Nismo",
-        cat: "autos",
-        service: "Full Custom Wrap",
-        price: "22 000 UAH",
-        image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80"
-      },
-      {
-        id: 4,
-        title: "Porsche 911 GT3 RS",
-        cat: "autos",
-        service: "Track Setup",
-        price: "30 000 UAH",
-        image: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=800&q=80"
-      },
+    // --- 3D SCENE SETUP ---
+    const container = document.getElementById('webgl-container');
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x020208, 0.0015);
 
-      // MOTOS
-      {
-        id: 5,
-        title: "Yamaha YZF-R1",
-        cat: "motos",
-        service: "ECU Flash + Exhaust",
-        price: "14 000 UAH",
-        image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=800&q=80"
-      },
-      {
-        id: 6,
-        title: "Ducati Panigale V4",
-        cat: "motos",
-        service: "Desmo Service",
-        price: "19 000 UAH",
-        image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80"
-      },
-      {
-        id: 7,
-        title: "Kawasaki Ninja H2",
-        cat: "motos",
-        service: "Supercharger Tune",
-        price: "27 000 UAH",
-        image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=800&q=80"
-      },
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+    camera.position.set(0, 0, 400);
 
-      // PITBIKES
-      {
-        id: 8,
-        title: "Pitster Pro LXR 190",
-        cat: "pitbikes",
-        service: "Engine Overhaul",
-        price: "9 500 UAH",
-        image: "https://images.unsplash.com/photo-1579710039144-85d6da173898?auto=format&fit=crop&w=800&q=80"
-      },
-      {
-        id: 9,
-        title: "Kayo Evolution 140",
-        cat: "pitbikes",
-        service: "Carb Adjustment",
-        price: "7 500 UAH",
-        image: "https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?auto=format&fit=crop&w=800&q=80"
-      },
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
 
-      // SCOOTERS
-      {
-        id: 10,
-        title: "Vespa Custom Neon",
-        cat: "scooters",
-        service: "CVT Tuning",
-        price: "8 000 UAH",
-        image: "https://images.unsplash.com/photo-1520627977056-c307aeb9a625?auto=format&fit=crop&w=800&q=80"
-      },
-      {
-        id: 11,
-        title: "Yamaha Aerox 70cc",
-        cat: "scooters",
-        service: "2T Malossi Kit",
-        price: "11 000 UAH",
-        image: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=800&q=80"
-      }
-    ];
+    // --- LIGHTS ---
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+    scene.add(ambientLight);
 
-    function renderCards(data) {
-      const grid = document.getElementById('cardsGrid');
-      grid.innerHTML = '';
+    const pointLight1 = new THREE.PointLight(0x00f3ff, 2, 800);
+    pointLight1.position.set(200, 200, 200);
+    scene.add(pointLight1);
 
-      if (data.length === 0) {
-        grid.innerHTML = `<h2 style="grid-column: 1/-1; text-align: center; color: var(--text-muted); margin-top: 40px;">НІЧОГО НЕ ЗНАЙДЕНО</h2>`;
-        return;
-      }
+    const pointLight2 = new THREE.PointLight(0xff0055, 2, 800);
+    pointLight2.position.set(-200, -200, -200);
+    scene.add(pointLight2);
 
-      data.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.setAttribute('data-cat', item.cat);
+    // --- OBJECTS ---
 
-        card.innerHTML = `
-          <div class="card-image-box">
-            <img src="${item.image}" alt="${item.title}">
-            <div class="badge">${item.cat}</div>
-          </div>
-          <div class="card-title">${item.title}</div>
-          <div class="card-info">
-            <div class="info-group">
-              <span class="info-label">Послуга</span>
-              <span class="info-value">${item.service}</span>
-            </div>
-            <div class="info-group" style="text-align: right;">
-              <span class="info-label">Ціна</span>
-              <span class="price-value">${item.price}</span>
-            </div>
-          </div>
-          <button class="btn-book">BOOK APPOINTMENT</button>
-        `;
-        grid.appendChild(card);
-      });
+    // 1. Quantum Core (Tesseract / Hyper-Cube)
+    const coreGroup = new THREE.Group();
+    scene.add(coreGroup);
+
+    const outerGeo = new THREE.BoxGeometry(100, 100, 100);
+    const outerMat = new THREE.MeshPhongMaterial({
+      color: 0x00f3ff,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.6
+    });
+    const outerCube = new THREE.Mesh(outerGeo, outerMat);
+    coreGroup.add(outerCube);
+
+    const innerGeo = new THREE.IcosahedronGeometry(40, 2);
+    const innerMat = new THREE.MeshStandardMaterial({
+      color: 0xff0055,
+      roughness: 0.2,
+      metalness: 0.8,
+      flatShading: true
+    });
+    const innerCore = new THREE.Mesh(innerGeo, innerMat);
+    coreGroup.add(innerCore);
+
+    // 2. Neon Grid Floor
+    const gridHelper = new THREE.GridHelper(2000, 60, 0x00f3ff, 0xff0055);
+    gridHelper.position.y = -200;
+    scene.add(gridHelper);
+
+    // 3. Starfield / Particles (10,000 Particles)
+    const particleCount = 6000;
+    const particlesGeo = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount * 3; i += 3) {
+      positions[i] = (Math.random() - 0.5) * 2000;
+      positions[i + 1] = (Math.random() - 0.5) * 2000;
+      positions[i + 2] = (Math.random() - 0.5) * 2000;
+
+      colors[i] = Math.random();
+      colors[i + 1] = Math.random() * 0.8 + 0.2;
+      colors[i + 2] = 1.0;
     }
 
-    function filterCards(category, button) {
-      document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
+    particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    particlesGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-      if (category === 'all') {
-        renderCards(database);
-      } else {
-        const filtered = database.filter(item => item.cat === category);
-        renderCards(filtered);
-      }
-    }
-
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-      const query = e.target.value.toLowerCase();
-      const filtered = database.filter(item => 
-        item.title.toLowerCase().includes(query) || 
-        item.service.toLowerCase().includes(query)
-      );
-      renderCards(filtered);
+    const particlesMat = new THREE.PointsMaterial({
+      size: 2.5,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.8
     });
 
-    renderCards(database);
+    const starField = new THREE.Points(particlesGeo, particlesMat);
+    scene.add(starField);
+
+    // --- INTERACTION & ANIMATION VARS ---
+    let mouseX = 0, mouseY = 0;
+    let targetRotationX = 0, targetRotationY = 0;
+    let rotationSpeed = 0.005;
+    let isWarping = false;
+
+    // --- INTERACTIVITY ---
+    document.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX - window.innerWidth / 2) * 0.0008;
+      mouseY = (e.clientY - window.innerHeight / 2) * 0.0008;
+    });
+
+    // Button Actions
+    document.getElementById('btn-warp').addEventListener('click', () => {
+      isWarping = true;
+      setTimeout(() => { isWarping = false; }, 2500);
+    });
+
+    document.getElementById('btn-color').addEventListener('click', () => {
+      const randomColor1 = Math.random() * 0xffffff;
+      const randomColor2 = Math.random() * 0xffffff;
+      innerMat.color.setHex(randomColor1);
+      outerMat.color.setHex(randomColor2);
+      pointLight1.color.setHex(randomColor2);
+    });
+
+    document.getElementById('btn-speed').addEventListener('click', () => {
+      rotationSpeed = rotationSpeed === 0.005 ? 0.03 : 0.005;
+    });
+
+    // Window Resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // --- ANIMATION LOOP ---
+    let clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const time = clock.getElapsedTime();
+
+      // Smooth Mouse Control
+      targetRotationX += (mouseY - targetRotationX) * 0.05;
+      targetRotationY += (mouseX - targetRotationY) * 0.05;
+
+      coreGroup.rotation.x += rotationSpeed;
+      coreGroup.rotation.y += rotationSpeed * 1.5;
+
+      coreGroup.rotation.x += targetRotationX * 0.1;
+      coreGroup.rotation.y += targetRotationY * 0.1;
+
+      // Pulsing Inner Core
+      const scale = 1 + Math.sin(time * 3) * 0.15;
+      innerCore.scale.set(scale, scale, scale);
+
+      // Starfield movement
+      starField.rotation.y = time * 0.02;
+
+      // Warp Effect handling
+      if (isWarping) {
+        camera.position.z -= 15;
+        camera.fov = THREE.MathUtils.lerp(camera.fov, 120, 0.1);
+        gridHelper.position.z += 20;
+        if (gridHelper.position.z > 200) gridHelper.position.z = 0;
+      } else {
+        camera.position.z = THREE.MathUtils.lerp(camera.position.z, 400, 0.05);
+        camera.fov = THREE.MathUtils.lerp(camera.fov, 75, 0.05);
+      }
+      camera.updateProjectionMatrix();
+
+      // Light Movement
+      pointLight1.position.x = Math.sin(time * 0.7) * 300;
+      pointLight1.position.z = Math.cos(time * 0.5) * 300;
+      pointLight2.position.x = Math.cos(time * 0.3) * 300;
+      pointLight2.position.z = Math.sin(time * 0.8) * 300;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
   </script>
 </body>
 </html>
