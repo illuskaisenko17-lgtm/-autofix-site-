@@ -3,1054 +3,1393 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>GidHot.com — Авто, Мото та Скутери</title>
+<title>GidHot.com</title>
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-  background:#080808;
-  color:white;
+    background:#07080b;
+    color:#fff;
+    font-family:Arial, sans-serif;
 }
 
+/* ===== HEADER ===== */
+
 header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:#101010;
-  border-bottom:1px solid #292929;
-  padding:18px 6%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:1000;
+    background:rgba(7,8,11,.85);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid #222;
+}
+
+.nav{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    height:75px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
 .logo{
-  font-size:28px;
-  font-weight:900;
-  color:#ff4b00;
+    font-size:28px;
+    font-weight:900;
+}
+
+.logo span{
+    color:#ff5a00;
+}
+
+nav{
+    display:flex;
+    gap:28px;
 }
 
 nav a{
-  color:white;
-  text-decoration:none;
-  margin-left:25px;
-  font-weight:bold;
+    color:#aaa;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.3s;
 }
 
 nav a:hover{
-  color:#ff4b00;
+    color:#ff5a00;
 }
 
-.hero{
-  min-height:500px;
-  padding:90px 7%;
-  display:flex;
-  align-items:center;
+.favorite-top{
+    border:1px solid #333;
+    background:#15171c;
+    color:white;
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+}
 
-  background:
-  linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.9)),
-  url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=80")
-  center/cover;
+/* ===== HERO ===== */
+
+.hero{
+    min-height:100vh;
+    padding:150px 5% 80px;
+
+    display:flex;
+    align-items:center;
+
+    background:
+    radial-gradient(circle at 80% 30%,rgba(255,90,0,.18),transparent 30%),
+    radial-gradient(circle at 20% 70%,rgba(255,90,0,.08),transparent 30%);
+}
+
+.hero-content{
+    max-width:1200px;
+    width:100%;
+    margin:auto;
+}
+
+.badge{
+    display:inline-block;
+    padding:9px 15px;
+    border:1px solid #333;
+    background:#111319;
+    border-radius:30px;
+    color:#aaa;
+    margin-bottom:25px;
 }
 
 .hero h1{
-  font-size:64px;
-  margin-bottom:18px;
+    font-size:clamp(55px,9vw,100px);
+    line-height:.9;
+    margin-bottom:25px;
 }
 
-.hero h1 span{
-  color:#ff4b00;
+.orange{
+    color:#ff5a00;
 }
 
 .hero p{
-  color:#ddd;
-  font-size:20px;
-  max-width:650px;
-  margin-bottom:30px;
+    color:#999;
+    font-size:19px;
+    max-width:650px;
+    line-height:1.6;
+    margin-bottom:35px;
 }
 
+/* SEARCH */
+
 .search{
-  display:flex;
-  max-width:700px;
+    max-width:650px;
+    display:flex;
+    background:#fff;
+    padding:6px;
+    border-radius:13px;
 }
 
 .search input{
-  flex:1;
-  padding:18px;
-  border:0;
-  outline:0;
-  border-radius:10px 0 0 10px;
-  font-size:16px;
+    flex:1;
+    border:none;
+    outline:none;
+    padding:15px;
+    font-size:16px;
 }
 
 .search button{
-  border:0;
-  padding:18px 28px;
-  background:#ff4b00;
-  color:white;
-  font-weight:bold;
-  border-radius:0 10px 10px 0;
-  cursor:pointer;
+    border:none;
+    background:#ff5a00;
+    color:#fff;
+    padding:0 25px;
+    border-radius:9px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
+/* ===== SECTIONS ===== */
+
 section{
-  padding:70px 6%;
+    padding:90px 5%;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
 }
 
 .title{
-  text-align:center;
-  margin-bottom:35px;
+    margin-bottom:35px;
 }
 
 .title h2{
-  font-size:40px;
+    font-size:42px;
 }
 
 .title p{
-  color:#999;
-  margin-top:8px;
+    color:#777;
+    margin-top:8px;
 }
 
+/* ===== CATEGORIES ===== */
+
 .categories{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
 }
 
 .category{
-  background:#151515;
-  border:1px solid #292929;
-  border-radius:18px;
-  padding:35px;
-  text-align:center;
-  cursor:pointer;
-  transition:.25s;
+    min-height:220px;
+    border:1px solid #272a31;
+    border-radius:20px;
+    background:#101217;
+    padding:30px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:end;
+
+    cursor:pointer;
+    transition:.3s;
 }
 
 .category:hover{
-  transform:translateY(-7px);
-  border-color:#ff4b00;
+    transform:translateY(-8px);
+    border-color:#ff5a00;
+    box-shadow:0 20px 50px rgba(255,90,0,.12);
 }
 
 .category-icon{
-  font-size:55px;
-  margin-bottom:15px;
+    font-size:60px;
+    margin-bottom:20px;
 }
 
 .category h3{
-  font-size:25px;
+    font-size:27px;
+}
+
+.category p{
+    color:#777;
+    margin-top:8px;
+}
+
+/* ===== CATALOG ===== */
+
+.catalog{
+    background:#0c0e12;
 }
 
 .filters{
-  background:#121212;
-  padding:20px;
-  border-radius:15px;
-  margin-bottom:30px;
-
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
+    display:grid;
+    grid-template-columns:1fr 180px 180px 130px;
+    gap:10px;
+    margin-bottom:25px;
 }
 
 .filters input,
 .filters select{
-  padding:14px;
-  border:1px solid #333;
-  background:#080808;
-  color:white;
-  border-radius:8px;
-  outline:none;
+    padding:14px;
+    background:#12151b;
+    color:#fff;
+    border:1px solid #292d35;
+    border-radius:10px;
+    outline:none;
 }
 
 .reset{
-  border:0;
-  background:#ff4b00;
-  color:white;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:bold;
+    background:#ff5a00 !important;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.vehicles{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:25px;
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
 }
+
+/* ===== CARD ===== */
 
 .card{
-  background:#151515;
-  border:1px solid #292929;
-  border-radius:16px;
-  overflow:hidden;
-  transition:.25s;
-  position:relative;
+    background:#111419;
+    border:1px solid #282c34;
+    border-radius:18px;
+    overflow:hidden;
+    transition:.3s;
 }
 
 .card:hover{
-  transform:translateY(-6px);
-  border-color:#ff4b00;
+    transform:translateY(-7px);
+    border-color:#ff5a00;
 }
 
-.card img{
-  width:100%;
-  height:220px;
-  object-fit:cover;
+.vehicle{
+    height:230px;
+    background:
+    radial-gradient(circle at 50% 30%,rgba(255,90,0,.18),transparent 40%),
+    #0b0d11;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:100px;
 }
 
 .card-info{
-  padding:20px;
+    padding:20px;
 }
 
 .card-info h3{
-  font-size:23px;
-  margin-bottom:8px;
+    font-size:23px;
+    margin-bottom:8px;
 }
 
-.details{
-  color:#999;
-  margin-bottom:12px;
+.info{
+    color:#777;
+    line-height:1.7;
 }
 
 .price{
-  color:#ff4b00;
-  font-size:25px;
-  font-weight:bold;
-  margin-bottom:15px;
+    color:#ff5a00;
+    font-size:25px;
+    font-weight:900;
+    margin:15px 0;
 }
 
-.card-buttons{
-  display:flex;
-  gap:8px;
+.buttons{
+    display:flex;
+    gap:8px;
 }
 
-.details-btn,
-.favorite{
-  border:0;
-  padding:12px;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:bold;
+.details{
+    flex:1;
+    border:none;
+    padding:13px;
+    border-radius:9px;
+    background:#ff5a00;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.details-btn{
-  flex:1;
-  background:#ff4b00;
-  color:white;
+.fav{
+    width:48px;
+    border:1px solid #333;
+    background:#181b21;
+    color:#fff;
+    border-radius:9px;
+    font-size:20px;
+    cursor:pointer;
 }
 
-.favorite{
-  width:48px;
-  background:#252525;
-  color:white;
-  font-size:20px;
+.fav.active{
+    color:#ff5a00;
+    border-color:#ff5a00;
 }
 
-.favorite.active{
-  background:#ff4b00;
+/* ===== STATS ===== */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
 }
 
-.empty{
-  display:none;
-  text-align:center;
-  color:#999;
-  padding:40px;
+.stat{
+    background:#111419;
+    border:1px solid #282c34;
+    border-radius:15px;
+    padding:25px;
 }
 
-.add-section{
-  background:#101010;
+.stat strong{
+    font-size:35px;
+    color:#ff5a00;
 }
 
-.form{
-  max-width:700px;
-  margin:auto;
-  background:#171717;
-  padding:30px;
-  border-radius:18px;
-  border:1px solid #292929;
+.stat p{
+    color:#777;
+    margin-top:7px;
 }
 
-.form h3{
-  font-size:28px;
-  margin-bottom:20px;
+/* ===== MODAL ===== */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:2000;
+
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(8px);
+
+    align-items:center;
+    justify-content:center;
+    padding:20px;
 }
 
-.form input,
-.form select{
-  width:100%;
-  padding:15px;
-  margin-bottom:15px;
-  border-radius:8px;
-  border:1px solid #333;
-  background:#080808;
-  color:white;
-  outline:none;
+.modal.show{
+    display:flex;
 }
 
-.form button{
-  width:100%;
-  padding:16px;
-  border:0;
-  border-radius:8px;
-  background:#ff4b00;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
+.modal-box{
+    width:100%;
+    max-width:600px;
+    background:#111419;
+    border:1px solid #333;
+    border-radius:20px;
+    padding:30px;
 }
+
+.close{
+    float:right;
+    border:none;
+    background:#22252b;
+    color:#fff;
+    width:38px;
+    height:38px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.modal-box h2{
+    margin:20px 0 10px;
+}
+
+.modal-box p{
+    color:#999;
+    line-height:1.7;
+}
+
+.modal-price{
+    color:#ff5a00;
+    font-size:30px;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+/* ===== FOOTER ===== */
 
 footer{
-  background:#0d0d0d;
-  padding:40px;
-  text-align:center;
-  color:#777;
+    padding:50px 5%;
+    text-align:center;
+    border-top:1px solid #222;
+    color:#666;
 }
 
-footer strong{
-  color:#ff4b00;
+footer span{
+    color:#ff5a00;
 }
+
+/* ===== MOBILE ===== */
 
 @media(max-width:900px){
 
-  .vehicles,
-  .categories{
-    grid-template-columns:repeat(2,1fr);
-  }
+    nav{
+        display:none;
+    }
 
-  .filters{
-    grid-template-columns:repeat(2,1fr);
-  }
+    .categories,
+    .cards{
+        grid-template-columns:1fr 1fr;
+    }
 
-  .hero h1{
-    font-size:48px;
-  }
+    .filters{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
 }
 
 @media(max-width:600px){
 
-  nav{
-    display:none;
-  }
+    .categories,
+    .cards,
+    .stats,
+    .filters{
+        grid-template-columns:1fr;
+    }
 
-  .vehicles,
-  .categories,
-  .filters{
-    grid-template-columns:1fr;
-  }
+    .hero{
+        padding-top:120px;
+    }
 
-  .hero{
-    padding:70px 6%;
-  }
+    .hero h1{
+        font-size:55px;
+    }
 
-  .hero h1{
-    font-size:40px;
-  }
+    .search{
+        flex-direction:column;
+        background:transparent;
+        padding:0;
+        gap:8px;
+    }
 
-  .search{
-    flex-direction:column;
-  }
-
-  .search input,
-  .search button{
-    border-radius:8px;
-    margin-bottom:8px;
-  }
+    .search input,
+    .search button{
+        padding:16px;
+        border-radius:10px;
+    }
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
+
 <header>
 
-  <div class="logo">GidHot.com</div>
+<div class="nav">
 
-  <nav>
-    <a href="#home">Головна</a>
-    <a href="#catalog">Каталог</a>
-    <a href="#add">Продати</a>
-  </nav>
+<div class="logo">
+Gid<span>Hot</span>.com
+</div>
+
+<nav>
+<a href="#home">Головна</a>
+<a href="#categories">Категорії</a>
+<a href="#catalog">Каталог</a>
+<a href="#about">Про нас</a>
+</nav>
+
+<button class="favorite-top" onclick="showFavorites()">
+❤️ <span id="favCount">0</span>
+</button>
+
+</div>
 
 </header>
 
 
+<!-- HERO -->
+
 <section class="hero" id="home">
 
-  <div>
+<div class="hero-content">
 
-    <h1>Твій <span>GidHot</span> 🚗</h1>
+<div class="badge">
+🔥 GidHot Online Garage
+</div>
 
-    <p>
-      Автомобілі, мотоцикли та скутери.
-      Знаходь техніку, яка тобі подобається.
-    </p>
+<h1>
+ЗНАЙДИ<br>
+СВІЙ <span class="orange">ДРАЙВ</span>
+</h1>
 
-    <div class="search">
+<p>
+Автомобілі, мотоцикли та скутери
+в одному красивому каталозі.
+Обирай техніку, яка тобі подобається.
+</p>
 
-      <input
-        id="search"
-        type="text"
-        placeholder="🔎 BMW, Yamaha, Audi..."
-        oninput="filterCars()"
-      >
+<div class="search">
 
-      <button onclick="filterCars()">
-        Пошук
-      </button>
+<input
+id="search"
+placeholder="🔎 BMW, Yamaha, Audi..."
+>
 
-    </div>
+<button onclick="searchCars()">
+ПОШУК
+</button>
 
-  </div>
+</div>
 
-</section>
-
-
-<section>
-
-  <div class="title">
-
-    <h2>Категорії</h2>
-
-    <p>
-      Обери свою категорію
-    </p>
-
-  </div>
-
-  <div class="categories">
-
-    <div
-      class="category"
-      onclick="chooseCategory('Автомобіль')">
-
-      <div class="category-icon">🚗</div>
-
-      <h3>Автомобілі</h3>
-
-    </div>
-
-
-    <div
-      class="category"
-      onclick="chooseCategory('Мотоцикл')">
-
-      <div class="category-icon">🏍️</div>
-
-      <h3>Мотоцикли</h3>
-
-    </div>
-
-
-    <div
-      class="category"
-      onclick="chooseCategory('Скутер')">
-
-      <div class="category-icon">🛵</div>
-
-      <h3>Скутери</h3>
-
-    </div>
-
-  </div>
+</div>
 
 </section>
 
 
-<section id="catalog">
+<!-- CATEGORIES -->
 
-  <div class="title">
+<section id="categories">
 
-    <h2>🔥 Каталог</h2>
+<div class="container">
 
-    <p>
-      Шукай та фільтруй техніку
-    </p>
+<div class="title">
+<h2>Категорії</h2>
+<p>Обери свою техніку</p>
+</div>
 
-  </div>
+<div class="categories">
 
+<div class="category" onclick="category('Авто')">
 
-  <div class="filters">
+<div class="category-icon">
+🚗
+</div>
 
-    <select id="typeFilter" onchange="filterCars()">
+<h3>Автомобілі</h3>
 
-      <option value="">Всі категорії</option>
+<p>
+Sport • SUV • Sedan • Luxury
+</p>
 
-      <option value="Автомобіль">
-        🚗 Автомобілі
-      </option>
+</div>
 
-      <option value="Мотоцикл">
-        🏍️ Мотоцикли
-      </option>
 
-      <option value="Скутер">
-        🛵 Скутери
-      </option>
+<div class="category" onclick="category('Мото')">
 
-    </select>
+<div class="category-icon">
+🏍️
+</div>
 
+<h3>Мотоцикли</h3>
 
-    <input
-      id="minPrice"
-      type="number"
-      placeholder="Мін. ціна"
-      oninput="filterCars()"
-    >
+<p>
+Sport • Naked • Touring
+</p>
 
+</div>
 
-    <input
-      id="maxPrice"
-      type="number"
-      placeholder="Макс. ціна"
-      oninput="filterCars()"
-    >
 
+<div class="category" onclick="category('Скутер')">
 
-    <button
-      class="reset"
-      onclick="resetFilters()">
+<div class="category-icon">
+🛵
+</div>
 
-      Скинути
+<h3>Скутери</h3>
 
-    </button>
+<p>
+City • Classic • Modern
+</p>
 
-  </div>
+</div>
 
+</div>
 
-  <div class="vehicles" id="vehicles">
-
-
-    <div
-      class="card"
-      data-type="Автомобіль"
-      data-name="BMW M5"
-      data-price="85000">
-
-      <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=900&q=80">
-
-      <div class="card-info">
-
-        <h3>BMW M5</h3>
-
-        <div class="details">
-          2024 • Бензин • Автомат
-        </div>
-
-        <div class="price">
-          $85 000
-        </div>
-
-        <div class="card-buttons">
-
-          <button class="details-btn">
-            Детальніше
-          </button>
-
-          <button
-            class="favorite"
-            onclick="favorite(this)">
-            ♡
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="card"
-      data-type="Автомобіль"
-      data-name="Audi RS7"
-      data-price="105000">
-
-      <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=900&q=80">
-
-      <div class="card-info">
-
-        <h3>Audi RS7</h3>
-
-        <div class="details">
-          2023 • Бензин • Автомат
-        </div>
-
-        <div class="price">
-          $105 000
-        </div>
-
-        <div class="card-buttons">
-
-          <button class="details-btn">
-            Детальніше
-          </button>
-
-          <button
-            class="favorite"
-            onclick="favorite(this)">
-            ♡
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="card"
-      data-type="Мотоцикл"
-      data-name="Yamaha MT-09"
-      data-price="10500">
-
-      <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=900&q=80">
-
-      <div class="card-info">
-
-        <h3>Yamaha MT-09</h3>
-
-        <div class="details">
-          2024 • 890 см³ • Мотоцикл
-        </div>
-
-        <div class="price">
-          $10 500
-        </div>
-
-        <div class="card-buttons">
-
-          <button class="details-btn">
-            Детальніше
-          </button>
-
-          <button
-            class="favorite"
-            onclick="favorite(this)">
-            ♡
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="card"
-      data-type="Мотоцикл"
-      data-name="Ducati Panigale"
-      data-price="24000">
-
-      <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=900&q=80">
-
-      <div class="card-info">
-
-        <h3>Ducati Panigale</h3>
-
-        <div class="details">
-          2024 • 1103 см³ • Спорт
-        </div>
-
-        <div class="price">
-          $24 000
-        </div>
-
-        <div class="card-buttons">
-
-          <button class="details-btn">
-            Детальніше
-          </button>
-
-          <button
-            class="favorite"
-            onclick="favorite(this)">
-            ♡
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="card"
-      data-type="Скутер"
-      data-name="Vespa GTS"
-      data-price="7200">
-
-      <img src="https://images.unsplash.com/photo-1558980394-0c7f7e5c7d3c?auto=format&fit=crop&w=900&q=80">
-
-      <div class="card-info">
-
-        <h3>Vespa GTS</h3>
-
-        <div class="details">
-          2024 • 300 см³ • Скутер
-        </div>
-
-        <div class="price">
-          $7 200
-        </div>
-
-        <div class="card-buttons">
-
-          <button class="details-btn">
-            Детальніше
-          </button>
-
-          <button
-            class="favorite"
-            onclick="favorite(this)">
-            ♡
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="card"
-      data-type="Скутер"
-      data-name="Honda PCX"
-      data-price="4800">
-
-      <img src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=900&q=80">
-
-      <div class="card-info">
-
-        <h3>Honda PCX</h3>
-
-        <div class="details">
-          2024 • 160 см³ • Скутер
-        </div>
-
-        <div class="price">
-          $4 800
-        </div>
-
-        <div class="card-buttons">
-
-          <button class="details-btn">
-            Детальніше
-          </button>
-
-          <button
-            class="favorite"
-            onclick="favorite(this)">
-            ♡
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="empty" id="empty">
-    😕 Нічого не знайдено
-  </div>
+</div>
 
 </section>
 
 
-<section class="add-section" id="add">
+<!-- CATALOG -->
 
-  <div class="title">
+<section class="catalog" id="catalog">
 
-    <h2>📢 Додати оголошення</h2>
+<div class="container">
 
-    <p>
-      Додай свою техніку до каталогу
-    </p>
+<div class="title">
 
-  </div>
+<h2>🔥 Каталог</h2>
 
+<p id="result">
+9 моделей доступно
+</p>
 
-  <div class="form">
-
-    <h3>Нове оголошення</h3>
-
-    <input
-      id="newName"
-      placeholder="Назва, наприклад BMW M4"
-    >
+</div>
 
 
-    <select id="newType">
+<div class="filters">
 
-      <option value="Автомобіль">
-        🚗 Автомобіль
-      </option>
+<input
+id="filterSearch"
+placeholder="Пошук..."
+oninput="filterCars()"
+>
 
-      <option value="Мотоцикл">
-        🏍️ Мотоцикл
-      </option>
+<select id="type" onchange="filterCars()">
 
-      <option value="Скутер">
-        🛵 Скутер
-      </option>
+<option value="">
+Всі категорії
+</option>
 
-    </select>
+<option value="Авто">
+🚗 Авто
+</option>
 
+<option value="Мото">
+🏍️ Мото
+</option>
 
-    <input
-      id="newPrice"
-      type="number"
-      placeholder="Ціна в $"
-    >
+<option value="Скутер">
+🛵 Скутер
+</option>
 
-
-    <input
-      id="newYear"
-      type="number"
-      placeholder="Рік"
-    >
+</select>
 
 
-    <input
-      id="newImage"
-      placeholder="Посилання на фото"
-    >
+<select id="sort" onchange="filterCars()">
+
+<option value="default">
+Популярні
+</option>
+
+<option value="low">
+Ціна ↑
+</option>
+
+<option value="high">
+Ціна ↓
+</option>
+
+</select>
 
 
-    <button onclick="addVehicle()">
-      🚀 Опублікувати оголошення
-    </button>
+<button class="reset" onclick="resetFilters()">
+СКИНУТИ
+</button>
 
-  </div>
+</div>
+
+
+<div class="cards" id="cards">
+
+
+<!-- BMW -->
+
+<div
+class="card"
+data-name="BMW M5"
+data-type="Авто"
+data-price="85000"
+data-info="2024 • V8 • Автомат • 727 к.с."
+>
+
+<div class="vehicle">
+🚘
+</div>
+
+<div class="card-info">
+
+<h3>BMW M5</h3>
+
+<div class="info">
+2024 • V8 • Автомат<br>
+727 к.с.
+</div>
+
+<div class="price">
+$85 000
+</div>
+
+<div class="buttons">
+
+<button class="details"
+onclick="details('BMW M5','$85 000','2024 • V8 • Автомат • 727 к.с.')">
+Детальніше
+</button>
+
+<button class="fav" onclick="favorite(this)">
+♡
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PORSCHE -->
+
+<div
+class="card"
+data-name="Porsche 911"
+data-type="Авто"
+data-price="120000"
+>
+
+<div class="vehicle">
+🏎️
+</div>
+
+<div class="card-info">
+
+<h3>Porsche 911</h3>
+
+<div class="info">
+2024 • 3.0 Turbo • PDK<br>
+394 к.с.
+</div>
+
+<div class="price">
+$120 000
+</div>
+
+<div class="buttons">
+
+<button class="details"
+onclick="details('Porsche 911','$120 000','2024 • 3.0 Turbo • PDK • 394 к.с.')">
+Детальніше
+</button>
+
+<button class="fav" onclick="favorite(this)">
+♡
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- AUDI -->
+
+<div
+class="card"
+data-name="Audi RS7"
+data-type="Авто"
+data-price="105000"
+>
+
+<div class="vehicle">
+🚗
+</div>
+
+<div class="card-info">
+
+<h3>Audi RS7</h3>
+
+<div class="info">
+2023 • V8 • Quattro<br>
+600 к.с.
+</div>
+
+<div class="price">
+$105 000
+</div>
+
+<div class="buttons">
+
+<button class="details"
+onclick="details('Audi RS7','$105 000','2023 • V8 • Quattro • 600 к.с.')">
+Детальніше
+</button>
+
+<button class="fav" onclick="favorite(this)">
+♡
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- YAMAHA -->
+
+<div
+class="card"
+data-name="Yamaha MT-09"
+data-type="Мото"
+data-price="10500"
+>
+
+<div class="vehicle">
+🏍️
+</div>
+
+<div class="card-info">
+
+<h3>Yamaha MT-09</h3>
+
+<div class="info">
+2024 • 890 cc<br>
+119 к.с.
+</div>
+
+<div class="price">
+$10 500
+</div>
+
+<div class="buttons">
+
+<button class="details"
+onclick="details('Yamaha MT-09','$10 500','2024 • 890 cc • 119 к.с.')">
+Детальніше
+</button>
+
+<button class="fav" onclick="favorite(this)">
+♡
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- DUCATI -->
+
+<div
+class="card"
+data-name="Ducati Panigale"
+data-type="Мото"
+data-price="24000"
+>
+
+<div class="vehicle">
+🏍️
+</div>
+
+<div class="card-info">
+
+<h3>Ducati Panigale</h3>
+
+<div class="info">
+2024 • 1103 cc • V4<br>
+215 к.с.
+</div>
+
+<div class="price">
+$24 000
+</div>
+
+<div class="buttons">
+
+<button class="details"
+onclick="details('Ducati Panigale','$24 000','2024 • 1103 cc • V4 • 215 к.с.')">
+Детальніше
+</button>
+
+<button class="fav" onclick="favorite(this)">
+♡
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- KAWASAKI -->
+
+<div
+class="card"
+data-name="Kawasaki Ninja"
+data-type="Мото"
+data-price="11200"
+>
+
+<div class="vehicle">
+🏍️
+</div>
+
+<div class="card-info">
+
+<h3>Kawasaki Ninja</h3>
+
+<div class="info">
+2024 • 636 cc<br>
+129 к.с.
+</div>
+
+<div class="price">
+$11 200
+</div>
+
+<div class="buttons">
+
+<button class="details"
+onclick="details('Kawasaki Ninja','$11 200','2024 • 636 cc • 129 к.с.')">
+Детальніше
+</button>
+
+<button class="fav" onclick="favorite(this)">
+♡
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- VESPA -->
+
+<div
+class="card"
+data-name="Vespa GTS"
+data-type="Скутер"
+data-price="7200"
+>
+
+<div class="vehicle">
+🛵
+</div>
+
+<div class="card-info">
+
+<h3>Vespa GTS</h3>
+
+<div class="info">
+2024 • 300 cc<br>
+23.8 к.с.
+</div>
+
+<div class="price">
+$7 200
+</div>
+
+<div class="buttons">
+
+<button class="details"
+onclick="details('Vespa GTS','$7 200','2024 • 300 cc • 23.8 к.с.')">
+Детальніше
+</button>
+
+<button class="fav" onclick="favorite(this)">
+♡
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- HONDA -->
+
+<div
+class="card"
+data-name="Honda PCX"
+data-type="Скутер"
+data-price="4800"
+>
+
+<div class="vehicle">
+🛵
+</div>
+
+<div class="card-info">
+
+<h3>Honda PCX</h3>
+
+<div class="info">
+2024 • 160 cc<br>
+16 к.с.
+</div>
+
+<div class="price">
+$4 800
+</div>
+
+<div class="buttons">
+
+<button class="details"
+onclick="details('Honda PCX','$4 800','2024 • 160 cc • 16 к.с.')">
+Детальніше
+</button>
+
+<button class="fav" onclick="favorite(this)">
+♡
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- XMAX -->
+
+<div
+class="card"
+data-name="Yamaha XMAX"
+data-type="Скутер"
+data-price="8200"
+>
+
+<div class="vehicle">
+🛵
+</div>
+
+<div class="card-info">
+
+<h3>Yamaha XMAX</h3>
+
+<div class="info">
+2024 • 300 cc<br>
+28 к.с.
+</div>
+
+<div class="price">
+$8 200
+</div>
+
+<div class="buttons">
+
+<button class="details"
+onclick="details('Yamaha XMAX','$8 200','2024 • 300 cc • 28 к.с.')">
+Детальніше
+</button>
+
+<button class="fav" onclick="favorite(this)">
+♡
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- STATS -->
+
+<section id="about">
+
+<div class="container">
+
+<div class="title">
+
+<h2>GidHot.com</h2>
+
+<p>
+Все необхідне в одному місці
+</p>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<strong>9+</strong>
+<p>Моделей</p>
+</div>
+
+<div class="stat">
+<strong>3</strong>
+<p>Категорії</p>
+</div>
+
+<div class="stat">
+<strong>24/7</strong>
+<p>Онлайн</p>
+</div>
+
+<div class="stat">
+<strong>🔥</strong>
+<p>GidHot Style</p>
+</div>
+
+</div>
+
+</div>
 
 </section>
 
 
 <footer>
 
-  <p>
-    © 2026 <strong>GidHot.com</strong>
-    — автомобілі • мотоцикли • скутери
-  </p>
+© 2026 <span>GidHot.com</span>
+<br><br>
+Автомобілі • Мотоцикли • Скутери
 
 </footer>
 
 
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeModal()">
+✕
+</button>
+
+<h2 id="modalTitle">
+BMW M5
+</h2>
+
+<p id="modalInfo">
+Інформація
+</p>
+
+<div class="modal-price" id="modalPrice">
+$85 000
+</div>
+
+</div>
+
+</div>
+
+
 <script>
+
+/* SEARCH */
+
+function searchCars(){
+
+    const value =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+    document
+        .getElementById("filterSearch")
+        .value=value;
+
+    filterCars();
+
+    document
+        .getElementById("catalog")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+}
+
+
+/* FILTER */
 
 function filterCars(){
 
-  const search =
-    document.getElementById("search")
-    .value
-    .toLowerCase();
+    const search =
+        document
+        .getElementById("filterSearch")
+        .value
+        .toLowerCase();
 
-  const type =
-    document.getElementById("typeFilter")
-    .value;
+    const type =
+        document
+        .getElementById("type")
+        .value;
 
-  const min =
-    Number(document.getElementById("minPrice").value) || 0;
-
-  const maxInput =
-    document.getElementById("maxPrice").value;
-
-  const max =
-    maxInput === ""
-    ? Infinity
-    : Number(maxInput);
+    const sort =
+        document
+        .getElementById("sort")
+        .value;
 
 
-  const cards =
-    document.querySelectorAll(".card");
-
-  let visible = 0;
+    const cards =
+        [...document.querySelectorAll(".card")];
 
 
-  cards.forEach(card => {
+    cards.forEach(card=>{
 
-    const name =
-      card.dataset.name.toLowerCase();
+        const name =
+            card.dataset.name.toLowerCase();
 
-    const cardType =
-      card.dataset.type;
+        const cardType =
+            card.dataset.type;
 
-    const price =
-      Number(card.dataset.price);
+        const foundName =
+            name.includes(search);
 
-
-    const matchesSearch =
-      name.includes(search);
-
-    const matchesType =
-      type === "" || cardType === type;
-
-    const matchesPrice =
-      price >= min && price <= max;
+        const foundType =
+            !type ||
+            cardType===type;
 
 
-    if(
-      matchesSearch &&
-      matchesType &&
-      matchesPrice
-    ){
+        card.style.display =
+            foundName && foundType
+            ? "block"
+            : "none";
 
-      card.style.display = "block";
-      visible++;
+    });
 
-    }else{
 
-      card.style.display = "none";
+    if(sort==="low"){
+
+        cards.sort(
+            (a,b)=>
+            Number(a.dataset.price)-
+            Number(b.dataset.price)
+        );
 
     }
 
-  });
+
+    if(sort==="high"){
+
+        cards.sort(
+            (a,b)=>
+            Number(b.dataset.price)-
+            Number(a.dataset.price)
+        );
+
+    }
 
 
-  document.getElementById("empty").style.display =
-    visible === 0 ? "block" : "none";
+    const container =
+        document.getElementById("cards");
+
+
+    cards.forEach(card=>
+        container.appendChild(card)
+    );
+
+
+    const visible =
+        cards.filter(
+            card=>card.style.display!=="none"
+        ).length;
+
+
+    document.getElementById("result")
+        .innerText =
+        visible +
+        " моделей знайдено";
 }
 
 
-function chooseCategory(category){
+/* CATEGORY */
 
-  document.getElementById("typeFilter")
-    .value = category;
+function category(type){
 
-  filterCars();
+    document.getElementById("type")
+        .value=type;
 
-  document.getElementById("catalog")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
+    filterCars();
+
+    document.getElementById("catalog")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
 }
 
+
+/* RESET */
 
 function resetFilters(){
 
-  document.getElementById("search").value = "";
-  document.getElementById("typeFilter").value = "";
-  document.getElementById("minPrice").value = "";
-  document.getElementById("maxPrice").value = "";
+    document.getElementById("filterSearch")
+        .value="";
 
-  filterCars();
+    document.getElementById("type")
+        .value="";
+
+    document.getElementById("sort")
+        .value="default";
+
+    filterCars();
 }
 
+
+/* FAVORITE */
+
+let favorites=0;
 
 function favorite(button){
 
-  button.classList.toggle("active");
+    button.classList.toggle("active");
 
-  if(button.classList.contains("active")){
-    button.innerHTML = "♥";
-  }else{
-    button.innerHTML = "♡";
-  }
+    if(button.classList.contains("active")){
+
+        button.innerHTML="♥";
+        favorites++;
+
+    }else{
+
+        button.innerHTML="♡";
+        favorites--;
+
+    }
+
+    document.getElementById("favCount")
+        .innerText=favorites;
 }
 
 
-function addVehicle(){
+/* DETAILS */
 
-  const name =
-    document.getElementById("newName").value.trim();
+function details(name,price,info){
 
-  const type =
-    document.getElementById("newType").value;
+    document.getElementById("modalTitle")
+        .innerText=name;
 
-  const price =
-    document.getElementById("newPrice").value;
+    document.getElementById("modalPrice")
+        .innerText=price;
 
-  const year =
-    document.getElementById("newYear").value;
+    document.getElementById("modalInfo")
+        .innerText=info;
 
-  const image =
-    document.getElementById("newImage").value;
-
-
-  if(!name || !price || !year || !image){
-
-    alert("Заповни всі поля!");
-    return;
-
-  }
-
-
-  const card =
-  document.createElement("div");
-
-  card.className = "card";
-
-  card.dataset.type = type;
-  card.dataset.name = name;
-  card.dataset.price = price;
-
-
-  card.innerHTML = `
-
-    <img src="${image}">
-
-    <div class="card-info">
-
-      <h3>${name}</h3>
-
-      <div class="details">
-        ${year} • ${type}
-      </div>
-
-      <div class="price">
-        $${Number(price).toLocaleString()}
-      </div>
-
-      <div class="card-buttons">
-
-        <button class="details-btn">
-          Детальніше
-        </button>
-
-        <button
-          class="favorite"
-          onclick="favorite(this)">
-          ♡
-        </button>
-
-      </div>
-
-    </div>
-
-  `;
-
-
-  document
-    .getElementById("vehicles")
-    .prepend(card);
-
-
-  document.getElementById("newName").value = "";
-  document.getElementById("newPrice").value = "";
-  document.getElementById("newYear").value = "";
-  document.getElementById("newImage").value = "";
-
-
-  alert("🎉 Оголошення додано!");
-
-  document.getElementById("catalog")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
-
+    document.getElementById("modal")
+        .classList.add("show");
 }
+
+
+/* CLOSE */
+
+function closeModal(){
+
+    document.getElementById("modal")
+        .classList.remove("show");
+}
+
+
+/* CLOSE WHEN CLICK OUTSIDE */
+
+document
+.getElementById("modal")
+.addEventListener("click",function(e){
+
+    if(e.target===this){
+        closeModal();
+    }
+
+});
 
 </script>
 
