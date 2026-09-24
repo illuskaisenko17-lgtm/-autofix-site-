@@ -1,453 +1,397 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CYBER MECHANICS HUB</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Mechanics Hub</title>
   <style>
     :root {
-      --bg-dark: #070a12;
-      --card-bg: #0d1222;
-      --neon-cyan: #00f3ff;
-      --neon-pink: #ff0055;
-      --neon-green: #00ff66;
-      --neon-purple: #ab00ff;
+      --bg-color: #0b0c10;
+      --card-bg: rgba(23, 27, 38, 0.85);
+      --border-color: rgba(0, 242, 254, 0.2);
+      --neon-cyan: #00f2fe;
+      --neon-magenta: #ff007f;
+      --neon-green: #39ff14;
+      --neon-purple: #bc13fe;
       --text-main: #ffffff;
-      --text-dim: #8a99ad;
+      --text-muted: #a0a5b5;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Rajdhani', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
-      background-color: var(--bg-dark);
+      background-color: var(--bg-color);
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(0, 243, 255, 0.12) 0%, transparent 70%),
-        linear-gradient(rgba(0, 243, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 243, 255, 0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 30px 30px, 30px 30px;
+        radial-gradient(circle at 50% 0%, rgba(188, 19, 254, 0.15), transparent 70%),
+        linear-gradient(to bottom, #050608, #0b0c10);
       color: var(--text-main);
-      padding: 20px 15px;
       min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
+    .container {
+      max-width: 1280px;
+      width: 100%;
+    }
+
+    /* Header Section */
     header {
-      max-width: 1200px;
-      margin: 0 auto 25px auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 25px;
       flex-wrap: wrap;
       gap: 15px;
-      border-bottom: 2px solid rgba(0, 243, 255, 0.2);
-      padding-bottom: 15px;
     }
 
-    .brand-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.8rem;
+    .logo {
+      font-size: 2rem;
       font-weight: 900;
-      color: var(--neon-cyan);
-      text-shadow: 0 0 12px var(--neon-cyan);
       letter-spacing: 2px;
-    }
-
-    .search-input {
-      background: rgba(13, 18, 34, 0.9);
-      border: 1px solid var(--neon-cyan);
-      border-radius: 6px;
-      padding: 10px 15px;
       color: var(--neon-cyan);
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.85rem;
-      outline: none;
-      box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
-      width: 260px;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px rgba(0, 242, 254, 0.6),
+                   0 0 20px rgba(0, 242, 254, 0.3);
     }
 
-    /* Категорії */
-    .categories-bar {
+    .search-box {
+      position: relative;
       display: flex;
+      align-items: center;
+    }
+
+    .search-box input {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--neon-cyan);
+      border-radius: 8px;
+      padding: 10px 15px;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+      width: 260px;
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .search-box input:focus {
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+    }
+
+    /* Category Buttons (Navigation Carousel) */
+    .categories {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 30px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+
+    .category-btn {
+      flex: 1;
+      min-width: 150px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 15px;
+      display: flex;
+      align-items: center;
       justify-content: center;
       gap: 10px;
-      max-width: 1200px;
-      margin: 0 auto 30px auto;
-      flex-wrap: wrap;
-    }
-
-    .cat-btn {
-      background: var(--card-bg);
-      border: 1px solid rgba(0, 243, 255, 0.3);
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.8rem;
+      color: var(--text-main);
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    .cat-btn.active, .cat-btn:hover {
-      background: var(--neon-cyan);
-      color: #000;
-      box-shadow: 0 0 15px var(--neon-cyan);
+    .category-btn:hover, .category-btn.active {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+      transform: translateY(-2px);
     }
 
-    /* Сітка карт */
+    .category-btn.autos.active { border-color: var(--neon-cyan); box-shadow: 0 0 15px var(--neon-cyan); }
+    .category-btn.motos.active { border-color: var(--neon-magenta); box-shadow: 0 0 15px var(--neon-magenta); }
+    .category-btn.pitbikes.active { border-color: var(--neon-green); box-shadow: 0 0 15px var(--neon-green); }
+    .category-btn.scooters.active { border-color: var(--neon-purple); box-shadow: 0 0 15px var(--neon-purple); }
+
+    /* Cards Grid */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 25px;
-      max-width: 1200px;
-      margin: 0 auto;
+      gap: 20px;
     }
 
     .card {
       background: var(--card-bg);
-      border: 1px solid rgba(0, 243, 255, 0.2);
-      border-radius: 10px;
-      overflow: hidden;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 15px;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      position: relative;
+      backdrop-filter: blur(5px);
     }
 
     .card:hover {
       transform: translateY(-5px);
-      border-color: var(--neon-cyan);
-      box-shadow: 0 0 25px rgba(0, 243, 255, 0.3);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
     }
 
-    .card-img-wrap {
+    .card[data-type="autos"]:hover { border-color: var(--neon-cyan); box-shadow: 0 0 20px rgba(0, 242, 254, 0.3); }
+    .card[data-type="motos"]:hover { border-color: var(--neon-magenta); box-shadow: 0 0 20px rgba(255, 0, 127, 0.3); }
+    .card[data-type="pitbikes"]:hover { border-color: var(--neon-green); box-shadow: 0 0 20px rgba(57, 255, 20, 0.3); }
+    .card[data-type="scooters"]:hover { border-color: var(--neon-purple); box-shadow: 0 0 20px rgba(188, 19, 254, 0.3); }
+
+    .card-img-container {
       width: 100%;
       height: 180px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 15px;
       position: relative;
       background: #000;
     }
 
-    .card-img {
+    .card-img-container img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
+      transition: transform 0.5s ease;
     }
 
-    .badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 4px;
-      letter-spacing: 1px;
+    .card:hover .card-img-container img {
+      transform: scale(1.08);
     }
 
-    .badge-auto { background: rgba(255, 0, 85, 0.9); color: #fff; box-shadow: 0 0 8px var(--neon-pink); }
-    .badge-moto { background: rgba(171, 0, 255, 0.9); color: #fff; box-shadow: 0 0 8px var(--neon-purple); }
-    .badge-pit { background: rgba(0, 255, 102, 0.9); color: #000; box-shadow: 0 0 8px var(--neon-green); }
-    .badge-scooter { background: rgba(0, 243, 255, 0.9); color: #000; box-shadow: 0 0 8px var(--neon-cyan); }
-
-    .card-body {
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-
-    .card-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.1rem;
-      margin-bottom: 10px;
-      color: #fff;
-    }
-
-    .card-info {
+    .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .card-tag {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-transform: uppercase;
+    }
+
+    .card-details {
+      display: flex;
+      justify-content: space-between;
       margin-bottom: 15px;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 8px 12px;
-      border-radius: 5px;
-      border-left: 3px solid var(--neon-cyan);
-    }
-
-    .service-desc {
       font-size: 0.85rem;
-      color: var(--text-dim);
     }
 
-    .price {
-      font-family: 'Orbitron', sans-serif;
-      color: var(--neon-green);
-      font-weight: 800;
-      font-size: 0.95rem;
+    .detail-label {
+      color: var(--text-muted);
+      margin-bottom: 3px;
     }
 
-    .btn-book {
-      width: 100%;
-      padding: 12px;
-      background: transparent;
-      border: 1px solid var(--neon-cyan);
+    .detail-value {
+      font-weight: 600;
+    }
+
+    .price-value {
       color: var(--neon-cyan);
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 800;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: all 0.3s;
-      margin-top: auto;
-      letter-spacing: 1px;
+      font-weight: 700;
     }
 
-    .btn-book:hover {
+    .btn-action {
+      background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.15));
+      border: 1px solid var(--neon-cyan);
+      color: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      text-transform: uppercase;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .btn-action:hover {
       background: var(--neon-cyan);
       color: #000;
       box-shadow: 0 0 15px var(--neon-cyan);
-    }
-
-    /* Модальне вікно */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      backdrop-filter: blur(5px);
-    }
-
-    .modal-box {
-      background: var(--card-bg);
-      border: 2px solid var(--neon-cyan);
-      box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
-      padding: 30px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 400px;
-    }
-
-    .modal-title {
-      font-family: 'Orbitron', sans-serif;
-      color: var(--neon-cyan);
-      margin-bottom: 15px;
-      font-size: 1.1rem;
-      text-align: center;
-    }
-
-    .modal-input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 12px;
-      background: #04060a;
-      border: 1px solid rgba(0, 243, 255, 0.4);
-      color: #fff;
-      border-radius: 5px;
-      outline: none;
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .btn-submit {
-      flex: 2;
-      background: var(--neon-cyan);
-      border: none;
-      color: #000;
-      padding: 10px;
-      font-family: 'Orbitron', sans-serif;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: 800;
-    }
-
-    .btn-cancel {
-      flex: 1;
-      background: transparent;
-      border: 1px solid var(--neon-pink);
-      color: var(--neon-pink);
-      padding: 10px;
-      font-family: 'Orbitron', sans-serif;
-      border-radius: 5px;
-      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="brand-title">CYBER MECHANICS</div>
-    <input type="text" id="searchInput" class="search-input" onkeyup="filterCards()" placeholder="SEARCH VEHICLE..." />
-  </header>
-
-  <div class="categories-bar">
-    <button class="cat-btn active" onclick="selectCat('all', this)">ALL</button>
-    <button class="cat-btn" onclick="selectCat('auto', this)">AUTO</button>
-    <button class="cat-btn" onclick="selectCat('moto', this)">MOTO</button>
-    <button class="cat-btn" onclick="selectCat('pitbike', this)">PITBIKE</button>
-    <button class="cat-btn" onclick="selectCat('scooter', this)">SCOOTER</button>
-  </div>
-
-  <div class="grid" id="grid">
-
-    <!-- Kawasaki Z900 -->
-    <div class="card" data-cat="moto" data-name="kawasaki z900">
-      <div class="card-img-wrap">
-        <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=600&q=80" 
-             onerror="this.src='https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=600&q=80'" 
-             class="card-img" alt="Kawasaki Z900" />
-        <span class="badge badge-moto">MOTO</span>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="logo">Cyber Mechanics Hub</div>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="FIND YOUR RIDE...">
       </div>
-      <div class="card-body">
-        <div class="card-title">Kawasaki Z900</div>
-        <div class="card-info">
-          <span class="service-desc">Chain & Brakes Service</span>
-          <span class="price">2200 UAH</span>
-        </div>
-        <button class="btn-book" onclick="openBooking('Kawasaki Z900')">BOOK APPOINTMENT</button>
-      </div>
+    </header>
+
+    <!-- Categories Filters -->
+    <div class="categories">
+      <button class="category-btn autos active" onclick="filterCategory('all', this)">All Vehicles</button>
+      <button class="category-btn autos" onclick="filterCategory('autos', this)">🚗 Autos</button>
+      <button class="category-btn motos" onclick="filterCategory('motos', this)">🏍️ Motos</button>
+      <button class="category-btn pitbikes" onclick="filterCategory('pitbikes', this)">🏎️ Pitbikes</button>
+      <button class="category-btn scooters" onclick="filterCategory('scooters', this)">🛵 Scooters</button>
     </div>
 
-    <!-- Pitster Pro LXR -->
-    <div class="card" data-cat="pitbike" data-name="pitster pro lxr">
-      <div class="card-img-wrap">
-        <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80" 
-             onerror="this.src='https://images.unsplash.com/photo-1547549662-77849a0d8421?auto=format&fit=crop&w=600&q=80'" 
-             class="card-img" alt="Pitster Pro LXR" />
-        <span class="badge badge-pit">PITBIKE</span>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Pitster Pro LXR</div>
-        <div class="card-info">
-          <span class="service-desc">Suspension & Engine</span>
-          <span class="price">1200 UAH</span>
-        </div>
-        <button class="btn-book" onclick="openBooking('Pitster Pro LXR')">BOOK APPOINTMENT</button>
-      </div>
-    </div>
-
-    <!-- Kayo Pitbike -->
-    <div class="card" data-cat="pitbike" data-name="kayo pitbike">
-      <div class="card-img-wrap">
-        <img src="https://images.unsplash.com/photo-1547549662-77849a0d8421?auto=format&fit=crop&w=600&q=80" 
-             onerror="this.src='https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80'" 
-             class="card-img" alt="Kayo Pitbike" />
-        <span class="badge badge-pit">PITBIKE</span>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Kayo Pitbike</div>
-        <div class="card-info">
-          <span class="service-desc">Carburetor & Valves</span>
-          <span class="price">950 UAH</span>
-        </div>
-        <button class="btn-book" onclick="openBooking('Kayo Pitbike')">BOOK APPOINTMENT</button>
-      </div>
-    </div>
-
-    <!-- Vespa Custom -->
-    <div class="card" data-cat="scooter" data-name="vespa custom">
-      <div class="card-img-wrap">
-        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=600&q=80" 
-             onerror="this.src='https://images.unsplash.com/photo-1525160354320-d8e92641c563?auto=format&fit=crop&w=600&q=80'" 
-             class="card-img" alt="Vespa Custom" />
-        <span class="badge badge-scooter">SCOOTER</span>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Vespa Custom</div>
-        <div class="card-info">
-          <span class="service-desc">Full Maintenance</span>
-          <span class="price">850 UAH</span>
-        </div>
-        <button class="btn-book" onclick="openBooking('Vespa Custom')">BOOK APPOINTMENT</button>
-      </div>
-    </div>
-
-    <!-- Honda Scooter / Dio -->
-    <div class="card" data-cat="scooter" data-name="honda dio 35 zx">
-      <div class="card-img-wrap">
-        <img src="https://images.unsplash.com/photo-1525160354320-d8e92641c563?auto=format&fit=crop&w=600&q=80" 
-             onerror="this.src='https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=600&q=80'" 
-             class="card-img" alt="Honda Dio 35 ZX" />
-        <span class="badge badge-scooter">SCOOTER</span>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Honda Dio 35 ZX</div>
-        <div class="card-info">
-          <span class="service-desc">Variator & Engine Tuning</span>
-          <span class="price">700 UAH</span>
-        </div>
-        <button class="btn-book" onclick="openBooking('Honda Dio 35 ZX')">BOOK APPOINTMENT</button>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Модальне вікно -->
-  <div class="modal-overlay" id="modal">
-    <div class="modal-box">
-      <div class="modal-title" id="modalTitle">BOOK APPOINTMENT</div>
-      <input type="text" class="modal-input" placeholder="Ваше ім'я" />
-      <input type="tel" class="modal-input" placeholder="Номер телефону" />
-      <input type="date" class="modal-input" />
-      <div class="modal-actions">
-        <button class="btn-submit" onclick="closeBooking(true)">ПІДТВЕРДИТИ</button>
-        <button class="btn-cancel" onclick="closeBooking(false)">СКАСУВАТИ</button>
-      </div>
+    <!-- Vehicle Cards Grid -->
+    <div class="grid" id="vehicleGrid">
+      <!-- Cards will be populated dynamically -->
     </div>
   </div>
 
   <script>
-    let currentCategory = 'all';
+    const vehicles = [
+      {
+        id: 1,
+        title: "BMW M5 F90",
+        type: "autos",
+        service: "Engine Tuning",
+        price: "15 000 UAH",
+        image: "https://images.unsplash.com/photo-1555215695-3004980adade?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 2,
+        title: "Audi R8 Cyber",
+        type: "autos",
+        service: "Stage 2 + Wrap",
+        price: "22 000 UAH",
+        image: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 3,
+        title: "Nissan GT-R Nismo",
+        type: "autos",
+        service: "Full Custom Tuning",
+        price: "28 000 UAH",
+        image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 4,
+        title: "Yamaha R1 Neo",
+        type: "motos",
+        service: "ECU Remap",
+        price: "12 000 UAH",
+        image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 5,
+        title: "Ducati Panigale V4",
+        type: "motos",
+        service: "Exhaust & Tune",
+        price: "18 500 UAH",
+        image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 6,
+        title: "Pitster Pro LXR",
+        type: "pitbikes",
+        service: "Suspension & Engine",
+        price: "9 500 UAH",
+        image: "https://images.unsplash.com/photo-1579710039144-85d6da173898?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 7,
+        title: "Kayo Evolution 140",
+        type: "pitbikes",
+        service: "Carb Tuning & Mods",
+        price: "8 000 UAH",
+        image: "https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 8,
+        title: "Vespa Custom Neon",
+        type: "scooters",
+        service: "Visual Neon & CVT",
+        price: "6 500 UAH",
+        image: "https://images.unsplash.com/photo-1520627977056-c307aeb9a625?auto=format&fit=crop&w=600&q=80"
+      }
+    ];
 
-    function selectCat(cat, btn) {
-      currentCategory = cat;
-      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      filterCards();
-    }
+    function renderVehicles(items) {
+      const grid = document.getElementById('vehicleGrid');
+      grid.innerHTML = '';
 
-    function filterCards() {
-      const search = document.getElementById('searchInput').value.toLowerCase();
-      const cards = document.querySelectorAll('.card');
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.setAttribute('data-type', item.type);
 
-      cards.forEach(card => {
-        const name = card.getAttribute('data-name');
-        const cat = card.getAttribute('data-cat');
-        const matchSearch = name.includes(search);
-        const matchCat = (currentCategory === 'all' || cat === currentCategory);
-
-        if (matchSearch && matchCat) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
+        card.innerHTML = `
+          <div class="card-img-container">
+            <img src="${item.image}" alt="${item.title}">
+          </div>
+          <div class="card-header">
+            <div class="card-title">${item.title}</div>
+            <div class="card-tag">${item.type}</div>
+          </div>
+          <div class="card-details">
+            <div>
+              <div class="detail-label">Service:</div>
+              <div class="detail-value">${item.service}</div>
+            </div>
+            <div>
+              <div class="detail-label">Price:</div>
+              <div class="price-value">${item.price}</div>
+            </div>
+          </div>
+          <button class="btn-action">Book Appointment</button>
+        `;
+        grid.appendChild(card);
       });
     }
 
-    function openBooking(title) {
-      document.getElementById('modalTitle').innerText = 'ЗАПИС: ' + title;
-      document.getElementById('modal').style.display = 'flex';
-    }
+    function filterCategory(category, element) {
+      document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+      element.classList.add('active');
 
-    function closeBooking(submitted) {
-      document.getElementById('modal').style.display = 'none';
-      if (submitted) {
-        alert('Заявку відправлено!');
+      if (category === 'all') {
+        renderVehicles(vehicles);
+      } else {
+        const filtered = vehicles.filter(v => v.type === category);
+        renderVehicles(filtered);
       }
     }
+
+    // Search function
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      const filtered = vehicles.filter(v => 
+        v.title.toLowerCase().includes(query) || 
+        v.service.toLowerCase().includes(query)
+      );
+      renderVehicles(filtered);
+    });
+
+    // Initial render
+    renderVehicles(vehicles);
   </script>
 </body>
 </html>
