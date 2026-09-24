@@ -1,367 +1,1058 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CyberTuning Studio</title>
-  
-  <!-- Футуристичні шрифти Google -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    /* ПОВНА СТИЛІЗАЦІЯ ВБУДОВАНА В ОДИН ФАЙЛ */
-    :root {
-      --bg-main: #07080c;
-      --card-bg: #10121a;
-      --border-color: rgba(255, 255, 255, 0.08);
-      
-      --neon-cyan: #00f0ff;
-      --neon-green: #00ff66;
-      --neon-purple: #b026ff;
-      --neon-orange: #ff5500;
-      
-      --text-main: #ffffff;
-      --text-muted: #828699;
-      
-      --font-title: 'Orbitron', sans-serif;
-      --font-body: 'Rajdhani', sans-serif;
-    }
+<title>GidHot.com — Авто, Мото та Скутери</title>
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
 
-    body {
-      background-color: var(--bg-main);
-      color: var(--text-main);
-      font-family: var(--font-body);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 25px 12px;
-      background-image: 
-        radial-gradient(circle at 15% 15%, rgba(0, 240, 255, 0.06) 0%, transparent 40%),
-        radial-gradient(circle at 85% 85%, rgba(176, 38, 255, 0.06) 0%, transparent 40%);
-    }
+body{
+  background:#080808;
+  color:white;
+}
 
-    /* ШАПКА */
-    header {
-      text-align: center;
-      margin-bottom: 25px;
-      max-width: 600px;
-    }
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#101010;
+  border-bottom:1px solid #292929;
+  padding:18px 6%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
 
-    header h1 {
-      font-family: var(--font-title);
-      font-size: clamp(22px, 6vw, 36px);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      background: linear-gradient(135deg, #ffffff 20%, var(--neon-cyan) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 6px;
-    }
+.logo{
+  font-size:28px;
+  font-weight:900;
+  color:#ff4b00;
+}
 
-    header p {
-      color: var(--text-muted);
-      font-size: 16px;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:25px;
+  font-weight:bold;
+}
 
-    /* СІТКА КАРТОК */
-    .catalog {
-      width: 100%;
-      max-width: 420px; /* Компільовано під вигляд мобільного додатку */
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
+nav a:hover{
+  color:#ff4b00;
+}
 
-    /* КАРТКА */
-    .card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
+.hero{
+  min-height:500px;
+  padding:90px 7%;
+  display:flex;
+  align-items:center;
 
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(0, 240, 255, 0.3);
-    }
+  background:
+  linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.9)),
+  url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=80")
+  center/cover;
+}
 
-    /* ЗОБРАЖЕННЯ */
-    .image-container {
-      position: relative;
-      width: 100%;
-      height: 210px;
-      border-radius: 12px;
-      overflow: hidden;
-      background-color: #000;
-    }
+.hero h1{
+  font-size:64px;
+  margin-bottom:18px;
+}
 
-    .image-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+.hero h1 span{
+  color:#ff4b00;
+}
 
-    /* НЕОНОВІ БЕЙДЖІ */
-    .badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      padding: 4px 10px;
-      border-radius: 5px;
-      font-family: var(--font-title);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-    }
+.hero p{
+  color:#ddd;
+  font-size:20px;
+  max-width:650px;
+  margin-bottom:30px;
+}
 
-    .badge-autos {
-      border: 1px solid var(--neon-cyan);
-      color: var(--neon-cyan);
-      background: rgba(0, 240, 255, 0.15);
-    }
+.search{
+  display:flex;
+  max-width:700px;
+}
 
-    .badge-pitbikes {
-      border: 1px solid var(--neon-green);
-      color: var(--neon-green);
-      background: rgba(0, 255, 102, 0.15);
-    }
+.search input{
+  flex:1;
+  padding:18px;
+  border:0;
+  outline:0;
+  border-radius:10px 0 0 10px;
+  font-size:16px;
+}
 
-    .badge-scooters {
-      border: 1px solid var(--neon-purple);
-      color: var(--neon-purple);
-      background: rgba(176, 38, 255, 0.15);
-    }
+.search button{
+  border:0;
+  padding:18px 28px;
+  background:#ff4b00;
+  color:white;
+  font-weight:bold;
+  border-radius:0 10px 10px 0;
+  cursor:pointer;
+}
 
-    .badge-quads {
-      border: 1px solid var(--neon-orange);
-      color: var(--neon-orange);
-      background: rgba(255, 85, 0, 0.15);
-    }
+section{
+  padding:70px 6%;
+}
 
-    /* ТЕКСТОВІ БЛОКИ */
-    .card-title {
-      font-family: var(--font-title);
-      font-size: 19px;
-      font-weight: 800;
-      color: var(--text-main);
-      letter-spacing: 0.5px;
-    }
+.title{
+  text-align:center;
+  margin-bottom:35px;
+}
 
-    .card-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      background: rgba(255, 255, 255, 0.02);
-      padding: 10px 12px;
-      border-radius: 8px;
-    }
+.title h2{
+  font-size:40px;
+}
 
-    .info-col {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
+.title p{
+  color:#999;
+  margin-top:8px;
+}
 
-    .info-col.right {
-      text-align: right;
-    }
+.categories{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
 
-    .label {
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
+.category{
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:18px;
+  padding:35px;
+  text-align:center;
+  cursor:pointer;
+  transition:.25s;
+}
 
-    .value-text {
-      font-size: 15px;
-      font-weight: 700;
-      color: #ffffff;
-    }
+.category:hover{
+  transform:translateY(-7px);
+  border-color:#ff4b00;
+}
 
-    .value-price {
-      font-family: var(--font-title);
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--neon-cyan);
-    }
+.category-icon{
+  font-size:55px;
+  margin-bottom:15px;
+}
 
-    /* КНОПКА */
-    .btn-book {
-      width: 100%;
-      padding: 13px;
-      background: linear-gradient(180deg, #1d202e 0%, #131520 100%);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 8px;
-      color: #ffffff;
-      font-family: var(--font-title);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
+.category h3{
+  font-size:25px;
+}
 
-    .btn-book:hover {
-      border-color: var(--neon-cyan);
-      color: var(--neon-cyan);
-      box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
-    }
-  </style>
+.filters{
+  background:#121212;
+  padding:20px;
+  border-radius:15px;
+  margin-bottom:30px;
+
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.filters input,
+.filters select{
+  padding:14px;
+  border:1px solid #333;
+  background:#080808;
+  color:white;
+  border-radius:8px;
+  outline:none;
+}
+
+.reset{
+  border:0;
+  background:#ff4b00;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.vehicles{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+}
+
+.card{
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:16px;
+  overflow:hidden;
+  transition:.25s;
+  position:relative;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  border-color:#ff4b00;
+}
+
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.card-info{
+  padding:20px;
+}
+
+.card-info h3{
+  font-size:23px;
+  margin-bottom:8px;
+}
+
+.details{
+  color:#999;
+  margin-bottom:12px;
+}
+
+.price{
+  color:#ff4b00;
+  font-size:25px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.card-buttons{
+  display:flex;
+  gap:8px;
+}
+
+.details-btn,
+.favorite{
+  border:0;
+  padding:12px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.details-btn{
+  flex:1;
+  background:#ff4b00;
+  color:white;
+}
+
+.favorite{
+  width:48px;
+  background:#252525;
+  color:white;
+  font-size:20px;
+}
+
+.favorite.active{
+  background:#ff4b00;
+}
+
+.empty{
+  display:none;
+  text-align:center;
+  color:#999;
+  padding:40px;
+}
+
+.add-section{
+  background:#101010;
+}
+
+.form{
+  max-width:700px;
+  margin:auto;
+  background:#171717;
+  padding:30px;
+  border-radius:18px;
+  border:1px solid #292929;
+}
+
+.form h3{
+  font-size:28px;
+  margin-bottom:20px;
+}
+
+.form input,
+.form select{
+  width:100%;
+  padding:15px;
+  margin-bottom:15px;
+  border-radius:8px;
+  border:1px solid #333;
+  background:#080808;
+  color:white;
+  outline:none;
+}
+
+.form button{
+  width:100%;
+  padding:16px;
+  border:0;
+  border-radius:8px;
+  background:#ff4b00;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+footer{
+  background:#0d0d0d;
+  padding:40px;
+  text-align:center;
+  color:#777;
+}
+
+footer strong{
+  color:#ff4b00;
+}
+
+@media(max-width:900px){
+
+  .vehicles,
+  .categories{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .filters{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .hero h1{
+    font-size:48px;
+  }
+}
+
+@media(max-width:600px){
+
+  nav{
+    display:none;
+  }
+
+  .vehicles,
+  .categories,
+  .filters{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    padding:70px 6%;
+  }
+
+  .hero h1{
+    font-size:40px;
+  }
+
+  .search{
+    flex-direction:column;
+  }
+
+  .search input,
+  .search button{
+    border-radius:8px;
+    margin-bottom:8px;
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <header>
-    <h1>CyberTuning Studio</h1>
-    <p>Кастомізація та сервіс транспорту</p>
-  </header>
+<header>
 
-  <main class="catalog">
+  <div class="logo">GidHot.com</div>
 
-    <!-- 1. BMW M5 F90 -->
-    <article class="card">
-      <div class="image-container">
-        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80" alt="BMW M5 F90">
-        <span class="badge badge-autos">AUTOS</span>
-      </div>
-      <h2 class="card-title">BMW M5 F90 Cyber</h2>
+  <nav>
+    <a href="#home">Головна</a>
+    <a href="#catalog">Каталог</a>
+    <a href="#add">Продати</a>
+  </nav>
+
+</header>
+
+
+<section class="hero" id="home">
+
+  <div>
+
+    <h1>Твій <span>GidHot</span> 🚗</h1>
+
+    <p>
+      Автомобілі, мотоцикли та скутери.
+      Знаходь техніку, яка тобі подобається.
+    </p>
+
+    <div class="search">
+
+      <input
+        id="search"
+        type="text"
+        placeholder="🔎 BMW, Yamaha, Audi..."
+        oninput="filterCars()"
+      >
+
+      <button onclick="filterCars()">
+        Пошук
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section>
+
+  <div class="title">
+
+    <h2>Категорії</h2>
+
+    <p>
+      Обери свою категорію
+    </p>
+
+  </div>
+
+  <div class="categories">
+
+    <div
+      class="category"
+      onclick="chooseCategory('Автомобіль')">
+
+      <div class="category-icon">🚗</div>
+
+      <h3>Автомобілі</h3>
+
+    </div>
+
+
+    <div
+      class="category"
+      onclick="chooseCategory('Мотоцикл')">
+
+      <div class="category-icon">🏍️</div>
+
+      <h3>Мотоцикли</h3>
+
+    </div>
+
+
+    <div
+      class="category"
+      onclick="chooseCategory('Скутер')">
+
+      <div class="category-icon">🛵</div>
+
+      <h3>Скутери</h3>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="catalog">
+
+  <div class="title">
+
+    <h2>🔥 Каталог</h2>
+
+    <p>
+      Шукай та фільтруй техніку
+    </p>
+
+  </div>
+
+
+  <div class="filters">
+
+    <select id="typeFilter" onchange="filterCars()">
+
+      <option value="">Всі категорії</option>
+
+      <option value="Автомобіль">
+        🚗 Автомобілі
+      </option>
+
+      <option value="Мотоцикл">
+        🏍️ Мотоцикли
+      </option>
+
+      <option value="Скутер">
+        🛵 Скутери
+      </option>
+
+    </select>
+
+
+    <input
+      id="minPrice"
+      type="number"
+      placeholder="Мін. ціна"
+      oninput="filterCars()"
+    >
+
+
+    <input
+      id="maxPrice"
+      type="number"
+      placeholder="Макс. ціна"
+      oninput="filterCars()"
+    >
+
+
+    <button
+      class="reset"
+      onclick="resetFilters()">
+
+      Скинути
+
+    </button>
+
+  </div>
+
+
+  <div class="vehicles" id="vehicles">
+
+
+    <div
+      class="card"
+      data-type="Автомобіль"
+      data-name="BMW M5"
+      data-price="85000">
+
+      <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=900&q=80">
+
       <div class="card-info">
-        <div class="info-col">
-          <span class="label">ПОСЛУГА</span>
-          <span class="value-text">Stage 3 + Neon</span>
-        </div>
-        <div class="info-col right">
-          <span class="label">ЦІНА</span>
-          <span class="value-price">18 500 UAH</span>
-        </div>
-      </div>
-      <button class="btn-book">BOOK APPOINTMENT</button>
-    </article>
 
-    <!-- 2. Audi R8 V10 -->
-    <article class="card">
-      <div class="image-container">
-        <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=800&q=80" alt="Audi R8 V10 Performance">
-        <span class="badge badge-autos">AUTOS</span>
+        <h3>BMW M5</h3>
+
+        <div class="details">
+          2024 • Бензин • Автомат
+        </div>
+
+        <div class="price">
+          $85 000
+        </div>
+
+        <div class="card-buttons">
+
+          <button class="details-btn">
+            Детальніше
+          </button>
+
+          <button
+            class="favorite"
+            onclick="favorite(this)">
+            ♡
+          </button>
+
+        </div>
+
       </div>
-      <h2 class="card-title">Audi R8 V10 Performance</h2>
+
+    </div>
+
+
+    <div
+      class="card"
+      data-type="Автомобіль"
+      data-name="Audi RS7"
+      data-price="105000">
+
+      <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=900&q=80">
+
       <div class="card-info">
-        <div class="info-col">
-          <span class="label">ПОСЛУГА</span>
-          <span class="value-text">Stage 2 Exhaust</span>
-        </div>
-        <div class="info-col right">
-          <span class="label">ЦІНА</span>
-          <span class="value-price">22 000 UAH</span>
-        </div>
-      </div>
-      <button class="btn-book">BOOK APPOINTMENT</button>
-    </article>
 
-    <!-- 3. Pitster Pro LXR 190 -->
-    <article class="card">
-      <div class="image-container">
-        <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=800&q=80" alt="Pitster Pro LXR 190">
-        <span class="badge badge-pitbikes">PITBIKES</span>
+        <h3>Audi RS7</h3>
+
+        <div class="details">
+          2023 • Бензин • Автомат
+        </div>
+
+        <div class="price">
+          $105 000
+        </div>
+
+        <div class="card-buttons">
+
+          <button class="details-btn">
+            Детальніше
+          </button>
+
+          <button
+            class="favorite"
+            onclick="favorite(this)">
+            ♡
+          </button>
+
+        </div>
+
       </div>
-      <h2 class="card-title">Pitster Pro LXR 190</h2>
+
+    </div>
+
+
+    <div
+      class="card"
+      data-type="Мотоцикл"
+      data-name="Yamaha MT-09"
+      data-price="10500">
+
+      <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=900&q=80">
+
       <div class="card-info">
-        <div class="info-col">
-          <span class="label">ПОСЛУГА</span>
-          <span class="value-text">Engine Overhaul</span>
-        </div>
-        <div class="info-col right">
-          <span class="label">ЦІНА</span>
-          <span class="value-price">9 500 UAH</span>
-        </div>
-      </div>
-      <button class="btn-book">BOOK APPOINTMENT</button>
-    </article>
 
-    <!-- 4. Kayo Evolution 140 -->
-    <article class="card">
-      <div class="image-container">
-        <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80" alt="Kayo Evolution 140">
-        <span class="badge badge-pitbikes">PITBIKES</span>
+        <h3>Yamaha MT-09</h3>
+
+        <div class="details">
+          2024 • 890 см³ • Мотоцикл
+        </div>
+
+        <div class="price">
+          $10 500
+        </div>
+
+        <div class="card-buttons">
+
+          <button class="details-btn">
+            Детальніше
+          </button>
+
+          <button
+            class="favorite"
+            onclick="favorite(this)">
+            ♡
+          </button>
+
+        </div>
+
       </div>
-      <h2 class="card-title">Kayo Evolution 140</h2>
+
+    </div>
+
+
+    <div
+      class="card"
+      data-type="Мотоцикл"
+      data-name="Ducati Panigale"
+      data-price="24000">
+
+      <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=900&q=80">
+
       <div class="card-info">
-        <div class="info-col">
-          <span class="label">ПОСЛУГА</span>
-          <span class="value-text">Carb Adjustment</span>
-        </div>
-        <div class="info-col right">
-          <span class="label">ЦІНА</span>
-          <span class="value-price">7 500 UAH</span>
-        </div>
-      </div>
-      <button class="btn-book">BOOK APPOINTMENT</button>
-    </article>
 
-    <!-- 5. Can-Am Maverick X3 -->
-    <article class="card">
-      <div class="image-container">
-        <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80" alt="Can-Am Maverick X3">
-        <span class="badge badge-quads">QUADS</span>
+        <h3>Ducati Panigale</h3>
+
+        <div class="details">
+          2024 • 1103 см³ • Спорт
+        </div>
+
+        <div class="price">
+          $24 000
+        </div>
+
+        <div class="card-buttons">
+
+          <button class="details-btn">
+            Детальніше
+          </button>
+
+          <button
+            class="favorite"
+            onclick="favorite(this)">
+            ♡
+          </button>
+
+        </div>
+
       </div>
-      <h2 class="card-title">Can-Am Maverick X3</h2>
+
+    </div>
+
+
+    <div
+      class="card"
+      data-type="Скутер"
+      data-name="Vespa GTS"
+      data-price="7200">
+
+      <img src="https://images.unsplash.com/photo-1558980394-0c7f7e5c7d3c?auto=format&fit=crop&w=900&q=80">
+
       <div class="card-info">
-        <div class="info-col">
-          <span class="label">ПОСЛУГА</span>
-          <span class="value-text">Off-Road Prep</span>
-        </div>
-        <div class="info-col right">
-          <span class="label">ЦІНА</span>
-          <span class="value-price">14 000 UAH</span>
-        </div>
-      </div>
-      <button class="btn-book">BOOK APPOINTMENT</button>
-    </article>
 
-    <!-- 6. Vespa Custom Neon -->
-    <article class="card">
-      <div class="image-container">
-        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=800&q=80" alt="Vespa Custom Neon">
-        <span class="badge badge-scooters">SCOOTERS</span>
+        <h3>Vespa GTS</h3>
+
+        <div class="details">
+          2024 • 300 см³ • Скутер
+        </div>
+
+        <div class="price">
+          $7 200
+        </div>
+
+        <div class="card-buttons">
+
+          <button class="details-btn">
+            Детальніше
+          </button>
+
+          <button
+            class="favorite"
+            onclick="favorite(this)">
+            ♡
+          </button>
+
+        </div>
+
       </div>
-      <h2 class="card-title">Vespa Custom Neon</h2>
+
+    </div>
+
+
+    <div
+      class="card"
+      data-type="Скутер"
+      data-name="Honda PCX"
+      data-price="4800">
+
+      <img src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=900&q=80">
+
       <div class="card-info">
-        <div class="info-col">
-          <span class="label">ПОСЛУГА</span>
-          <span class="value-text">CVT Tuning</span>
-        </div>
-        <div class="info-col right">
-          <span class="label">ЦІНА</span>
-          <span class="value-price">8 000 UAH</span>
-        </div>
-      </div>
-      <button class="btn-book">BOOK APPOINTMENT</button>
-    </article>
 
-  </main>
+        <h3>Honda PCX</h3>
+
+        <div class="details">
+          2024 • 160 см³ • Скутер
+        </div>
+
+        <div class="price">
+          $4 800
+        </div>
+
+        <div class="card-buttons">
+
+          <button class="details-btn">
+            Детальніше
+          </button>
+
+          <button
+            class="favorite"
+            onclick="favorite(this)">
+            ♡
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="empty" id="empty">
+    😕 Нічого не знайдено
+  </div>
+
+</section>
+
+
+<section class="add-section" id="add">
+
+  <div class="title">
+
+    <h2>📢 Додати оголошення</h2>
+
+    <p>
+      Додай свою техніку до каталогу
+    </p>
+
+  </div>
+
+
+  <div class="form">
+
+    <h3>Нове оголошення</h3>
+
+    <input
+      id="newName"
+      placeholder="Назва, наприклад BMW M4"
+    >
+
+
+    <select id="newType">
+
+      <option value="Автомобіль">
+        🚗 Автомобіль
+      </option>
+
+      <option value="Мотоцикл">
+        🏍️ Мотоцикл
+      </option>
+
+      <option value="Скутер">
+        🛵 Скутер
+      </option>
+
+    </select>
+
+
+    <input
+      id="newPrice"
+      type="number"
+      placeholder="Ціна в $"
+    >
+
+
+    <input
+      id="newYear"
+      type="number"
+      placeholder="Рік"
+    >
+
+
+    <input
+      id="newImage"
+      placeholder="Посилання на фото"
+    >
+
+
+    <button onclick="addVehicle()">
+      🚀 Опублікувати оголошення
+    </button>
+
+  </div>
+
+</section>
+
+
+<footer>
+
+  <p>
+    © 2026 <strong>GidHot.com</strong>
+    — автомобілі • мотоцикли • скутери
+  </p>
+
+</footer>
+
+
+<script>
+
+function filterCars(){
+
+  const search =
+    document.getElementById("search")
+    .value
+    .toLowerCase();
+
+  const type =
+    document.getElementById("typeFilter")
+    .value;
+
+  const min =
+    Number(document.getElementById("minPrice").value) || 0;
+
+  const maxInput =
+    document.getElementById("maxPrice").value;
+
+  const max =
+    maxInput === ""
+    ? Infinity
+    : Number(maxInput);
+
+
+  const cards =
+    document.querySelectorAll(".card");
+
+  let visible = 0;
+
+
+  cards.forEach(card => {
+
+    const name =
+      card.dataset.name.toLowerCase();
+
+    const cardType =
+      card.dataset.type;
+
+    const price =
+      Number(card.dataset.price);
+
+
+    const matchesSearch =
+      name.includes(search);
+
+    const matchesType =
+      type === "" || cardType === type;
+
+    const matchesPrice =
+      price >= min && price <= max;
+
+
+    if(
+      matchesSearch &&
+      matchesType &&
+      matchesPrice
+    ){
+
+      card.style.display = "block";
+      visible++;
+
+    }else{
+
+      card.style.display = "none";
+
+    }
+
+  });
+
+
+  document.getElementById("empty").style.display =
+    visible === 0 ? "block" : "none";
+}
+
+
+function chooseCategory(category){
+
+  document.getElementById("typeFilter")
+    .value = category;
+
+  filterCars();
+
+  document.getElementById("catalog")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+}
+
+
+function resetFilters(){
+
+  document.getElementById("search").value = "";
+  document.getElementById("typeFilter").value = "";
+  document.getElementById("minPrice").value = "";
+  document.getElementById("maxPrice").value = "";
+
+  filterCars();
+}
+
+
+function favorite(button){
+
+  button.classList.toggle("active");
+
+  if(button.classList.contains("active")){
+    button.innerHTML = "♥";
+  }else{
+    button.innerHTML = "♡";
+  }
+}
+
+
+function addVehicle(){
+
+  const name =
+    document.getElementById("newName").value.trim();
+
+  const type =
+    document.getElementById("newType").value;
+
+  const price =
+    document.getElementById("newPrice").value;
+
+  const year =
+    document.getElementById("newYear").value;
+
+  const image =
+    document.getElementById("newImage").value;
+
+
+  if(!name || !price || !year || !image){
+
+    alert("Заповни всі поля!");
+    return;
+
+  }
+
+
+  const card =
+  document.createElement("div");
+
+  card.className = "card";
+
+  card.dataset.type = type;
+  card.dataset.name = name;
+  card.dataset.price = price;
+
+
+  card.innerHTML = `
+
+    <img src="${image}">
+
+    <div class="card-info">
+
+      <h3>${name}</h3>
+
+      <div class="details">
+        ${year} • ${type}
+      </div>
+
+      <div class="price">
+        $${Number(price).toLocaleString()}
+      </div>
+
+      <div class="card-buttons">
+
+        <button class="details-btn">
+          Детальніше
+        </button>
+
+        <button
+          class="favorite"
+          onclick="favorite(this)">
+          ♡
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  document
+    .getElementById("vehicles")
+    .prepend(card);
+
+
+  document.getElementById("newName").value = "";
+  document.getElementById("newPrice").value = "";
+  document.getElementById("newYear").value = "";
+  document.getElementById("newImage").value = "";
+
+
+  alert("🎉 Оголошення додано!");
+
+  document.getElementById("catalog")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+</script>
 
 </body>
 </html>
