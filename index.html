@@ -46,7 +46,7 @@
 
     .brand-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 900;
       letter-spacing: 2px;
       color: var(--neon-cyan);
@@ -72,10 +72,11 @@
       border-color: #fff;
     }
 
+    /* Кнопки категорій */
     .categories-bar {
       display: flex;
       justify-content: center;
-      gap: 15px;
+      gap: 12px;
       max-width: 1300px;
       margin: 0 auto 35px auto;
       overflow-x: auto;
@@ -86,20 +87,21 @@
       background: var(--card-bg);
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 12px;
-      padding: 12px 24px;
+      padding: 12px 20px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       cursor: pointer;
       transition: all 0.3s;
-      min-width: 150px;
+      min-width: 140px;
       justify-content: center;
+      white-space: nowrap;
     }
 
     .cat-card span {
       font-family: 'Orbitron', sans-serif;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       letter-spacing: 1px;
       color: #fff;
     }
@@ -110,7 +112,7 @@
       color: var(--neon-cyan);
     }
 
-    /* Сітка з картками */
+    /* Сітка картки */
     .vehicles-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -136,26 +138,23 @@
       box-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
     }
 
-    /* Неоновий бокс для зображення автомобіля/мотоцикла */
+    /* Неоновий блок з векторною графікою */
     .v-img-container {
       width: 100%;
-      height: 200px;
+      height: 180px;
       position: relative;
       background: #05070d;
       border-bottom: 2px solid var(--neon-cyan);
-      box-shadow: inset 0 0 15px rgba(0, 243, 255, 0.3);
-      overflow: hidden;
+      box-shadow: inset 0 0 20px rgba(0, 243, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .v-img-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .v-card:hover .v-img-container img {
-      transform: scale(1.08);
+    .v-img-container svg {
+      width: 75%;
+      height: 75%;
+      filter: drop-shadow(0 0 8px currentColor);
     }
 
     .v-content {
@@ -174,30 +173,29 @@
 
     .v-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 800;
       color: #fff;
     }
 
     .v-badge {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-family: 'Orbitron', sans-serif;
-      padding: 4px 10px;
+      padding: 4px 8px;
       border-radius: 6px;
       text-transform: uppercase;
       font-weight: 800;
-      color: #fff;
     }
 
-    .badge-auto { background: var(--neon-pink); box-shadow: 0 0 8px var(--neon-pink); }
-    .badge-moto { background: var(--neon-purple); box-shadow: 0 0 8px var(--neon-purple); }
-    .badge-pit { background: var(--neon-green); color: #000; box-shadow: 0 0 8px var(--neon-green); }
-    .badge-scooter { background: var(--neon-cyan); color: #000; box-shadow: 0 0 8px var(--neon-cyan); }
+    .badge-auto { color: var(--neon-pink); border: 1px solid var(--neon-pink); box-shadow: 0 0 8px var(--neon-pink); }
+    .badge-moto { color: var(--neon-purple); border: 1px solid var(--neon-purple); box-shadow: 0 0 8px var(--neon-purple); }
+    .badge-pit { color: var(--neon-green); border: 1px solid var(--neon-green); box-shadow: 0 0 8px var(--neon-green); }
+    .badge-scooter { color: var(--neon-cyan); border: 1px solid var(--neon-cyan); box-shadow: 0 0 8px var(--neon-cyan); }
 
     .v-info {
       display: flex;
       justify-content: space-between;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       margin-bottom: 15px;
       color: var(--text-dim);
       font-weight: 600;
@@ -232,6 +230,59 @@
       color: #000;
       box-shadow: 0 0 22px var(--neon-cyan);
     }
+
+    /* Модальне вікно */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-box {
+      background: var(--card-bg);
+      border: 2px solid var(--neon-cyan);
+      box-shadow: 0 0 30px var(--neon-cyan);
+      padding: 30px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .modal-title {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-cyan);
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+    }
+
+    .modal-input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      background: #05070d;
+      border: 1px solid var(--neon-cyan);
+      color: #fff;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    .modal-close {
+      background: var(--neon-pink);
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      font-family: 'Orbitron', sans-serif;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 0 10px var(--neon-pink);
+    }
   </style>
 </head>
 <body>
@@ -243,7 +294,7 @@
 
   <div class="categories-bar">
     <div class="cat-card active" data-cat="all" onclick="selectCat('all', this)">
-      <span>⚡ ALL</span>
+      <span>⚡ ALL (16)</span>
     </div>
     <div class="cat-card" data-cat="auto" onclick="selectCat('auto', this)">
       <span>🏎️ AUTOS</span>
@@ -261,168 +312,196 @@
 
   <div class="vehicles-grid" id="grid">
 
-    <!-- 1. АВТО: BMW M5 F90 -->
+    <!-- === АВТО === -->
     <div class="v-card" data-category="auto" data-name="bmw m5 f90">
-      <div class="v-img-container">
-        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600" alt="BMW M5 F90">
+      <div class="v-img-container" style="color: var(--neon-pink);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9C1.4 11.3 1 12.1 1 13v3c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
       </div>
       <div class="v-content">
-        <div class="v-header">
-          <span class="v-title">BMW M5 F90</span>
-          <span class="v-badge badge-auto">AUTO</span>
-        </div>
-        <div class="v-info">
-          <span>Service: Stage 2 & Exhaust</span>
-          <span class="v-price">15000 UAH</span>
-        </div>
-        <button class="btn-book">BOOK APPOINTMENT</button>
+        <div class="v-header"><span class="v-title">BMW M5 F90</span><span class="v-badge badge-auto">AUTO</span></div>
+        <div class="v-info"><span>Engine Tuning</span><span class="v-price">15000 UAH</span></div>
+        <button class="btn-book" onclick="openBooking('BMW M5 F90')">BOOK APPOINTMENT</button>
       </div>
     </div>
 
-    <!-- 2. АВТО: Audi R8 -->
     <div class="v-card" data-category="auto" data-name="audi r8">
-      <div class="v-img-container">
-        <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=600" alt="Audi R8">
+      <div class="v-img-container" style="color: var(--neon-pink);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9C1.4 11.3 1 12.1 1 13v3c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
       </div>
       <div class="v-content">
-        <div class="v-header">
-          <span class="v-title">Audi R8</span>
-          <span class="v-badge badge-auto">AUTO</span>
-        </div>
-        <div class="v-info">
-          <span>Service: Engine & Transmission</span>
-          <span class="v-price">15000 UAH</span>
-        </div>
-        <button class="btn-book">BOOK APPOINTMENT</button>
+        <div class="v-header"><span class="v-title">Audi R8 V10</span><span class="v-badge badge-auto">AUTO</span></div>
+        <div class="v-info"><span>Exhaust & ECU</span><span class="v-price">18000 UAH</span></div>
+        <button class="btn-book" onclick="openBooking('Audi R8 V10')">BOOK APPOINTMENT</button>
       </div>
     </div>
 
-    <!-- 3. АВТО: Porsche 911 GT3 -->
-    <div class="v-card" data-category="auto" data-name="porsche 911 gt3">
-      <div class="v-img-container">
-        <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600" alt="Porsche 911 GT3">
+    <div class="v-card" data-category="auto" data-name="porsche 911">
+      <div class="v-img-container" style="color: var(--neon-pink);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9C1.4 11.3 1 12.1 1 13v3c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
       </div>
       <div class="v-content">
-        <div class="v-header">
-          <span class="v-title">Porsche 911 GT3</span>
-          <span class="v-badge badge-auto">AUTO</span>
-        </div>
-        <div class="v-info">
-          <span>Service: Track Suspension Setup</span>
-          <span class="v-price">18000 UAH</span>
-        </div>
-        <button class="btn-book">BOOK APPOINTMENT</button>
+        <div class="v-header"><span class="v-title">Porsche 911 GT3</span><span class="v-badge badge-auto">AUTO</span></div>
+        <div class="v-info"><span>Track Setup</span><span class="v-price">22000 UAH</span></div>
+        <button class="btn-book" onclick="openBooking('Porsche 911 GT3')">BOOK APPOINTMENT</button>
       </div>
     </div>
 
-    <!-- 4. ПІТБАЙК: Pitster Pro LXR -->
-    <div class="v-card" data-category="pitbike" data-name="pitster pro lxr">
-      <div class="v-img-container">
-        <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600" alt="Pitster Pro LXR">
+    <div class="v-card" data-category="auto" data-name="nissan gtr">
+      <div class="v-img-container" style="color: var(--neon-pink);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9C1.4 11.3 1 12.1 1 13v3c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
       </div>
       <div class="v-content">
-        <div class="v-header">
-          <span class="v-title">Pitster Pro LXR</span>
-          <span class="v-badge badge-pit">PITBIKE</span>
-        </div>
-        <div class="v-info">
-          <span>Service: Suspension & Engine</span>
-          <span class="v-price">1200 UAH</span>
-        </div>
-        <button class="btn-book">BOOK APPOINTMENT</button>
+        <div class="v-header"><span class="v-title">Nissan GT-R R35</span><span class="v-badge badge-auto">AUTO</span></div>
+        <div class="v-info"><span>Stage 3 Kit</span><span class="v-price">25000 UAH</span></div>
+        <button class="btn-book" onclick="openBooking('Nissan GT-R R35')">BOOK APPOINTMENT</button>
       </div>
     </div>
 
-    <!-- 5. ПІТБАЙК: Kayo Evolution TT140 -->
-    <div class="v-card" data-category="pitbike" data-name="kayo evolution tt140">
-      <div class="v-img-container">
-        <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=600" alt="Kayo Pitbike">
-      </div>
-      <div class="v-content">
-        <div class="v-header">
-          <span class="v-title">Kayo Evolution TT140</span>
-          <span class="v-badge badge-pit">PITBIKE</span>
-        </div>
-        <div class="v-info">
-          <span>Service: Carburetor & Valves</span>
-          <span class="v-price">950 UAH</span>
-        </div>
-        <button class="btn-book">BOOK APPOINTMENT</button>
-      </div>
-    </div>
-
-    <!-- 6. МОТОЦИКЛ: Yamaha YZF-R1 -->
-    <div class="v-card" data-category="moto" data-name="yamaha r1 yzf">
-      <div class="v-img-container">
-        <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=600" alt="Yamaha R1">
-      </div>
-      <div class="v-content">
-        <div class="v-header">
-          <span class="v-title">Yamaha YZF-R1</span>
-          <span class="v-badge badge-moto">MOTO</span>
-        </div>
-        <div class="v-info">
-          <span>Service: Full Service & Tuning</span>
-          <span class="v-price">3500 UAH</span>
-        </div>
-        <button class="btn-book">BOOK APPOINTMENT</button>
-      </div>
-    </div>
-
-    <!-- 7. МОТОЦИКЛ: Kawasaki Z900 -->
+    <!-- === МОТОЦТИКЛИ === -->
     <div class="v-card" data-category="moto" data-name="kawasaki z900">
-      <div class="v-img-container">
-        <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=600" alt="Kawasaki Z900">
+      <div class="v-img-container" style="color: var(--neon-purple);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6h-5l-3 5h6l3 6.5"/></svg>
       </div>
       <div class="v-content">
-        <div class="v-header">
-          <span class="v-title">Kawasaki Z900</span>
-          <span class="v-badge badge-moto">MOTO</span>
-        </div>
-        <div class="v-info">
-          <span>Service: Chain & Brakes Service</span>
-          <span class="v-price">2200 UAH</span>
-        </div>
-        <button class="btn-book">BOOK APPOINTMENT</button>
+        <div class="v-header"><span class="v-title">Kawasaki Z900</span><span class="v-badge badge-moto">MOTO</span></div>
+        <div class="v-info"><span>Chain & Brakes</span><span class="v-price">2200 UAH</span></div>
+        <button class="btn-book" onclick="openBooking('Kawasaki Z900')">BOOK APPOINTMENT</button>
       </div>
     </div>
 
-    <!-- 8. СКУТЕР: Vespa Custom -->
+    <div class="v-card" data-category="moto" data-name="yamaha r1">
+      <div class="v-img-container" style="color: var(--neon-purple);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6h-5l-3 5h6l3 6.5"/></svg>
+      </div>
+      <div class="v-content">
+        <div class="v-header"><span class="v-title">Yamaha YZF-R1</span><span class="v-badge badge-moto">MOTO</span></div>
+        <div class="v-info"><span>Full Dyno Tune</span><span class="v-price">3500 UAH</span></div>
+        <button class="btn-book" onclick="openBooking('Yamaha YZF-R1')">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+    <div class="v-card" data-category="moto" data-name="ducati panigale">
+      <div class="v-img-container" style="color: var(--neon-purple);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6h-5l-3 5h6l3 6.5"/></svg>
+      </div>
+      <div class="v-content">
+        <div class="v-header"><span class="v-title">Ducati Panigale V4</span><span class="v-badge badge-moto">MOTO</span></div>
+        <div class="v-info"><span>Desmo Service</span><span class="v-price">4800 UAH</span></div>
+        <button class="btn-book" onclick="openBooking('Ducati Panigale V4')">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+    <div class="v-card" data-category="moto" data-name="ktm duke">
+      <div class="v-img-container" style="color: var(--neon-purple);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6h-5l-3 5h6l3 6.5"/></svg>
+      </div>
+      <div class="v-content">
+        <div class="v-header"><span class="v-title">KTM Duke 890</span><span class="v-badge badge-moto">MOTO</span></div>
+        <div class="v-info"><span>WP Suspension</span><span class="v-price">2900 UAH</span></div>
+        <button class="btn-book" onclick="openBooking('KTM Duke 890')">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+    <!-- === ПІТБАЙКИ === -->
+    <div class="v-card" data-category="pitbike" data-name="pitster pro lxr">
+      <div class="v-img-container" style="color: var(--neon-green);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5.5" cy="17.5" r="3"/><circle cx="18.5" cy="17.5" r="3"/><path d="M12 5l-2 5h5l2 7"/></svg>
+      </div>
+      <div class="v-content">
+        <div class="v-header"><span class="v-title">Pitster Pro LXR</span><span class="v-badge badge-pit">PITBIKE</span></div>
+        <div class="v-info"><span>Suspension & Engine</span><span class="v-price">1200 UAH</span></div>
+        <button class="btn-book" onclick="openBooking('Pitster Pro LXR')">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+    <div class="v-card" data-category="pitbike" data-name="kayo evolution 140">
+      <div class="v-img-container" style="color: var(--neon-green);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5.5" cy="17.5" r="3"/><circle cx="18.5" cy="17.5" r="3"/><path d="M12 5l-2 5h5l2 7"/></svg>
+      </div>
+      <div class="v-content">
+        <div class="v-header"><span class="v-title">Kayo Evolution 140</span><span class="v-badge badge-pit">PITBIKE</span></div>
+        <div class="v-info"><span>Carb & Valves Tuning</span><span class="v-price">1100 UAH</span></div>
+        <button class="btn-book" onclick="openBooking('Kayo Evolution 140')">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+    <div class="v-card" data-category="pitbike" data-name="ycf bigy 190">
+      <div class="v-img-container" style="color: var(--neon-green);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5.5" cy="17.5" r="3"/><circle cx="18.5" cy="17.5" r="3"/><path d="M12 5l-2 5h5l2 7"/></svg>
+      </div>
+      <div class="v-content">
+        <div class="v-header"><span class="v-title">YCF Bigy 190 MX</span><span class="v-badge badge-pit">PITBIKE</span></div>
+        <div class="v-info"><span>Piston Replacement</span><span class="v-price">1600 UAH</span></div>
+        <button class="btn-book" onclick="openBooking('YCF Bigy 190 MX')">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+    <div class="v-card" data-category="pitbike" data-name="bse ph10">
+      <div class="v-img-container" style="color: var(--neon-green);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5.5" cy="17.5" r="3"/><circle cx="18.5" cy="17.5" r="3"/><path d="M12 5l-2 5h5l2 7"/></svg>
+      </div>
+      <div class="v-content">
+        <div class="v-header"><span class="v-title">BSE PH10 125cc</span><span class="v-badge badge-pit">PITBIKE</span></div>
+        <div class="v-info"><span>Oil & Filter Change</span><span class="v-price">800 UAH</span></div>
+        <button class="btn-book" onclick="openBooking('BSE PH10 125cc')">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+    <!-- === СКУТЕРИ === -->
     <div class="v-card" data-category="scooter" data-name="vespa custom">
-      <div class="v-img-container">
-        <img src="https://images.unsplash.com/photo-1525160354320-d8e92641c563?w=600" alt="Vespa Custom">
+      <div class="v-img-container" style="color: var(--neon-cyan);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7M10 17l1-6h4l2 6"/></svg>
       </div>
       <div class="v-content">
-        <div class="v-header">
-          <span class="v-title">Vespa Custom</span>
-          <span class="v-badge badge-scooter">SCOOTER</span>
-        </div>
-        <div class="v-info">
-          <span>Service: Full Maintenance</span>
-          <span class="v-price">850 UAH</span>
-        </div>
-        <button class="btn-book">BOOK APPOINTMENT</button>
+        <div class="v-header"><span class="v-title">Vespa Custom</span><span class="v-badge badge-scooter">SCOOTER</span></div>
+        <div class="v-info"><span>Full Maintenance</span><span class="v-price">850 UAH</span></div>
+        <button class="btn-book" onclick="openBooking('Vespa Custom')">BOOK APPOINTMENT</button>
       </div>
     </div>
 
-    <!-- 9. СКУТЕР: Honda Dio 35 -->
     <div class="v-card" data-category="scooter" data-name="honda dio 35">
-      <div class="v-img-container">
-        <img src="https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?w=600" alt="Honda Dio">
+      <div class="v-img-container" style="color: var(--neon-cyan);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7M10 17l1-6h4l2 6"/></svg>
       </div>
       <div class="v-content">
-        <div class="v-header">
-          <span class="v-title">Honda Dio 35 ZX</span>
-          <span class="v-badge badge-scooter">SCOOTER</span>
-        </div>
-        <div class="v-info">
-          <span>Service: Variator & Engine Tuning</span>
-          <span class="v-price">700 UAH</span>
-        </div>
-        <button class="btn-book">BOOK APPOINTMENT</button>
+        <div class="v-header"><span class="v-title">Honda Dio 35 ZX</span><span class="v-badge badge-scooter">SCOOTER</span></div>
+        <div class="v-info"><span>Variator Tuning</span><span class="v-price">750 UAH</span></div>
+        <button class="btn-book" onclick="openBooking('Honda Dio 35 ZX')">BOOK APPOINTMENT</button>
       </div>
     </div>
 
+    <div class="v-card" data-category="scooter" data-name="yamaha jog">
+      <div class="v-img-container" style="color: var(--neon-cyan);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7M10 17l1-6h4l2 6"/></svg>
+      </div>
+      <div class="v-content">
+        <div class="v-header"><span class="v-title">Yamaha Jog RR</span><span class="v-badge badge-scooter">SCOOTER</span></div>
+        <div class="v-info"><span>70cc Cylinder Kit</span><span class="v-price">1400 UAH</span></div>
+        <button class="btn-book" onclick="openBooking('Yamaha Jog RR')">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+    <div class="v-card" data-category="scooter" data-name="aprilia sr 50">
+      <div class="v-img-container" style="color: var(--neon-cyan);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7M10 17l1-6h4l2 6"/></svg>
+      </div>
+      <div class="v-content">
+        <div class="v-header"><span class="v-title">Aprilia SR 50</span><span class="v-badge badge-scooter">SCOOTER</span></div>
+        <div class="v-info"><span>Water Pump Service</span><span class="v-price">950 UAH</span></div>
+        <button class="btn-book" onclick="openBooking('Aprilia SR 50')">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Модальне вікно -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-box">
+      <div class="modal-title" id="modalRideName">BOOK SERVICE</div>
+      <input type="text" class="modal-input" placeholder="Ваше ім'я" />
+      <input type="tel" class="modal-input" placeholder="Номер телефону" />
+      <button class="modal-close" onclick="closeBooking()">ПІДТВЕРДИТИ ЗАПИС</button>
+    </div>
   </div>
 
   <script>
@@ -452,6 +531,16 @@
           card.style.display = 'none';
         }
       });
+    }
+
+    function openBooking(title) {
+      document.getElementById('modalRideName').innerText = 'BOOK: ' + title;
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function closeBooking() {
+      document.getElementById('modal').style.display = 'none';
+      alert('Дякуємо! Заявку прийнято.');
     }
   </script>
 </body>
