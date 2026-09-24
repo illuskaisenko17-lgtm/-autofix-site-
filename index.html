@@ -1,513 +1,488 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AutoFix — Каталог авто та мото</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-      transition: all 0.2s ease-in-out;
-    }
-    body {
-      background-color: #0d0f12;
-      color: #e2e8f0;
-      font-family: 'Montserrat', sans-serif;
-      padding: 15px;
-      padding-bottom: 80px;
-      margin: 0;
-    }
-    
-    .promo-banner {
-      background: linear-gradient(135deg, #ff9900, #ff5500);
-      color: #000;
-      font-weight: 800;
-      text-align: center;
-      padding: 12px;
-      border-radius: 12px;
-      margin-bottom: 15px;
-      font-size: 0.9em;
-      box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
-    }
-
-    .header-box {
-      text-align: center;
-      margin-bottom: 25px;
-      background: linear-gradient(145deg, #181c24, #101216);
-      padding: 25px 15px;
-      border-radius: 16px;
-      border: 1px solid #2a3241;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-    .header-box h2 {
-      color: #ffffff;
-      margin-top: 0;
-      font-size: 1.6em;
-      font-weight: 800;
-    }
-    
-    .stats-container {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin: 15px 0;
-      flex-wrap: wrap;
-    }
-    .stat-item {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 8px 14px;
-      border-radius: 8px;
-      border: 1px solid #2a3241;
-      font-size: 0.8em;
-      font-weight: 700;
-      color: #38ef7d;
-    }
-
-    .search-box {
-      width: 100%;
-      max-width: 500px;
-      padding: 14px 18px;
-      font-size: 15px;
-      border-radius: 10px;
-      border: 1px solid #3b82f6;
-      background-color: #1a202c;
-      color: #ffffff;
-      outline: none;
-    }
-    .search-box:focus {
-      border-color: #ffcc00;
-      box-shadow: 0 0 12px rgba(255, 204, 0, 0.3);
-    }
-
-    .filter-btns {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 15px;
-      flex-wrap: wrap;
-    }
-    .filter-btn {
-      background-color: #1e293b;
-      color: #94a3b8;
-      border: 1px solid #334155;
-      padding: 8px 16px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 0.8em;
-    }
-    .filter-btn:hover, .filter-btn.active {
-      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-      color: #ffffff;
-      border-color: #60a5fa;
-    }
-
-    .section-title {
-      color: #ffcc00;
-      border-bottom: 2px solid #334155;
-      padding-bottom: 8px;
-      margin-top: 35px;
-      margin-bottom: 20px;
-      font-size: 1.3em;
-      font-weight: 700;
-    }
-
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-    }
-
-    .car-card {
-      background: #161b22;
-      border-radius: 12px;
-      border: 1px solid #21262d;
-      border-left: 4px solid #3b82f6;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    .car-card:hover {
-      transform: translateY(-4px);
-      border-color: #30363d;
-      border-left-color: #60a5fa;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-    }
-    .card-img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-    }
-    .card-body {
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-    .moto-card { border-left-color: #f43f5e; }
-    .moto-card:hover { border-left-color: #fb7185; }
-
-    h3 { color: #60a5fa; font-size: 1.1em; margin: 0 0 8px 0; font-weight: 700; }
-    .moto-card h3 { color: #fb7185; }
-    
-    ul { padding-left: 15px; margin: 8px 0; line-height: 1.6; flex-grow: 1; }
-    li { list-style-type: none; font-size: 0.85em; margin-bottom: 4px; }
-    li::before { content: "✓"; color: #38ef7d; font-weight: bold; margin-right: 6px; }
-    .price {
-      background: #064e3b;
-      color: #34d399;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-weight: 700;
-      font-size: 0.8em;
-      float: right;
-    }
-
-    .btn-contact {
-      display: block;
-      width: 100%;
-      text-align: center;
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: #ffffff;
-      font-weight: 700;
-      padding: 10px 0;
-      border-radius: 8px;
-      text-decoration: none;
-      margin-top: 12px;
-      font-size: 0.85em;
-    }
-    .btn-contact:hover {
-      background: linear-gradient(135deg, #34d399, #10b981);
-    }
-
-    .reviews-box {
-      margin-top: 40px;
-      background: #161b22;
-      padding: 20px;
-      border-radius: 16px;
-      border: 1px solid #2a3241;
-    }
-    .review-card {
-      background: #0d0f12;
-      padding: 12px;
-      border-radius: 8px;
-      margin-top: 10px;
-      font-size: 0.85em;
-    }
-    .review-author {
-      color: #ffcc00;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .back-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #3b82f6;
-      color: #ffffff;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      font-size: 18px;
-      text-decoration: none;
-      z-index: 1000;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Професійний АвтоСервіс AutoFix</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="promo-banner">
-  🔥 ЗНИЖКА -15% на комп'ютерну діагностику при записі сьогодні!
-</div>
+    <!-- Шапка з акцією -->
+    <div class="promo-banner">
+        🔥 ЗНИЖКА -15% на комп'ютерну діагностику при записі сьогодні!
+    </div>
 
-<div class="header-box">
-  <h2>🔧 Професійний АвтоСервіс AutoFix</h2>
-  
-  <div class="stats-container">
-    <div class="stat-item">🚗 1500+ авто в базі</div>
-    <div class="stat-item">⚡️ Сервіс за 30 хв</div>
-    <div class="stat-item">💯 Гарантія якості</div>
-  </div>
+    <!-- Головна секція -->
+    <header class="hero-section">
+        <div class="container">
+            <h1>🔧 Професійний АвтоСервіс AutoFix</h1>
+            
+            <div class="badges">
+                <span class="badge">🚗 1500+ авто в базі</span>
+                <span class="badge">⚡ Сервіс за 30 хв</span>
+                <span class="badge">💯 Гарантія якості</span>
+            </div>
 
-  <p>🔍 Знайдіть бренд свого авто або мотоцикла:</p>
-  <input type="text" id="searchInput" class="search-box" onkeyup="filterVehicles()" placeholder="Введіть марку (BMW, Toyota, Ducati, Zeekr)...">
-  
-  <div class="filter-btns">
-    <button class="filter-btn active" onclick="filterType('all', event)">Усі</button>
-    <button class="filter-btn" onclick="filterType('auto', event)">🚗 Авто</button>
-    <button class="filter-btn" onclick="filterType('moto', event)">🏍 Мото</button>
-  </div>
-</div>
+            <!-- Пошук та фільтри -->
+            <div class="search-box">
+                <label for="brand-search">🔍 Знайдіть бренд свого авто або мотоцикла:</label>
+                <input type="text" id="brand-search" placeholder="Введіть марку (BMW, Toyota, Honda, Ducati...)">
+            </div>
 
-<div id="main-content">
-  <h2 class="section-title">🚗 Німеччина & Європа</h2>
-  <div class="grid-container">
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=600&q=80" class="card-img" alt="BMW">
-      <div class="card-body">
-        <h3>🚗 BMW</h3>
-        <ul><li>Діагностика <span class="price">500 грн</span></li><li>Заміна мастила <span class="price">800 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Audi">
-      <div class="card-body">
-        <h3>🚗 Audi</h3>
-        <ul><li>Діагностика ходової <span class="price">400 грн</span></li><li>Адаптація DSG <span class="price">1200 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Mercedes">
-      <div class="card-body">
-        <h3>🚗 Mercedes-Benz</h3>
-        <ul><li>Скидання помилок Star <span class="price">800 грн</span></li><li>Перевірка Airmatic <span class="price">500 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Volkswagen">
-      <div class="card-body">
-        <h3>🚗 Volkswagen</h3>
-        <ul><li>Заміна ременя ГРМ <span class="price">2500 грн</span></li><li>Перевірка підвіски <span class="price">400 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Porsche">
-      <div class="card-body">
-        <h3>🚗 Porsche</h3>
-        <ul><li>Сканування PIWIS <span class="price">1200 грн</span></li><li>Обслуговування гальм <span class="price">1500 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Opel">
-      <div class="card-body">
-        <h3>🚗 Opel</h3>
-        <ul><li>Діагностика двигуна <span class="price">450 грн</span></li><li>Модулі запалювання <span class="price">500 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Skoda">
-      <div class="card-body">
-        <h3>🚗 Skoda / SEAT / Cupra</h3>
-        <ul><li>Планове ТО <span class="price">700 грн</span></li><li>Діагностика турбіни <span class="price">600 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-  </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Усі</button>
+                <button class="filter-btn" data-filter="car">🚗 Авто</button>
+                <button class="filter-btn" data-filter="moto">🏍️ Мото</button>
+            </div>
+        </div>
+    </header>
 
-  <h2 class="section-title">🇯🇵 Японія</h2>
-  <div class="grid-container">
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Toyota">
-      <div class="card-body">
-        <h3>🚗 Toyota / Lexus</h3>
-        <ul><li>Сервіс Hybrid <span class="price">1000 грн</span></li><li>Заміна мастила <span class="price">600 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1609521263047-f8d205293f24?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Honda">
-      <div class="card-body">
-        <h3>🚗 Honda / Acura</h3>
-        <ul><li>Регулювання VTEC <span class="price">1200 грн</span></li><li>ТО варіатора <span class="price">1000 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Nissan">
-      <div class="card-body">
-        <h3>🚗 Nissan / Infiniti</h3>
-        <ul><li>Діагностика CVT <span class="price">800 грн</span></li><li>Чистка дроселя <span class="price">500 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Mazda">
-      <div class="card-body">
-        <h3>🚗 Mazda</h3>
-        <ul><li>Діагностика SkyActiv <span class="price">600 грн</span></li><li>Перевірка ходової <span class="price">400 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Subaru">
-      <div class="card-body">
-        <h3>🚗 Subaru / Mitsubishi / Suzuki / Isuzu</h3>
-        <ul><li>Сервіс AWD <span class="price">800 грн</span></li><li>Обслуговування двигуна <span class="price">1200 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-  </div>
+    <!-- Секція категорій та послуг -->
+    <main class="container cards-container">
+        
+        <!-- Toyota / Lexus -->
+        <div class="card" data-category="car" data-brand="toyota lexus">
+            <div class="card-image">
+                <img src="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=600&auto=format&fit=crop" alt="Toyota / Lexus">
+            </div>
+            <div class="card-content">
+                <h3>🚗 Toyota / Lexus</h3>
+                <ul class="services-list">
+                    <li><span>✔ Сервіс Hybrid</span> <span class="price">1000 грн</span></li>
+                    <li><span>✔ Заміна мастила</span> <span class="price">600 грн</span></li>
+                    <li><span>✔ Комп'ютерна діагностика</span> <span class="price">500 грн</span></li>
+                </ul>
+                <button class="btn-primary open-modal-btn" data-brand-name="Toyota / Lexus">💬 Записатися</button>
+            </div>
+        </div>
 
-  <h2 class="section-title">🇺🇸 США & Електро</h2>
-  <div class="grid-container">
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Tesla">
-      <div class="card-body">
-        <h3>🚗 Tesla (Model 3/Y/S/X)</h3>
-        <ul><li>Діагностика батареї <span class="price">1500 грн</span></li><li>Калібрування автопілота <span class="price">1000 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1551830820-330a71b99659?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Ford">
-      <div class="card-body">
-        <h3>🚗 Ford / Lincoln</h3>
-        <ul><li>Прошивка PowerShift <span class="price">1000 грн</span></li><li>Діагностика EcoBoost <span class="price">600 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Chevrolet">
-      <div class="card-body">
-        <h3>🚗 Chevrolet / Cadillac / Buick / GMC</h3>
-        <ul><li>Діагностика АКПП <span class="price">700 грн</span></li><li>Сканування GM <span class="price">600 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Jeep">
-      <div class="card-body">
-        <h3>🚗 Jeep / RAM / Dodge / Chrysler</h3>
-        <ul><li>Обслуговування 4x4 <span class="price">900 грн</span></li><li>Діагностика підвіски <span class="price">500 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-  </div>
+        <!-- Honda / Acura -->
+        <div class="card" data-category="car" data-brand="honda acura">
+            <div class="card-image">
+                <!-- Виправлена картинка замість зламаного посилання -->
+                <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=600&auto=format&fit=crop" alt="Honda / Acura">
+            </div>
+            <div class="card-content">
+                <h3>🚗 Honda / Acura</h3>
+                <ul class="services-list">
+                    <li><span>✔ Регулювання VTEC</span> <span class="price">1200 грн</span></li>
+                    <li><span>✔ ТО варіатора</span> <span class="price">1000 грн</span></li>
+                    <li><span>✔ Регулювання клапанів</span> <span class="price">800 грн</span></li>
+                </ul>
+                <button class="btn-primary open-modal-btn" data-brand-name="Honda / Acura">💬 Записатися</button>
+            </div>
+        </div>
 
-  <h2 class="section-title">🇨🇳 Кийтаські авто & Електро</h2>
-  <div class="grid-container">
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Zeekr">
-      <div class="card-body">
-        <h3>🚗 BYD / Zeekr / LiXiang / NIO / Xpeng</h3>
-        <ul><li>Діагностика софту/батареї <span class="price">1200 грн</span></li><li>Русифікація <span class="price">2000 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
+        <!-- Німеччина & Європа -->
+        <div class="card" data-category="car" data-brand="bmw audi mercedes vw euro">
+            <div class="card-image">
+                <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600&auto=format&fit=crop" alt="Німеччина & Європа">
+            </div>
+            <div class="card-content">
+                <h3>🚗 Німеччина & Європа</h3>
+                <ul class="services-list">
+                    <li><span>✔ Діагностика Engine/DSG</span> <span class="price">800 грн</span></li>
+                    <li><span>✔ Заміна гальмівних колодок</span> <span class="price">700 грн</span></li>
+                </ul>
+                <button class="btn-primary open-modal-btn" data-brand-name="Німеччина & Європа">💬 Записатися</button>
+            </div>
+        </div>
+
+        <!-- Moto Ducati -->
+        <div class="card" data-category="moto" data-brand="ducati yamaha kawasaki honda moto">
+            <div class="card-image">
+                <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600&auto=format&fit=crop" alt="Мототехніка">
+            </div>
+            <div class="card-content">
+                <h3>🏍️ Мототехніка (Ducati / Yamaha)</h3>
+                <ul class="services-list">
+                    <li><span>✔ Сезонне ТО мотоцикла</span> <span class="price">1500 грн</span></li>
+                    <li><span>✔ Чистка та змащення ланцюга</span> <span class="price">400 грн</span></li>
+                </ul>
+                <button class="btn-primary open-modal-btn" data-brand-name="Мототехніка">💬 Записатися</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Кнопка "Вгору" -->
+    <button id="backToTop" class="back-to-top" title="Нагору">↑</button>
+
+    <!-- Модальне вікно запису -->
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Запис на сервіс</h2>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label>Марка авто/мото:</label>
+                    <input type="text" id="modalBrand" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="clientName">Ваше ім'я:</label>
+                    <input type="text" id="clientName" required placeholder="Олександр">
+                </div>
+                <div class="form-group">
+                    <label for="clientPhone">Номер телефону:</label>
+                    <input type="tel" id="clientPhone" required placeholder="+380 (99) 000-00-00">
+                </div>
+                <button type="submit" class="btn-primary submit-btn">Підтвердити запис</button>
+            </form>
+        </div>
     </div>
-    <div class="car-card vehicle-item auto">
-      <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Geely">
-      <div class="card-body">
-        <h3>🚗 Geely / Chery / Haval / Changan / GAC</h3>
-        <ul><li>Діагностика турбомоторів <span class="price">600 грн</span></li><li>Планове ТО <span class="price">800 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-  </div>
 
-  <h2 class="section-title">🏍 Мотоцикли & Скутери</h2>
-  <div class="grid-container">
-    <div class="car-card moto-card vehicle-item moto">
-      <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Honda Moto">
-      <div class="card-body">
-        <h3>🏍 Honda Moto / Yamaha Moto</h3>
-        <ul><li>Чистка інжектора/карбюратора <span class="price">1500 грн</span></li><li>Обслуговування ланцюга <span class="price">350 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-    <div class="car-card moto-card vehicle-item moto">
-      <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Kawasaki Moto">
-      <div class="card-body">
-        <h3>🏍 Kawasaki / Suzuki Moto</h3>
-        <ul><li>Заміна антифризу/помпи <span class="price">600 грн</span></li><li>Синхронізація дроселів <span class="price">1200 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-    <div class="car-card moto-card vehicle-item moto">
-      <img src="https://images.unsplash.com/photo-1515777315835-281b94c9589f?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Ducati Moto">
-      <div class="card-body">
-        <h3>🏍 Ducati / BMW Motorrad / KTM / Aprilia</h3>
-        <ul><li>Заміна ременів Desmo <span class="price">3000 грн</span></li><li>Сканування помилок <span class="price">800 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-    <div class="car-card moto-card vehicle-item moto">
-      <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Harley-Davidson">
-      <div class="card-body">
-        <h3>🏍 Harley-Davidson / Indian / Triumph / Royal Enfield</h3>
-        <ul><li>Діагностика V-Twin <span class="price">1000 грн</span></li><li>Заміна мастила <span class="price">700 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-    <div class="car-card moto-card vehicle-item moto">
-      <img src="https://images.unsplash.com/photo-1525160354320-d8e92641c563?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Vespa Scooter">
-      <div class="card-body">
-        <h3>🛵 Vespa / SYM / Kymco / Bajaj (Скутери)</h3>
-        <ul><li>Обслуговування варіатора <span class="price">600 грн</span></li><li>Чистка карбюратора <span class="price">500 грн</span></li></ul>
-        <a href="https://t.me/" class="btn-contact">💬 Записатися</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="reviews-box">
-  <h2 style="color: #ffcc00; margin-top: 0; font-size: 1.2em;">💬 Відгуки наших клієнтів</h2>
-  
-  <div class="review-card">
-    <div class="review-author">⭐️⭐️⭐️⭐️⭐️ Олександр (BMW F30)</div>
-    <div>«Швидко знайшли стук у підвісці та вирішили проблему за пів дня. Професійний підхід!»</div>
-  </div>
-  
-  <div class="review-card">
-    <div class="review-author">⭐️⭐️⭐️⭐️⭐️ Максим (Toyota RAV4)</div>
-    <div>«Зробили повну діагностику гібрида перед покупкою. Дякую за якісну роботу!»</div>
-  </div>
-</div>
-
-<a href="#" id="backToTop" class="back-to-top">↑</a>
-
-<script>
-function filterVehicles() {
-  let input = document.getElementById('searchInput').value.toLowerCase();
-  let items = document.getElementsByClassName('vehicle-item');
-
-  for (let i = 0; i < items.length; i++) {
-    let title = items[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
-    if (title.includes(input)) {
-      items[i].style.display = "";
-    } else {
-      items[i].style.display = "none";
-    }
-  }
-}
-
-function filterType(type, e) {
-  let items = document.getElementsByClassName('vehicle-item');
-  let btns = document.getElementsByClassName('filter-btn');
-  
-  for (let btn of btns) btn.classList.remove('active');
-  if (e && e.currentTarget) e.currentTarget.classList.add('active');
-
-  for (let i = 0; i < items.length; i++) {
-    if (type === 'all') {
-      items[i].style.display = "";
-    } else if (items[i].classList.contains(type)) {
-      items[i].style.display = "";
-    } else {
-      items[i].style.display = "none";
-    }
-  }
-}
-
-window.onscroll = function() {
-  let topBtn = document.getElementById("backToTop");
-  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-    topBtn.style.display = "flex";
-  } else {
-    topBtn.style.display = "none";
-  }
-};
-</script>
+    <script src="script.js"></script>
 </body>
-</html>
+</html>* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0d1117;
+    color: #ffffff;
+    line-height: 1.6;
+    padding-bottom: 60px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* Баннер акції */
+.promo-banner {
+    background: linear-gradient(90deg, #ff6b00, #ff8800);
+    color: #000;
+    text-align: center;
+    padding: 12px 10px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 10px rgba(255, 107, 0, 0.3);
+}
+
+/* Шапка */
+.hero-section {
+    text-align: center;
+    padding: 24px 0 16px;
+}
+
+.hero-section h1 {
+    font-size: 1.6rem;
+    margin-bottom: 16px;
+}
+
+.badges {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.badge {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #3fb950;
+}
+
+/* Пошук і фільтри */
+.search-box {
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+.search-box label {
+    display: block;
+    font-size: 0.9rem;
+    color: #8b949e;
+    margin-bottom: 6px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #1f6feb;
+    background-color: #161b22;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+}
+
+.search-box input:focus {
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 3px rgba(56, 139, 253, 0.3);
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #30363d;
+    background-color: #161b22;
+    color: #c9d1d9;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background-color: #1f6feb;
+    color: #fff;
+    border-color: #1f6feb;
+}
+
+/* Картки */
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.card:hover {
+    border-color: #388bfd;
+}
+
+.card-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+.card-content {
+    padding: 16px;
+}
+
+.card-content h3 {
+    color: #58a6ff;
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+}
+
+.services-list {
+    list-style: none;
+    margin-bottom: 16px;
+}
+
+.services-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #21262d;
+    font-size: 0.95rem;
+}
+
+.services-list li:last-child {
+    border-bottom: none;
+}
+
+.price {
+    background-color: #0d2d20;
+    color: #3fb950;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+/* Кнопка */
+.btn-primary {
+    width: 100%;
+    background-color: #238636;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #2ea043;
+}
+
+/* Кнопка "Вгору" */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    background-color: #1f6feb;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    z-index: 99;
+}
+
+/* Модальне вікно */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    padding: 16px;
+}
+
+.modal-content {
+    background-color: #161b22;
+    padding: 24px;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+    border: 1px solid #30363d;
+}
+
+.close-btn {
+    position: absolute;
+    top: 12px; right: 16px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #8b949e;
+}
+
+.form-group {
+    margin-top: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+    color: #8b949e;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+    background-color: #0d1117;
+    color: #fff;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('brand-search');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.card');
+    const backToTopBtn = document.getElementById('backToTop');
+
+    // 1. Динамічна фільтрація за допомогою пошуку
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+
+        cards.forEach(card => {
+            const brandData = card.getAttribute('data-brand').toLowerCase();
+            const cardTitle = card.querySelector('h3').textContent.toLowerCase();
+
+            if (brandData.includes(query) || cardTitle.includes(query)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+
+    // 2. Фільтрація по кнопках (Усі / Авто / Мото)
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filterValue = btn.getAttribute('data-filter');
+
+            cards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                if (filterValue === 'all' || category === filterValue) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // 3. Кнопка "Вгору"
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.style.display = 'flex';
+        } else {
+            backToTopBtn.style.display = 'none';
+        }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 4. Логіка модального вікна
+    const modal = document.getElementById('appointmentModal');
+    const closeModal = document.querySelector('.close-btn');
+    const modalBrandInput = document.getElementById('modalBrand');
+    const openModalBtns = document.querySelectorAll('.open-modal-btn');
+    const bookingForm = document.getElementById('bookingForm');
+
+    openModalBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const brandName = btn.getAttribute('data-brand-name');
+            modalBrandInput.value = brandName;
+            modal.style.display = 'flex';
+        });
+    });
+
+    closeModal.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    // Обробка відправки форми
+    bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('clientName').value;
+        const brand = modalBrandInput.value;
+        
+        alert(`Дякуємо, ${name}! Заявку для ${brand} успішно прийнято. Ми зателефонуємо вам найближчим часом.`);
+        modal.style.display = 'none';
+        bookingForm.reset();
+    });
+});
