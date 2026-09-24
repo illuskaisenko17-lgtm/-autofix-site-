@@ -4,17 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CYBER MECHANICS HUB</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #0a0c14;
+      --bg-dark: #080a10;
       --card-bg: #101422;
       --neon-cyan: #00f3ff;
       --neon-pink: #ff007f;
       --neon-green: #00ff66;
       --neon-purple: #b026ff;
       --text-main: #ffffff;
-      --text-dim: #8a93b2;
+      --text-dim: #9098b5;
     }
 
     * {
@@ -27,19 +27,18 @@
     body {
       background-color: var(--bg-dark);
       background-image: 
-        radial-gradient(circle at 50% 10%, rgba(0, 243, 255, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255, 0, 127, 0.05) 0%, transparent 40%);
+        radial-gradient(circle at 50% 10%, rgba(0, 243, 255, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(255, 0, 127, 0.08) 0%, transparent 50%);
       color: var(--text-main);
       padding: 20px 15px;
       min-height: 100vh;
     }
 
-    /* Шапка сайту */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 1200px;
+      max-width: 1300px;
       margin: 0 auto 30px auto;
       flex-wrap: wrap;
       gap: 15px;
@@ -47,41 +46,37 @@
 
     .brand-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 900;
       letter-spacing: 2px;
       color: var(--neon-cyan);
-      text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px rgba(0, 243, 255, 0.5);
-    }
-
-    .search-box {
-      position: relative;
+      text-shadow: 0 0 12px var(--neon-cyan), 0 0 25px rgba(0, 243, 255, 0.6);
     }
 
     .search-input {
-      background: rgba(16, 20, 34, 0.8);
+      background: rgba(16, 20, 34, 0.9);
       border: 1px solid var(--neon-cyan);
       border-radius: 8px;
-      padding: 10px 15px;
+      padding: 10px 16px;
       color: var(--neon-cyan);
       font-family: 'Orbitron', sans-serif;
       font-size: 0.85rem;
       outline: none;
-      box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
-      width: 220px;
+      box-shadow: 0 0 12px rgba(0, 243, 255, 0.25);
+      width: 250px;
       transition: all 0.3s;
     }
 
     .search-input:focus {
-      box-shadow: 0 0 18px var(--neon-cyan);
+      box-shadow: 0 0 20px var(--neon-cyan);
+      border-color: #fff;
     }
 
-    /* Верхня навігація по категоріях */
     .categories-bar {
       display: flex;
       justify-content: center;
       gap: 15px;
-      max-width: 1200px;
+      max-width: 1300px;
       margin: 0 auto 35px auto;
       overflow-x: auto;
       padding: 5px;
@@ -91,18 +86,14 @@
       background: var(--card-bg);
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 12px;
-      padding: 12px 25px;
+      padding: 12px 24px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       cursor: pointer;
       transition: all 0.3s;
-      min-width: 160px;
+      min-width: 150px;
       justify-content: center;
-    }
-
-    .cat-card .icon {
-      font-size: 1.4rem;
     }
 
     .cat-card span {
@@ -113,70 +104,62 @@
       color: #fff;
     }
 
-    /* Стилі категорій під час вибору */
-    .cat-card[data-cat="auto"].active, .cat-card[data-cat="auto"]:hover {
+    .cat-card.active, .cat-card:hover {
       border-color: var(--neon-cyan);
       box-shadow: 0 0 15px var(--neon-cyan);
       color: var(--neon-cyan);
     }
 
-    .cat-card[data-cat="moto"].active, .cat-card[data-cat="moto"]:hover {
-      border-color: var(--neon-pink);
-      box-shadow: 0 0 15px var(--neon-pink);
-    }
-
-    .cat-card[data-cat="pitbike"].active, .cat-card[data-cat="pitbike"]:hover {
-      border-color: var(--neon-green);
-      box-shadow: 0 0 15px var(--neon-green);
-    }
-
-    .cat-card[data-cat="scooter"].active, .cat-card[data-cat="scooter"]:hover {
-      border-color: var(--neon-purple);
-      box-shadow: 0 0 15px var(--neon-purple);
-    }
-
-    /* Сітка техніки */
+    /* Сітка з картками */
     .vehicles-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
-      max-width: 1200px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      max-width: 1300px;
       margin: 0 auto;
     }
 
     .v-card {
       background: var(--card-bg);
-      border: 1px solid rgba(0, 243, 255, 0.2);
-      border-radius: 14px;
+      border: 1px solid rgba(0, 243, 255, 0.25);
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
       transition: all 0.35s ease;
       display: flex;
       flex-direction: column;
     }
 
     .v-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-8px);
       border-color: var(--neon-cyan);
-      box-shadow: 0 0 25px rgba(0, 243, 255, 0.4);
+      box-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
     }
 
+    /* Неоновий бокс для зображення автомобіля/мотоцикла */
     .v-img-container {
       width: 100%;
-      height: 180px;
+      height: 200px;
       position: relative;
       background: #05070d;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 2px solid var(--neon-cyan);
+      box-shadow: inset 0 0 15px rgba(0, 243, 255, 0.3);
+      overflow: hidden;
     }
 
     .v-img-container img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .v-card:hover .v-img-container img {
+      transform: scale(1.08);
     }
 
     .v-content {
-      padding: 15px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
@@ -191,101 +174,97 @@
 
     .v-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
+      font-size: 1.15rem;
+      font-weight: 800;
       color: #fff;
     }
 
     .v-badge {
-      font-size: 0.65rem;
+      font-size: 0.7rem;
       font-family: 'Orbitron', sans-serif;
-      padding: 3px 8px;
-      border-radius: 4px;
-      border: 1px solid currentColor;
+      padding: 4px 10px;
+      border-radius: 6px;
       text-transform: uppercase;
-      font-weight: 700;
+      font-weight: 800;
+      color: #fff;
     }
 
-    .badge-auto { color: var(--neon-cyan); border-color: var(--neon-cyan); box-shadow: 0 0 5px var(--neon-cyan); }
-    .badge-moto { color: var(--neon-pink); border-color: var(--neon-pink); box-shadow: 0 0 5px var(--neon-pink); }
-    .badge-pit { color: var(--neon-green); border-color: var(--neon-green); box-shadow: 0 0 5px var(--neon-green); }
-    .badge-scooter { color: var(--neon-purple); border-color: var(--neon-purple); box-shadow: 0 0 5px var(--neon-purple); }
+    .badge-auto { background: var(--neon-pink); box-shadow: 0 0 8px var(--neon-pink); }
+    .badge-moto { background: var(--neon-purple); box-shadow: 0 0 8px var(--neon-purple); }
+    .badge-pit { background: var(--neon-green); color: #000; box-shadow: 0 0 8px var(--neon-green); }
+    .badge-scooter { background: var(--neon-cyan); color: #000; box-shadow: 0 0 8px var(--neon-cyan); }
 
     .v-info {
       display: flex;
       justify-content: space-between;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       margin-bottom: 15px;
       color: var(--text-dim);
+      font-weight: 600;
     }
 
     .v-price {
       color: var(--neon-green);
-      font-weight: 700;
+      font-weight: 800;
       font-family: 'Orbitron', sans-serif;
-      text-shadow: 0 0 5px var(--neon-green);
+      text-shadow: 0 0 8px var(--neon-green);
     }
 
     .btn-book {
       width: 100%;
-      padding: 10px;
-      background: rgba(0, 243, 255, 0.05);
-      border: 1px solid var(--neon-cyan);
-      color: #fff;
+      padding: 12px;
+      background: transparent;
+      border: 2px solid var(--neon-cyan);
+      color: var(--neon-cyan);
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      border-radius: 10px;
       cursor: pointer;
       letter-spacing: 1px;
       transition: all 0.3s;
       margin-top: auto;
-      box-shadow: 0 0 8px rgba(0, 243, 255, 0.2);
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
     }
 
     .btn-book:hover {
       background: var(--neon-cyan);
       color: #000;
-      box-shadow: 0 0 20px var(--neon-cyan);
+      box-shadow: 0 0 22px var(--neon-cyan);
     }
   </style>
 </head>
 <body>
 
-  <!-- Заголовок сайту -->
   <header>
     <div class="brand-title">CYBER MECHANICS HUB</div>
-    <div class="search-box">
-      <input type="text" id="searchInput" class="search-input" onkeyup="filterCards()" placeholder="FIND YOUR RIDE..." />
-    </div>
+    <input type="text" id="searchInput" class="search-input" onkeyup="filterCards()" placeholder="FIND YOUR RIDE..." />
   </header>
 
-  <!-- Вкладки категорій -->
   <div class="categories-bar">
     <div class="cat-card active" data-cat="all" onclick="selectCat('all', this)">
-      <span class="icon">⚡</span> <span>ALL</span>
+      <span>⚡ ALL</span>
     </div>
     <div class="cat-card" data-cat="auto" onclick="selectCat('auto', this)">
-      <span class="icon">🏎️</span> <span>AUTOS</span>
+      <span>🏎️ AUTOS</span>
     </div>
     <div class="cat-card" data-cat="moto" onclick="selectCat('moto', this)">
-      <span class="icon">🏍️</span> <span>MOTOS</span>
+      <span>🏍️ MOTOS</span>
     </div>
     <div class="cat-card" data-cat="pitbike" onclick="selectCat('pitbike', this)">
-      <span class="icon">🏁</span> <span>PITBIKES</span>
+      <span>🏁 PITBIKES</span>
     </div>
     <div class="cat-card" data-cat="scooter" onclick="selectCat('scooter', this)">
-      <span class="icon">🛵</span> <span>SCOOTERS</span>
+      <span>🛵 SCOOTERS</span>
     </div>
   </div>
 
-  <!-- Сітка карток -->
   <div class="vehicles-grid" id="grid">
 
-    <!-- BMW M5 F90 -->
+    <!-- 1. АВТО: BMW M5 F90 -->
     <div class="v-card" data-category="auto" data-name="bmw m5 f90">
       <div class="v-img-container">
-        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=500" alt="BMW M5 F90">
+        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600" alt="BMW M5 F90">
       </div>
       <div class="v-content">
         <div class="v-header">
@@ -293,17 +272,17 @@
           <span class="v-badge badge-auto">AUTO</span>
         </div>
         <div class="v-info">
-          <span>Service: Engine Tuning</span>
+          <span>Service: Stage 2 & Exhaust</span>
           <span class="v-price">15000 UAH</span>
         </div>
         <button class="btn-book">BOOK APPOINTMENT</button>
       </div>
     </div>
 
-    <!-- Audi R8 -->
+    <!-- 2. АВТО: Audi R8 -->
     <div class="v-card" data-category="auto" data-name="audi r8">
       <div class="v-img-container">
-        <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=500" alt="Audi R8">
+        <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=600" alt="Audi R8">
       </div>
       <div class="v-content">
         <div class="v-header">
@@ -311,17 +290,35 @@
           <span class="v-badge badge-auto">AUTO</span>
         </div>
         <div class="v-info">
-          <span>Service: Engine Tuning</span>
+          <span>Service: Engine & Transmission</span>
           <span class="v-price">15000 UAH</span>
         </div>
         <button class="btn-book">BOOK APPOINTMENT</button>
       </div>
     </div>
 
-    <!-- Pitster Pro LXR -->
+    <!-- 3. АВТО: Porsche 911 GT3 -->
+    <div class="v-card" data-category="auto" data-name="porsche 911 gt3">
+      <div class="v-img-container">
+        <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600" alt="Porsche 911 GT3">
+      </div>
+      <div class="v-content">
+        <div class="v-header">
+          <span class="v-title">Porsche 911 GT3</span>
+          <span class="v-badge badge-auto">AUTO</span>
+        </div>
+        <div class="v-info">
+          <span>Service: Track Suspension Setup</span>
+          <span class="v-price">18000 UAH</span>
+        </div>
+        <button class="btn-book">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+    <!-- 4. ПІТБАЙК: Pitster Pro LXR -->
     <div class="v-card" data-category="pitbike" data-name="pitster pro lxr">
       <div class="v-img-container">
-        <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=500" alt="Pitster Pro LXR">
+        <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600" alt="Pitster Pro LXR">
       </div>
       <div class="v-content">
         <div class="v-header">
@@ -336,10 +333,64 @@
       </div>
     </div>
 
-    <!-- Vespa / Scooter -->
-    <div class="v-card" data-category="scooter" data-name="vespa scooter">
+    <!-- 5. ПІТБАЙК: Kayo Evolution TT140 -->
+    <div class="v-card" data-category="pitbike" data-name="kayo evolution tt140">
       <div class="v-img-container">
-        <img src="https://images.unsplash.com/photo-1525160354320-d8e92641c563?w=500" alt="Vespa">
+        <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=600" alt="Kayo Pitbike">
+      </div>
+      <div class="v-content">
+        <div class="v-header">
+          <span class="v-title">Kayo Evolution TT140</span>
+          <span class="v-badge badge-pit">PITBIKE</span>
+        </div>
+        <div class="v-info">
+          <span>Service: Carburetor & Valves</span>
+          <span class="v-price">950 UAH</span>
+        </div>
+        <button class="btn-book">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+    <!-- 6. МОТОЦИКЛ: Yamaha YZF-R1 -->
+    <div class="v-card" data-category="moto" data-name="yamaha r1 yzf">
+      <div class="v-img-container">
+        <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=600" alt="Yamaha R1">
+      </div>
+      <div class="v-content">
+        <div class="v-header">
+          <span class="v-title">Yamaha YZF-R1</span>
+          <span class="v-badge badge-moto">MOTO</span>
+        </div>
+        <div class="v-info">
+          <span>Service: Full Service & Tuning</span>
+          <span class="v-price">3500 UAH</span>
+        </div>
+        <button class="btn-book">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+    <!-- 7. МОТОЦИКЛ: Kawasaki Z900 -->
+    <div class="v-card" data-category="moto" data-name="kawasaki z900">
+      <div class="v-img-container">
+        <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=600" alt="Kawasaki Z900">
+      </div>
+      <div class="v-content">
+        <div class="v-header">
+          <span class="v-title">Kawasaki Z900</span>
+          <span class="v-badge badge-moto">MOTO</span>
+        </div>
+        <div class="v-info">
+          <span>Service: Chain & Brakes Service</span>
+          <span class="v-price">2200 UAH</span>
+        </div>
+        <button class="btn-book">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+    <!-- 8. СКУТЕР: Vespa Custom -->
+    <div class="v-card" data-category="scooter" data-name="vespa custom">
+      <div class="v-img-container">
+        <img src="https://images.unsplash.com/photo-1525160354320-d8e92641c563?w=600" alt="Vespa Custom">
       </div>
       <div class="v-content">
         <div class="v-header">
@@ -347,8 +398,26 @@
           <span class="v-badge badge-scooter">SCOOTER</span>
         </div>
         <div class="v-info">
-          <span>Service: Full Service</span>
+          <span>Service: Full Maintenance</span>
           <span class="v-price">850 UAH</span>
+        </div>
+        <button class="btn-book">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+    <!-- 9. СКУТЕР: Honda Dio 35 -->
+    <div class="v-card" data-category="scooter" data-name="honda dio 35">
+      <div class="v-img-container">
+        <img src="https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?w=600" alt="Honda Dio">
+      </div>
+      <div class="v-content">
+        <div class="v-header">
+          <span class="v-title">Honda Dio 35 ZX</span>
+          <span class="v-badge badge-scooter">SCOOTER</span>
+        </div>
+        <div class="v-info">
+          <span>Service: Variator & Engine Tuning</span>
+          <span class="v-price">700 UAH</span>
         </div>
         <button class="btn-book">BOOK APPOINTMENT</button>
       </div>
