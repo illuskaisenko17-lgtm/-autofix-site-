@@ -1,576 +1,388 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HYPERFIX — AUTO & MOTO TUNING SERVICE</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CYBER MECHANICS HUB</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg-dark: #0a0c14;
+      --card-bg: #101422;
+      --neon-cyan: #00f3ff;
+      --neon-pink: #ff007f;
+      --neon-green: #00ff66;
+      --neon-purple: #b026ff;
+      --text-main: #ffffff;
+      --text-dim: #8a93b2;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Rajdhani', sans-serif;
     }
 
     body {
-      background: #06050a;
-      color: #ffffff;
-      padding-bottom: 60px;
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 50% 10%, rgba(0, 243, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 0, 127, 0.05) 0%, transparent 40%);
+      color: var(--text-main);
+      padding: 20px 15px;
+      min-height: 100vh;
     }
 
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 0 15px;
-    }
-
-    /* Неоновый промо-баннер */
-    .promo-banner {
-      background: linear-gradient(90deg, #ff0055, #ff5500, #00f0ff, #00ff88);
-      background-size: 300% 300%;
-      animation: neonGlow 4s ease infinite;
-      color: #000;
-      text-align: center;
-      padding: 12px 10px;
-      font-weight: 900;
-      font-size: 13px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      box-shadow: 0 0 25px rgba(0, 240, 255, 0.8);
-    }
-
-    @keyframes neonGlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Шапка сайта */
-    .hero-card {
-      background: linear-gradient(135deg, #120924, #1f0a28);
-      border-radius: 20px;
-      padding: 22px;
-      margin-top: 20px;
-      border: 2px solid #00f0ff;
-      box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
-    }
-
-    .hero-title {
-      font-size: 24px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      background: linear-gradient(90deg, #00f0ff, #ff0055, #00ff88);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 15px;
+    /* Шапка сайту */
+    header {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 10px;
-    }
-
-    .badges {
-      display: flex;
+      max-width: 1200px;
+      margin: 0 auto 30px auto;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
+      gap: 15px;
     }
 
-    .badge {
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-size: 11px;
+    .brand-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
       font-weight: 900;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      letter-spacing: 2px;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px rgba(0, 243, 255, 0.5);
     }
 
-    .badge-neon-green {
-      background: rgba(0, 255, 136, 0.15);
-      color: #00ff88;
-      border: 1px solid #00ff88;
-      box-shadow: 0 0 12px rgba(0, 255, 136, 0.4);
-    }
-
-    .badge-neon-pink {
-      background: rgba(255, 0, 85, 0.15);
-      color: #ff0055;
-      border: 1px solid #ff0055;
-      box-shadow: 0 0 12px rgba(255, 0, 85, 0.4);
-    }
-
-    /* Поиск и категории */
     .search-box {
-      width: 100%;
-      padding: 15px;
-      background-color: #0d081a;
-      border: 2px solid #ff0055;
-      border-radius: 12px;
-      color: #fff;
-      font-size: 14px;
-      outline: none;
-      margin-bottom: 15px;
-      box-shadow: 0 0 15px rgba(255, 0, 85, 0.2);
-      transition: all 0.3s;
-    }
-
-    .search-box:focus {
-      border-color: #00f0ff;
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
-    }
-
-    .category-tabs {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 5px;
-    }
-
-    .tab-btn {
-      flex: 1;
-      min-width: 95px;
-      padding: 11px 14px;
-      background: #140c28;
-      border: 1px solid #2e1a52;
-      color: #a291c9;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 11px;
-      text-transform: uppercase;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .tab-btn.active {
-      background: linear-gradient(135deg, #ff0055, #ff5500);
-      color: #fff;
-      border-color: #ff5500;
-      box-shadow: 0 0 20px rgba(255, 85, 0, 0.6);
-    }
-
-    /* Карточки каталога */
-    .catalog-card {
-      background: #0f0a1c;
-      border-radius: 20px;
-      overflow: hidden;
-      margin-top: 22px;
-      border: 2px solid #23163c;
-      transition: all 0.3s;
-    }
-
-    .catalog-card:hover {
-      border-color: #00f0ff;
-      transform: translateY(-3px);
-      box-shadow: 0 0 30px rgba(0, 240, 255, 0.35);
-    }
-
-    .card-img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .card-content {
-      padding: 20px;
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-
-    .card-title {
-      font-size: 18px;
-      font-weight: 900;
-      color: #fff;
-    }
-
-    .tag {
-      font-size: 10px;
-      font-weight: 900;
-      padding: 5px 12px;
-      border-radius: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .tag-cyan { background: #00f0ff; color: #000; box-shadow: 0 0 10px rgba(0, 240, 255, 0.5); }
-    .tag-pink { background: #ff0055; color: #fff; box-shadow: 0 0 10px rgba(255, 0, 85, 0.5); }
-    .tag-orange { background: #ff7700; color: #000; box-shadow: 0 0 10px rgba(255, 119, 0, 0.5); }
-    .tag-purple { background: #a855f7; color: #fff; box-shadow: 0 0 10px rgba(168, 85, 247, 0.5); }
-
-    .price-list {
-      list-style: none;
-      margin: 15px 0 20px 0;
-    }
-
-    .price-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px solid #1f1538;
-      font-size: 13px;
-    }
-
-    .service-name {
-      color: #d1c8ea;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 600;
-    }
-
-    .service-name i {
-      color: #00f0ff;
-      width: 16px;
-      text-align: center;
-    }
-
-    .price-value {
-      color: #00ff88 !important;
-      font-weight: 900;
-      font-size: 14px;
-      text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
-      white-space: nowrap;
-    }
-
-    /* Кнопки */
-    .btn {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 14px;
-      font-weight: 900;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      transition: all 0.3s;
-    }
-
-    .btn-action {
-      background: linear-gradient(90deg, #00f0ff, #00ff88);
-      color: #000;
-      box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
-    }
-
-    .btn-action:hover {
-      box-shadow: 0 0 30px rgba(0, 255, 136, 0.9);
-      transform: scale(1.02);
-    }
-
-    /* Модальное окно */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(5, 3, 10, 0.9);
-      backdrop-filter: blur(10px);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      padding: 15px;
-    }
-
-    .modal-content {
-      background: #110a24;
-      border: 2px solid #00f0ff;
-      box-shadow: 0 0 40px rgba(0, 240, 255, 0.4);
-      border-radius: 20px;
-      padding: 25px;
-      width: 100%;
-      max-width: 450px;
       position: relative;
     }
 
-    .close-btn {
-      position: absolute;
-      top: 15px; right: 20px;
-      font-size: 28px;
-      cursor: pointer;
-      color: #ff0055;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 11px;
-      font-weight: 800;
-      color: #00f0ff;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-    }
-
-    .form-group select, .form-group input {
-      width: 100%;
-      padding: 12px;
-      background: #070412;
-      border: 1px solid #2e1a52;
-      border-radius: 10px;
-      color: #fff;
+    .search-input {
+      background: rgba(16, 20, 34, 0.8);
+      border: 1px solid var(--neon-cyan);
+      border-radius: 8px;
+      padding: 10px 15px;
+      color: var(--neon-cyan);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
       outline: none;
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+      width: 220px;
+      transition: all 0.3s;
+    }
+
+    .search-input:focus {
+      box-shadow: 0 0 18px var(--neon-cyan);
+    }
+
+    /* Верхня навігація по категоріях */
+    .categories-bar {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      max-width: 1200px;
+      margin: 0 auto 35px auto;
+      overflow-x: auto;
+      padding: 5px;
+    }
+
+    .cat-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 12px 25px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+      min-width: 160px;
+      justify-content: center;
+    }
+
+    .cat-card .icon {
+      font-size: 1.4rem;
+    }
+
+    .cat-card span {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      color: #fff;
+    }
+
+    /* Стилі категорій під час вибору */
+    .cat-card[data-cat="auto"].active, .cat-card[data-cat="auto"]:hover {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 15px var(--neon-cyan);
+      color: var(--neon-cyan);
+    }
+
+    .cat-card[data-cat="moto"].active, .cat-card[data-cat="moto"]:hover {
+      border-color: var(--neon-pink);
+      box-shadow: 0 0 15px var(--neon-pink);
+    }
+
+    .cat-card[data-cat="pitbike"].active, .cat-card[data-cat="pitbike"]:hover {
+      border-color: var(--neon-green);
+      box-shadow: 0 0 15px var(--neon-green);
+    }
+
+    .cat-card[data-cat="scooter"].active, .cat-card[data-cat="scooter"]:hover {
+      border-color: var(--neon-purple);
+      box-shadow: 0 0 15px var(--neon-purple);
+    }
+
+    /* Сітка техніки */
+    .vehicles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .v-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(0, 243, 255, 0.2);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+      transition: all 0.35s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .v-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 25px rgba(0, 243, 255, 0.4);
+    }
+
+    .v-img-container {
+      width: 100%;
+      height: 180px;
+      position: relative;
+      background: #05070d;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .v-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .v-content {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .v-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .v-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .v-badge {
+      font-size: 0.65rem;
+      font-family: 'Orbitron', sans-serif;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid currentColor;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .badge-auto { color: var(--neon-cyan); border-color: var(--neon-cyan); box-shadow: 0 0 5px var(--neon-cyan); }
+    .badge-moto { color: var(--neon-pink); border-color: var(--neon-pink); box-shadow: 0 0 5px var(--neon-pink); }
+    .badge-pit { color: var(--neon-green); border-color: var(--neon-green); box-shadow: 0 0 5px var(--neon-green); }
+    .badge-scooter { color: var(--neon-purple); border-color: var(--neon-purple); box-shadow: 0 0 5px var(--neon-purple); }
+
+    .v-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      color: var(--text-dim);
+    }
+
+    .v-price {
+      color: var(--neon-green);
+      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
+      text-shadow: 0 0 5px var(--neon-green);
+    }
+
+    .btn-book {
+      width: 100%;
+      padding: 10px;
+      background: rgba(0, 243, 255, 0.05);
+      border: 1px solid var(--neon-cyan);
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+      margin-top: auto;
+      box-shadow: 0 0 8px rgba(0, 243, 255, 0.2);
+    }
+
+    .btn-book:hover {
+      background: var(--neon-cyan);
+      color: #000;
+      box-shadow: 0 0 20px var(--neon-cyan);
     }
   </style>
 </head>
 <body>
 
-  <div class="promo-banner">
-    ⚡ ТЮНІНГ & СЕРВІС 24/7 — ЗНИЖКА -20% НА ПЕРШИЙ ЗАПИС ⚡
-  </div>
+  <!-- Заголовок сайту -->
+  <header>
+    <div class="brand-title">CYBER MECHANICS HUB</div>
+    <div class="search-box">
+      <input type="text" id="searchInput" class="search-input" onkeyup="filterCards()" placeholder="FIND YOUR RIDE..." />
+    </div>
+  </header>
 
-  <main class="container">
-    <header class="hero-card">
-      <div class="hero-title">
-        <i class="fa-solid fa-bolt-lightning"></i> HYPERFIX SERVICE
-      </div>
-
-      <div class="badges">
-        <span class="badge badge-neon-green"><i class="fa-solid fa-circle"></i> Сервіс Відкрито</span>
-        <span class="badge badge-neon-pink"><i class="fa-solid fa-fire-flame-curved"></i> Stage 1 / 2 / 3</span>
-      </div>
-
-      <input type="text" id="search-input" class="search-box" placeholder="🔍 Введіть модель (BMW, Dio, Jog, Kayo, Pitster Pro...)">
-
-      <div class="category-tabs">
-        <button class="tab-btn active" data-filter="all"><i class="fa-solid fa-border-all"></i> Усі</button>
-        <button class="tab-btn" data-filter="car"><i class="fa-solid fa-car-side"></i> Авто</button>
-        <button class="tab-btn" data-filter="moto"><i class="fa-solid fa-motorcycle"></i> Мото</button>
-        <button class="tab-btn" data-filter="scooter"><i class="fa-solid fa-moped"></i> Скутери</button>
-        <button class="tab-btn" data-filter="pitbike"><i class="fa-solid fa-person-biking"></i> Пітбайки</button>
-      </div>
-    </header>
-
-    <section id="catalog"></section>
-  </main>
-
-  <div id="booking-modal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeBookingModal()">&times;</span>
-      <h3 style="font-weight: 900; text-transform: uppercase; margin-bottom: 5px; color: #fff;">Швидкий Запис</h3>
-      <p id="modal-subtitle" style="color: #00ff88; font-size: 13px; margin-bottom: 18px; font-weight: 700;"></p>
-
-      <form onsubmit="handleBooking(event)">
-        <div class="form-group">
-          <label>Оберіть майстра / бокс:</label>
-          <select required>
-            <option>Бокс №1 — Спец-авто / Тюнінг Stage</option>
-            <option>Бокс №2 — Мототехніка та Спортбайки</option>
-            <option>Бокс №3 — Скутери & Pitbike майстерня</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Ваш телефон / Telegram:</label>
-          <input type="text" placeholder="@username або +380..." required>
-        </div>
-
-        <button type="submit" class="btn btn-action" style="margin-top: 10px;">
-          <i class="fa-solid fa-paper-plane"></i> Підтвердити Запис
-        </button>
-      </form>
+  <!-- Вкладки категорій -->
+  <div class="categories-bar">
+    <div class="cat-card active" data-cat="all" onclick="selectCat('all', this)">
+      <span class="icon">⚡</span> <span>ALL</span>
+    </div>
+    <div class="cat-card" data-cat="auto" onclick="selectCat('auto', this)">
+      <span class="icon">🏎️</span> <span>AUTOS</span>
+    </div>
+    <div class="cat-card" data-cat="moto" onclick="selectCat('moto', this)">
+      <span class="icon">🏍️</span> <span>MOTOS</span>
+    </div>
+    <div class="cat-card" data-cat="pitbike" onclick="selectCat('pitbike', this)">
+      <span class="icon">🏁</span> <span>PITBIKES</span>
+    </div>
+    <div class="cat-card" data-cat="scooter" onclick="selectCat('scooter', this)">
+      <span class="icon">🛵</span> <span>SCOOTERS</span>
     </div>
   </div>
 
+  <!-- Сітка карток -->
+  <div class="vehicles-grid" id="grid">
+
+    <!-- BMW M5 F90 -->
+    <div class="v-card" data-category="auto" data-name="bmw m5 f90">
+      <div class="v-img-container">
+        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=500" alt="BMW M5 F90">
+      </div>
+      <div class="v-content">
+        <div class="v-header">
+          <span class="v-title">BMW M5 F90</span>
+          <span class="v-badge badge-auto">AUTO</span>
+        </div>
+        <div class="v-info">
+          <span>Service: Engine Tuning</span>
+          <span class="v-price">15000 UAH</span>
+        </div>
+        <button class="btn-book">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+    <!-- Audi R8 -->
+    <div class="v-card" data-category="auto" data-name="audi r8">
+      <div class="v-img-container">
+        <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=500" alt="Audi R8">
+      </div>
+      <div class="v-content">
+        <div class="v-header">
+          <span class="v-title">Audi R8</span>
+          <span class="v-badge badge-auto">AUTO</span>
+        </div>
+        <div class="v-info">
+          <span>Service: Engine Tuning</span>
+          <span class="v-price">15000 UAH</span>
+        </div>
+        <button class="btn-book">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+    <!-- Pitster Pro LXR -->
+    <div class="v-card" data-category="pitbike" data-name="pitster pro lxr">
+      <div class="v-img-container">
+        <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=500" alt="Pitster Pro LXR">
+      </div>
+      <div class="v-content">
+        <div class="v-header">
+          <span class="v-title">Pitster Pro LXR</span>
+          <span class="v-badge badge-pit">PITBIKE</span>
+        </div>
+        <div class="v-info">
+          <span>Service: Suspension & Engine</span>
+          <span class="v-price">1200 UAH</span>
+        </div>
+        <button class="btn-book">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+    <!-- Vespa / Scooter -->
+    <div class="v-card" data-category="scooter" data-name="vespa scooter">
+      <div class="v-img-container">
+        <img src="https://images.unsplash.com/photo-1525160354320-d8e92641c563?w=500" alt="Vespa">
+      </div>
+      <div class="v-content">
+        <div class="v-header">
+          <span class="v-title">Vespa Custom</span>
+          <span class="v-badge badge-scooter">SCOOTER</span>
+        </div>
+        <div class="v-info">
+          <span>Service: Full Service</span>
+          <span class="v-price">850 UAH</span>
+        </div>
+        <button class="btn-book">BOOK APPOINTMENT</button>
+      </div>
+    </div>
+
+  </div>
+
   <script>
-    const catalogData = [
-      // 🚗 АВТО
-      {
-        name: "BMW M5 F90 / M3 G80 / M4",
-        category: "car",
-        tag: "M-POWER",
-        tagColor: "tag-pink",
-        image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80",
-        services: [
-          { icon: "fa-oil-can", name: "Заміна моторного масла та фільтра", price: "500 грн" },
-          { icon: "fa-laptop-code", name: "Чип-тюнінг Stage 2 + Popcorn (Pop & Bang)", price: "9 500 грн" },
-          { icon: "fa-gears", name: "Обслуговування XDrive та КПП ZF8", price: "3 800 грн" },
-          { icon: "fa-microchip", name: "Комп'ютерна діагностика iDrive / ISTA", price: "500 грн" }
-        ]
-      },
-      {
-        name: "Mercedes-AMG C63 / E63S / GT",
-        category: "car",
-        tag: "V8 BITURBO",
-        tagColor: "tag-orange",
-        image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80",
-        services: [
-          { icon: "fa-oil-can", name: "Заміна масла і технічних рідин", price: "500 грн" },
-          { icon: "fa-bullhorn", name: "Налаштування вихлопу та прошивка AMG", price: "8 000 грн" },
-          { icon: "fa-circle-dot", name: "Заміна гальмівних колодок", price: "600 грн" },
-          { icon: "fa-gauge-high", name: "Діагностика пневмопідвіски AIRMATIC", price: "800 грн" }
-        ]
-      },
+    let currentCategory = 'all';
 
-      // 🏍️ МОТОЦИКЛЫ
-      {
-        name: "Yamaha YZF-R1 / R6 / MT-09",
-        category: "moto",
-        tag: "CROSSPLANE",
-        tagColor: "tag-cyan",
-        image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80",
-        services: [
-          { icon: "fa-oil-can", name: "Заміна моторного масла та фільтра", price: "500 грн" },
-          { icon: "fa-screwdriver-wrench", name: "Синхронізація інжектора та дроселів", price: "1 600 грн" },
-          { icon: "fa-link", name: "Заміна ланцюга та зірок", price: "1 300 грн" },
-          { icon: "fa-shield-halved", name: "Повне планове ТО", price: "1 000 грн" }
-        ]
-      },
+    function selectCat(cat, element) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-card').forEach(el => el.classList.remove('active'));
+      element.classList.add('active');
+      filterCards();
+    }
 
-      // 🛵 СКУТЕРЫ
-      {
-        name: "Honda Dio 27/28/34/35 & AF-62/68",
-        category: "scooter",
-        tag: "JAPAN LEGEND",
-        tagColor: "tag-purple",
-        image: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=800&q=80",
-        services: [
-          { icon: "fa-oil-can", name: "Заміна масла двигуна / редуктора", price: "500 грн" },
-          { icon: "fa-wrench", name: "Налаштування карбюратора та заміна поршневої", price: "850 грн" },
-          { icon: "fa-arrows-spin", name: "Тюнінг варіатора (ролики, ремінь DLH)", price: "600 грн" },
-          { icon: "fa-sparkles", name: "Комплексне ТО скутера", price: "700 грн" }
-        ]
-      },
-      {
-        name: "Yamaha Jog / Aerox 50-70cc",
-        category: "scooter",
-        tag: "STUNT / TUNING",
-        tagColor: "tag-pink",
-        image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=800&q=80",
-        services: [
-          { icon: "fa-oil-can", name: "Заміна масла та обслуговування", price: "500 грн" },
-          { icon: "fa-bolt", name: "Встановлення ЦПГ 70cc (Malossi / Stage6)", price: "1 500 грн" },
-          { icon: "fa-compact-disc", name: "Налаштування зчеплення та пружин", price: "700 грн" },
-          { icon: "fa-circle-dot", name: "Заміна гальмівних колодок", price: "350 грн" }
-        ]
-      },
+    function filterCards() {
+      const searchValue = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.v-card');
 
-      // 🏁 ПИТБАЙКИ
-      {
-        name: "Kayo Evolution / Basic / TT140 / T2",
-        category: "pitbike",
-        tag: "PITBIKE HARD",
-        tagColor: "tag-orange",
-        image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=800&q=80",
-        services: [
-          { icon: "fa-oil-can", name: "Заміна масла двигуна (Motul)", price: "500 грн" },
-          { icon: "fa-sliders", name: "Регулювання теплових зазорів клапанів", price: "450 грн" },
-          { icon: "fa-filter", name: "Чистка та налаштування карбюратора Nibbi", price: "500 грн" },
-          { icon: "fa-dharmachakra", name: "Перепакування та сервіс передньої вилки", price: "1 200 грн" }
-        ]
-      },
-      {
-        name: "BSE PH10 / Pitster Pro / Geon X-Pit",
-        category: "pitbike",
-        tag: "OFFROAD / STUNT",
-        tagColor: "tag-pink",
-        image: "https://images.unsplash.com/photo-1547549662-77849a0d5071?auto=format&fit=crop&w=800&q=80",
-        services: [
-          { icon: "fa-oil-can", name: "Заміна масла та промивка двигуна", price: "500 грн" },
-          { icon: "fa-link", name: "Заміна ланцюга 428H + посилені зірки", price: "600 грн" },
-          { icon: "fa-hand", name: "Встановлення дублера задніх гальм (Stunt)", price: "1 400 грн" }
-        ]
-      }
-    ];
+      cards.forEach(card => {
+        const name = card.getAttribute('data-name');
+        const cat = card.getAttribute('data-category');
 
-    function renderCatalog(items) {
-      const container = document.getElementById("catalog");
-      container.innerHTML = "";
+        const matchesSearch = name.includes(searchValue);
+        const matchesCat = (currentCategory === 'all' || cat === currentCategory);
 
-      if (items.length === 0) {
-        container.innerHTML = "<p style='text-align: center; color: #8f85b0; padding: 30px;'>Нічого не знайдено за вашим запитом.</p>";
-        return;
-      }
-
-      items.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "catalog-card";
-        card.innerHTML = `
-          <img src="${item.image}" class="card-img" alt="${item.name}">
-          <div class="card-content">
-            <div class="card-header">
-              <div class="card-title">${item.name}</div>
-              <span class="tag ${item.tagColor}">${item.tag}</span>
-            </div>
-            <ul class="price-list">
-              ${item.services.map(s => `
-                <li class="price-item">
-                  <span class="service-name"><i class="fa-solid ${s.icon}"></i> ${s.name}</span>
-                  <span class="price-value">${s.price}</span>
-                </li>
-              `).join('')}
-            </ul>
-            <button class="btn btn-action" onclick="openBookingModal('${item.name}')">
-              <i class="fa-solid fa-bolt"></i> Записатися на Сервіс
-            </button>
-          </div>
-        `;
-        container.appendChild(card);
+        if (matchesSearch && matchesCat) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
       });
-    }
-
-    renderCatalog(catalogData);
-
-    const searchInput = document.getElementById("search-input");
-    const tabBtns = document.querySelectorAll(".tab-btn");
-    let currentFilter = "all";
-
-    searchInput.addEventListener("input", filterData);
-
-    tabBtns.forEach(btn => {
-      btn.addEventListener("click", () => {
-        tabBtns.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        currentFilter = btn.getAttribute("data-filter");
-        filterData();
-      });
-    });
-
-    function filterData() {
-      const query = searchInput.value.toLowerCase();
-      const filtered = catalogData.filter(item => {
-        const matchesFilter = currentFilter === "all" || item.category === currentFilter;
-        const matchesSearch = item.name.toLowerCase().includes(query) || item.tag.toLowerCase().includes(query);
-        return matchesFilter && matchesSearch;
-      });
-      renderCatalog(filtered);
-    }
-
-    const modal = document.getElementById("booking-modal");
-    const modalSubtitle = document.getElementById("modal-subtitle");
-
-    function openBookingModal(name) {
-      modalSubtitle.textContent = `Модель: ${name}`;
-      modal.style.display = "flex";
-    }
-
-    function closeBookingModal() {
-      modal.style.display = "none";
-    }
-
-    function handleBooking(e) {
-      e.preventDefault();
-      alert("🔥 Успішно! Вашу заявку прийнято. Очікуйте повідомлення в Telegram.");
-      closeBookingModal();
     }
   </script>
 </body>
