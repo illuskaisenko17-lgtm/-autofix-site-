@@ -3,64 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GidHot.com — Авто • Мото • Скутери</title>
+<title>GidHot.com</title>
 
 <style>
 *{
-  box-sizing:border-box;
   margin:0;
   padding:0;
+  box-sizing:border-box;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:Arial,sans-serif;
   background:#070707;
-  color:white;
-  overflow-x:hidden;
-}
-
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-2;
-  background:
-    linear-gradient(rgba(255,75,0,.035) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,75,0,.035) 1px,transparent 1px);
-  background-size:50px 50px;
-}
-
-body:after{
-  content:"";
-  position:fixed;
-  width:500px;
-  height:500px;
-  background:#ff3c00;
-  filter:blur(180px);
-  opacity:.08;
-  top:-200px;
-  right:-150px;
-  z-index:-1;
+  color:#fff;
 }
 
 header{
+  height:75px;
   position:sticky;
   top:0;
   z-index:100;
-  height:75px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 6%;
-  background:rgba(5,5,5,.9);
+  background:#090909ee;
   backdrop-filter:blur(15px);
-  border-bottom:1px solid #222;
+  border-bottom:1px solid #292929;
 }
 
 .logo{
-  font-size:27px;
+  font-size:28px;
   font-weight:900;
-  letter-spacing:-1px;
 }
 
 .logo span{
@@ -76,33 +50,32 @@ nav a{
   color:#aaa;
   text-decoration:none;
   font-weight:bold;
-  transition:.2s;
 }
 
 nav a:hover{
-  color:#ff5a00;
+  color:#ff4d00;
 }
 
 .fav{
   border:1px solid #333;
-  padding:10px 16px;
+  padding:10px 17px;
   border-radius:30px;
-  color:#fff;
 }
 
 .hero{
-  min-height:680px;
-  padding:70px 6%;
+  min-height:650px;
+  padding:80px 6%;
   display:grid;
-  grid-template-columns:1fr 1.2fr;
+  grid-template-columns:1fr 1fr;
   align-items:center;
   gap:30px;
+  background:
+    radial-gradient(circle at 80% 50%,#ff4d0018,transparent 40%);
 }
 
 .hero h1{
-  font-size:clamp(55px,8vw,115px);
-  line-height:.85;
-  text-transform:uppercase;
+  font-size:clamp(60px,9vw,120px);
+  line-height:.82;
   font-weight:1000;
 }
 
@@ -111,50 +84,33 @@ nav a:hover{
 }
 
 .hero p{
-  margin:30px 0;
-  color:#aaa;
+  color:#999;
+  max-width:520px;
   font-size:18px;
-  max-width:500px;
   line-height:1.6;
+  margin:30px 0;
 }
 
 .btn{
   display:inline-block;
   background:#ff4d00;
   color:#fff;
-  padding:16px 28px;
+  padding:16px 25px;
+  border:0;
   border-radius:10px;
   text-decoration:none;
-  font-weight:900;
-  border:none;
+  font-weight:bold;
   cursor:pointer;
-  transition:.25s;
 }
 
 .btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 15px 40px #ff4d0044;
+  box-shadow:0 10px 40px #ff4d0055;
+  transform:translateY(-2px);
 }
 
-.hero-image{
-  position:relative;
-}
-
-.hero-image:before{
-  content:"";
-  position:absolute;
-  width:80%;
-  height:80%;
-  left:10%;
-  top:10%;
-  background:#ff4d00;
-  filter:blur(120px);
-  opacity:.15;
-}
-
-.hero svg{
+.hero-car{
   width:100%;
-  position:relative;
+  filter:drop-shadow(0 20px 40px #ff4d0044);
   animation:float 4s ease-in-out infinite;
 }
 
@@ -172,8 +128,7 @@ section{
 
 .title small{
   color:#ff4d00;
-  font-weight:900;
-  text-transform:uppercase;
+  font-weight:bold;
 }
 
 .title h2{
@@ -188,13 +143,13 @@ section{
 }
 
 .category{
-  min-height:250px;
+  height:260px;
+  padding:25px;
   border:1px solid #292929;
   border-radius:22px;
-  padding:25px;
+  background:linear-gradient(145deg,#171717,#0b0b0b);
   position:relative;
   overflow:hidden;
-  background:linear-gradient(145deg,#151515,#090909);
   cursor:pointer;
   transition:.3s;
 }
@@ -205,79 +160,33 @@ section{
 }
 
 .category h3{
-  font-size:28px;
-  position:relative;
-  z-index:2;
+  font-size:27px;
 }
 
 .category p{
-  color:#888;
-  margin-top:8px;
-  position:relative;
-  z-index:2;
+  color:#777;
+  margin-top:10px;
 }
 
-.category .big{
+.category .emoji{
   position:absolute;
-  right:-25px;
-  bottom:-30px;
+  right:-10px;
+  bottom:-25px;
   font-size:150px;
-  opacity:.75;
-  transform:rotate(-8deg);
-}
-
-.showcase{
-  display:grid;
-  grid-template-columns:1.5fr 1fr 1fr;
-  gap:18px;
-}
-
-.show{
-  min-height:300px;
-  border-radius:22px;
-  overflow:hidden;
-  border:1px solid #292929;
-  position:relative;
-  background:#111;
-}
-
-.show svg{
-  width:100%;
-  height:100%;
-}
-
-.show.big-show{
-  grid-row:span 2;
-  min-height:620px;
-}
-
-.show-label{
-  position:absolute;
-  left:22px;
-  bottom:20px;
-  z-index:3;
-}
-
-.show-label h3{
-  font-size:30px;
-}
-
-.show-label p{
-  color:#aaa;
 }
 
 .filters{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  margin-bottom:35px;
+  margin-bottom:30px;
 }
 
 .filters button{
   background:#111;
-  border:1px solid #333;
   color:#aaa;
-  padding:12px 18px;
+  border:1px solid #333;
+  padding:12px 20px;
   border-radius:30px;
   cursor:pointer;
   font-weight:bold;
@@ -296,7 +205,7 @@ section{
 
 .card{
   background:#101010;
-  border:1px solid #272727;
+  border:1px solid #292929;
   border-radius:20px;
   overflow:hidden;
   transition:.3s;
@@ -305,50 +214,51 @@ section{
 .card:hover{
   transform:translateY(-7px);
   border-color:#ff4d00;
-  box-shadow:0 20px 50px #000;
 }
 
-.car-img{
-  height:240px;
+.vehicle{
+  height:250px;
+  background:
+    radial-gradient(circle,#292929,#080808 70%);
   position:relative;
   overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 50%,#252525,#080808 70%);
 }
 
-.car-img svg{
+.vehicle svg{
   width:100%;
   height:100%;
   transition:.5s;
 }
 
-.card:hover .car-img svg{
-  transform:scale(1.07);
+.card:hover .vehicle svg{
+  transform:scale(1.08);
 }
 
 .type{
   position:absolute;
-  left:15px;
   top:15px;
+  left:15px;
+  z-index:2;
   background:#ff4d00;
   padding:7px 11px;
-  border-radius:8px;
-  font-size:12px;
-  font-weight:900;
+  border-radius:7px;
+  font-size:11px;
+  font-weight:bold;
 }
 
 .heart{
   position:absolute;
   right:15px;
   top:15px;
+  z-index:2;
   width:38px;
   height:38px;
   border-radius:50%;
   border:1px solid #444;
   background:#111;
-  color:white;
-  cursor:pointer;
+  color:#fff;
   font-size:18px;
+  cursor:pointer;
 }
 
 .info{
@@ -356,12 +266,12 @@ section{
 }
 
 .info h3{
-  font-size:23px;
+  font-size:24px;
 }
 
 .info p{
   color:#777;
-  margin:7px 0 18px;
+  margin:8px 0 18px;
 }
 
 .bottom{
@@ -372,14 +282,14 @@ section{
 
 .price{
   font-size:22px;
-  font-weight:900;
+  font-weight:bold;
 }
 
 .details{
+  border:0;
   background:#222;
   color:#fff;
-  border:1px solid #333;
-  padding:10px 15px;
+  padding:11px 16px;
   border-radius:8px;
   cursor:pointer;
 }
@@ -395,25 +305,25 @@ section{
 }
 
 .stat{
+  background:#111;
+  border:1px solid #292929;
   padding:30px;
-  border:1px solid #282828;
   border-radius:18px;
-  background:#101010;
 }
 
 .stat strong{
   display:block;
-  font-size:42px;
   color:#ff4d00;
+  font-size:42px;
 }
 
 .stat span{
-  color:#888;
+  color:#777;
 }
 
 footer{
   border-top:1px solid #222;
-  padding:50px 6%;
+  padding:40px 6%;
   color:#666;
   display:flex;
   justify-content:space-between;
@@ -422,9 +332,9 @@ footer{
 .modal{
   position:fixed;
   inset:0;
-  background:#000b;
-  backdrop-filter:blur(10px);
   z-index:999;
+  background:#000c;
+  backdrop-filter:blur(10px);
   display:none;
   align-items:center;
   justify-content:center;
@@ -432,7 +342,9 @@ footer{
 }
 
 .modal-box{
-  width:min(600px,100%);
+  width:min(650px,100%);
+  max-height:90vh;
+  overflow:auto;
   background:#111;
   border:1px solid #333;
   border-radius:22px;
@@ -443,46 +355,62 @@ footer{
 .close{
   position:absolute;
   right:20px;
-  top:15px;
+  top:12px;
+  border:0;
   background:none;
-  border:none;
   color:#aaa;
-  font-size:30px;
+  font-size:32px;
   cursor:pointer;
 }
 
 .modal-box h2{
-  font-size:35px;
-  margin-bottom:15px;
+  font-size:38px;
+  margin-bottom:20px;
 }
 
-.modal-box p{
+.specs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.spec{
+  padding:16px;
+  background:#191919;
+  border:1px solid #292929;
+  border-radius:12px;
+}
+
+.spec span{
+  display:block;
+  color:#777;
+  font-size:13px;
+  margin-bottom:7px;
+}
+
+.spec strong{
+  font-size:18px;
+}
+
+.description{
   color:#999;
-  line-height:1.7;
+  line-height:1.6;
+  margin-top:20px;
 }
 
 @media(max-width:900px){
-  .hero{
-    grid-template-columns:1fr;
-    padding-top:50px;
-  }
 
   nav{
     display:none;
   }
 
+  .hero{
+    grid-template-columns:1fr;
+  }
+
   .categories,
   .catalog{
     grid-template-columns:1fr 1fr;
-  }
-
-  .showcase{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .show.big-show{
-    grid-row:auto;
-    min-height:350px;
   }
 
   .stats{
@@ -491,23 +419,23 @@ footer{
 }
 
 @media(max-width:600px){
+
+  section{
+    padding:55px 5%;
+  }
+
   .categories,
   .catalog,
-  .showcase,
   .stats{
     grid-template-columns:1fr;
   }
 
   .hero h1{
-    font-size:60px;
+    font-size:65px;
   }
 
-  .hero{
-    min-height:auto;
-  }
-
-  section{
-    padding:55px 5%;
+  .specs{
+    grid-template-columns:1fr;
   }
 
   footer{
@@ -521,78 +449,125 @@ footer{
 <body>
 
 <header>
-  <div class="logo">Gid<span>Hot</span>.com</div>
+
+  <div class="logo">
+    Gid<span>Hot</span>.com
+  </div>
 
   <nav>
-    <a href="#cars">Авто</a>
-    <a href="#moto">Мото</a>
-    <a href="#scooter">Скутери</a>
     <a href="#catalog">Каталог</a>
+    <a href="#categories">Категорії</a>
+    <a href="#about">Про сайт</a>
   </nav>
 
-  <div class="fav">♡ <span id="favCount">0</span></div>
+  <div class="fav">
+    ♥ <span id="favCount">0</span>
+  </div>
+
 </header>
+
 
 <section class="hero">
 
   <div>
-    <h1>DRIVE<br><span>YOUR</span><br>STYLE</h1>
+
+    <h1>
+      DRIVE<br>
+      <span>YOUR</span><br>
+      STYLE
+    </h1>
 
     <p>
-      GidHot.com — місце для тих, хто любить швидкі автомобілі,
-      потужні мотоцикли та стильні скутери.
+      GidHot.com — великий каталог автомобілів,
+      мотоциклів та скутерів.
     </p>
 
-    <a href="#catalog" class="btn">ДИВИТИСЯ КАТАЛОГ →</a>
+    <a href="#catalog" class="btn">
+      ВІДКРИТИ КАТАЛОГ →
+    </a>
+
   </div>
 
-  <div class="hero-image">
 
-    <svg viewBox="0 0 900 500">
+  <div>
+
+    <svg class="hero-car" viewBox="0 0 800 450">
+
       <defs>
-        <linearGradient id="orange" x1="0" x2="1">
+        <linearGradient id="heroOrange">
           <stop stop-color="#ff2600"/>
           <stop offset="1" stop-color="#ff8500"/>
         </linearGradient>
-        <linearGradient id="glass" x1="0" x2="1">
-          <stop stop-color="#111"/>
-          <stop offset="1" stop-color="#555"/>
-        </linearGradient>
       </defs>
 
-      <ellipse cx="450" cy="420" rx="330" ry="35" fill="#000"/>
-      <path d="M100 370 L170 280 Q220 170 390 155 L600 160 Q710 170 800 300 L850 370 Z"
-            fill="url(#orange)"/>
+      <ellipse
+        cx="400"
+        cy="370"
+        rx="300"
+        ry="35"
+        fill="#000"
+      />
 
-      <path d="M260 270 L330 185 L455 180 L500 270Z"
-            fill="url(#glass)" stroke="#ffb08b" stroke-width="4"/>
+      <path
+        d="M90 330
+        L145 255
+        Q200 150 350 140
+        L540 145
+        Q650 160 730 275
+        L770 330
+        L750 365
+        L105 365Z"
+        fill="url(#heroOrange)"
+      />
 
-      <path d="M510 270 L500 180 L610 185 L700 285Z"
-            fill="#151515" stroke="#ffb08b" stroke-width="4"/>
+      <path
+        d="M220 245
+        L280 165
+        L410 160
+        L465 245Z"
+        fill="#151515"
+        stroke="#ffb08a"
+        stroke-width="4"
+      />
 
-      <path d="M120 340 Q300 300 800 335" fill="none"
-            stroke="#ffb58f" stroke-width="5"/>
+      <path
+        d="M480 245
+        L460 160
+        L550 165
+        L650 260Z"
+        fill="#111"
+        stroke="#ffb08a"
+        stroke-width="4"
+      />
 
-      <circle cx="250" cy="370" r="65" fill="#050505"/>
-      <circle cx="250" cy="370" r="33" fill="#555"/>
-      <circle cx="250" cy="370" r="14" fill="#ff4d00"/>
+      <circle cx="230" cy="350" r="60" fill="#050505"/>
+      <circle cx="230" cy="350" r="27" fill="#555"/>
+      <circle cx="230" cy="350" r="10" fill="#ff4d00"/>
 
-      <circle cx="690" cy="370" r="65" fill="#050505"/>
-      <circle cx="690" cy="370" r="33" fill="#555"/>
-      <circle cx="690" cy="370" r="14" fill="#ff4d00"/>
+      <circle cx="625" cy="350" r="60" fill="#050505"/>
+      <circle cx="625" cy="350" r="27" fill="#555"/>
+      <circle cx="625" cy="350" r="10" fill="#ff4d00"/>
 
-      <rect x="730" y="300" width="65" height="15" rx="7" fill="#fff"/>
+      <path
+        d="M110 315 Q400 280 740 315"
+        fill="none"
+        stroke="#fff"
+        stroke-opacity=".5"
+        stroke-width="3"
+      />
+
     </svg>
 
   </div>
 
 </section>
 
-<section id="cars">
+
+<section id="categories">
 
   <div class="title">
-    <small>Категорії</small>
-    <h2>Обери свій стиль</h2>
+    <small>GIDHOT</small>
+    <h2>Категорії</h2>
   </div>
 
   <div class="categories">
@@ -600,104 +575,19 @@ footer{
     <div class="category" onclick="filterType('Авто')">
       <h3>🚘 Автомобілі</h3>
       <p>Спорткари та преміум авто</p>
-      <div class="big">🏎️</div>
+      <div class="emoji">🏎️</div>
     </div>
 
     <div class="category" onclick="filterType('Мото')">
       <h3>🏍️ Мотоцикли</h3>
-      <p>Швидкість і максимальний кайф</p>
-      <div class="big">🏍️</div>
+      <p>Швидкі та потужні мото</p>
+      <div class="emoji">🏍️</div>
     </div>
 
     <div class="category" onclick="filterType('Скутер')">
       <h3>🛵 Скутери</h3>
-      <p>Стиль для міста</p>
-      <div class="big">🛵</div>
-    </div>
-
-  </div>
-</section>
-
-
-<section>
-
-  <div class="title">
-    <small>GidHot Gallery</small>
-    <h2>Наші фаворити</h2>
-  </div>
-
-  <div class="showcase">
-
-    <div class="show big-show">
-
-      <svg viewBox="0 0 700 700">
-        <rect width="700" height="700" fill="#080808"/>
-
-        <circle cx="350" cy="350" r="250"
-                fill="none" stroke="#ff4d00" stroke-width="2" opacity=".2"/>
-
-        <circle cx="350" cy="350" r="180"
-                fill="none" stroke="#ff4d00" stroke-width="2" opacity=".3"/>
-
-        <path d="M100 450 L170 330 L260 260 L450 260
-                 L560 330 L610 450 Z"
-              fill="#ff4d00"/>
-
-        <path d="M240 325 L290 275 L390 275 L440 325Z"
-              fill="#111"/>
-
-        <circle cx="210" cy="440" r="65" fill="#050505"/>
-        <circle cx="210" cy="440" r="30" fill="#555"/>
-
-        <circle cx="500" cy="440" r="65" fill="#050505"/>
-        <circle cx="500" cy="440" r="30" fill="#555"/>
-      </svg>
-
-      <div class="show-label">
-        <h3>SPORT</h3>
-        <p>Максимальний стиль</p>
-      </div>
-
-    </div>
-
-
-    <div class="show">
-
-      <svg viewBox="0 0 500 400">
-        <rect width="500" height="400" fill="#111"/>
-        <circle cx="150" cy="310" r="55" fill="#050505"/>
-        <circle cx="350" cy="310" r="55" fill="#050505"/>
-        <path d="M100 280 L160 170 L300 150 L400 250 L370 285 L130 285Z"
-              fill="#ddd"/>
-        <path d="M190 185 L250 155 L330 190 L350 235 L170 235Z"
-              fill="#222"/>
-      </svg>
-
-      <div class="show-label">
-        <h3>PREMIUM</h3>
-        <p>Комфорт</p>
-      </div>
-
-    </div>
-
-
-    <div class="show">
-
-      <svg viewBox="0 0 500 400">
-        <rect width="500" height="400" fill="#111"/>
-        <circle cx="140" cy="300" r="48" fill="#050505"/>
-        <circle cx="370" cy="300" r="48" fill="#050505"/>
-        <path d="M140 280 L210 160 L300 190 L390 280 L350 300 L170 300Z"
-              fill="#ff4d00"/>
-        <path d="M210 165 L260 115 L315 180 L285 200Z"
-              fill="#222"/>
-      </svg>
-
-      <div class="show-label">
-        <h3>BIKE</h3>
-        <p>Потужність</p>
-      </div>
-
+      <p>Для міста та щоденних поїздок</p>
+      <div class="emoji">🛵</div>
     </div>
 
   </div>
@@ -708,196 +598,390 @@ footer{
 <section id="catalog">
 
   <div class="title">
-    <small>Catalog</small>
-    <h2>Великий вибір</h2>
+    <small>CATALOG</small>
+    <h2>Наш транспорт</h2>
   </div>
 
   <div class="filters">
-    <button onclick="filterType('all')">Всі</button>
-    <button onclick="filterType('Авто')">Авто</button>
-    <button onclick="filterType('Мото')">Мото</button>
-    <button onclick="filterType('Скутер')">Скутери</button>
+
+    <button onclick="filterType('all')">
+      Всі
+    </button>
+
+    <button onclick="filterType('Авто')">
+      🚘 Авто
+    </button>
+
+    <button onclick="filterType('Мото')">
+      🏍️ Мото
+    </button>
+
+    <button onclick="filterType('Скутер')">
+      🛵 Скутери
+    </button>
+
   </div>
 
-  <div class="catalog" id="catalogList">
+
+  <div class="catalog">
 
 
     <!-- BMW -->
+
     <div class="card" data-type="Авто">
 
-      <div class="car-img">
+      <div class="vehicle">
 
         <span class="type">AUTO</span>
-        <button class="heart" onclick="fav(this)">♡</button>
+
+        <button class="heart" onclick="favorite(this)">
+          ♡
+        </button>
 
         <svg viewBox="0 0 500 300">
+
           <rect width="500" height="300" fill="#101010"/>
-          <ellipse cx="250" cy="245" rx="190" ry="20" fill="#000"/>
 
-          <path d="M70 220 L110 160 L180 125 L330 125
-                   L405 165 L440 220 L430 245 L80 245Z"
-                fill="#aaa"/>
+          <ellipse
+            cx="250"
+            cy="245"
+            rx="190"
+            ry="18"
+            fill="#000"
+          />
 
-          <path d="M165 160 L195 130 L310 130 L345 160Z"
-                fill="#222"/>
+          <path
+            d="M65 220
+            L110 160
+            L180 125
+            L330 125
+            L405 165
+            L440 220
+            L430 245
+            L75 245Z"
+            fill="#aaa"
+          />
 
-          <circle cx="145" cy="230" r="42" fill="#050505"/>
-          <circle cx="145" cy="230" r="20" fill="#555"/>
+          <path
+            d="M165 160
+            L195 130
+            L310 130
+            L345 160Z"
+            fill="#181818"
+          />
 
-          <circle cx="365" cy="230" r="42" fill="#050505"/>
-          <circle cx="365" cy="230" r="20" fill="#555"/>
+          <circle cx="145" cy="230" r="43" fill="#050505"/>
+          <circle cx="145" cy="230" r="19" fill="#666"/>
+
+          <circle cx="365" cy="230" r="43" fill="#050505"/>
+          <circle cx="365" cy="230" r="19" fill="#666"/>
+
         </svg>
 
       </div>
 
+
       <div class="info">
+
         <h3>BMW M5</h3>
-        <p>V8 • 625 HP • AWD</p>
+
+        <p>
+          V8 • 625 HP • AWD
+        </p>
 
         <div class="bottom">
-          <div class="price">$110 000</div>
-          <button class="details" onclick="openModal('BMW M5')">Деталі</button>
+
+          <div class="price">
+            $110 000
+          </div>
+
+          <button
+            class="details"
+            onclick="details(
+              'BMW M5',
+              '625 HP',
+              '305 км/год',
+              '3.4 сек',
+              'V8',
+              'AWD',
+              '$110 000',
+              'Потужний спортивний седан з V8 та повним приводом.'
+            )"
+          >
+            Деталі
+          </button>
+
         </div>
+
       </div>
 
     </div>
 
 
     <!-- Porsche -->
+
     <div class="card" data-type="Авто">
 
-      <div class="car-img">
+      <div class="vehicle">
 
         <span class="type">SPORT</span>
-        <button class="heart" onclick="fav(this)">♡</button>
+
+        <button class="heart" onclick="favorite(this)">
+          ♡
+        </button>
 
         <svg viewBox="0 0 500 300">
+
           <rect width="500" height="300" fill="#101010"/>
 
-          <ellipse cx="250" cy="245" rx="190" ry="20" fill="#000"/>
+          <path
+            d="M60 220
+            Q100 170 180 150
+            Q250 105 335 150
+            Q405 160 440 220
+            L430 245
+            L70 245Z"
+            fill="#ff4d00"
+          />
 
-          <path d="M65 220 Q100 170 180 150
-                   Q250 105 335 150
-                   Q405 160 440 220
-                   L430 245 L75 245Z"
-                fill="#ff4d00"/>
-
-          <path d="M175 155 Q235 115 315 150
-                   L350 175 L145 175Z"
-                fill="#111"/>
+          <path
+            d="M175 155
+            Q235 115 315 150
+            L350 175
+            L145 175Z"
+            fill="#111"
+          />
 
           <circle cx="140" cy="230" r="42" fill="#050505"/>
           <circle cx="140" cy="230" r="18" fill="#777"/>
 
           <circle cx="370" cy="230" r="42" fill="#050505"/>
           <circle cx="370" cy="230" r="18" fill="#777"/>
+
         </svg>
 
       </div>
 
+
       <div class="info">
+
         <h3>Porsche 911</h3>
-        <p>Flat-6 • 580 HP • Turbo</p>
+
+        <p>
+          Flat-6 • 580 HP • Turbo
+        </p>
 
         <div class="bottom">
-          <div class="price">$145 000</div>
-          <button class="details" onclick="openModal('Porsche 911')">Деталі</button>
+
+          <div class="price">
+            $145 000
+          </div>
+
+          <button
+            class="details"
+            onclick="details(
+              'Porsche 911',
+              '580 HP',
+              '320 км/год',
+              '2.7 сек',
+              'Flat-6',
+              'RWD',
+              '$145 000',
+              'Легендарний спортивний автомобіль з дуже швидким розгоном.'
+            )"
+          >
+            Деталі
+          </button>
+
         </div>
+
       </div>
 
     </div>
 
 
     <!-- Audi -->
+
     <div class="card" data-type="Авто">
 
-      <div class="car-img">
+      <div class="vehicle">
 
         <span class="type">PREMIUM</span>
-        <button class="heart" onclick="fav(this)">♡</button>
+
+        <button class="heart" onclick="favorite(this)">
+          ♡
+        </button>
 
         <svg viewBox="0 0 500 300">
+
           <rect width="500" height="300" fill="#101010"/>
 
-          <path d="M60 220 L110 160 L180 135
-                   L330 135 L405 165 L445 220
-                   L430 245 L70 245Z"
-                fill="#e7e7e7"/>
+          <path
+            d="M60 220
+            L110 160
+            L180 135
+            L330 135
+            L405 165
+            L445 220
+            L430 245
+            L70 245Z"
+            fill="#ddd"
+          />
 
-          <path d="M180 165 L205 140 L300 140 L345 165Z"
-                fill="#222"/>
+          <path
+            d="M180 165
+            L205 140
+            L300 140
+            L345 165Z"
+            fill="#222"
+          />
 
           <circle cx="140" cy="230" r="43" fill="#050505"/>
           <circle cx="140" cy="230" r="19" fill="#888"/>
 
           <circle cx="365" cy="230" r="43" fill="#050505"/>
           <circle cx="365" cy="230" r="19" fill="#888"/>
+
         </svg>
 
       </div>
 
+
       <div class="info">
+
         <h3>Audi RS7</h3>
-        <p>V8 • 591 HP • Quattro</p>
+
+        <p>
+          V8 • 591 HP • Quattro
+        </p>
 
         <div class="bottom">
-          <div class="price">$125 000</div>
-          <button class="details" onclick="openModal('Audi RS7')">Деталі</button>
+
+          <div class="price">
+            $125 000
+          </div>
+
+          <button
+            class="details"
+            onclick="details(
+              'Audi RS7',
+              '591 HP',
+              '305 км/год',
+              '3.6 сек',
+              'V8',
+              'Quattro AWD',
+              '$125 000',
+              'Преміальний спортивний автомобіль з повним приводом.'
+            )"
+          >
+            Деталі
+          </button>
+
         </div>
+
       </div>
 
     </div>
 
 
     <!-- Mercedes -->
+
     <div class="card" data-type="Авто">
 
-      <div class="car-img">
+      <div class="vehicle">
 
         <span class="type">LUXURY</span>
-        <button class="heart" onclick="fav(this)">♡</button>
+
+        <button class="heart" onclick="favorite(this)">
+          ♡
+        </button>
 
         <svg viewBox="0 0 500 300">
+
           <rect width="500" height="300" fill="#101010"/>
 
-          <path d="M65 220 L120 155 L195 125 L330 135
-                   L410 170 L440 220 L430 245 L70 245Z"
-                fill="#777"/>
+          <path
+            d="M65 220
+            L120 155
+            L195 125
+            L330 135
+            L410 170
+            L440 220
+            L430 245
+            L70 245Z"
+            fill="#777"
+          />
 
-          <path d="M180 160 L210 130 L300 138 L345 165Z"
-                fill="#181818"/>
+          <path
+            d="M180 160
+            L210 130
+            L300 138
+            L345 165Z"
+            fill="#181818"
+          />
 
           <circle cx="140" cy="230" r="42" fill="#050505"/>
           <circle cx="140" cy="230" r="18" fill="#aaa"/>
 
           <circle cx="370" cy="230" r="42" fill="#050505"/>
           <circle cx="370" cy="230" r="18" fill="#aaa"/>
+
         </svg>
 
       </div>
 
+
       <div class="info">
+
         <h3>Mercedes AMG GT</h3>
-        <p>V8 • 585 HP • AMG</p>
+
+        <p>
+          V8 • 585 HP • AMG
+        </p>
 
         <div class="bottom">
-          <div class="price">$175 000</div>
-          <button class="details" onclick="openModal('Mercedes AMG GT')">Деталі</button>
+
+          <div class="price">
+            $175 000
+          </div>
+
+          <button
+            class="details"
+            onclick="details(
+              'Mercedes AMG GT',
+              '585 HP',
+              '315 км/год',
+              '3.2 сек',
+              'V8 Biturbo',
+              'RWD',
+              '$175 000',
+              'Преміальний спортивний автомобіль AMG.'
+            )"
+          >
+            Деталі
+          </button>
+
         </div>
+
       </div>
 
     </div>
 
 
     <!-- Yamaha -->
+
     <div class="card" data-type="Мото">
 
-      <div class="car-img">
+      <div class="vehicle">
 
         <span class="type">MOTO</span>
-        <button class="heart" onclick="fav(this)">♡</button>
+
+        <button class="heart" onclick="favorite(this)">
+          ♡
+        </button>
 
         <svg viewBox="0 0 500 300">
+
           <rect width="500" height="300" fill="#101010"/>
 
           <circle cx="140" cy="230" r="45" fill="#050505"/>
@@ -906,42 +990,82 @@ footer{
           <circle cx="365" cy="230" r="45" fill="#050505"/>
           <circle cx="365" cy="230" r="20" fill="#777"/>
 
-          <path d="M140 225 L210 145 L300 145
-                   L365 225 L320 230 L260 175
-                   L205 230Z"
-                fill="#168cff"/>
+          <path
+            d="M140 225
+            L210 145
+            L300 145
+            L365 225
+            L320 230
+            L260 175
+            L205 230Z"
+            fill="#168cff"
+          />
 
-          <path d="M290 145 L325 105 L350 145"
-                fill="none" stroke="#aaa" stroke-width="10"/>
+          <path
+            d="M290 145
+            L325 105
+            L350 145"
+            fill="none"
+            stroke="#aaa"
+            stroke-width="10"
+          />
 
-          <path d="M205 145 L170 105"
-                stroke="#aaa" stroke-width="9"/>
         </svg>
 
       </div>
 
+
       <div class="info">
+
         <h3>Yamaha MT-09</h3>
-        <p>889cc • 119 HP</p>
+
+        <p>
+          889cc • 119 HP
+        </p>
 
         <div class="bottom">
-          <div class="price">$11 500</div>
-          <button class="details" onclick="openModal('Yamaha MT-09')">Деталі</button>
+
+          <div class="price">
+            $11 500
+          </div>
+
+          <button
+            class="details"
+            onclick="details(
+              'Yamaha MT-09',
+              '119 HP',
+              '230 км/год',
+              '3.5 сек',
+              '889cc',
+              'Chain Drive',
+              '$11 500',
+              'Легкий та потужний міський мотоцикл.'
+            )"
+          >
+            Деталі
+          </button>
+
         </div>
+
       </div>
 
     </div>
 
 
     <!-- Ducati -->
+
     <div class="card" data-type="Мото">
 
-      <div class="car-img">
+      <div class="vehicle">
 
         <span class="type">SUPERBIKE</span>
-        <button class="heart" onclick="fav(this)">♡</button>
+
+        <button class="heart" onclick="favorite(this)">
+          ♡
+        </button>
 
         <svg viewBox="0 0 500 300">
+
           <rect width="500" height="300" fill="#101010"/>
 
           <circle cx="135" cy="230" r="43" fill="#050505"/>
@@ -950,42 +1074,80 @@ footer{
           <circle cx="370" cy="230" r="43" fill="#050505"/>
           <circle cx="370" cy="230" r="18" fill="#777"/>
 
-          <path d="M135 220 L200 145 L300 140
-                   L370 220 L320 225 L265 170
-                   L200 225Z"
-                fill="#d90000"/>
+          <path
+            d="M135 220
+            L200 145
+            L300 140
+            L370 220
+            L320 225
+            L265 170
+            L200 225Z"
+            fill="#d90000"
+          />
 
-          <path d="M270 145 L320 95 L345 145"
-                fill="#222"/>
+          <path
+            d="M270 145
+            L320 95
+            L345 145"
+            fill="#222"
+          />
 
-          <path d="M195 145 L165 105"
-                stroke="#aaa" stroke-width="9"/>
         </svg>
 
       </div>
 
+
       <div class="info">
-        <h3>Ducati Panigale</h3>
-        <p>V4 • 215 HP • Racing</p>
+
+        <h3>Ducati Panigale V4</h3>
+
+        <p>
+          V4 • 215 HP
+        </p>
 
         <div class="bottom">
-          <div class="price">$30 000</div>
-          <button class="details" onclick="openModal('Ducati Panigale V4')">Деталі</button>
+
+          <div class="price">
+            $30 000
+          </div>
+
+          <button
+            class="details"
+            onclick="details(
+              'Ducati Panigale V4',
+              '215 HP',
+              '300+ км/год',
+              '3.0 сек',
+              'V4',
+              'Chain Drive',
+              '$30 000',
+              'Високопродуктивний спортивний мотоцикл.'
+            )"
+          >
+            Деталі
+          </button>
+
         </div>
+
       </div>
 
     </div>
 
 
     <!-- Kawasaki -->
+
     <div class="card" data-type="Мото">
 
-      <div class="car-img">
+      <div class="vehicle">
 
         <span class="type">MOTO</span>
-        <button class="heart" onclick="fav(this)">♡</button>
+
+        <button class="heart" onclick="favorite(this)">
+          ♡
+        </button>
 
         <svg viewBox="0 0 500 300">
+
           <rect width="500" height="300" fill="#101010"/>
 
           <circle cx="135" cy="230" r="43" fill="#050505"/>
@@ -994,42 +1156,80 @@ footer{
           <circle cx="370" cy="230" r="43" fill="#050505"/>
           <circle cx="370" cy="230" r="18" fill="#777"/>
 
-          <path d="M135 220 L205 145 L305 150
-                   L370 220 L315 225 L260 170
-                   L200 225Z"
-                fill="#78d600"/>
+          <path
+            d="M135 220
+            L205 145
+            L305 150
+            L370 220
+            L315 225
+            L260 170
+            L200 225Z"
+            fill="#78d600"
+          />
 
-          <path d="M285 150 L325 100 L350 150"
-                fill="#222"/>
+          <path
+            d="M285 150
+            L325 100
+            L350 150"
+            fill="#222"
+          />
 
-          <path d="M200 145 L170 105"
-                stroke="#aaa" stroke-width="9"/>
         </svg>
 
       </div>
 
+
       <div class="info">
-        <h3>Kawasaki Ninja</h3>
-        <p>636cc • 130 HP</p>
+
+        <h3>Kawasaki Ninja ZX-6R</h3>
+
+        <p>
+          636cc • 130 HP
+        </p>
 
         <div class="bottom">
-          <div class="price">$14 000</div>
-          <button class="details" onclick="openModal('Kawasaki Ninja ZX-6R')">Деталі</button>
+
+          <div class="price">
+            $14 000
+          </div>
+
+          <button
+            class="details"
+            onclick="details(
+              'Kawasaki Ninja ZX-6R',
+              '130 HP',
+              '260 км/год',
+              '3.5 сек',
+              '636cc',
+              'Chain Drive',
+              '$14 000',
+              'Спортивний мотоцикл класу Supersport.'
+            )"
+          >
+            Деталі
+          </button>
+
         </div>
+
       </div>
 
     </div>
 
 
     <!-- Vespa -->
+
     <div class="card" data-type="Скутер">
 
-      <div class="car-img">
+      <div class="vehicle">
 
         <span class="type">SCOOTER</span>
-        <button class="heart" onclick="fav(this)">♡</button>
+
+        <button class="heart" onclick="favorite(this)">
+          ♡
+        </button>
 
         <svg viewBox="0 0 500 300">
+
           <rect width="500" height="300" fill="#101010"/>
 
           <circle cx="145" cy="235" r="40" fill="#050505"/>
@@ -1038,42 +1238,80 @@ footer{
           <circle cx="355" cy="235" r="40" fill="#050505"/>
           <circle cx="355" cy="235" r="18" fill="#777"/>
 
-          <path d="M145 225 Q170 145 270 145
-                   Q330 145 355 225
-                   L320 235 L180 235Z"
-                fill="#f0f0f0"/>
+          <path
+            d="M145 225
+            Q170 145 270 145
+            Q330 145 355 225
+            L320 235
+            L180 235Z"
+            fill="#eee"
+          />
 
-          <path d="M275 145 L315 95 L345 145"
-                fill="none" stroke="#aaa" stroke-width="10"/>
+          <path
+            d="M275 145
+            L315 95
+            L345 145"
+            fill="none"
+            stroke="#aaa"
+            stroke-width="10"
+          />
 
-          <path d="M270 150 L210 150 L190 225"
-                fill="none" stroke="#aaa" stroke-width="8"/>
         </svg>
 
       </div>
 
+
       <div class="info">
-        <h3>Vespa GTS</h3>
-        <p>300cc • City Style</p>
+
+        <h3>Vespa GTS 300</h3>
+
+        <p>
+          300cc • City
+        </p>
 
         <div class="bottom">
-          <div class="price">$7 500</div>
-          <button class="details" onclick="openModal('Vespa GTS')">Деталі</button>
+
+          <div class="price">
+            $7 500
+          </div>
+
+          <button
+            class="details"
+            onclick="details(
+              'Vespa GTS 300',
+              '23 HP',
+              '120 км/год',
+              '8.0 сек',
+              '300cc',
+              'Automatic',
+              '$7 500',
+              'Стильний міський скутер для щоденних поїздок.'
+            )"
+          >
+            Деталі
+          </button>
+
         </div>
+
       </div>
 
     </div>
 
 
     <!-- Honda -->
+
     <div class="card" data-type="Скутер">
 
-      <div class="car-img">
+      <div class="vehicle">
 
         <span class="type">CITY</span>
-        <button class="heart" onclick="fav(this)">♡</button>
+
+        <button class="heart" onclick="favorite(this)">
+          ♡
+        </button>
 
         <svg viewBox="0 0 500 300">
+
           <rect width="500" height="300" fill="#101010"/>
 
           <circle cx="145" cy="235" r="40" fill="#050505"/>
@@ -1082,39 +1320,80 @@ footer{
           <circle cx="355" cy="235" r="40" fill="#050505"/>
           <circle cx="355" cy="235" r="18" fill="#777"/>
 
-          <path d="M145 225 Q170 145 265 145
-                   Q325 150 355 225
-                   L320 235 L180 235Z"
-                fill="#ff4d00"/>
+          <path
+            d="M145 225
+            Q170 145 265 145
+            Q325 150 355 225
+            L320 235
+            L180 235Z"
+            fill="#ff4d00"
+          />
 
-          <path d="M275 145 L315 95 L345 145"
-                fill="none" stroke="#aaa" stroke-width="10"/>
+          <path
+            d="M275 145
+            L315 95
+            L345 145"
+            fill="none"
+            stroke="#aaa"
+            stroke-width="10"
+          />
+
         </svg>
 
       </div>
 
+
       <div class="info">
+
         <h3>Honda PCX</h3>
-        <p>160cc • City • ABS</p>
+
+        <p>
+          160cc • ABS • City
+        </p>
 
         <div class="bottom">
-          <div class="price">$4 800</div>
-          <button class="details" onclick="openModal('Honda PCX')">Деталі</button>
+
+          <div class="price">
+            $4 800
+          </div>
+
+          <button
+            class="details"
+            onclick="details(
+              'Honda PCX',
+              '16 HP',
+              '105 км/год',
+              '10 сек',
+              '160cc',
+              'Automatic',
+              '$4 800',
+              'Економний та зручний скутер для міста.'
+            )"
+          >
+            Деталі
+          </button>
+
         </div>
+
       </div>
 
     </div>
 
 
-    <!-- BMW Motorrad -->
+    <!-- BMW GS -->
+
     <div class="card" data-type="Мото">
 
-      <div class="car-img">
+      <div class="vehicle">
 
         <span class="type">ADVENTURE</span>
-        <button class="heart" onclick="fav(this)">♡</button>
+
+        <button class="heart" onclick="favorite(this)">
+          ♡
+        </button>
 
         <svg viewBox="0 0 500 300">
+
           <rect width="500" height="300" fill="#101010"/>
 
           <circle cx="135" cy="235" r="44" fill="#050505"/>
@@ -1123,39 +1402,82 @@ footer{
           <circle cx="370" cy="235" r="44" fill="#050505"/>
           <circle cx="370" cy="235" r="19" fill="#777"/>
 
-          <path d="M135 220 L205 135 L305 145
-                   L370 220 L320 230 L260 170
-                   L200 230Z"
-                fill="#fff"/>
+          <path
+            d="M135 220
+            L205 135
+            L305 145
+            L370 220
+            L320 230
+            L260 170
+            L200 230Z"
+            fill="#fff"
+          />
 
-          <path d="M285 145 L325 90 L350 145"
-                fill="none" stroke="#aaa" stroke-width="10"/>
+          <path
+            d="M285 145
+            L325 90
+            L350 145"
+            fill="none"
+            stroke="#aaa"
+            stroke-width="10"
+          />
+
         </svg>
 
       </div>
 
+
       <div class="info">
+
         <h3>BMW R 1300 GS</h3>
-        <p>1300cc • Adventure</p>
+
+        <p>
+          1300cc • Adventure
+        </p>
 
         <div class="bottom">
-          <div class="price">$19 500</div>
-          <button class="details" onclick="openModal('BMW R 1300 GS')">Деталі</button>
+
+          <div class="price">
+            $19 500
+          </div>
+
+          <button
+            class="details"
+            onclick="details(
+              'BMW R 1300 GS',
+              '145 HP',
+              '220 км/год',
+              '3.4 сек',
+              '1300cc Boxer',
+              'Cardan',
+              '$19 500',
+              'Потужний adventure-мотоцикл для довгих поїздок.'
+            )"
+          >
+            Деталі
+          </button>
+
         </div>
+
       </div>
 
     </div>
 
 
     <!-- XMAX -->
+
     <div class="card" data-type="Скутер">
 
-      <div class="car-img">
+      <div class="vehicle">
 
         <span class="type">MAXI</span>
-        <button class="heart" onclick="fav(this)">♡</button>
+
+        <button class="heart" onclick="favorite(this)">
+          ♡
+        </button>
 
         <svg viewBox="0 0 500 300">
+
           <rect width="500" height="300" fill="#101010"/>
 
           <circle cx="140" cy="235" r="42" fill="#050505"/>
@@ -1164,25 +1486,61 @@ footer{
           <circle cx="365" cy="235" r="42" fill="#050505"/>
           <circle cx="365" cy="235" r="19" fill="#777"/>
 
-          <path d="M140 220 Q165 135 270 140
-                   Q330 145 365 220
-                   L325 235 L175 235Z"
-                fill="#777"/>
+          <path
+            d="M140 220
+            Q165 135 270 140
+            Q330 145 365 220
+            L325 235
+            L175 235Z"
+            fill="#777"
+          />
 
-          <path d="M270 140 L315 90 L345 140"
-                fill="none" stroke="#aaa" stroke-width="10"/>
+          <path
+            d="M270 140
+            L315 90
+            L345 140"
+            fill="none"
+            stroke="#aaa"
+            stroke-width="10"
+          />
+
         </svg>
 
       </div>
 
+
       <div class="info">
+
         <h3>Yamaha XMAX</h3>
-        <p>300cc • Maxi Scooter</p>
+
+        <p>
+          300cc • Maxi Scooter
+        </p>
 
         <div class="bottom">
-          <div class="price">$7 900</div>
-          <button class="details" onclick="openModal('Yamaha XMAX')">Деталі</button>
+
+          <div class="price">
+            $7 900
+          </div>
+
+          <button
+            class="details"
+            onclick="details(
+              'Yamaha XMAX 300',
+              '28 HP',
+              '135 км/год',
+              '9.0 сек',
+              '292cc',
+              'Automatic',
+              '$7 900',
+              'Комфортний maxi-scooter для міста та траси.'
+            )"
+          >
+            Деталі
+          </button>
+
         </div>
+
       </div>
 
     </div>
@@ -1192,7 +1550,7 @@ footer{
 </section>
 
 
-<section>
+<section id="about">
 
   <div class="stats">
 
@@ -1208,7 +1566,7 @@ footer{
 
     <div class="stat">
       <strong>24/7</strong>
-      <span>онлайн каталог</span>
+      <span>каталог</span>
     </div>
 
     <div class="stat">
@@ -1227,23 +1585,65 @@ footer{
 </footer>
 
 
+<!-- MODAL -->
+
 <div class="modal" id="modal">
 
   <div class="modal-box">
 
     <button class="close" onclick="closeModal()">×</button>
 
-    <h2 id="modalTitle">Авто</h2>
+    <h2 id="modalName">
+      BMW M5
+    </h2>
 
-    <p>
-      Детальна інформація про транспорт.
-      Потужність, характеристики, дизайн та інші
-      параметри можна додати сюди.
-    </p>
+    <div class="specs">
+
+      <div class="spec">
+        <span>⚡ Потужність</span>
+        <strong id="modalPower"></strong>
+      </div>
+
+      <div class="spec">
+        <span>🏎️ Максимальна швидкість</span>
+        <strong id="modalSpeed"></strong>
+      </div>
+
+      <div class="spec">
+        <span>⏱️ 0–100 км/год</span>
+        <strong id="modalAcceleration"></strong>
+      </div>
+
+      <div class="spec">
+        <span>🔧 Двигун</span>
+        <strong id="modalEngine"></strong>
+      </div>
+
+      <div class="spec">
+        <span>⚙️ Привід</span>
+        <strong id="modalDrive"></strong>
+      </div>
+
+      <div class="spec">
+        <span>💰 Ціна</span>
+        <strong id="modalPrice"></strong>
+      </div>
+
+    </div>
+
+    <p
+      class="description"
+      id="modalDescription"
+    ></p>
 
     <br>
 
-    <button class="btn" onclick="closeModal()">ЗАКРИТИ</button>
+    <button
+      class="btn"
+      onclick="closeModal()"
+    >
+      ЗАКРИТИ
+    </button>
 
   </div>
 
@@ -1254,19 +1654,27 @@ footer{
 
 let favorites = 0;
 
-function fav(button){
+
+function favorite(button){
 
   if(button.innerHTML === "♡"){
+
     button.innerHTML = "♥";
     button.style.color = "#ff4d00";
+
     favorites++;
+
   }else{
+
     button.innerHTML = "♡";
-    button.style.color = "white";
+    button.style.color = "#fff";
+
     favorites--;
+
   }
 
   document.getElementById("favCount").innerText = favorites;
+
 }
 
 
@@ -1277,48 +1685,89 @@ function filterType(type){
   cards.forEach(card => {
 
     if(type === "all"){
-      card.style.display = "";
-    }
 
-    else if(card.dataset.type === type){
       card.style.display = "";
-    }
 
-    else{
-      card.style.display = "none";
+    }else{
+
+      if(card.dataset.type === type){
+
+        card.style.display = "";
+
+      }else{
+
+        card.style.display = "none";
+
+      }
+
     }
 
   });
 
-  document.getElementById("catalog").scrollIntoView({
-    behavior:"smooth"
-  });
+  document
+    .getElementById("catalog")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
 }
 
 
-function openModal(name){
+function details(
+  name,
+  power,
+  speed,
+  acceleration,
+  engine,
+  drive,
+  price,
+  description
+){
 
-  document.getElementById("modalTitle").innerText = name;
+  document.getElementById("modalName").innerText = name;
 
-  document.getElementById("modal").style.display = "flex";
+  document.getElementById("modalPower").innerText = power;
+
+  document.getElementById("modalSpeed").innerText = speed;
+
+  document.getElementById("modalAcceleration").innerText =
+    acceleration;
+
+  document.getElementById("modalEngine").innerText =
+    engine;
+
+  document.getElementById("modalDrive").innerText =
+    drive;
+
+  document.getElementById("modalPrice").innerText =
+    price;
+
+  document.getElementById("modalDescription").innerText =
+    description;
+
+  document.getElementById("modal").style.display =
+    "flex";
 
 }
 
 
 function closeModal(){
 
-  document.getElementById("modal").style.display = "none";
+  document.getElementById("modal").style.display =
+    "none";
 
 }
 
 
-document.getElementById("modal").addEventListener("click",function(e){
+document
+  .getElementById("modal")
+  .addEventListener("click",function(e){
 
-  if(e.target === this){
-    closeModal();
-  }
+    if(e.target === this){
+      closeModal();
+    }
 
-});
+  });
 
 </script>
 
