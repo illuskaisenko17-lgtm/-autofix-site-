@@ -3,19 +3,425 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Професійний АвтоСервіс AutoFix</title>
-  <link rel="stylesheet" href="style.css">
+  <title>AutoFix — Професійний Сервіс & Тюнінг</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0b0f19;
+      color: #ffffff;
+      padding-bottom: 40px;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Промо банер */
+    .promo-banner {
+      background: linear-gradient(90deg, #ff5100, #ff8800);
+      color: #fff;
+      text-align: center;
+      padding: 12px 10px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    /* Шапка */
+    .hero-card {
+      background-color: #151c2c;
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 15px;
+      border: 1px solid #232d42;
+    }
+
+    .hero-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .hero-title i {
+      color: #22c55e;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge.green {
+      background-color: rgba(34, 197, 94, 0.15);
+      color: #22c55e;
+      border: 1px solid #22c55e;
+    }
+
+    .badge.dark {
+      background-color: #1e293b;
+      color: #94a3b8;
+    }
+
+    /* Пошук */
+    .search-section label {
+      display: block;
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 8px;
+    }
+
+    .search-section input {
+      width: 100%;
+      padding: 12px;
+      background-color: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      color: #fff;
+      outline: none;
+      margin-bottom: 12px;
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      flex: 1;
+      padding: 8px;
+      background-color: #1e293b;
+      border: none;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .filter-btn.active {
+      background-color: #2563eb;
+    }
+
+    /* Telegram банер */
+    .telegram-banner {
+      background: #1e293b;
+      border-left: 4px solid #0088cc;
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .tg-icon {
+      font-size: 32px;
+      color: #0088cc;
+    }
+
+    .telegram-banner h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .telegram-banner p {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    /* Акційна картка */
+    .promo-offer-card {
+      position: relative;
+      background: linear-gradient(135deg, #854d0e, #1e1b4b);
+      border: 1px solid #eab308;
+      border-radius: 16px;
+      padding: 18px;
+      margin-top: 15px;
+    }
+
+    .offer-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #eab308;
+      color: #000;
+      font-weight: bold;
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .promo-offer-card h3 {
+      font-size: 15px;
+      color: #fef08a;
+      margin-bottom: 6px;
+    }
+
+    .promo-offer-card p {
+      font-size: 12px;
+      color: #cbd5e1;
+    }
+
+    /* Калькулятор */
+    .interactive-card {
+      background: linear-gradient(135deg, #1e1b4b, #0f172a);
+      border: 1px solid #4338ca;
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 15px;
+    }
+
+    .interactive-card h2 {
+      font-size: 16px;
+      color: #818cf8;
+      margin-bottom: 4px;
+    }
+
+    .interactive-card p {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 15px;
+    }
+
+    .calc-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .calc-group select {
+      width: 100%;
+      padding: 10px;
+      background-color: #0f172a;
+      border: 1px solid #334155;
+      color: #fff;
+      border-radius: 8px;
+      margin-top: 4px;
+    }
+
+    .calc-result {
+      margin: 15px 0;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .calc-result span {
+      color: #22c55e;
+      font-size: 20px;
+    }
+
+    /* Слайдер До / Після */
+    .before-after-section {
+      margin-top: 20px;
+    }
+
+    .before-after-section h2 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #f87171;
+    }
+
+    .project-card {
+      background-color: #151c2c;
+      border-radius: 12px;
+      padding: 15px;
+      border: 1px solid #232d42;
+    }
+
+    .project-info h4 {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .project-info p {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .power-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .power-stats .before { color: #94a3b8; }
+    .power-stats .after { color: #22c55e; }
+
+    /* Картки авто та мото */
+    .catalog-card {
+      background-color: #151c2c;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 20px;
+      border: 1px solid #232d42;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-content {
+      padding: 15px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tag {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .tag.red { background-color: #ef4444; color: #fff; }
+    .tag.blue { background-color: #2563eb; color: #fff; }
+
+    .price-list {
+      list-style: none;
+      margin: 15px 0;
+    }
+
+    .price-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #1e293b;
+      font-size: 13px;
+    }
+
+    .price-value {
+      color: #22c55e;
+      background-color: rgba(34, 197, 94, 0.1);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    /* Модальне вікно */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 15px;
+    }
+
+    .modal-content {
+      background-color: #151c2c;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 20px;
+      width: 100%;
+      max-width: 450px;
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #94a3b8;
+    }
+
+    .modal-subtitle {
+      font-size: 12px;
+      color: #22c55e;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 4px;
+    }
+
+    .form-group select, .form-group input {
+      width: 100%;
+      padding: 10px;
+      background-color: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      color: #fff;
+      outline: none;
+    }
+
+    /* Кнопка */
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background-color: #22c55e;
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Верхній рекламний банер -->
   <div class="promo-banner">
     🔥 ЗНИЖКА -15% на комп'ютерну діагностику при записі сьогодні!
   </div>
 
   <main class="container">
-    <!-- Шапка автосервісу -->
     <header class="hero-card">
       <div class="hero-title">
         <i class="fa-solid fa-wrench"></i>
@@ -27,10 +433,9 @@
         <span class="badge dark"><i class="fa-solid fa-shield-halved"></i> Гарантія якості</span>
       </div>
 
-      <!-- Пошук та фільтри -->
       <div class="search-section">
         <label for="search-input"><i class="fa-solid fa-magnifying-glass"></i> Знайдіть бренд свого авто або мотоцикла:</label>
-        <input type="text" id="search-input" placeholder="Введіть марку (BMW, Porsche, Ducati, Kawasaki, Ferrari...)">
+        <input type="text" id="search-input" placeholder="Введіть марку (BMW, Porsche, Ducati, Ferrari, Kawasaki...)">
         <div class="filter-buttons">
           <button class="filter-btn active" data-filter="all">Усі</button>
           <button class="filter-btn" data-filter="car"><i class="fa-solid fa-car"></i> Авто</button>
@@ -39,10 +444,23 @@
       </div>
     </header>
 
-    <!-- ГРАНДІОЗНИЙ ІНТЕРАКТИВ: Калькулятор послуг -->
+    <section class="telegram-banner">
+      <i class="fa-brands fa-telegram tg-icon"></i>
+      <div>
+        <h3>Відеозвіт у Telegram в реальному часі</h3>
+        <p>Отримуйте фото та відео фіксацію діагностики й обслуговування вашого авто прямо на смартфон.</p>
+      </div>
+    </section>
+
+    <section class="promo-offer-card">
+      <div class="offer-badge">ЕКСКЛЮЗИВ</div>
+      <h3><i class="fa-solid fa-gauge-high"></i> Безкоштовний замір на диностенді</h3>
+      <p>Замовляйте комплексне ТО від 5 000 грн та отримуйте 1-й замір потужності безкоштовно!</p>
+    </section>
+
     <section class="interactive-card">
       <h2><i class="fa-solid fa-calculator"></i> Інтерактивний Калькулятор Тюнінгу та ТО</h2>
-      <p>Розрахуйте вартість обслуговування онлайн за 5 секунд!</p>
+      <p>Розрахуйте вартість робіт за пару кліків:</p>
       
       <div class="calc-grid">
         <div class="calc-group">
@@ -53,11 +471,12 @@
           </select>
         </div>
         <div class="calc-group">
-          <label>Оберіть послугу:</label>
+          <label>Оберіть послугу / Тюнінг:</label>
           <select id="calc-service">
             <option value="1200">Комп'ютерна діагностика — 1 200 грн</option>
             <option value="3500">Заміна мастила та фільтрів — 3 500 грн</option>
-            <option value="4500">Тюнінг вихлопної системи / Stage 1 — 4 500 грн</option>
+            <option value="8500">Чип-тюнінг Stage 1 / Stage 2 — 8 500 грн</option>
+            <option value="4500">Тюнінг вихлопної системи — 4 500 грн</option>
             <option value="2000">Замір потужності на диностенді — 2 000 грн</option>
           </select>
         </div>
@@ -66,443 +485,314 @@
       <div class="calc-result">
         Орієнтовна вартість: <span id="total-price">1 200 грн</span>
       </div>
-      <button class="btn btn-primary" onclick="alert('Заявку сформовано! Менеджер зв’яжеться з вами.')">
-        <i class="fa-brands fa-telegram"></i> Отримати відеозвіт робіт у Telegram
+      <button class="btn btn-primary" onclick="openBookingModal('Калькулятор ТО та Тюнінгу')">
+        <i class="fa-brands fa-telegram"></i> Записатися за розрахунком
       </button>
     </section>
 
-    <!-- КАТАЛОГ ТРАНСПОРТУ -->
-    <section id="catalog" class="catalog-grid">
-      <!-- Картки будуть згенеровані через JavaScript -->
+    <section class="before-after-section">
+      <h2><i class="fa-solid fa-chart-line"></i> Результати Тюнінгу (До / Після)</h2>
+      <div class="project-card">
+        <div class="project-info">
+          <h4>BMW M5 F90 — Stage 2 Custom Tune</h4>
+          <p>Замір потужності сток vs Stage 2:</p>
+          <div class="power-stats">
+            <span class="before">Сток: 600 к.с. / 750 Нм</span>
+            <span class="after">Stage 2: 750 к.с. / 950 Нм 🔥</span>
+          </div>
+        </div>
+      </div>
     </section>
+
+    <section id="catalog" class="catalog-grid"></section>
   </main>
 
-  <script src="script.js"></script>
+  <div id="booking-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeBookingModal()">&times;</span>
+      <h3>Онлайн-запис на сервіс</h3>
+      <p id="modal-service-name" class="modal-subtitle">Обслуговування</p>
+
+      <form id="booking-form" onsubmit="handleBooking(event)">
+        <div class="form-group">
+          <label>Обрати вільний підйомник / пост:</label>
+          <select required>
+            <option value="1">Пост 1 (Діагностика та Електрика)</option>
+            <option value="2">Пост 2 (Підйомник для ТО & Підвіски)</option>
+            <option value="3">Пост 3 (Диностенд & Stage Tuning)</option>
+            <option value="4">Пост 4 (Мото-сервіс & Десмодром)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Обрати майстра:</label>
+          <select required>
+            <option value="m1">Олександр (Головний каламутник Stage 1-3)</option>
+            <option value="m2">Дмитро (Спеціаліст з VAG / Porsche / BMW)</option>
+            <option value="m3">Ігор (Мото-механік & Сервіс Ducati/BMW Motorrad)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Дата та час:</label>
+          <input type="datetime-local" required>
+        </div>
+
+        <div class="form-group">
+          <label>Ваш телефон (Telegram):</label>
+          <input type="tel" placeholder="+380 (99) 000-00-00" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Підтвердити запис</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const catalogData = [
+      {
+        name: "Ferrari & Lamborghini & McLaren",
+        category: "car",
+        tag: "HYPERCAR",
+        tagColor: "red",
+        icon: "fa-car-side",
+        image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80",
+        services: [
+          { name: "Діагностика керамічних гальмівних систем", price: "3 000 грн" },
+          { name: "Налаштування зчеплення E-Gear / ISR", price: "6 000 грн" },
+          { name: "Комплексне ТО суперкарів", price: "8 500 грн" }
+        ]
+      },
+      {
+        name: "BMW M-Series & Alpina & iX/i4",
+        category: "car",
+        tag: "ТОП-ВИБІР",
+        tagColor: "red",
+        icon: "fa-car",
+        image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=80",
+        services: [
+          { name: "Комп'ютерна діагностика iDrive", price: "400 грн" },
+          { name: "Чистка впускних клапанів Walnut Blasting", price: "4 500 грн" },
+          { name: "Заміна мастила та систем охолодження", price: "1 200 грн" }
+        ]
+      },
+      {
+        name: "Mercedes-AMG & Maybach S-Class",
+        category: "car",
+        tag: "AMG",
+        tagColor: "blue",
+        icon: "fa-car",
+        image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&q=80",
+        services: [
+          { name: "Скидання помилок блоків SAM через Star Diagnosis", price: "800 грн" },
+          { name: "Заміна мастила в автоматі 7G/9G-Tronic", price: "3 500 грн" },
+          { name: "Перевірка пневмопідвіски Airmatic", price: "600 грн" }
+        ]
+      },
+      {
+        name: "Audi RS3 / RS6 Avant / RS Q8 / R8",
+        category: "car",
+        tag: "RS SPORT",
+        tagColor: "red",
+        icon: "fa-car",
+        image: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=800&q=80",
+        services: [
+          { name: "Діагностика муфти Haldex / Quattro", price: "1 000 грн" },
+          { name: "Заміна оливи в КПП S-Tronic / Tiptronic", price: "3 800 грн" }
+        ]
+      },
+      {
+        name: "Porsche (911 / Taycan / Cayenne / Macan)",
+        category: "car",
+        tag: "PREMIUM",
+        tagColor: "red",
+        icon: "fa-car",
+        image: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=800&q=80",
+        services: [
+          { name: "Спеціалізована діагностика PIWIS 3", price: "1 500 грн" },
+          { name: "Заміна мастила та сервіс КПП PDK", price: "4 200 грн" },
+          { name: "Калібрування пневмопідвіски PASM", price: "1 800 грн" }
+        ]
+      },
+      {
+        name: "Nissan GT-R / Supra A90 / Civic Type R",
+        category: "car",
+        tag: "JDM LEGENDS",
+        tagColor: "red",
+        icon: "fa-car",
+        image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=800&q=80",
+        services: [
+          { name: "Налаштування коробки GR6", price: "3 500 грн" },
+          { name: "Замір потужності на диностенді", price: "2 000 грн" },
+          { name: "Тюнінг вихлопної системи", price: "2 800 грн" }
+        ]
+      },
+      {
+        name: "Dodge Challenger SRT / Mustang / RAM TRX",
+        category: "car",
+        tag: "HEMI V8",
+        tagColor: "blue",
+        icon: "fa-car-side",
+        image: "https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?w=800&q=80",
+        services: [
+          { name: "Комплексне ТО двигунів HEMI / Coyote", price: "2 500 грн" },
+          { name: "Діагностика компресора Supercharger", price: "1 800 грн" }
+        ]
+      },
+      {
+        name: "Tesla Plaid / Lucid Air / Rivian / Taycan",
+        category: "car",
+        tag: "ELECTRIC",
+        tagColor: "blue",
+        icon: "fa-bolt",
+        image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=800&q=80",
+        services: [
+          { name: "Діагностика батареї та охолодження High-Voltage", price: "2 000 грн" },
+          { name: "Сервіс редукторів та гальмівної системи", price: "1 800 грн" }
+        ]
+      },
+      {
+        name: "Ducati (Panigale V4 / Streetfighter / Diavel)",
+        category: "moto",
+        tag: "SUPERBIKE",
+        tagColor: "red",
+        icon: "fa-motorcycle",
+        image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800&q=80",
+        services: [
+          { name: "Десмодромний сервіс ГРМ (Desmo Service)", price: "5 500 грн" },
+          { name: "Заміна мастила та підготовка до сезону", price: "1 800 грн" },
+          { name: "Налаштування трек-підвіски Öhlins", price: "2 200 грн" }
+        ]
+      },
+      {
+        name: "BMW Motorrad (S1000RR / M1000RR / R1250 GS)",
+        category: "moto",
+        tag: "MOTO-TOP",
+        tagColor: "blue",
+        icon: "fa-motorcycle",
+        image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=800&q=80",
+        services: [
+          { name: "Діагностика сканером BMW Motorrad", price: "800 грн" },
+          { name: "Обслуговування кардана та підвіски ESA", price: "2 500 грн" }
+        ]
+      },
+      {
+        name: "Kawasaki Ninja / Yamaha R1 / Honda Fireblade",
+        category: "moto",
+        tag: "SPORT",
+        tagColor: "blue",
+        icon: "fa-motorcycle",
+        image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800&q=80",
+        services: [
+          { name: "Синхронізація дросельних заслонок", price: "1 500 грн" },
+          { name: "Заміна ланцюга та зірок", price: "1 200 грн" }
+        ]
+      },
+      {
+        name: "Harley-Davidson & Custom Choppers",
+        category: "moto",
+        tag: "CUSTOM",
+        tagColor: "red",
+        icon: "fa-motorcycle",
+        image: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=800&q=80",
+        services: [
+          { name: "Сервіс двигунів Milwaukee-Eight / Twin Cam", price: "3 000 грн" },
+          { name: "Обслуговування ремінної передачі", price: "1 000 грн" }
+        ]
+      }
+    ];
+
+    function renderCatalog(items) {
+      const container = document.getElementById("catalog");
+      container.innerHTML = "";
+
+      items.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "catalog-card";
+        card.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="card-img">
+          <div class="card-content">
+            <div class="card-header">
+              <div class="card-title">
+                <i class="fa-solid ${item.icon}"></i> ${item.name}
+              </div>
+              <span class="tag ${item.tagColor}">${item.tag}</span>
+            </div>
+            <ul class="price-list">
+              ${item.services.map(s => `
+                <li class="price-item">
+                  <span>• ${s.name}</span>
+                  <span class="price-value">${s.price}</span>
+                </li>
+              `).join('')}
+            </ul>
+            <button class="btn btn-primary" onclick="openBookingModal('${item.name}')">
+              <i class="fa-solid fa-calendar-check"></i> Записатися на сервіс
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    renderCatalog(catalogData);
+
+    const calcService = document.getElementById("calc-service");
+    const totalPrice = document.getElementById("total-price");
+
+    calcService.addEventListener("change", (e) => {
+      const price = Number(e.target.value).toLocaleString("uk-UA");
+      totalPrice.textContent = `${price} грн`;
+    });
+
+    const searchInput = document.getElementById("search-input");
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    let currentFilter = "all";
+
+    searchInput.addEventListener("input", filterItems);
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        filterBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentFilter = btn.getAttribute("data-filter");
+        filterItems();
+      });
+    });
+
+    function filterItems() {
+      const query = searchInput.value.toLowerCase();
+      const filtered = catalogData.filter(item => {
+        const matchesFilter = currentFilter === "all" || item.category === currentFilter;
+        const matchesSearch = item.name.toLowerCase().includes(query);
+        return matchesFilter && matchesSearch;
+      });
+      renderCatalog(filtered);
+    }
+
+    const modal = document.getElementById("booking-modal");
+    const modalSubtitle = document.getElementById("modal-service-name");
+
+    function openBookingModal(serviceName) {
+      modalSubtitle.textContent = `Обрано: ${serviceName}`;
+      modal.style.display = "flex";
+    }
+
+    function closeBookingModal() {
+      modal.style.display = "none";
+    }
+
+    function handleBooking(event) {
+      event.preventDefault();
+      alert("Дякуємо! Ваш запис підтверджено. Менеджер надішле деталі в Telegram.");
+      closeBookingModal();
+    }
+
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        closeBookingModal();
+      }
+    };
+  </script>
 </body>
 </html>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-}
-
-body {
-  background-color: #0b0f19;
-  color: #ffffff;
-  padding-bottom: 40px;
-}
-
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
-/* Промо банер */
-.promo-banner {
-  background: linear-gradient(90deg, #ff5100, #ff8800);
-  color: #fff;
-  text-align: center;
-  padding: 12px 10px;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-/* Шапка */
-.hero-card {
-  background-color: #151c2c;
-  border-radius: 16px;
-  padding: 20px;
-  margin-top: 15px;
-  border: 1px solid #232d42;
-}
-
-.hero-title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 18px;
-  margin-bottom: 15px;
-}
-
-.hero-title i {
-  color: #22c55e;
-}
-
-.badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 20px;
-}
-
-.badge {
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.badge.green {
-  background-color: rgba(34, 197, 94, 0.15);
-  color: #22c55e;
-  border: 1px solid #22c55e;
-}
-
-.badge.dark {
-  background-color: #1e293b;
-  color: #94a3b8;
-}
-
-/* Пошук */
-.search-section label {
-  display: block;
-  font-size: 13px;
-  color: #94a3b8;
-  margin-bottom: 8px;
-}
-
-.search-section input {
-  width: 100%;
-  padding: 12px;
-  background-color: #0f172a;
-  border: 1px solid #334155;
-  border-radius: 10px;
-  color: #fff;
-  outline: none;
-  margin-bottom: 12px;
-}
-
-.filter-buttons {
-  display: flex;
-  gap: 8px;
-}
-
-.filter-btn {
-  flex: 1;
-  padding: 8px;
-  background-color: #1e293b;
-  border: none;
-  color: #fff;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.filter-btn.active {
-  background-color: #2563eb;
-}
-
-/* Калькулятор */
-.interactive-card {
-  background: linear-gradient(135deg, #1e1b4b, #0f172a);
-  border: 1px solid #4338ca;
-  border-radius: 16px;
-  padding: 20px;
-  margin-top: 15px;
-}
-
-.interactive-card h2 {
-  font-size: 16px;
-  color: #818cf8;
-  margin-bottom: 4px;
-}
-
-.interactive-card p {
-  font-size: 12px;
-  color: #94a3b8;
-  margin-bottom: 15px;
-}
-
-.calc-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.calc-group select {
-  width: 100%;
-  padding: 10px;
-  background-color: #0f172a;
-  border: 1px solid #334155;
-  color: #fff;
-  border-radius: 8px;
-  margin-top: 4px;
-}
-
-.calc-result {
-  margin: 15px 0;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.calc-result span {
-  color: #22c55e;
-  font-size: 20px;
-}
-
-/* Картки авто та мото */
-.catalog-card {
-  background-color: #151c2c;
-  border-radius: 16px;
-  overflow: hidden;
-  margin-top: 20px;
-  border: 1px solid #232d42;
-}
-
-.card-img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  display: block;
-}
-
-.card-content {
-  padding: 15px;
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.card-title {
-  font-size: 18px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.tag {
-  font-size: 10px;
-  padding: 3px 8px;
-  border-radius: 4px;
-  font-weight: bold;
-}
-
-.tag.red { background-color: #ef4444; color: #fff; }
-.tag.blue { background-color: #2563eb; color: #fff; }
-
-.price-list {
-  list-style: none;
-  margin: 15px 0;
-}
-
-.price-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid #1e293b;
-  font-size: 13px;
-}
-
-.price-value {
-  color: #22c55e;
-  background-color: rgba(34, 197, 94, 0.1);
-  padding: 2px 8px;
-  border-radius: 6px;
-  font-weight: bold;
-}
-
-/* Кнопка */
-.btn {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-}
-
-.btn-primary {
-  background-color: #22c55e;
-  color: #fff;
-}
-// Повний каталог авто та мотоциклів
-const catalogData = [
-  // АВТОМОБІЛІ
-  {
-    name: "Porsche 911 / Cayenne / Taycan",
-    category: "car",
-    tag: "PREMIUM",
-    tagColor: "red",
-    icon: "fa-car",
-    image: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=800&q=80",
-    services: [
-      { name: "Спеціалізована діагностика PIWIS 3", price: "1 500 грн" },
-      { name: "Заміна мастила та сервіс КПП PDK", price: "4 200 грн" },
-      { name: "Калібрування пневмопідвіски PASM", price: "1 800 грн" }
-    ]
-  },
-  {
-    name: "BMW M-Series & Alpina",
-    category: "car",
-    tag: "ТОП-ВИБІР",
-    tagColor: "red",
-    icon: "fa-car",
-    image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=80",
-    services: [
-      { name: "Комп'ютерна діагностика iDrive", price: "400 грн" },
-      { name: "Чистка впускних клапанів Walnut Blasting", price: "4 500 грн" },
-      { name: "Заміна мастила та систем охолодження", price: "1 200 грн" }
-    ]
-  },
-  {
-    name: "Mercedes-AMG & Maybach",
-    category: "car",
-    tag: "AMG",
-    tagColor: "blue",
-    icon: "fa-car",
-    image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&q=80",
-    services: [
-      { name: "Скидання помилок блоків SAM через Star Diagnosis", price: "800 грн" },
-      { name: "Заміна мастила в автоматі 7G/9G-Tronic", price: "3 500 грн" },
-      { name: "Перевірка пневмопідвіски Airmatic", price: "600 грн" }
-    ]
-  },
-  {
-    name: "Nissan GT-R & JDM Legends",
-    category: "car",
-    tag: "STAGE 1-3",
-    tagColor: "red",
-    icon: "fa-car",
-    image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=800&q=80",
-    services: [
-      { name: "Налаштування коробки GR6", price: "3 500 грн" },
-      { name: "Замір потужності на диностенді", price: "2 000 грн" },
-      { name: "Тюнінг вихлопної системи", price: "2 800 грн" }
-    ]
-  },
-  {
-    name: "Supercars: Ferrari & Lamborghini",
-    category: "car",
-    tag: "EXOTIC",
-    tagColor: "red",
-    icon: "fa-car",
-    image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80",
-    services: [
-      { name: "Комплексна діагностика керамічних гальм", price: "3 000 грн" },
-      { name: "Сервіс та налаштування зчеплення E-Gear", price: "6 000 грн" }
-    ]
-  },
-
-  // МОТОЦИКЛИ
-  {
-    name: "Ducati Panigale & Streetfighter",
-    category: "moto",
-    tag: "SUPERBIKE",
-    tagColor: "red",
-    icon: "fa-motorcycle",
-    image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800&q=80",
-    services: [
-      { name: "Десмодромний сервіс ГРМ Desmo Service", price: "5 500 грн" },
-      { name: "Заміна мастила та підготовка до сезону", price: "1 800 грн" },
-      { name: "Налаштування трек-підвіски Öhlins", price: "2 200 грн" }
-    ]
-  },
-  {
-    name: "BMW Motorrad (S1000RR / GS)",
-    category: "moto",
-    tag: "MOTO-TOP",
-    tagColor: "blue",
-    icon: "fa-motorcycle",
-    image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=800&q=80",
-    services: [
-      { name: "Діагностика сканером BMW Motorrad", price: "800 грн" },
-      { name: "Обслуговування кардана та підвіски ESA", price: "2 500 грн" }
-    ]
-  },
-  {
-    name: "Kawasaki Ninja & Yamaha R-Series",
-    category: "moto",
-    tag: "SPORT",
-    tagColor: "blue",
-    icon: "fa-motorcycle",
-    image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800&q=80",
-    services: [
-      { name: "Синхронізація дросельних заслонок", price: "1 500 грн" },
-      { name: "Заміна ланцюга та зірок", price: "1 200 грн" }
-    ]
-  }
-];
-
-// Відображення каталогу
-function renderCatalog(items) {
-  const container = document.getElementById("catalog");
-  container.innerHTML = "";
-
-  items.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "catalog-card";
-    card.innerHTML = `
-      <img src="${item.image}" alt="${item.name}" class="card-img">
-      <div class="card-content">
-        <div class="card-header">
-          <div class="card-title">
-            <i class="fa-solid ${item.icon}"></i> ${item.name}
-          </div>
-          <span class="tag ${item.tagColor}">${item.tag}</span>
-        </div>
-        <ul class="price-list">
-          ${item.services.map(s => `
-            <li class="price-item">
-              <span>• ${s.name}</span>
-              <span class="price-value">${s.price}</span>
-            </li>
-          `).join('')}
-        </ul>
-        <button class="btn btn-primary" onclick="alert('Запис на ${item.name} прийнято!')">
-          <i class="fa-solid fa-comment-dots"></i> Записатися на сервіс
-        </button>
-      </div>
-    `;
-    container.appendChild(card);
-  });
-}
-
-// Початкова ініціалізація
-renderCatalog(catalogData);
-
-// Інтерактивний калькулятор
-const calcService = document.getElementById("calc-service");
-const totalPrice = document.getElementById("total-price");
-
-calcService.addEventListener("change", (e) => {
-  const price = Number(e.target.value).toLocaleString("uk-UA");
-  totalPrice.textContent = `${price} грн`;
-});
-
-// Пошук та фільтрація
-const searchInput = document.getElementById("search-input");
-const filterBtns = document.querySelectorAll(".filter-btn");
-
-let currentFilter = "all";
-
-searchInput.addEventListener("input", filterItems);
-
-filterBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    filterBtns.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    currentFilter = btn.getAttribute("data-filter");
-    filterItems();
-  });
-});
-
-function filterItems() {
-  const query = searchInput.value.toLowerCase();
-  const filtered = catalogData.filter(item => {
-    const matchesFilter = currentFilter === "all" || item.category === currentFilter;
-    const matchesSearch = item.name.toLowerCase().includes(query);
-    return matchesFilter && matchesSearch;
-  });
-  renderCatalog(filtered);
-}
