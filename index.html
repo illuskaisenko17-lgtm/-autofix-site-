@@ -3,645 +3,497 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>GidHot — Vehicle Catalog</title>
+<title>GidHot — Transport</title>
 
 <style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-    --bg:#05060b;
-    --bg2:#0b0e16;
-    --card:#10141f;
-    --card2:#151a27;
-    --pink:#ff176b;
-    --pink2:#ff4d91;
-    --orange:#ff6b35;
-    --cyan:#00e5ff;
-    --green:#00ffae;
-    --yellow:#ffd84d;
-    --text:#fff;
-    --muted:#8d96aa;
-}
-
-html{
-    scroll-behavior:smooth;
+ --bg:#05060b;
+ --card:#0e1320;
+ --card2:#151b2a;
+ --pink:#ff176b;
+ --cyan:#00e5ff;
+ --green:#00ff9d;
+ --orange:#ff6b00;
+ --white:#fff;
+ --muted:#8b94a8;
 }
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    color:var(--text);
-    background:
-        radial-gradient(circle at 10% 0%,#ff176b25,transparent 28%),
-        radial-gradient(circle at 90% 20%,#00e5ff12,transparent 25%),
-        radial-gradient(circle at 50% 100%,#ff6b3510,transparent 30%),
-        var(--bg);
-    min-height:100vh;
+ font-family:Arial,sans-serif;
+ color:white;
+ background:
+ radial-gradient(circle at 10% 0%,#ff176b25,transparent 30%),
+ radial-gradient(circle at 90% 20%,#00e5ff15,transparent 30%),
+ #05060b;
+ min-height:100vh;
 }
-
-/* ================= HEADER ================= */
 
 header{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    background:#05060bee;
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid #ff176b45;
+ position:sticky;
+ top:0;
+ z-index:100;
+ background:#05060bea;
+ backdrop-filter:blur(15px);
+ border-bottom:1px solid #ff176b55;
 }
 
-.header{
-    width:92%;
-    max-width:1450px;
-    margin:auto;
-    min-height:78px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+.nav{
+ max-width:1450px;
+ width:94%;
+ margin:auto;
+ height:75px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
 }
 
 .logo{
-    font-size:36px;
-    font-weight:1000;
-    letter-spacing:-2px;
+ font-size:34px;
+ font-weight:1000;
 }
 
 .logo span{
-    color:var(--pink);
-    text-shadow:
-        0 0 8px var(--pink),
-        0 0 25px var(--pink),
-        0 0 55px #ff176b88;
+ color:var(--pink);
+ text-shadow:0 0 10px var(--pink),0 0 35px var(--pink);
 }
 
-.header-buttons{
-    display:flex;
-    gap:10px;
+.nav button{
+ background:#101521;
+ border:1px solid #ff176b66;
+ color:white;
+ padding:12px 18px;
+ border-radius:12px;
+ cursor:pointer;
 }
-
-.header-button{
-    width:48px;
-    height:48px;
-    border-radius:14px;
-    border:1px solid #ff176b55;
-    background:#10141e;
-    color:#fff;
-    cursor:pointer;
-    font-size:21px;
-    transition:.25s;
-}
-
-.header-button:hover{
-    border-color:var(--pink);
-    box-shadow:0 0 25px #ff176b66;
-    transform:translateY(-2px);
-}
-
-/* ================= MAIN ================= */
 
 .container{
-    width:92%;
-    max-width:1450px;
-    margin:0 auto;
+ width:94%;
+ max-width:1450px;
+ margin:auto;
 }
 
 .hero{
-    text-align:center;
-    padding:65px 10px 35px;
+ text-align:center;
+ padding:65px 10px 35px;
 }
 
 .hero h1{
-    font-size:clamp(42px,7vw,78px);
-    font-weight:1000;
-    line-height:1;
+ font-size:clamp(45px,8vw,85px);
+ font-weight:1000;
 }
 
-.neon{
-    color:var(--pink);
-    text-shadow:
-        0 0 5px var(--pink),
-        0 0 20px var(--pink),
-        0 0 50px var(--pink);
+.hero h1 span{
+ color:var(--pink);
+ text-shadow:0 0 8px var(--pink),0 0 30px var(--pink);
 }
 
 .hero p{
-    max-width:800px;
-    margin:22px auto;
-    color:var(--muted);
-    font-size:17px;
-    line-height:1.6;
+ max-width:750px;
+ margin:20px auto;
+ color:var(--muted);
+ line-height:1.6;
 }
 
-/* ================= SEARCH ================= */
-
 .search{
-    max-width:700px;
-    margin:25px auto 0;
-    display:flex;
-    border:1px solid #ff176b66;
-    border-radius:17px;
-    overflow:hidden;
-    background:#0d111a;
-    box-shadow:0 0 25px #ff176b15;
+ max-width:700px;
+ margin:25px auto;
+ display:flex;
+ overflow:hidden;
+ border:1px solid #ff176b66;
+ border-radius:16px;
+ background:#0d111b;
+ box-shadow:0 0 25px #ff176b18;
 }
 
 .search input{
-    flex:1;
-    border:0;
-    outline:0;
-    padding:18px 20px;
-    background:transparent;
-    color:white;
-    font-size:16px;
+ flex:1;
+ padding:18px;
+ background:transparent;
+ color:white;
+ border:0;
+ outline:0;
+ font-size:16px;
 }
 
 .search button{
-    width:60px;
-    border:0;
-    background:var(--pink);
-    color:#fff;
-    font-size:21px;
+ width:60px;
+ border:0;
+ background:var(--pink);
+ color:white;
+ font-size:20px;
 }
-
-/* ================= CATEGORIES ================= */
 
 .categories{
-    display:flex;
-    gap:10px;
-    overflow-x:auto;
-    padding:18px 0 25px;
-    scrollbar-width:none;
-}
-
-.categories::-webkit-scrollbar{
-    display:none;
+ display:flex;
+ gap:10px;
+ overflow-x:auto;
+ padding:10px 0 30px;
 }
 
 .category{
-    flex-shrink:0;
-    border:1px solid #ff176b55;
-    background:#10141f;
-    color:#fff;
-    padding:13px 20px;
-    border-radius:14px;
-    cursor:pointer;
-    transition:.25s;
+ white-space:nowrap;
+ padding:13px 20px;
+ border-radius:13px;
+ border:1px solid #ff176b55;
+ background:#101521;
+ color:white;
+ cursor:pointer;
 }
 
-.category:hover,
-.category.active{
-    background:var(--pink);
-    border-color:var(--pink);
-    box-shadow:
-        0 0 15px #ff176b77,
-        0 0 35px #ff176b22;
+.category.active,
+.category:hover{
+ background:var(--pink);
+ box-shadow:0 0 25px #ff176b55;
 }
 
-/* ================= SECTION ================= */
-
-.section-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin:25px 0 20px;
+.title{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin:15px 0 20px;
 }
 
-.section-header h2{
-    font-size:30px;
+.title h2{
+ font-size:30px;
 }
 
-.counter{
-    color:var(--muted);
+.count{
+ color:var(--muted);
 }
 
-/* ================= CARDS ================= */
-
-.catalog{
-    display:grid;
-    grid-template-columns:
-        repeat(auto-fill,minmax(310px,1fr));
-    gap:24px;
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fill,minmax(310px,1fr));
+ gap:25px;
 }
 
 .card{
-    position:relative;
-    overflow:hidden;
-    border-radius:25px;
-    background:
-        linear-gradient(145deg,#121724,#080b12);
-    border:1px solid #ff176b3d;
-    transition:.3s;
+ overflow:hidden;
+ border-radius:24px;
+ background:linear-gradient(145deg,#121827,#080b12);
+ border:1px solid #ff176b35;
+ transition:.3s;
 }
 
 .card:hover{
-    transform:translateY(-7px);
-    border-color:#ff176b;
-    box-shadow:
-        0 0 20px #ff176b55,
-        0 0 65px #ff176b18;
+ transform:translateY(-7px);
+ border-color:var(--pink);
+ box-shadow:0 0 25px #ff176b55,0 0 70px #ff176b15;
 }
 
-.image-wrap{
-    height:235px;
-    position:relative;
-    overflow:hidden;
-    background:#090c13;
+.photo{
+ height:235px;
+ position:relative;
+ overflow:hidden;
+ background:#080b11;
 }
 
-.image-wrap img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    transition:.5s;
+.photo img{
+ width:100%;
+ height:100%;
+ object-fit:cover;
+ transition:.5s;
 }
 
-.card:hover .image-wrap img{
-    transform:scale(1.07);
+.card:hover .photo img{
+ transform:scale(1.07);
 }
 
-.type-badge{
-    position:absolute;
-    left:15px;
-    top:15px;
-    padding:8px 13px;
-    border-radius:12px;
-    background:#05070ddd;
-    backdrop-filter:blur(10px);
-    border:1px solid #ffffff25;
-    font-size:13px;
+.badge{
+ position:absolute;
+ top:14px;
+ left:14px;
+ padding:8px 12px;
+ background:#05060ddd;
+ border:1px solid #ffffff22;
+ border-radius:10px;
 }
 
-.favorite{
-    position:absolute;
-    right:15px;
-    top:15px;
-    width:43px;
-    height:43px;
-    border-radius:50%;
-    background:#05070ddd;
-    border:1px solid #ffffff30;
-    color:#fff;
-    cursor:pointer;
-    font-size:19px;
+.like{
+ position:absolute;
+ top:14px;
+ right:14px;
+ width:43px;
+ height:43px;
+ border-radius:50%;
+ border:1px solid #ffffff30;
+ background:#05060ddd;
+ color:white;
+ cursor:pointer;
+ font-size:19px;
 }
 
-.favorite.active{
-    color:var(--pink);
-    border-color:var(--pink);
-    box-shadow:0 0 20px #ff176b88;
+.like.active{
+ color:var(--pink);
+ border-color:var(--pink);
+ box-shadow:0 0 20px #ff176b;
 }
 
-.card-content{
-    padding:21px;
+.content{
+ padding:20px;
 }
 
 .brand{
-    color:var(--pink2);
-    font-size:12px;
-    font-weight:bold;
-    letter-spacing:2px;
+ color:#ff4d91;
+ font-size:12px;
+ letter-spacing:2px;
+ font-weight:bold;
 }
 
-.card h3{
-    font-size:25px;
-    margin:7px 0 17px;
+.content h3{
+ font-size:25px;
+ margin:7px 0 17px;
 }
 
 .specs{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:9px;
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:9px;
 }
 
 .spec{
-    padding:12px;
-    background:var(--card2);
-    border:1px solid #ffffff08;
-    border-radius:12px;
+ background:var(--card2);
+ padding:12px;
+ border-radius:11px;
 }
 
-.spec span{
-    display:block;
-    color:var(--muted);
-    font-size:12px;
-    margin-bottom:6px;
+.spec small{
+ display:block;
+ color:var(--muted);
+ margin-bottom:6px;
 }
 
 .spec strong{
-    font-size:14px;
+ font-size:14px;
 }
 
-.card-footer{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-    margin-top:18px;
+.bottom{
+ margin-top:18px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
 }
 
 .price{
-    font-size:19px;
-    font-weight:bold;
+ font-size:19px;
+ font-weight:bold;
 }
 
-.details-button{
-    padding:12px 17px;
-    border:0;
-    border-radius:12px;
-    background:
-        linear-gradient(90deg,var(--pink),var(--orange));
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-    box-shadow:0 0 20px #ff176b33;
+.details{
+ border:0;
+ padding:12px 16px;
+ border-radius:12px;
+ color:white;
+ background:linear-gradient(90deg,var(--pink),var(--orange));
+ cursor:pointer;
+ font-weight:bold;
 }
-
-/* ================= COMPARE ================= */
 
 .compare{
-    margin-top:80px;
-    padding:32px;
-    border-radius:28px;
-    border:1px solid #ff176b55;
-    background:
-        radial-gradient(circle at 50% 0%,#ff176b18,transparent 45%),
-        #0b0f18;
-    box-shadow:0 0 50px #ff176b12;
+ margin-top:80px;
+ padding:30px;
+ border-radius:25px;
+ border:1px solid #ff176b55;
+ background:#0b0f18;
+ box-shadow:0 0 50px #ff176b15;
 }
 
-.compare-head{
-    text-align:center;
-    margin-bottom:28px;
+.compare h2{
+ text-align:center;
+ font-size:35px;
 }
 
-.compare-head h2{
-    font-size:38px;
+.compare p{
+ text-align:center;
+ color:var(--muted);
+ margin:10px 0 25px;
 }
 
-.compare-head p{
-    color:var(--muted);
-    margin-top:8px;
-}
-
-.compare-selects{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-}
-
-.select-box label{
-    display:block;
-    color:var(--muted);
-    margin-bottom:8px;
+.selects{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:15px;
 }
 
 select{
-    width:100%;
-    padding:16px;
-    border-radius:14px;
-    background:#141925;
-    border:1px solid #ff176b55;
-    color:white;
-    outline:none;
-    font-size:16px;
+ width:100%;
+ padding:16px;
+ background:#151b29;
+ color:white;
+ border:1px solid #ff176b55;
+ border-radius:12px;
 }
 
-.compare-button{
-    width:100%;
-    margin-top:18px;
-    padding:17px;
-    border:0;
-    border-radius:15px;
-    background:
-        linear-gradient(90deg,var(--pink),var(--orange));
-    color:white;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-    box-shadow:0 0 30px #ff176b44;
+.compare-btn{
+ width:100%;
+ padding:17px;
+ margin-top:17px;
+ border:0;
+ border-radius:14px;
+ color:white;
+ background:linear-gradient(90deg,var(--pink),var(--orange));
+ font-size:17px;
+ font-weight:bold;
+ cursor:pointer;
 }
 
-/* ================= COMPARE RESULT ================= */
-
-.result{
-    margin-top:30px;
-    overflow-x:auto;
+.table-wrap{
+ overflow-x:auto;
+ margin-top:25px;
 }
 
-.compare-table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:750px;
+table{
+ width:100%;
+ min-width:700px;
+ border-collapse:collapse;
 }
 
-.compare-table th,
-.compare-table td{
-    padding:16px;
-    border-bottom:1px solid #ff176b2d;
-    text-align:center;
+th,td{
+ padding:15px;
+ border-bottom:1px solid #ff176b25;
+ text-align:center;
 }
 
-.compare-table th{
-    color:var(--pink2);
-    font-size:16px;
+th{
+ color:#ff4d91;
 }
 
-.compare-table td:first-child{
-    color:var(--muted);
-    text-align:left;
+td:first-child{
+ text-align:left;
+ color:var(--muted);
 }
 
 .better{
-    color:var(--green)!important;
-    font-weight:bold;
-    text-shadow:0 0 10px #00ffae55;
+ color:var(--green);
+ font-weight:bold;
+ text-shadow:0 0 10px #00ff9d66;
 }
 
 .winner{
-    margin-top:25px;
-    padding:27px;
-    border-radius:20px;
-    text-align:center;
-    border:1px solid var(--pink);
-    background:
-        radial-gradient(circle,#ff176b30,transparent 70%),
-        #101521;
-    box-shadow:0 0 40px #ff176b33;
+ margin-top:25px;
+ padding:25px;
+ border-radius:18px;
+ text-align:center;
+ border:1px solid var(--pink);
+ background:#ff176b12;
+ box-shadow:0 0 35px #ff176b25;
 }
 
 .winner h3{
-    color:var(--yellow);
-    font-size:28px;
-    text-shadow:0 0 15px #ffd84d66;
+ color:#ffd84d;
+ font-size:27px;
 }
 
 .winner p{
-    margin-top:10px;
-    color:var(--muted);
+ color:var(--muted);
 }
-
-/* ================= MODAL ================= */
 
 .modal{
-    position:fixed;
-    inset:0;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    background:#000d;
-    backdrop-filter:blur(15px);
-    z-index:3000;
+ position:fixed;
+ inset:0;
+ z-index:500;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+ background:#000d;
+ backdrop-filter:blur(15px);
 }
 
-.modal.active{
-    display:flex;
+.modal.show{
+ display:flex;
 }
 
 .modal-box{
-    width:100%;
-    max-width:900px;
-    max-height:92vh;
-    overflow:auto;
-    border-radius:25px;
-    background:#0a0e17;
-    border:1px solid var(--pink);
-    box-shadow:
-        0 0 35px #ff176b66,
-        0 0 100px #ff176b22;
-    position:relative;
+ width:100%;
+ max-width:900px;
+ max-height:92vh;
+ overflow:auto;
+ border-radius:25px;
+ background:#090d16;
+ border:1px solid var(--pink);
+ box-shadow:0 0 50px #ff176b66;
+ position:relative;
 }
 
 .close{
-    position:absolute;
-    right:18px;
-    top:18px;
-    width:45px;
-    height:45px;
-    border-radius:50%;
-    border:1px solid #ffffff33;
-    background:#000b;
-    color:#fff;
-    cursor:pointer;
-    font-size:20px;
-    z-index:5;
+ position:absolute;
+ right:15px;
+ top:15px;
+ z-index:5;
+ width:43px;
+ height:43px;
+ border-radius:50%;
+ background:#000c;
+ color:white;
+ border:1px solid #ffffff33;
+ cursor:pointer;
+ font-size:18px;
 }
 
-.modal-image{
-    width:100%;
-    height:360px;
-    object-fit:cover;
+.modal-img{
+ width:100%;
+ height:350px;
+ object-fit:cover;
 }
 
-.modal-body{
-    padding:28px;
+.modal-content{
+ padding:28px;
 }
 
-.modal-body h2{
-    font-size:38px;
-    margin:8px 0 25px;
+.modal-content h2{
+ font-size:38px;
+ margin:8px 0 25px;
 }
 
-.detail-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
+.details-grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:12px;
 }
 
 .detail{
-    padding:16px;
-    background:#151a27;
-    border:1px solid #ffffff08;
-    border-radius:14px;
+ padding:16px;
+ border-radius:13px;
+ background:#151b29;
 }
 
 .detail span{
-    display:block;
-    color:var(--muted);
-    font-size:13px;
-    margin-bottom:7px;
+ display:block;
+ color:var(--muted);
+ font-size:13px;
+ margin-bottom:7px;
 }
-
-.detail strong{
-    font-size:16px;
-}
-
-/* ================= EMPTY ================= */
-
-.empty{
-    grid-column:1/-1;
-    padding:70px 20px;
-    text-align:center;
-    color:var(--muted);
-}
-
-/* ================= FOOTER ================= */
 
 footer{
-    margin-top:90px;
-    padding:45px 20px;
-    text-align:center;
-    color:#697286;
-    border-top:1px solid #ff176b22;
+ margin-top:80px;
+ padding:40px;
+ text-align:center;
+ color:#667084;
+ border-top:1px solid #ff176b22;
 }
-
-/* ================= MOBILE ================= */
 
 @media(max-width:700px){
 
-    .header{
-        min-height:68px;
-    }
+ .nav{height:65px}
 
-    .logo{
-        font-size:28px;
-    }
+ .logo{font-size:27px}
 
-    .container{
-        width:94%;
-    }
+ .hero{padding-top:40px}
 
-    .hero{
-        padding:40px 5px 25px;
-    }
+ .grid{grid-template-columns:1fr}
 
-    .hero p{
-        font-size:15px;
-    }
+ .selects{grid-template-columns:1fr}
 
-    .catalog{
-        grid-template-columns:1fr;
-    }
+ .compare{padding:20px 12px}
 
-    .compare{
-        padding:22px 14px;
-    }
+ .details-grid{grid-template-columns:1fr}
 
-    .compare-selects{
-        grid-template-columns:1fr;
-    }
+ .modal-img{height:230px}
 
-    .detail-grid{
-        grid-template-columns:1fr;
-    }
-
-    .modal-image{
-        height:240px;
-    }
-
-    .modal-body{
-        padding:20px;
-    }
-
-    .modal-body h2{
-        font-size:29px;
-    }
-
+ .modal-content h2{font-size:29px}
 }
 
 </style>
@@ -650,58 +502,36 @@ footer{
 <body>
 
 <header>
+<div class="nav">
 
-<div class="header">
+<div class="logo">Gid<span>Hot</span>.</div>
 
-    <div class="logo">
-        Gid<span>Hot</span>.
-    </div>
-
-    <div class="header-buttons">
-
-        <button
-            class="header-button"
-            onclick="goCompare()">
-            ⚡
-        </button>
-
-        <button
-            class="header-button"
-            onclick="window.scrollTo({top:0,behavior:'smooth'})">
-            🚗
-        </button>
-
-    </div>
+<button onclick="document.getElementById('compare').scrollIntoView({behavior:'smooth'})">
+⚡ Порівняти
+</button>
 
 </div>
-
 </header>
 
 
 <main class="container">
 
-<!-- ================= HERO ================= -->
-
 <section class="hero">
 
-<h1>
-    Gid<span class="neon">Hot</span>
-</h1>
+<h1>Gid<span>Hot</span></h1>
 
 <p>
-    Великий каталог транспорту.
-    Порівнюй автомобілі, мотоцикли,
-    пітбайки та скутери за характеристиками.
+Великий каталог автомобілів, мотоциклів,
+пітбайків та скутерів. Характеристики,
+фото та порівняння в одному місці.
 </p>
 
 <div class="search">
 
 <input
-    id="search"
-    type="text"
-    placeholder="🔎 Знайти модель, марку або тип..."
-    oninput="renderCatalog()"
->
+id="search"
+placeholder="🔎 Пошук транспорту..."
+oninput="render()">
 
 <button>⌕</button>
 
@@ -710,117 +540,69 @@ footer{
 </section>
 
 
-<!-- ================= FILTERS ================= -->
-
 <div class="categories">
 
-<button
-    class="category active"
-    onclick="setCategory('all',this)">
-    🔥 Все
+<button class="category active" onclick="filter('all',this)">
+🔥 Все
 </button>
 
-<button
-    class="category"
-    onclick="setCategory('Авто',this)">
-    🚗 Автомобілі
+<button class="category" onclick="filter('Авто',this)">
+🚗 Автомобілі
 </button>
 
-<button
-    class="category"
-    onclick="setCategory('Мотоцикл',this)">
-    🏍️ Мотоцикли
+<button class="category" onclick="filter('Мотоцикл',this)">
+🏍️ Мотоцикли
 </button>
 
-<button
-    class="category"
-    onclick="setCategory('Пітбайк',this)">
-    🏁 Пітбайки
+<button class="category" onclick="filter('Пітбайк',this)">
+🏁 Пітбайки
 </button>
 
-<button
-    class="category"
-    onclick="setCategory('Скутер',this)">
-    🛵 Скутери
+<button class="category" onclick="filter('Скутер',this)">
+🛵 Скутери
 </button>
 
 </div>
 
 
-<!-- ================= CATALOG ================= -->
+<div class="title">
 
-<div class="section-header">
+<h2>🔥 Каталог</h2>
 
-<h2>🔥 Каталог транспорту</h2>
-
-<span
-    class="counter"
-    id="counter">
-</span>
+<span class="count" id="count"></span>
 
 </div>
 
-<div
-    id="catalog"
-    class="catalog">
-</div>
+
+<div class="grid" id="catalog"></div>
 
 
-<!-- ================= COMPARE ================= -->
+<section class="compare" id="compare">
 
-<section
-    id="compare"
-    class="compare">
-
-<div class="compare-head">
-
-<h2>⚡ Порівняння</h2>
+<h2>⚡ Порівняння транспорту</h2>
 
 <p>
-    Вибери будь-які дві моделі —
-    сайт покаже різницю за характеристиками.
+Вибери дві моделі та подивись різницю
+за основними характеристиками.
 </p>
 
+<div class="selects">
+
+<div>
+<select id="one"></select>
 </div>
 
-
-<div class="compare-selects">
-
-<div class="select-box">
-
-<label>Перший транспорт</label>
-
-<select id="vehicle1">
-</select>
-
-</div>
-
-
-<div class="select-box">
-
-<label>Другий транспорт</label>
-
-<select id="vehicle2">
-</select>
-
+<div>
+<select id="two"></select>
 </div>
 
 </div>
 
-
-<button
-    class="compare-button"
-    onclick="compareVehicles()">
-
+<button class="compare-btn" onclick="compare()">
 ⚡ ПОРІВНЯТИ
-
 </button>
 
-
-<div
-    id="compareResult"
-    class="result">
-</div>
+<div id="result"></div>
 
 </section>
 
@@ -828,33 +610,16 @@ footer{
 
 
 <footer>
-
-<b>GidHot.</b>
-
-<br><br>
-
+<b>GidHot.</b><br><br>
 Автомобілі • Мотоцикли • Пітбайки • Скутери
-
-<br><br>
-
-Vehicle Catalog
-
 </footer>
 
 
-<!-- ================= MODAL ================= -->
-
-<div
-    id="modal"
-    class="modal">
+<div class="modal" id="modal">
 
 <div class="modal-box">
 
-<button
-    class="close"
-    onclick="closeModal()">
-    ✕
-</button>
+<button class="close" onclick="closeModal()">✕</button>
 
 <div id="modalContent"></div>
 
@@ -865,13 +630,7 @@ Vehicle Catalog
 
 <script>
 
-/* =====================================================
-   БАЗА ДАНИХ
-===================================================== */
-
-const vehicles = [
-
-/* ================= АВТО ================= */
+const vehicles=[
 
 {
 id:1,
@@ -884,10 +643,10 @@ engine:"5.2 V10",
 volume:"5204 см³",
 weight:1595,
 fuel:"Бензин",
-drive:"Повний AWD",
-gearbox:"7-ступ. S tronic",
-acceleration:"3.1 с",
-consumption:"13.1 л/100 км",
+drive:"AWD",
+gear:"7-ступ. S tronic",
+acc:"3.1 с",
+cons:"13.1 л/100 км",
 year:2024,
 price:210000,
 image:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=90"
@@ -904,10 +663,10 @@ engine:"3.0 Twin Turbo",
 volume:"2993 см³",
 weight:1725,
 fuel:"Бензин",
-drive:"Задній RWD",
-gearbox:"8-ступ. автомат",
-acceleration:"3.9 с",
-consumption:"10.2 л/100 км",
+drive:"RWD",
+gear:"8-ступ. автомат",
+acc:"3.9 с",
+cons:"10.2 л/100 км",
 year:2024,
 price:95000,
 image:"https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1400&q=90"
@@ -924,10 +683,10 @@ engine:"3.7 Twin Turbo",
 volume:"3745 см³",
 weight:1640,
 fuel:"Бензин",
-drive:"Повний AWD",
-gearbox:"8-ступ. PDK",
-acceleration:"2.7 с",
-consumption:"11.2 л/100 км",
+drive:"AWD",
+gear:"8-ступ. PDK",
+acc:"2.7 с",
+cons:"11.2 л/100 км",
 year:2024,
 price:150000,
 image:"https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=1400&q=90"
@@ -944,10 +703,10 @@ engine:"3.8 V6 Twin Turbo",
 volume:"3799 см³",
 weight:1740,
 fuel:"Бензин",
-drive:"Повний AWD",
-gearbox:"6-ступ. DCT",
-acceleration:"2.9 с",
-consumption:"12.0 л/100 км",
+drive:"AWD",
+gear:"6-ступ. DCT",
+acc:"2.9 с",
+cons:"12.0 л/100 км",
 year:2024,
 price:120000,
 image:"https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1400&q=90"
@@ -955,28 +714,6 @@ image:"https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&
 
 {
 id:5,
-brand:"Mercedes-Benz",
-name:"Mercedes-AMG GT",
-type:"Авто",
-power:577,
-speed:315,
-engine:"4.0 V8 Biturbo",
-volume:"3982 см³",
-weight:1970,
-fuel:"Бензин",
-drive:"AWD",
-gearbox:"9-ступ. автомат",
-acceleration:"3.2 с",
-consumption:"14.1 л/100 км",
-year:2024,
-price:180000,
-image:"https://images.unsplash.com/photo-1618843479619-f3d0e2f1d0c2?auto=format&fit=crop&w=1400&q=90"
-},
-
-/* ================= МОТО ================= */
-
-{
-id:6,
 brand:"Yamaha",
 name:"Yamaha MT-09",
 type:"Мотоцикл",
@@ -987,16 +724,16 @@ volume:"889 см³",
 weight:193,
 fuel:"Бензин",
 drive:"Ланцюг",
-gearbox:"6-ступ.",
-acceleration:"3.4 с",
-consumption:"5.0 л/100 км",
+gear:"6-ступ.",
+acc:"3.4 с",
+cons:"5.0 л/100 км",
 year:2024,
 price:11500,
 image:"https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1400&q=90"
 },
 
 {
-id:7,
+id:6,
 brand:"Kawasaki",
 name:"Kawasaki Ninja ZX-10R",
 type:"Мотоцикл",
@@ -1007,16 +744,16 @@ volume:"998 см³",
 weight:207,
 fuel:"Бензин",
 drive:"Ланцюг",
-gearbox:"6-ступ.",
-acceleration:"3.0 с",
-consumption:"6.5 л/100 км",
+gear:"6-ступ.",
+acc:"3.0 с",
+cons:"6.5 л/100 км",
 year:2024,
 price:18000,
 image:"https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=1400&q=90"
 },
 
 {
-id:8,
+id:7,
 brand:"Honda",
 name:"Honda CBR1000RR",
 type:"Мотоцикл",
@@ -1027,38 +764,16 @@ volume:"999 см³",
 weight:201,
 fuel:"Бензин",
 drive:"Ланцюг",
-gearbox:"6-ступ.",
-acceleration:"2.9 с",
-consumption:"6.4 л/100 км",
+gear:"6-ступ.",
+acc:"2.9 с",
+cons:"6.4 л/100 км",
 year:2024,
 price:17000,
 image:"https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=1400&q=90"
 },
 
 {
-id:9,
-brand:"BMW",
-name:"BMW S 1000 RR",
-type:"Мотоцикл",
-power:205,
-speed:303,
-engine:"4-циліндри",
-volume:"999 см³",
-weight:197,
-fuel:"Бензин",
-drive:"Ланцюг",
-gearbox:"6-ступ.",
-acceleration:"3.0 с",
-consumption:"6.5 л/100 км",
-year:2024,
-price:19000,
-image:"https://images.unsplash.com/photo-1571646750131-7c6f1b1d9b19?auto=format&fit=crop&w=1400&q=90"
-},
-
-/* ================= ПІТБАЙКИ ================= */
-
-{
-id:10,
+id:8,
 brand:"BSE",
 name:"BSE M2 160",
 type:"Пітбайк",
@@ -1069,16 +784,16 @@ volume:"160 см³",
 weight:72,
 fuel:"Бензин",
 drive:"Ланцюг",
-gearbox:"4-ступ.",
-acceleration:"—",
-consumption:"≈3 л/100 км",
+gear:"4-ступ.",
+acc:"—",
+cons:"≈3 л/100 км",
 year:2024,
 price:1800,
 image:"https://images.unsplash.com/photo-1571068316344-75bc76f77890?auto=format&fit=crop&w=1400&q=90"
 },
 
 {
-id:11,
+id:9,
 brand:"Kayo",
 name:"Kayo Basic 125",
 type:"Пітбайк",
@@ -1089,16 +804,16 @@ volume:"125 см³",
 weight:68,
 fuel:"Бензин",
 drive:"Ланцюг",
-gearbox:"4-ступ.",
-acceleration:"—",
-consumption:"≈2.8 л/100 км",
+gear:"4-ступ.",
+acc:"—",
+cons:"≈2.8 л/100 км",
 year:2024,
 price:1300,
 image:"https://images.unsplash.com/photo-1525160354320-d8e92641c563?auto=format&fit=crop&w=1400&q=90"
 },
 
 {
-id:12,
+id:10,
 brand:"Apollo",
 name:"Apollo RFZ 125",
 type:"Пітбайк",
@@ -1109,38 +824,16 @@ volume:"125 см³",
 weight:70,
 fuel:"Бензин",
 drive:"Ланцюг",
-gearbox:"4-ступ.",
-acceleration:"—",
-consumption:"≈3 л/100 км",
+gear:"4-ступ.",
+acc:"—",
+cons:"≈3 л/100 км",
 year:2024,
 price:1400,
 image:"https://images.unsplash.com/photo-1558980394-0c94e4e8b6d5?auto=format&fit=crop&w=1400&q=90"
 },
 
 {
-id:13,
-brand:"Kayo",
-name:"Kayo TT 140",
-type:"Пітбайк",
-power:13,
-speed:100,
-engine:"4T",
-volume:"140 см³",
-weight:71,
-fuel:"Бензин",
-drive:"Ланцюг",
-gearbox:"4-ступ.",
-acceleration:"—",
-consumption:"≈3 л/100 км",
-year:2024,
-price:1550,
-image:"https://images.unsplash.com/photo-1504215680853-026ed2a45def?auto=format&fit=crop&w=1400&q=90"
-},
-
-/* ================= СКУТЕРИ ================= */
-
-{
-id:14,
+id:11,
 brand:"Aprilia",
 name:"Aprilia SR GT 200",
 type:"Скутер",
@@ -1151,16 +844,16 @@ volume:"174 см³",
 weight:148,
 fuel:"Бензин",
 drive:"Ремінь",
-gearbox:"CVT",
-acceleration:"—",
-consumption:"≈2.9 л/100 км",
+gear:"CVT",
+acc:"—",
+cons:"≈2.9 л/100 км",
 year:2024,
 price:5500,
 image:"https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?auto=format&fit=crop&w=1400&q=90"
 },
 
 {
-id:15,
+id:12,
 brand:"Yamaha",
 name:"Yamaha NMAX 155",
 type:"Скутер",
@@ -1171,16 +864,16 @@ volume:"155 см³",
 weight:131,
 fuel:"Бензин",
 drive:"Ремінь",
-gearbox:"CVT",
-acceleration:"—",
-consumption:"≈2.4 л/100 км",
+gear:"CVT",
+acc:"—",
+cons:"≈2.4 л/100 км",
 year:2024,
 price:4200,
 image:"https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=1400&q=90"
 },
 
 {
-id:16,
+id:13,
 brand:"Honda",
 name:"Honda PCX 160",
 type:"Скутер",
@@ -1191,9 +884,9 @@ volume:"157 см³",
 weight:133,
 fuel:"Бензин",
 drive:"Ремінь",
-gearbox:"CVT",
-acceleration:"—",
-consumption:"≈2.1 л/100 км",
+gear:"CVT",
+acc:"—",
+cons:"≈2.1 л/100 км",
 year:2024,
 price:3900,
 image:"https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&w=1400&q=90"
@@ -1201,762 +894,480 @@ image:"https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&
 
 ];
 
-
-/* =====================================================
-   ЗМІННІ
-===================================================== */
-
-let currentCategory="all";
+let current="all";
 let favorites=[];
 
 
-/* =====================================================
-   SCORE
-===================================================== */
+/* SCORE */
 
-function getScore(v){
+function score(v){
 
-    const power=Math.min(v.power/6.2,100);
+ let power=Math.min(v.power/6.2,100);
+ let speed=Math.min(v.speed/3.31,100);
+ let weight=Math.max(0,100-v.weight/20);
+ let price=Math.max(0,100-v.price/2500);
 
-    const speed=Math.min(v.speed/3.31,100);
-
-    const weight=Math.max(
-        0,
-        100-(v.weight/20)
-    );
-
-    const price=Math.max(
-        0,
-        100-(v.price/2500)
-    );
-
-    return Math.round(
-        power*.35+
-        speed*.30+
-        weight*.15+
-        price*.20
-    );
+ return Math.round(
+  power*.35+
+  speed*.30+
+  weight*.15+
+  price*.20
+ );
 }
 
 
-/* =====================================================
-   ІКОНКА
-===================================================== */
+/* ICON */
 
-function getIcon(type){
+function icon(type){
 
-    if(type==="Авто") return "🚗";
+ if(type==="Авто")return"🚗";
+ if(type==="Мотоцикл")return"🏍️";
+ if(type==="Пітбайк")return"🏁";
+ if(type==="Скутер")return"🛵";
 
-    if(type==="Мотоцикл") return "🏍️";
-
-    if(type==="Пітбайк") return "🏁";
-
-    if(type==="Скутер") return "🛵";
-
-    return "🔥";
+ return"🔥";
 }
 
 
-/* =====================================================
-   КАТАЛОГ
-===================================================== */
+/* RENDER */
 
-function renderCatalog(){
+function render(){
 
-    const search=document
-        .getElementById("search")
-        .value
-        .toLowerCase()
-        .trim();
+ const search=document
+ .getElementById("search")
+ .value
+ .toLowerCase();
 
-    const list=vehicles.filter(v=>{
+ const list=vehicles.filter(v=>{
 
-        const categoryOK=
-            currentCategory==="all" ||
-            v.type===currentCategory;
+  const category=
+   current==="all"||v.type===current;
 
-        const searchOK=
-            v.name.toLowerCase().includes(search) ||
-            v.brand.toLowerCase().includes(search) ||
-            v.type.toLowerCase().includes(search);
+  const text=
+   v.name.toLowerCase().includes(search)||
+   v.brand.toLowerCase().includes(search)||
+   v.type.toLowerCase().includes(search);
 
-        return categoryOK && searchOK;
+  return category&&text;
 
-    });
+ });
 
-    document.getElementById("counter").textContent=
-        `${list.length} моделей`;
+ document.getElementById("count").textContent=
+ list.length+" моделей";
 
-    const catalog=document.getElementById("catalog");
+ document.getElementById("catalog").innerHTML=
+ list.length?
 
-    if(list.length===0){
+ list.map(v=>`
 
-        catalog.innerHTML=`
-            <div class="empty">
-                <h2>😕 Нічого не знайдено</h2>
-                <br>
-                <p>Спробуй іншу модель або категорію.</p>
-            </div>
-        `;
+ <article class="card">
 
-        return;
-    }
+ <div class="photo">
 
-    catalog.innerHTML=list.map(v=>`
+ <img src="${v.image}" alt="${v.name}">
 
-        <article class="card">
+ <div class="badge">
+ ${icon(v.type)} ${v.type}
+ </div>
 
-            <div class="image-wrap">
+ <button
+ class="like ${favorites.includes(v.id)?"active":""}"
+ onclick="favorite(${v.id})">
+ ♥
+ </button>
 
-                <img
-                    src="${v.image}"
-                    alt="${v.name}"
-                    loading="lazy"
-                >
+ </div>
 
-                <div class="type-badge">
-                    ${getIcon(v.type)} ${v.type}
-                </div>
+ <div class="content">
 
-                <button
-                    class="favorite ${favorites.includes(v.id)?"active":""}"
-                    onclick="toggleFavorite(${v.id})">
+ <div class="brand">
+ ${v.brand.toUpperCase()}
+ </div>
 
-                    ♥
-                </button>
+ <h3>${v.name}</h3>
 
-            </div>
+ <div class="specs">
 
+ <div class="spec">
+ <small>⚡ Потужність</small>
+ <strong>${v.power} к.с.</strong>
+ </div>
 
-            <div class="card-content">
+ <div class="spec">
+ <small>🚀 Швидкість</small>
+ <strong>${v.speed} км/год</strong>
+ </div>
 
-                <div class="brand">
-                    ${v.brand.toUpperCase()}
-                </div>
+ <div class="spec">
+ <small>🔧 Двигун</small>
+ <strong>${v.engine}</strong>
+ </div>
 
-                <h3>
-                    ${v.name}
-                </h3>
+ <div class="spec">
+ <small>🔩 Об'єм</small>
+ <strong>${v.volume}</strong>
+ </div>
 
+ <div class="spec">
+ <small>⚖️ Вага</small>
+ <strong>${v.weight} кг</strong>
+ </div>
 
-                <div class="specs">
+ <div class="spec">
+ <small>🏆 Score</small>
+ <strong>${score(v)}/100</strong>
+ </div>
 
-                    <div class="spec">
-                        <span>⚡ Потужність</span>
-                        <strong>${v.power} к.с.</strong>
-                    </div>
+ </div>
 
-                    <div class="spec">
-                        <span>🚀 Швидкість</span>
-                        <strong>${v.speed} км/год</strong>
-                    </div>
+ <div class="bottom">
 
-                    <div class="spec">
-                        <span>🔧 Двигун</span>
-                        <strong>${v.engine}</strong>
-                    </div>
+ <div class="price">
+ $${v.price.toLocaleString()}
+ </div>
 
-                    <div class="spec">
-                        <span>🔩 Об'єм</span>
-                        <strong>${v.volume}</strong>
-                    </div>
+ <button
+ class="details"
+ onclick="details(${v.id})">
+ Детальніше
+ </button>
 
-                    <div class="spec">
-                        <span>⚖️ Вага</span>
-                        <strong>${v.weight} кг</strong>
-                    </div>
+ </div>
 
-                    <div class="spec">
-                        <span>🏆 Score</span>
-                        <strong>${getScore(v)}/100</strong>
-                    </div>
+ </div>
 
-                </div>
+ </article>
 
+ `).join("")
 
-                <div class="card-footer">
+ :
 
-                    <div class="price">
-                        $${v.price.toLocaleString()}
-                    </div>
-
-                    <button
-                        class="details-button"
-                        onclick="openDetails(${v.id})">
-
-                        Деталі →
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-    `).join("");
+ `<div style="grid-column:1/-1;text-align:center;padding:60px;color:#8b94a8">
+ 😕 Нічого не знайдено
+ </div>`;
 
 }
 
 
-/* =====================================================
-   CATEGORY
-===================================================== */
+/* FILTER */
 
-function setCategory(category,button){
+function filter(type,button){
 
-    currentCategory=category;
+ current=type;
 
-    document
-        .querySelectorAll(".category")
-        .forEach(b=>{
-            b.classList.remove("active");
-        });
+ document
+ .querySelectorAll(".category")
+ .forEach(x=>x.classList.remove("active"));
 
-    button.classList.add("active");
+ button.classList.add("active");
 
-    renderCatalog();
+ render();
 
 }
 
 
-/* =====================================================
-   FAVORITES
-===================================================== */
+/* FAVORITE */
 
-function toggleFavorite(id){
+function favorite(id){
 
-    if(favorites.includes(id)){
+ if(favorites.includes(id)){
+  favorites=favorites.filter(x=>x!==id);
+ }else{
+  favorites.push(id);
+ }
 
-        favorites=
-            favorites.filter(x=>x!==id);
-
-    }else{
-
-        favorites.push(id);
-
-    }
-
-    renderCatalog();
+ render();
 
 }
 
 
-/* =====================================================
-   SELECTS
-===================================================== */
+/* DETAILS */
+
+function details(id){
+
+ const v=vehicles.find(x=>x.id===id);
+
+ document.getElementById("modalContent").innerHTML=`
+
+ <img class="modal-img" src="${v.image}">
+
+ <div class="modal-content">
+
+ <div class="brand">
+ ${v.brand.toUpperCase()} • ${v.type.toUpperCase()}
+ </div>
+
+ <h2>${v.name}</h2>
+
+ <div class="details-grid">
+
+ <div class="detail">
+ <span>⚡ Потужність</span>
+ <strong>${v.power} к.с.</strong>
+ </div>
+
+ <div class="detail">
+ <span>🚀 Максимальна швидкість</span>
+ <strong>${v.speed} км/год</strong>
+ </div>
+
+ <div class="detail">
+ <span>🔧 Двигун</span>
+ <strong>${v.engine}</strong>
+ </div>
+
+ <div class="detail">
+ <span>🔩 Об'єм</span>
+ <strong>${v.volume}</strong>
+ </div>
+
+ <div class="detail">
+ <span>⚖️ Вага</span>
+ <strong>${v.weight} кг</strong>
+ </div>
+
+ <div class="detail">
+ <span>⛽ Паливо</span>
+ <strong>${v.fuel}</strong>
+ </div>
+
+ <div class="detail">
+ <span>🛞 Привід</span>
+ <strong>${v.drive}</strong>
+ </div>
+
+ <div class="detail">
+ <span>⚙️ Коробка</span>
+ <strong>${v.gear}</strong>
+ </div>
+
+ <div class="detail">
+ <span>💨 Розгін 0–100</span>
+ <strong>${v.acc}</strong>
+ </div>
+
+ <div class="detail">
+ <span>🛢️ Витрата</span>
+ <strong>${v.cons}</strong>
+ </div>
+
+ <div class="detail">
+ <span>📅 Рік</span>
+ <strong>${v.year}</strong>
+ </div>
+
+ <div class="detail">
+ <span>💰 Ціна</span>
+ <strong>$${v.price.toLocaleString()}</strong>
+ </div>
+
+ <div class="detail">
+ <span>🏆 GidHot Score</span>
+ <strong>${score(v)}/100</strong>
+ </div>
+
+ </div>
+
+ </div>
+ `;
+
+ document.getElementById("modal").classList.add("show");
+
+}
+
+
+function closeModal(){
+ document.getElementById("modal").classList.remove("show");
+}
+
+
+document.getElementById("modal").onclick=e=>{
+ if(e.target.id==="modal")closeModal();
+};
+
+
+/* SELECTS */
 
 function fillSelects(){
 
-    const first=document.getElementById("vehicle1");
+ const a=document.getElementById("one");
+ const b=document.getElementById("two");
 
-    const second=document.getElementById("vehicle2");
+ vehicles.forEach(v=>{
 
-    first.innerHTML="";
-    second.innerHTML="";
+  a.innerHTML+=`
+   <option value="${v.id}">
+    ${icon(v.type)} ${v.name}
+   </option>`;
 
-    vehicles.forEach(v=>{
+  b.innerHTML+=`
+   <option value="${v.id}">
+    ${icon(v.type)} ${v.name}
+   </option>`;
 
-        first.innerHTML+=`
-            <option value="${v.id}">
-                ${getIcon(v.type)}
-                ${v.brand} ${v.name}
-            </option>
-        `;
+ });
 
-        second.innerHTML+=`
-            <option value="${v.id}">
-                ${getIcon(v.type)}
-                ${v.brand} ${v.name}
-            </option>
-        `;
+ a.value=1;
+ b.value=5;
+}
 
-    });
 
-    first.value=1;
+/* COMPARE */
 
-    second.value=6;
+function compare(){
+
+ const a=vehicles.find(
+  v=>v.id==document.getElementById("one").value
+ );
+
+ const b=vehicles.find(
+  v=>v.id==document.getElementById("two").value
+ );
+
+ const rows=[
+
+ {
+  name:"Потужність",
+  a:a.power+" к.с.",
+  b:b.power+" к.с.",
+  win:a.power>b.power?"a":b.power>a.power?"b":"tie"
+ },
+
+ {
+  name:"Максимальна швидкість",
+  a:a.speed+" км/год",
+  b:b.speed+" км/год",
+  win:a.speed>b.speed?"a":b.speed>a.speed?"b":"tie"
+ },
+
+ {
+  name:"Вага",
+  a:a.weight+" кг",
+  b:b.weight+" кг",
+  win:a.weight<b.weight?"a":b.weight<a.weight?"b":"tie"
+ },
+
+ {
+  name:"Ціна",
+  a:"$"+a.price.toLocaleString(),
+  b:"$"+b.price.toLocaleString(),
+  win:a.price<b.price?"a":b.price<a.price?"b":"tie"
+ },
+
+ {
+  name:"GidHot Score",
+  a:score(a)+"/100",
+  b:score(b)+"/100",
+  win:score(a)>score(b)?"a":score(b)>score(a)?"b":"tie"
+ }
+
+ ];
+
+ let ap=0;
+ let bp=0;
+
+ rows.forEach(r=>{
+  if(r.win==="a")ap++;
+  if(r.win==="b")bp++;
+ });
+
+ let winner;
+
+ if(ap>bp){
+  winner=`🏆 ${a.name}`;
+ }else if(bp>ap){
+  winner=`🏆 ${b.name}`;
+ }else{
+  winner="🤝 Нічия";
+ }
+
+ document.getElementById("result").innerHTML=`
+
+ <div class="table-wrap">
+
+ <table>
+
+ <tr>
+  <th>Характеристика</th>
+  <th>${a.name}</th>
+  <th>${b.name}</th>
+ </tr>
+
+ ${rows.map(r=>`
+
+ <tr>
+
+ <td>${r.name}</td>
+
+ <td class="${r.win==="a"?"better":""}">
+ ${r.a} ${r.win==="a"?"🏆":""}
+ </td>
+
+ <td class="${r.win==="b"?"better":""}">
+ ${r.b} ${r.win==="b"?"🏆":""}
+ </td>
+
+ </tr>
+
+ `).join("")}
+
+ <tr>
+  <td>Двигун</td>
+  <td>${a.engine}</td>
+  <td>${b.engine}</td>
+ </tr>
+
+ <tr>
+  <td>Об'єм</td>
+  <td>${a.volume}</td>
+  <td>${b.volume}</td>
+ </tr>
+
+ <tr>
+  <td>Коробка</td>
+  <td>${a.gear}</td>
+  <td>${b.gear}</td>
+ </tr>
+
+ <tr>
+  <td>Привід</td>
+  <td>${a.drive}</td>
+  <td>${b.drive}</td>
+ </tr>
+
+ <tr>
+  <td>Розгін</td>
+  <td>${a.acc}</td>
+  <td>${b.acc}</td>
+ </tr>
+
+ <tr>
+  <td>Витрата</td>
+  <td>${a.cons}</td>
+  <td>${b.cons}</td>
+ </tr>
+
+ </table>
+
+ </div>
+
+ <div class="winner">
+
+ <h3>${winner}</h3>
+
+ <p>
+ Результат за кількістю кращих показників:
+ ${ap} : ${bp}
+ </p>
+
+ </div>
+
+ `;
 
 }
 
 
-/* =====================================================
-   COMPARE
-===================================================== */
-
-function compareVehicles(){
-
-    const a=vehicles.find(
-        v=>v.id==document.getElementById("vehicle1").value
-    );
-
-    const b=vehicles.find(
-        v=>v.id==document.getElementById("vehicle2").value
-    );
-
-    if(!a || !b) return;
-
-
-    const rows=[
-
-        {
-            name:"Потужність",
-            a:a.power+" к.с.",
-            b:b.power+" к.с.",
-            winner:a.power>b.power?"a":
-                   b.power>a.power?"b":"tie"
-        },
-
-        {
-            name:"Максимальна швидкість",
-            a:a.speed+" км/год",
-            b:b.speed+" км/год",
-            winner:a.speed>b.speed?"a":
-                   b.speed>a.speed?"b":"tie"
-        },
-
-        {
-            name:"Вага",
-            a:a.weight+" кг",
-            b:b.weight+" кг",
-            winner:a.weight<b.weight?"a":
-                   b.weight<a.weight?"b":"tie"
-        },
-
-        {
-            name:"Ціна",
-            a:"$"+a.price.toLocaleString(),
-            b:"$"+b.price.toLocaleString(),
-            winner:a.price<b.price?"a":
-                   b.price<a.price?"b":"tie"
-        },
-
-        {
-            name:"GidHot Score",
-            a:getScore(a)+"/100",
-            b:getScore(b)+"/100",
-            winner:getScore(a)>getScore(b)?"a":
-                   getScore(b)>getScore(a)?"b":"tie"
-        }
-
-    ];
-
-
-    let aPoints=0;
-    let bPoints=0;
-
-
-    rows.forEach(row=>{
-
-        if(row.winner==="a") aPoints++;
-
-        if(row.winner==="b") bPoints++;
-
-    });
-
-
-    let winnerText="";
-
-
-    if(aPoints>bPoints){
-
-        winnerText=`
-            <div class="winner">
-
-                <h3>
-                    🏆 ${a.name}
-                </h3>
-
-                <p>
-                    Більше балів у цьому порівнянні:
-                    ${aPoints} : ${bPoints}
-                </p>
-
-            </div>
-        `;
-
-    }
-
-    else if(bPoints>aPoints){
-
-        winnerText=`
-            <div class="winner">
-
-                <h3>
-                    🏆 ${b.name}
-                </h3>
-
-                <p>
-                    Більше балів у цьому порівнянні:
-                    ${bPoints} : ${aPoints}
-                </p>
-
-            </div>
-        `;
-
-    }
-
-    else{
-
-        winnerText=`
-            <div class="winner">
-
-                <h3>
-                    🤝 Нічия
-                </h3>
-
-                <p>
-                    Однакова кількість балів.
-                </p>
-
-            </div>
-        `;
-
-    }
-
-
-    document.getElementById("compareResult").innerHTML=`
-
-        <table class="compare-table">
-
-            <thead>
-
-                <tr>
-
-                    <th>Параметр</th>
-
-                    <th>
-                        ${a.name}
-                    </th>
-
-                    <th>
-                        ${b.name}
-                    </th>
-
-                </tr>
-
-            </thead>
-
-
-            <tbody>
-
-                ${rows.map(row=>`
-
-                    <tr>
-
-                        <td>
-                            ${row.name}
-                        </td>
-
-                        <td class="${row.winner==="a"?"better":""}">
-
-                            ${row.a}
-
-                            ${row.winner==="a"?" 🏆":""}
-
-                        </td>
-
-                        <td class="${row.winner==="b"?"better":""}">
-
-                            ${row.b}
-
-                            ${row.winner==="b"?" 🏆":""}
-
-                        </td>
-
-                    </tr>
-
-                `).join("")}
-
-
-                <tr>
-
-                    <td>
-                        Двигун
-                    </td>
-
-                    <td>
-                        ${a.engine}
-                    </td>
-
-                    <td>
-                        ${b.engine}
-                    </td>
-
-                </tr>
-
-
-                <tr>
-
-                    <td>
-                        Об'єм
-                    </td>
-
-                    <td>
-                        ${a.volume}
-                    </td>
-
-                    <td>
-                        ${b.volume}
-                    </td>
-
-                </tr>
-
-
-                <tr>
-
-                    <td>
-                        Коробка
-                    </td>
-
-                    <td>
-                        ${a.gearbox}
-                    </td>
-
-                    <td>
-                        ${b.gearbox}
-                    </td>
-
-                </tr>
-
-
-                <tr>
-
-                    <td>
-                        Привід
-                    </td>
-
-                    <td>
-                        ${a.drive}
-                    </td>
-
-                    <td>
-                        ${b.drive}
-                    </td>
-
-                </tr>
-
-
-                <tr>
-
-                    <td>
-                        Розгін 0–100
-                    </td>
-
-                    <td>
-                        ${a.acceleration}
-                    </td>
-
-                    <td>
-                        ${b.acceleration}
-                    </td>
-
-                </tr>
-
-
-                <tr>
-
-                    <td>
-                        Витрата
-                    </td>
-
-                    <td>
-                        ${a.consumption}
-                    </td>
-
-                    <td>
-                        ${b.consumption}
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-        ${winnerText}
-
-    `;
-
-}
-
-
-/* =====================================================
-   DETAILS
-===================================================== */
-
-function openDetails(id){
-
-    const v=vehicles.find(
-        x=>x.id===id
-    );
-
-    document.getElementById("modalContent").innerHTML=`
-
-        <img
-            class="modal-image"
-            src="${v.image}"
-            alt="${v.name}"
-        >
-
-
-        <div class="modal-body">
-
-            <div class="brand">
-                ${v.brand.toUpperCase()} •
-                ${v.type.toUpperCase()}
-            </div>
-
-
-            <h2>
-                ${v.name}
-            </h2>
-
-
-            <div class="detail-grid">
-
-
-                <div class="detail">
-                    <span>⚡ Потужність</span>
-                    <strong>${v.power} к.с.</strong>
-                </div>
-
-
-                <div class="detail">
-                    <span>🚀 Максимальна швидкість</span>
-                    <strong>${v.speed} км/год</strong>
-                </div>
-
-
-                <div class="detail">
-                    <span>🔧 Двигун</span>
-                    <strong>${v.engine}</strong>
-                </div>
-
-
-                <div class="detail">
-                    <span>🔩 Об'єм двигуна</span>
-                    <strong>${v.volume}</strong>
-                </div>
-
-
-                <div class="detail">
-                    <span>⚖️ Маса</span>
-                    <strong>${v.weight} кг</strong>
-                </div>
-
-
-                <div class="detail">
-                    <span>⛽ Паливо</span>
-                    <strong>${v.fuel}</strong>
-                </div>
-
-
-                <div class="detail">
-                    <span>🛞 Привід</span>
-                    <strong>${v.drive}</strong>
-                </div>
-
-
-                <div class="detail">
-                    <span>⚙️ Коробка</span>
-                    <strong>${v.gearbox}</strong>
-                </div>
-
-
-                <div class="detail">
-                    <span>💨 Розгін 0–100</span>
-                    <strong>${v.acceleration}</strong>
-                </div>
-
-
-                <div class="detail">
-                    <span>🛢️ Витрата</span>
-                    <strong>${v.consumption}</strong>
-                </div>
-
-
-                <div class="detail">
-                    <span>📅 Рік</span>
-                    <strong>${v.year}</strong>
-                </div>
-
-
-                <div class="detail">
-                    <span>💰 Ціна</span>
-                    <strong>
-                        $${v.price.toLocaleString()}
-                    </strong>
-                </div>
-
-
-                <div class="detail">
-                    <span>🏆 GidHot Score</span>
-                    <strong>
-                        ${getScore(v)}/100
-                    </strong>
-                </div>
-
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    document
-        .getElementById("modal")
-        .classList.add("active");
-
-}
-
-
-/* =====================================================
-   CLOSE MODAL
-===================================================== */
-
-function closeModal(){
-
-    document
-        .getElementById("modal")
-        .classList.remove("active");
-
-}
-
-
-document
-.getElementById("modal")
-.addEventListener("click",function(e){
-
-    if(e.target===this){
-        closeModal();
-    }
-
-});
-
-
-/* =====================================================
-   GO COMPARE
-===================================================== */
-
-function goCompare(){
-
-    document
-        .getElementById("compare")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
-
-}
-
-
-/* =====================================================
-   START
-===================================================== */
-
-renderCatalog();
-
+render();
 fillSelects();
 
 </script>
