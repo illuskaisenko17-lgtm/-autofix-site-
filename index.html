@@ -3,395 +3,448 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cyber Mechanics Hub</title>
+  <title>CYBER MECHANICS HUB 2077</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color: #0b0c10;
-      --card-bg: rgba(23, 27, 38, 0.85);
-      --border-color: rgba(0, 242, 254, 0.2);
-      --neon-cyan: #00f2fe;
-      --neon-magenta: #ff007f;
-      --neon-green: #39ff14;
-      --neon-purple: #bc13fe;
-      --text-main: #ffffff;
-      --text-muted: #a0a5b5;
+      --bg-dark: #05070c;
+      --panel-bg: rgba(13, 17, 28, 0.75);
+      --border-cyan: #00f3ff;
+      --border-pink: #ff007f;
+      --border-green: #00ff66;
+      --border-purple: #9d00ff;
+      --glow-cyan: 0 0 15px rgba(0, 243, 255, 0.6), 0 0 30px rgba(0, 243, 255, 0.2);
+      --glow-pink: 0 0 15px rgba(255, 0, 127, 0.6), 0 0 30px rgba(255, 0, 127, 0.2);
+      --glow-green: 0 0 15px rgba(0, 255, 102, 0.6), 0 0 30px rgba(0, 255, 102, 0.2);
+      --glow-purple: 0 0 15px rgba(157, 0, 255, 0.6), 0 0 30px rgba(157, 0, 255, 0.2);
+      --text-color: #f0f6fc;
+      --text-muted: #8b949e;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Rajdhani', sans-serif;
     }
 
     body {
-      background-color: var(--bg-color);
+      background-color: var(--bg-dark);
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(188, 19, 254, 0.15), transparent 70%),
-        linear-gradient(to bottom, #050608, #0b0c10);
-      color: var(--text-main);
+        radial-gradient(circle at 50% 10%, rgba(157, 0, 255, 0.15), transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 243, 255, 0.1), transparent 50%),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+      color: var(--text-color);
       min-height: 100vh;
-      padding: 20px;
+      padding: 40px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     .container {
-      max-width: 1280px;
+      max-width: 1400px;
       width: 100%;
     }
 
-    /* Header Section */
+    /* HEADER */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 25px;
+      margin-bottom: 40px;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 20px;
     }
 
     .logo {
-      font-size: 2rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
       font-weight: 900;
-      letter-spacing: 2px;
-      color: var(--neon-cyan);
-      text-transform: uppercase;
-      text-shadow: 0 0 10px rgba(0, 242, 254, 0.6),
-                   0 0 20px rgba(0, 242, 254, 0.3);
-    }
-
-    .search-box {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .search-box input {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid var(--neon-cyan);
-      border-radius: 8px;
-      padding: 10px 15px;
+      letter-spacing: 3px;
       color: #fff;
-      font-size: 0.9rem;
+      text-transform: uppercase;
+      text-shadow: var(--glow-cyan);
+      background: linear-gradient(90deg, #fff, var(--border-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .search-wrapper {
+      position: relative;
+    }
+
+    .search-input {
+      background: rgba(10, 14, 23, 0.9);
+      border: 2px solid var(--border-cyan);
+      border-radius: 8px;
+      padding: 12px 20px;
+      color: #fff;
+      font-size: 1.1rem;
+      font-family: 'Orbitron', sans-serif;
       outline: none;
-      width: 260px;
-      box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+      width: 320px;
+      box-shadow: var(--glow-cyan);
       transition: all 0.3s ease;
     }
 
-    .search-box input:focus {
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+    .search-input:focus {
+      width: 360px;
+      box-shadow: 0 0 25px rgba(0, 243, 255, 0.8);
     }
 
-    /* Category Buttons (Navigation Carousel) */
-    .categories {
-      display: flex;
-      justify-content: space-between;
+    /* CATEGORIES BAR */
+    .categories-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 15px;
-      margin-bottom: 30px;
-      overflow-x: auto;
-      padding-bottom: 10px;
+      margin-bottom: 40px;
     }
 
-    .category-btn {
-      flex: 1;
-      min-width: 150px;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
+    .cat-btn {
+      background: var(--panel-bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
-      padding: 12px 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      color: var(--text-main);
+      padding: 15px 10px;
+      color: var(--text-color);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.95rem;
       font-weight: 700;
       cursor: pointer;
       text-transform: uppercase;
       letter-spacing: 1px;
       transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
-    .category-btn:hover, .category-btn.active {
-      border-color: var(--neon-cyan);
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
-      transform: translateY(-2px);
+    .cat-btn:hover, .cat-btn.active {
+      transform: translateY(-3px);
     }
 
-    .category-btn.autos.active { border-color: var(--neon-cyan); box-shadow: 0 0 15px var(--neon-cyan); }
-    .category-btn.motos.active { border-color: var(--neon-magenta); box-shadow: 0 0 15px var(--neon-magenta); }
-    .category-btn.pitbikes.active { border-color: var(--neon-green); box-shadow: 0 0 15px var(--neon-green); }
-    .category-btn.scooters.active { border-color: var(--neon-purple); box-shadow: 0 0 15px var(--neon-purple); }
+    .cat-btn[data-cat="all"].active { border-color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.4); }
+    .cat-btn[data-cat="autos"].active { border-color: var(--border-cyan); box-shadow: var(--glow-cyan); color: var(--border-cyan); }
+    .cat-btn[data-cat="motos"].active { border-color: var(--border-pink); box-shadow: var(--glow-pink); color: var(--border-pink); }
+    .cat-btn[data-cat="pitbikes"].active { border-color: var(--border-green); box-shadow: var(--glow-green); color: var(--border-green); }
+    .cat-btn[data-cat="scooters"].active { border-color: var(--border-purple); box-shadow: var(--glow-purple); color: var(--border-purple); }
 
-    /* Cards Grid */
-    .grid {
+    /* CARDS GRID */
+    .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
     }
 
     .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
+      background: var(--panel-bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 16px;
-      padding: 15px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      transition: all 0.3s ease;
+      backdrop-filter: blur(12px);
       position: relative;
-      backdrop-filter: blur(5px);
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+      transform: translateY(-8px) scale(1.02);
     }
 
-    .card[data-type="autos"]:hover { border-color: var(--neon-cyan); box-shadow: 0 0 20px rgba(0, 242, 254, 0.3); }
-    .card[data-type="motos"]:hover { border-color: var(--neon-magenta); box-shadow: 0 0 20px rgba(255, 0, 127, 0.3); }
-    .card[data-type="pitbikes"]:hover { border-color: var(--neon-green); box-shadow: 0 0 20px rgba(57, 255, 20, 0.3); }
-    .card[data-type="scooters"]:hover { border-color: var(--neon-purple); box-shadow: 0 0 20px rgba(188, 19, 254, 0.3); }
+    /* Glow per category on hover */
+    .card[data-cat="autos"]:hover { border-color: var(--border-cyan); box-shadow: var(--glow-cyan); }
+    .card[data-cat="motos"]:hover { border-color: var(--border-pink); box-shadow: var(--glow-pink); }
+    .card[data-cat="pitbikes"]:hover { border-color: var(--border-green); box-shadow: var(--glow-green); }
+    .card[data-cat="scooters"]:hover { border-color: var(--border-purple); box-shadow: var(--glow-purple); }
 
-    .card-img-container {
+    .card-image-box {
       width: 100%;
-      height: 180px;
+      height: 200px;
       border-radius: 10px;
       overflow: hidden;
-      margin-bottom: 15px;
       position: relative;
+      margin-bottom: 15px;
       background: #000;
     }
 
-    .card-img-container img {
+    .card-image-box img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.5s ease;
     }
 
-    .card:hover .card-img-container img {
-      transform: scale(1.08);
+    .card:hover .card-image-box img {
+      transform: scale(1.1);
     }
 
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
+    .badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.2);
     }
+
+    .card[data-cat="autos"] .badge { border-color: var(--border-cyan); color: var(--border-cyan); }
+    .card[data-cat="motos"] .badge { border-color: var(--border-pink); color: var(--border-pink); }
+    .card[data-cat="pitbikes"] .badge { border-color: var(--border-green); color: var(--border-green); }
+    .card[data-cat="scooters"] .badge { border-color: var(--border-purple); color: var(--border-purple); }
 
     .card-title {
-      font-size: 1.1rem;
-      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
     }
 
-    .card-tag {
-      font-size: 0.7rem;
-      padding: 3px 8px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+    .card-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .info-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
       text-transform: uppercase;
     }
 
-    .card-details {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 15px;
-      font-size: 0.85rem;
-    }
-
-    .detail-label {
-      color: var(--text-muted);
-      margin-bottom: 3px;
-    }
-
-    .detail-value {
-      font-weight: 600;
+    .info-value {
+      font-size: 1rem;
+      font-weight: 700;
     }
 
     .price-value {
-      color: var(--neon-cyan);
-      font-weight: 700;
+      color: var(--border-cyan);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
     }
 
-    .btn-action {
-      background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.15));
-      border: 1px solid var(--neon-cyan);
-      color: #fff;
-      padding: 10px;
+    .btn-book {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,0.2);
       border-radius: 8px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.15));
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
       font-weight: 700;
+      text-transform: uppercase;
       letter-spacing: 1px;
       cursor: pointer;
-      text-transform: uppercase;
-      width: 100%;
       transition: all 0.3s ease;
     }
 
-    .btn-action:hover {
-      background: var(--neon-cyan);
+    .btn-book:hover {
+      background: var(--border-cyan);
       color: #000;
-      box-shadow: 0 0 15px var(--neon-cyan);
+      border-color: var(--border-cyan);
+      box-shadow: var(--glow-cyan);
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <!-- Header -->
     <header>
-      <div class="logo">Cyber Mechanics Hub</div>
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="FIND YOUR RIDE...">
+      <div class="logo">CYBER MECHANICS HUB</div>
+      <div class="search-wrapper">
+        <input type="text" id="searchInput" class="search-input" placeholder="FIND YOUR RIDE...">
       </div>
     </header>
 
-    <!-- Categories Filters -->
-    <div class="categories">
-      <button class="category-btn autos active" onclick="filterCategory('all', this)">All Vehicles</button>
-      <button class="category-btn autos" onclick="filterCategory('autos', this)">🚗 Autos</button>
-      <button class="category-btn motos" onclick="filterCategory('motos', this)">🏍️ Motos</button>
-      <button class="category-btn pitbikes" onclick="filterCategory('pitbikes', this)">🏎️ Pitbikes</button>
-      <button class="category-btn scooters" onclick="filterCategory('scooters', this)">🛵 Scooters</button>
+    <div class="categories-bar">
+      <button class="cat-btn active" data-cat="all" onclick="filterCards('all', this)">⚡ ВСІ МОДЕЛІ</button>
+      <button class="cat-btn" data-cat="autos" onclick="filterCards('autos', this)">🚗 AUTOS</button>
+      <button class="cat-btn" data-cat="motos" onclick="filterCards('motos', this)">🏍️ MOTOS</button>
+      <button class="cat-btn" data-cat="pitbikes" onclick="filterCards('pitbikes', this)">🏎️ PITBIKES</button>
+      <button class="cat-btn" data-cat="scooters" onclick="filterCards('scooters', this)">🛵 SCOOTERS</button>
     </div>
 
-    <!-- Vehicle Cards Grid -->
-    <div class="grid" id="vehicleGrid">
-      <!-- Cards will be populated dynamically -->
-    </div>
+    <div class="cards-grid" id="cardsGrid"></div>
   </div>
 
   <script>
-    const vehicles = [
+    const database = [
+      // AUTOS
       {
         id: 1,
-        title: "BMW M5 F90",
-        type: "autos",
-        service: "Engine Tuning",
-        price: "15 000 UAH",
-        image: "https://images.unsplash.com/photo-1555215695-3004980adade?auto=format&fit=crop&w=600&q=80"
+        title: "BMW M5 F90 Cyber",
+        cat: "autos",
+        service: "Stage 3 + Neon",
+        price: "18 500 UAH",
+        image: "https://images.unsplash.com/photo-1555215695-3004980adade?auto=format&fit=crop&w=800&q=80"
       },
       {
         id: 2,
-        title: "Audi R8 Cyber",
-        type: "autos",
-        service: "Stage 2 + Wrap",
-        price: "22 000 UAH",
-        image: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=600&q=80"
+        title: "Audi R8 V10 Performance",
+        cat: "autos",
+        service: "Engine Tuning",
+        price: "25 000 UAH",
+        image: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&q=80"
       },
       {
         id: 3,
         title: "Nissan GT-R Nismo",
-        type: "autos",
-        service: "Full Custom Tuning",
-        price: "28 000 UAH",
-        image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=600&q=80"
+        cat: "autos",
+        service: "Full Custom Wrap",
+        price: "22 000 UAH",
+        image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80"
       },
       {
         id: 4,
-        title: "Yamaha R1 Neo",
-        type: "motos",
-        service: "ECU Remap",
-        price: "12 000 UAH",
-        image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=600&q=80"
+        title: "Porsche 911 GT3 RS",
+        cat: "autos",
+        service: "Track Setup",
+        price: "30 000 UAH",
+        image: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=800&q=80"
       },
+
+      // MOTOS
       {
         id: 5,
-        title: "Ducati Panigale V4",
-        type: "motos",
-        service: "Exhaust & Tune",
-        price: "18 500 UAH",
-        image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=600&q=80"
+        title: "Yamaha YZF-R1",
+        cat: "motos",
+        service: "ECU Flash + Exhaust",
+        price: "14 000 UAH",
+        image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=800&q=80"
       },
       {
         id: 6,
-        title: "Pitster Pro LXR",
-        type: "pitbikes",
-        service: "Suspension & Engine",
-        price: "9 500 UAH",
-        image: "https://images.unsplash.com/photo-1579710039144-85d6da173898?auto=format&fit=crop&w=600&q=80"
+        title: "Ducati Panigale V4",
+        cat: "motos",
+        service: "Desmo Service",
+        price: "19 000 UAH",
+        image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80"
       },
       {
         id: 7,
-        title: "Kayo Evolution 140",
-        type: "pitbikes",
-        service: "Carb Tuning & Mods",
-        price: "8 000 UAH",
-        image: "https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?auto=format&fit=crop&w=600&q=80"
+        title: "Kawasaki Ninja H2",
+        cat: "motos",
+        service: "Supercharger Tune",
+        price: "27 000 UAH",
+        image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=800&q=80"
       },
+
+      // PITBIKES
       {
         id: 8,
+        title: "Pitster Pro LXR 190",
+        cat: "pitbikes",
+        service: "Engine Overhaul",
+        price: "9 500 UAH",
+        image: "https://images.unsplash.com/photo-1579710039144-85d6da173898?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 9,
+        title: "Kayo Evolution 140",
+        cat: "pitbikes",
+        service: "Carb Adjustment",
+        price: "7 500 UAH",
+        image: "https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?auto=format&fit=crop&w=800&q=80"
+      },
+
+      // SCOOTERS
+      {
+        id: 10,
         title: "Vespa Custom Neon",
-        type: "scooters",
-        service: "Visual Neon & CVT",
-        price: "6 500 UAH",
-        image: "https://images.unsplash.com/photo-1520627977056-c307aeb9a625?auto=format&fit=crop&w=600&q=80"
+        cat: "scooters",
+        service: "CVT Tuning",
+        price: "8 000 UAH",
+        image: "https://images.unsplash.com/photo-1520627977056-c307aeb9a625?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 11,
+        title: "Yamaha Aerox 70cc",
+        cat: "scooters",
+        service: "2T Malossi Kit",
+        price: "11 000 UAH",
+        image: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=800&q=80"
       }
     ];
 
-    function renderVehicles(items) {
-      const grid = document.getElementById('vehicleGrid');
+    function renderCards(data) {
+      const grid = document.getElementById('cardsGrid');
       grid.innerHTML = '';
 
-      items.forEach(item => {
+      if (data.length === 0) {
+        grid.innerHTML = `<h2 style="grid-column: 1/-1; text-align: center; color: var(--text-muted); margin-top: 40px;">НІЧОГО НЕ ЗНАЙДЕНО</h2>`;
+        return;
+      }
+
+      data.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
-        card.setAttribute('data-type', item.type);
+        card.setAttribute('data-cat', item.cat);
 
         card.innerHTML = `
-          <div class="card-img-container">
+          <div class="card-image-box">
             <img src="${item.image}" alt="${item.title}">
+            <div class="badge">${item.cat}</div>
           </div>
-          <div class="card-header">
-            <div class="card-title">${item.title}</div>
-            <div class="card-tag">${item.type}</div>
-          </div>
-          <div class="card-details">
-            <div>
-              <div class="detail-label">Service:</div>
-              <div class="detail-value">${item.service}</div>
+          <div class="card-title">${item.title}</div>
+          <div class="card-info">
+            <div class="info-group">
+              <span class="info-label">Послуга</span>
+              <span class="info-value">${item.service}</span>
             </div>
-            <div>
-              <div class="detail-label">Price:</div>
-              <div class="price-value">${item.price}</div>
+            <div class="info-group" style="text-align: right;">
+              <span class="info-label">Ціна</span>
+              <span class="price-value">${item.price}</span>
             </div>
           </div>
-          <button class="btn-action">Book Appointment</button>
+          <button class="btn-book">BOOK APPOINTMENT</button>
         `;
         grid.appendChild(card);
       });
     }
 
-    function filterCategory(category, element) {
-      document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-      element.classList.add('active');
+    function filterCards(category, button) {
+      document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
 
       if (category === 'all') {
-        renderVehicles(vehicles);
+        renderCards(database);
       } else {
-        const filtered = vehicles.filter(v => v.type === category);
-        renderVehicles(filtered);
+        const filtered = database.filter(item => item.cat === category);
+        renderCards(filtered);
       }
     }
 
-    // Search function
     document.getElementById('searchInput').addEventListener('input', (e) => {
       const query = e.target.value.toLowerCase();
-      const filtered = vehicles.filter(v => 
-        v.title.toLowerCase().includes(query) || 
-        v.service.toLowerCase().includes(query)
+      const filtered = database.filter(item => 
+        item.title.toLowerCase().includes(query) || 
+        item.service.toLowerCase().includes(query)
       );
-      renderVehicles(filtered);
+      renderCards(filtered);
     });
 
-    // Initial render
-    renderVehicles(vehicles);
+    renderCards(database);
   </script>
 </body>
 </html>
