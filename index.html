@@ -3,445 +3,763 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GidHot.com</title>
+<title>GidHot — Premium Auto</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-  font-family:Arial,sans-serif;
-  background:#070707;
-  color:#fff;
+    font-family:Inter,Arial,sans-serif;
+    background:#050608;
+    color:#fff;
+    overflow-x:hidden;
 }
 
+button,input{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+/* ===== BACKGROUND ===== */
+
+body::before{
+    content:"";
+    position:fixed;
+    width:700px;
+    height:700px;
+    background:rgba(255,45,85,.12);
+    filter:blur(150px);
+    border-radius:50%;
+    top:-300px;
+    left:-250px;
+    pointer-events:none;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:600px;
+    height:600px;
+    background:rgba(0,140,255,.10);
+    filter:blur(160px);
+    border-radius:50%;
+    right:-250px;
+    bottom:-250px;
+    pointer-events:none;
+}
+
+/* ===== HEADER ===== */
+
 header{
-  height:75px;
-  position:sticky;
-  top:0;
-  z-index:100;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 6%;
-  background:#090909ee;
-  backdrop-filter:blur(15px);
-  border-bottom:1px solid #292929;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    backdrop-filter:blur(20px);
+    background:rgba(5,6,8,.78);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.nav{
+    max-width:1400px;
+    margin:auto;
+    height:76px;
+    padding:0 25px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
 .logo{
-  font-size:28px;
-  font-weight:900;
+    font-size:27px;
+    font-weight:900;
+    letter-spacing:-1.5px;
 }
 
 .logo span{
-  color:#ff4d00;
+    color:#ff315d;
 }
 
-nav{
-  display:flex;
-  gap:30px;
+.navlinks{
+    display:flex;
+    gap:30px;
 }
 
-nav a{
-  color:#aaa;
-  text-decoration:none;
-  font-weight:bold;
+.navlinks a{
+    color:#a9adb7;
+    font-size:14px;
+    font-weight:600;
+    transition:.25s;
 }
 
-nav a:hover{
-  color:#ff4d00;
+.navlinks a:hover{
+    color:#fff;
 }
 
-.fav{
-  border:1px solid #333;
-  padding:10px 17px;
-  border-radius:30px;
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
+
+.nav-btn{
+    border:1px solid rgba(255,255,255,.1);
+    background:rgba(255,255,255,.05);
+    color:#fff;
+    padding:10px 15px;
+    border-radius:12px;
+}
+
+@media(max-width:800px){
+    .navlinks{
+        display:none;
+    }
+}
+
+/* ===== HERO ===== */
 
 .hero{
-  min-height:650px;
-  padding:80px 6%;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  align-items:center;
-  gap:30px;
-  background:
-    radial-gradient(circle at 80% 50%,#ff4d0018,transparent 40%);
+    max-width:1400px;
+    margin:auto;
+    padding:90px 25px 55px;
+    min-height:650px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    gap:40px;
+}
+
+.hero-text small{
+    color:#ff4168;
+    font-weight:800;
+    letter-spacing:2px;
 }
 
 .hero h1{
-  font-size:clamp(60px,9vw,120px);
-  line-height:.82;
-  font-weight:1000;
+    margin-top:15px;
+    font-size:clamp(50px,7vw,92px);
+    line-height:.92;
+    letter-spacing:-5px;
 }
 
 .hero h1 span{
-  color:#ff4d00;
+    background:linear-gradient(90deg,#fff,#ff315d,#ff8aa4);
+    -webkit-background-clip:text;
+    color:transparent;
 }
 
 .hero p{
-  color:#999;
-  max-width:520px;
-  font-size:18px;
-  line-height:1.6;
-  margin:30px 0;
+    max-width:580px;
+    color:#969ba7;
+    line-height:1.7;
+    margin:28px 0;
+    font-size:16px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
 }
 
 .btn{
-  display:inline-block;
-  background:#ff4d00;
-  color:#fff;
-  padding:16px 25px;
-  border:0;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:bold;
-  cursor:pointer;
+    border:0;
+    border-radius:14px;
+    padding:14px 21px;
+    font-weight:800;
+    color:#fff;
+    background:#ff315d;
+    box-shadow:0 12px 35px rgba(255,49,93,.25);
+    transition:.25s;
 }
 
 .btn:hover{
-  box-shadow:0 10px 40px #ff4d0055;
-  transform:translateY(-2px);
+    transform:translateY(-3px);
+    box-shadow:0 18px 45px rgba(255,49,93,.35);
+}
+
+.btn.dark{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:none;
 }
 
 .hero-car{
-  width:100%;
-  filter:drop-shadow(0 20px 40px #ff4d0044);
-  animation:float 4s ease-in-out infinite;
+    position:relative;
+    min-height:400px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-@keyframes float{
-  50%{transform:translateY(-15px)}
+.hero-car::before{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    background:rgba(255,45,85,.13);
+    filter:blur(40px);
 }
 
-section{
-  padding:80px 6%;
+.hero-car img{
+    width:100%;
+    max-width:650px;
+    position:relative;
+    z-index:2;
+    filter:drop-shadow(0 35px 40px rgba(0,0,0,.8));
+    animation:floatCar 4s ease-in-out infinite;
 }
 
-.title{
-  margin-bottom:35px;
+@keyframes floatCar{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-12px)}
 }
 
-.title small{
-  color:#ff4d00;
-  font-weight:bold;
-}
-
-.title h2{
-  font-size:45px;
-  margin-top:8px;
-}
-
-.categories{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-
-.category{
-  height:260px;
-  padding:25px;
-  border:1px solid #292929;
-  border-radius:22px;
-  background:linear-gradient(145deg,#171717,#0b0b0b);
-  position:relative;
-  overflow:hidden;
-  cursor:pointer;
-  transition:.3s;
-}
-
-.category:hover{
-  transform:translateY(-8px);
-  border-color:#ff4d00;
-}
-
-.category h3{
-  font-size:27px;
-}
-
-.category p{
-  color:#777;
-  margin-top:10px;
-}
-
-.category .emoji{
-  position:absolute;
-  right:-10px;
-  bottom:-25px;
-  font-size:150px;
-}
-
-.filters{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:30px;
-}
-
-.filters button{
-  background:#111;
-  color:#aaa;
-  border:1px solid #333;
-  padding:12px 20px;
-  border-radius:30px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-.filters button:hover{
-  color:#fff;
-  border-color:#ff4d00;
-}
-
-.catalog{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-
-.card{
-  background:#101010;
-  border:1px solid #292929;
-  border-radius:20px;
-  overflow:hidden;
-  transition:.3s;
-}
-
-.card:hover{
-  transform:translateY(-7px);
-  border-color:#ff4d00;
-}
-
-.vehicle{
-  height:250px;
-  background:
-    radial-gradient(circle,#292929,#080808 70%);
-  position:relative;
-  overflow:hidden;
-}
-
-.vehicle svg{
-  width:100%;
-  height:100%;
-  transition:.5s;
-}
-
-.card:hover .vehicle svg{
-  transform:scale(1.08);
-}
-
-.type{
-  position:absolute;
-  top:15px;
-  left:15px;
-  z-index:2;
-  background:#ff4d00;
-  padding:7px 11px;
-  border-radius:7px;
-  font-size:11px;
-  font-weight:bold;
-}
-
-.heart{
-  position:absolute;
-  right:15px;
-  top:15px;
-  z-index:2;
-  width:38px;
-  height:38px;
-  border-radius:50%;
-  border:1px solid #444;
-  background:#111;
-  color:#fff;
-  font-size:18px;
-  cursor:pointer;
-}
-
-.info{
-  padding:20px;
-}
-
-.info h3{
-  font-size:24px;
-}
-
-.info p{
-  color:#777;
-  margin:8px 0 18px;
-}
-
-.bottom{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.price{
-  font-size:22px;
-  font-weight:bold;
-}
-
-.details{
-  border:0;
-  background:#222;
-  color:#fff;
-  padding:11px 16px;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-.details:hover{
-  background:#ff4d00;
-}
+/* ===== STATS ===== */
 
 .stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:20px;
+    max-width:1400px;
+    margin:auto;
+    padding:10px 25px 70px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
 }
 
 .stat{
-  background:#111;
-  border:1px solid #292929;
-  padding:30px;
-  border-radius:18px;
+    padding:25px;
+    border-radius:20px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.08);
 }
 
 .stat strong{
-  display:block;
-  color:#ff4d00;
-  font-size:42px;
+    display:block;
+    font-size:32px;
 }
 
 .stat span{
-  color:#777;
+    color:#858a95;
+    font-size:13px;
 }
 
-footer{
-  border-top:1px solid #222;
-  padding:40px 6%;
-  color:#666;
-  display:flex;
-  justify-content:space-between;
+/* ===== SECTION ===== */
+
+.section{
+    max-width:1400px;
+    margin:auto;
+    padding:70px 25px;
 }
 
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:999;
-  background:#000c;
-  backdrop-filter:blur(10px);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:20px;
+    margin-bottom:30px;
 }
 
-.modal-box{
-  width:min(650px,100%);
-  max-height:90vh;
-  overflow:auto;
-  background:#111;
-  border:1px solid #333;
-  border-radius:22px;
-  padding:30px;
-  position:relative;
+.section-title{
+    font-size:42px;
+    letter-spacing:-2px;
 }
 
-.close{
-  position:absolute;
-  right:20px;
-  top:12px;
-  border:0;
-  background:none;
-  color:#aaa;
-  font-size:32px;
-  cursor:pointer;
+.section-sub{
+    color:#858a95;
+    max-width:550px;
+    line-height:1.6;
+    margin-top:8px;
 }
 
-.modal-box h2{
-  font-size:38px;
-  margin-bottom:20px;
+/* ===== FILTERS ===== */
+
+.tools{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:28px;
+}
+
+.search{
+    flex:1;
+    min-width:220px;
+    background:#0c0e12;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:14px;
+    padding:14px 17px;
+    color:white;
+    outline:none;
+}
+
+.search:focus{
+    border-color:#ff315d;
+}
+
+.filter{
+    padding:13px 18px;
+    border-radius:13px;
+    color:#aaa;
+    background:#0c0e12;
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.filter.active,
+.filter:hover{
+    color:#fff;
+    background:#ff315d;
+}
+
+/* ===== CARS ===== */
+
+.cars{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.car-card{
+    position:relative;
+    overflow:hidden;
+    border-radius:24px;
+    background:#0b0d11;
+    border:1px solid rgba(255,255,255,.08);
+    transition:.35s;
+}
+
+.car-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(255,49,93,.45);
+    box-shadow:0 25px 60px rgba(0,0,0,.4);
+}
+
+.car-photo{
+    height:230px;
+    overflow:hidden;
+    background:#101319;
+    position:relative;
+}
+
+.car-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.car-card:hover .car-photo img{
+    transform:scale(1.08);
+}
+
+.badge{
+    position:absolute;
+    top:14px;
+    left:14px;
+    background:rgba(0,0,0,.65);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.12);
+    padding:7px 10px;
+    border-radius:10px;
+    font-size:11px;
+    font-weight:800;
+}
+
+.favorite{
+    position:absolute;
+    right:14px;
+    top:14px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(0,0,0,.55);
+    color:white;
+    font-size:20px;
+}
+
+.favorite.active{
+    color:#ff315d;
+}
+
+.car-info{
+    padding:20px;
+}
+
+.car-brand{
+    color:#777d88;
+    font-size:12px;
+    text-transform:uppercase;
+    font-weight:800;
+}
+
+.car-name{
+    font-size:22px;
+    font-weight:900;
+    margin:5px 0 15px;
 }
 
 .specs{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
 }
 
 .spec{
-  padding:16px;
-  background:#191919;
-  border:1px solid #292929;
-  border-radius:12px;
+    padding:10px;
+    border-radius:11px;
+    background:rgba(255,255,255,.045);
 }
 
-.spec span{
-  display:block;
-  color:#777;
-  font-size:13px;
-  margin-bottom:7px;
+.spec small{
+    color:#737984;
+    display:block;
+    font-size:10px;
 }
 
-.spec strong{
-  font-size:18px;
+.spec b{
+    font-size:12px;
 }
 
-.description{
-  color:#999;
-  line-height:1.6;
-  margin-top:20px;
+.car-bottom{
+    margin-top:18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
-@media(max-width:900px){
+.price{
+    font-weight:900;
+    font-size:19px;
+}
 
-  nav{
+.details{
+    background:#fff;
+    color:#000;
+    border:0;
+    border-radius:10px;
+    padding:10px 13px;
+    font-weight:800;
+}
+
+/* ===== EXPERIENCE ===== */
+
+.experience{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.big-box{
+    min-height:370px;
+    border-radius:28px;
+    padding:35px;
+    position:relative;
+    overflow:hidden;
+    background:
+        linear-gradient(135deg,rgba(255,49,93,.18),rgba(20,20,25,.8)),
+        #101116;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.big-box h3{
+    font-size:32px;
+    max-width:500px;
+    letter-spacing:-1px;
+}
+
+.big-box p{
+    color:#969ba7;
+    line-height:1.7;
+    margin-top:15px;
+    max-width:500px;
+}
+
+.big-box img{
+    position:absolute;
+    width:75%;
+    right:-10%;
+    bottom:-15%;
+    transform:rotate(-3deg);
+    filter:drop-shadow(0 20px 30px rgba(0,0,0,.8));
+}
+
+.features{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+.feature{
+    border-radius:20px;
+    background:#0b0d11;
+    border:1px solid rgba(255,255,255,.08);
+    padding:25px;
+}
+
+.feature-icon{
+    font-size:28px;
+    margin-bottom:18px;
+}
+
+.feature h4{
+    font-size:18px;
+}
+
+.feature p{
+    color:#858a95;
+    line-height:1.6;
+    margin-top:8px;
+    font-size:13px;
+}
+
+/* ===== REPAIR ===== */
+
+.repair-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.repair{
+    overflow:hidden;
+    border-radius:20px;
+    background:#0b0d11;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.repair img{
+    width:100%;
+    height:210px;
+    object-fit:cover;
+}
+
+.repair div{
+    padding:20px;
+}
+
+.repair h3{
+    margin-bottom:8px;
+}
+
+.repair p{
+    color:#858a95;
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* ===== COMPARE ===== */
+
+.compare-box{
+    background:#0b0d11;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:25px;
+    padding:25px;
+}
+
+.compare-selects{
+    display:grid;
+    grid-template-columns:1fr 1fr auto;
+    gap:12px;
+}
+
+select{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    color:#fff;
+    background:#15171c;
+    border:1px solid rgba(255,255,255,.1);
+}
+
+#compareResult{
+    margin-top:20px;
+    overflow:auto;
+}
+
+.compare-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.compare-table th,
+.compare-table td{
+    padding:15px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    text-align:left;
+}
+
+.compare-table th{
+    color:#ff5879;
+}
+
+/* ===== MODAL ===== */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.78);
+    backdrop-filter:blur(12px);
     display:none;
-  }
-
-  .hero{
-    grid-template-columns:1fr;
-  }
-
-  .categories,
-  .catalog{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .stats{
-    grid-template-columns:1fr 1fr;
-  }
+    align-items:center;
+    justify-content:center;
+    z-index:2000;
+    padding:20px;
 }
 
-@media(max-width:600px){
+.modal.show{
+    display:flex;
+}
 
-  section{
-    padding:55px 5%;
-  }
+.modal-content{
+    width:min(900px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:#0c0e12;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:28px;
+    padding:25px;
+    position:relative;
+    box-shadow:0 30px 100px rgba(0,0,0,.7);
+}
 
-  .categories,
-  .catalog,
-  .stats{
-    grid-template-columns:1fr;
-  }
+.close{
+    position:absolute;
+    right:18px;
+    top:18px;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.1);
+    background:#181a20;
+    color:#fff;
+    font-size:20px;
+}
 
-  .hero h1{
-    font-size:65px;
-  }
+.modal-image{
+    width:100%;
+    height:330px;
+    object-fit:cover;
+    border-radius:20px;
+}
 
-  .specs{
-    grid-template-columns:1fr;
-  }
+.modal h2{
+    font-size:36px;
+    margin:20px 0 8px;
+}
 
-  footer{
-    flex-direction:column;
-    gap:15px;
-  }
+.modal p{
+    color:#9297a2;
+    line-height:1.7;
+}
+
+.modal-specs{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.modal-specs div{
+    background:#15171c;
+    padding:16px;
+    border-radius:14px;
+}
+
+.modal-specs small{
+    color:#737984;
+    display:block;
+}
+
+.modal-specs b{
+    display:block;
+    margin-top:5px;
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+    border-top:1px solid rgba(255,255,255,.08);
+    padding:45px 25px;
+    text-align:center;
+    color:#686d77;
+}
+
+footer strong{
+    color:#fff;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:1100px){
+    .cars{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .hero p{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .hero-buttons{
+        justify-content:center;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:700px){
+    .cars,
+    .repair-grid{
+        grid-template-columns:1fr;
+    }
+
+    .experience{
+        grid-template-columns:1fr;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .compare-selects{
+        grid-template-columns:1fr;
+    }
+
+    .modal-specs{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .section-title{
+        font-size:32px;
+    }
+
+    .hero h1{
+        letter-spacing:-3px;
+    }
 }
 </style>
 </head>
@@ -449,1139 +767,592 @@ footer{
 <body>
 
 <header>
+<nav class="nav">
+    <div class="logo">Gid<span>Hot</span>.</div>
 
-  <div class="logo">
-    Gid<span>Hot</span>.com
-  </div>
+    <div class="navlinks">
+        <a href="#cars">Авто</a>
+        <a href="#experience">Можливості</a>
+        <a href="#repair">Обслуговування</a>
+        <a href="#compare">Порівняння</a>
+    </div>
 
-  <nav>
-    <a href="#catalog">Каталог</a>
-    <a href="#categories">Категорії</a>
-    <a href="#about">Про сайт</a>
-  </nav>
-
-  <div class="fav">
-    ♥ <span id="favCount">0</span>
-  </div>
-
+    <div class="nav-right">
+        <button class="nav-btn" onclick="scrollToCars()">🚘 Каталог</button>
+    </div>
+</nav>
 </header>
 
+<!-- HERO -->
 
 <section class="hero">
 
-  <div>
+    <div class="hero-text">
+        <small>PREMIUM AUTOMOTIVE PLATFORM</small>
 
-    <h1>
-      DRIVE<br>
-      <span>YOUR</span><br>
-      STYLE
-    </h1>
+        <h1>
+            Авто, які<br>
+            <span>хочеться.</span>
+        </h1>
 
-    <p>
-      GidHot.com — великий каталог автомобілів,
-      мотоциклів та скутерів.
-    </p>
+        <p>
+            GidHot — сучасний каталог автомобілів нового покоління.
+            Характеристики, потужність, дизайн, ціни, обслуговування
+            та порівняння — все в одному місці.
+        </p>
 
-    <a href="#catalog" class="btn">
-      ВІДКРИТИ КАТАЛОГ →
-    </a>
+        <div class="hero-buttons">
+            <button class="btn" onclick="scrollToCars()">
+                Переглянути авто →
+            </button>
 
-  </div>
+            <button class="btn dark" onclick="scrollToCompare()">
+                ⚡ Порівняти
+            </button>
+        </div>
+    </div>
+
+    <div class="hero-car">
+        <img
+        src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=90"
+        alt="Premium car">
+    </div>
+
+</section>
+
+<!-- STATS -->
+
+<section class="stats">
+
+    <div class="stat">
+        <strong>100+</strong>
+        <span>автомобілів у базі</span>
+    </div>
+
+    <div class="stat">
+        <strong>500+</strong>
+        <span>характеристик</span>
+    </div>
+
+    <div class="stat">
+        <strong>24/7</strong>
+        <span>доступ до каталогу</span>
+    </div>
+
+    <div class="stat">
+        <strong>10/10</strong>
+        <span>увага до деталей</span>
+    </div>
+
+</section>
+
+<!-- CARS -->
+
+<section class="section" id="cars">
+
+    <div class="section-head">
+        <div>
+            <h2 class="section-title">Обрані автомобілі</h2>
+            <p class="section-sub">
+                Потужні автомобілі, які заслуговують на увагу.
+                Натисни на картку, щоб побачити більше.
+            </p>
+        </div>
+    </div>
+
+    <div class="tools">
+
+        <input
+            id="search"
+            class="search"
+            placeholder="🔎 Пошук автомобіля..."
+            oninput="filterCars()"
+        >
+
+        <button class="filter active" onclick="setFilter('all',this)">
+            Всі
+        </button>
+
+        <button class="filter" onclick="setFilter('BMW',this)">
+            BMW
+        </button>
+
+        <button class="filter" onclick="setFilter('Audi',this)">
+            Audi
+        </button>
+
+        <button class="filter" onclick="setFilter('Porsche',this)">
+            Porsche
+        </button>
+
+        <button class="filter" onclick="setFilter('Mercedes',this)">
+            Mercedes
+        </button>
+
+    </div>
+
+    <div class="cars" id="carsGrid">
+
+        <!-- BMW -->
+
+        <article class="car-card" data-brand="BMW" data-name="BMW M5">
+
+            <div class="car-photo">
+                <img
+                src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1000&q=90"
+                alt="BMW M5"
+                onerror="this.style.display='none'"
+                >
+
+                <span class="badge">SPORT</span>
+
+                <button class="favorite" onclick="favorite(this)">
+                    ♡
+                </button>
+            </div>
+
+            <div class="car-info">
+
+                <div class="car-brand">BMW</div>
+
+                <div class="car-name">M5</div>
+
+                <div class="specs">
+                    <div class="spec">
+                        <small>Двигун</small>
+                        <b>V8 4.4L</b>
+                    </div>
+
+                    <div class="spec">
+                        <small>Потужність</small>
+                        <b>625 HP</b>
+                    </div>
+
+                    <div class="spec">
+                        <small>Привід</small>
+                        <b>xDrive</b>
+                    </div>
+
+                    <div class="spec">
+                        <small>0–100</small>
+                        <b>3.4 сек</b>
+                    </div>
+                </div>
+
+                <div class="car-bottom">
+                    <div class="price">$110 000</div>
+
+                    <button class="details"
+                    onclick="openCar('BMW M5')">
+                        Детальніше
+                    </button>
+                </div>
+
+            </div>
+        </article>
 
 
-  <div>
+        <!-- AUDI -->
 
-    <svg class="hero-car" viewBox="0 0 800 450">
+        <article class="car-card" data-brand="Audi" data-name="Audi RS7">
 
-      <defs>
-        <linearGradient id="heroOrange">
-          <stop stop-color="#ff2600"/>
-          <stop offset="1" stop-color="#ff8500"/>
-        </linearGradient>
-      </defs>
+            <div class="car-photo">
+                <img
+                src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1000&q=90"
+                alt="Audi RS7"
+                onerror="this.style.display='none'"
+                >
 
-      <ellipse
-        cx="400"
-        cy="370"
-        rx="300"
-        ry="35"
-        fill="#000"
-      />
+                <span class="badge">PREMIUM</span>
 
-      <path
-        d="M90 330
-        L145 255
-        Q200 150 350 140
-        L540 145
-        Q650 160 730 275
-        L770 330
-        L750 365
-        L105 365Z"
-        fill="url(#heroOrange)"
-      />
+                <button class="favorite" onclick="favorite(this)">
+                    ♡
+                </button>
+            </div>
 
-      <path
-        d="M220 245
-        L280 165
-        L410 160
-        L465 245Z"
-        fill="#151515"
-        stroke="#ffb08a"
-        stroke-width="4"
-      />
+            <div class="car-info">
 
-      <path
-        d="M480 245
-        L460 160
-        L550 165
-        L650 260Z"
-        fill="#111"
-        stroke="#ffb08a"
-        stroke-width="4"
-      />
+                <div class="car-brand">Audi</div>
 
-      <circle cx="230" cy="350" r="60" fill="#050505"/>
-      <circle cx="230" cy="350" r="27" fill="#555"/>
-      <circle cx="230" cy="350" r="10" fill="#ff4d00"/>
+                <div class="car-name">RS7</div>
 
-      <circle cx="625" cy="350" r="60" fill="#050505"/>
-      <circle cx="625" cy="350" r="27" fill="#555"/>
-      <circle cx="625" cy="350" r="10" fill="#ff4d00"/>
+                <div class="specs">
+                    <div class="spec">
+                        <small>Двигун</small>
+                        <b>V8 4.0L</b>
+                    </div>
 
-      <path
-        d="M110 315 Q400 280 740 315"
-        fill="none"
-        stroke="#fff"
-        stroke-opacity=".5"
-        stroke-width="3"
-      />
+                    <div class="spec">
+                        <small>Потужність</small>
+                        <b>591 HP</b>
+                    </div>
 
-    </svg>
+                    <div class="spec">
+                        <small>Привід</small>
+                        <b>Quattro</b>
+                    </div>
 
-  </div>
+                    <div class="spec">
+                        <small>0–100</small>
+                        <b>3.6 сек</b>
+                    </div>
+                </div>
+
+                <div class="car-bottom">
+                    <div class="price">$125 000</div>
+
+                    <button class="details"
+                    onclick="openCar('Audi RS7')">
+                        Детальніше
+                    </button>
+                </div>
+
+            </div>
+        </article>
+
+
+        <!-- PORSCHE -->
+
+        <article class="car-card" data-brand="Porsche" data-name="Porsche 911">
+
+            <div class="car-photo">
+                <img
+                src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1000&q=90"
+                alt="Porsche 911"
+                onerror="this.style.display='none'"
+                >
+
+                <span class="badge">LUXURY</span>
+
+                <button class="favorite" onclick="favorite(this)">
+                    ♡
+                </button>
+            </div>
+
+            <div class="car-info">
+
+                <div class="car-brand">Porsche</div>
+
+                <div class="car-name">911 Turbo S</div>
+
+                <div class="specs">
+                    <div class="spec">
+                        <small>Двигун</small>
+                        <b>Flat-6</b>
+                    </div>
+
+                    <div class="spec">
+                        <small>Потужність</small>
+                        <b>580 HP</b>
+                    </div>
+
+                    <div class="spec">
+                        <small>Привід</small>
+                        <b>AWD</b>
+                    </div>
+
+                    <div class="spec">
+                        <small>0–100</small>
+                        <b>2.7 сек</b>
+                    </div>
+                </div>
+
+                <div class="car-bottom">
+                    <div class="price">$145 000</div>
+
+                    <button class="details"
+                    onclick="openCar('Porsche 911')">
+                        Детальніше
+                    </button>
+                </div>
+
+            </div>
+        </article>
+
+
+        <!-- MERCEDES -->
+
+        <article class="car-card" data-brand="Mercedes" data-name="Mercedes AMG GT">
+
+            <div class="car-photo">
+                <img
+                src="https://images.unsplash.com/photo-1618843479619-f3d0e3e9f8f8?auto=format&fit=crop&w=1000&q=90"
+                alt="Mercedes AMG GT"
+                onerror="this.style.display='none'"
+                >
+
+                <span class="badge">AMG</span>
+
+                <button class="favorite" onclick="favorite(this)">
+                    ♡
+                </button>
+            </div>
+
+            <div class="car-info">
+
+                <div class="car-brand">Mercedes</div>
+
+                <div class="car-name">AMG GT</div>
+
+                <div class="specs">
+                    <div class="spec">
+                        <small>Двигун</small>
+                        <b>V8 4.0L</b>
+                    </div>
+
+                    <div class="spec">
+                        <small>Потужність</small>
+                        <b>585 HP</b>
+                    </div>
+
+                    <div class="spec">
+                        <small>Привід</small>
+                        <b>4MATIC+</b>
+                    </div>
+
+                    <div class="spec">
+                        <small>0–100</small>
+                        <b>3.2 сек</b>
+                    </div>
+                </div>
+
+                <div class="car-bottom">
+                    <div class="price">$175 000</div>
+
+                    <button class="details"
+                    onclick="openCar('Mercedes AMG GT')">
+                        Детальніше
+                    </button>
+                </div>
+
+            </div>
+        </article>
+
+    </div>
+</section>
+
+
+<!-- EXPERIENCE -->
+
+<section class="section" id="experience">
+
+    <div class="section-head">
+        <div>
+            <h2 class="section-title">Чому GidHot?</h2>
+
+            <p class="section-sub">
+                Не просто список автомобілів. Ми створили
+                платформу, яку хочеться переглядати.
+            </p>
+        </div>
+    </div>
+
+    <div class="experience">
+
+        <div class="big-box">
+
+            <h3>
+                Від першого погляду
+                до вибору авто.
+            </h3>
+
+            <p>
+                Порівнюй характеристики, дивись дизайн,
+                шукай потрібну модель та відкривай детальну
+                інформацію без зайвих переходів.
+            </p>
+
+            <img
+            src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=1000&q=90"
+            alt="Sport car"
+            >
+
+        </div>
+
+        <div class="features">
+
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h4>Потужність</h4>
+                <p>
+                    Двигун, кінські сили, розгін,
+                    привід та основні характеристики.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🔧</div>
+                <h4>Обслуговування</h4>
+                <p>
+                    Корисна інформація про регулярне
+                    технічне обслуговування.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h4>Порівняння</h4>
+                <p>
+                    Порівнюй дві моделі одночасно
+                    за головними параметрами.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">❤️</div>
+                <h4>Обране</h4>
+                <p>
+                    Зберігай автомобілі, які сподобались,
+                    прямо на сторінці.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- REPAIR -->
+
+<section class="section" id="repair">
+
+    <div class="section-head">
+
+        <div>
+            <h2 class="section-title">
+                Обслуговування
+            </h2>
+
+            <p class="section-sub">
+                Автомобіль — це не тільки зовнішність.
+                Догляд за ним допомагає зберігати надійність
+                та характеристики.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="repair-grid">
+
+        <div class="repair">
+
+            <img
+            src="https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&w=1000&q=90"
+            alt="Car service"
+            >
+
+            <div>
+                <h3>Двигун</h3>
+
+                <p>
+                    Регулярна діагностика, контроль рівня
+                    технічних рідин та планове обслуговування.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="repair">
+
+            <img
+            src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1000&q=90"
+            alt="Car maintenance"
+            >
+
+            <div>
+                <h3>Гальма</h3>
+
+                <p>
+                    Стан гальмівної системи має велике значення
+                    для безпеки. Перевірку краще проводити
+                    регулярно.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="repair">
+
+            <img
+            src="https://images.unsplash.com/photo-1632823471565-1ecdf5c42d54?auto=format&fit=crop&w=1000&q=90"
+            alt="Engine"
+            >
+
+            <div>
+                <h3>Діагностика</h3>
+
+                <p>
+                    Сучасна діагностика допомагає швидше
+                    знаходити несправності та помилки систем.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<section id="categories">
+<!-- COMPARE -->
 
-  <div class="title">
-    <small>GIDHOT</small>
-    <h2>Категорії</h2>
-  </div>
+<section class="section" id="compare">
 
-  <div class="categories">
+    <div class="section-head">
 
-    <div class="category" onclick="filterType('Авто')">
-      <h3>🚘 Автомобілі</h3>
-      <p>Спорткари та преміум авто</p>
-      <div class="emoji">🏎️</div>
+        <div>
+            <h2 class="section-title">
+                Порівняй два авто
+            </h2>
+
+            <p class="section-sub">
+                Обери дві моделі та подивись їхні
+                характеристики поруч.
+            </p>
+        </div>
+
     </div>
 
-    <div class="category" onclick="filterType('Мото')">
-      <h3>🏍️ Мотоцикли</h3>
-      <p>Швидкі та потужні мото</p>
-      <div class="emoji">🏍️</div>
-    </div>
+    <div class="compare-box">
 
-    <div class="category" onclick="filterType('Скутер')">
-      <h3>🛵 Скутери</h3>
-      <p>Для міста та щоденних поїздок</p>
-      <div class="emoji">🛵</div>
-    </div>
+        <div class="compare-selects">
 
-  </div>
+            <select id="car1">
+                <option value="BMW M5">BMW M5</option>
+                <option value="Audi RS7">Audi RS7</option>
+                <option value="Porsche 911">Porsche 911</option>
+                <option value="Mercedes AMG GT">Mercedes AMG GT</option>
+            </select>
+
+            <select id="car2">
+                <option value="Audi RS7">Audi RS7</option>
+                <option value="BMW M5">BMW M5</option>
+                <option value="Porsche 911">Porsche 911</option>
+                <option value="Mercedes AMG GT">Mercedes AMG GT</option>
+            </select>
+
+            <button class="btn" onclick="compareCars()">
+                Порівняти
+            </button>
+
+        </div>
+
+        <div id="compareResult"></div>
+
+    </div>
 
 </section>
 
 
-<section id="catalog">
-
-  <div class="title">
-    <small>CATALOG</small>
-    <h2>Наш транспорт</h2>
-  </div>
-
-  <div class="filters">
-
-    <button onclick="filterType('all')">
-      Всі
-    </button>
-
-    <button onclick="filterType('Авто')">
-      🚘 Авто
-    </button>
-
-    <button onclick="filterType('Мото')">
-      🏍️ Мото
-    </button>
-
-    <button onclick="filterType('Скутер')">
-      🛵 Скутери
-    </button>
-
-  </div>
-
-
-  <div class="catalog">
-
-
-    <!-- BMW -->
-
-    <div class="card" data-type="Авто">
-
-      <div class="vehicle">
-
-        <span class="type">AUTO</span>
-
-        <button class="heart" onclick="favorite(this)">
-          ♡
-        </button>
-
-        <svg viewBox="0 0 500 300">
-
-          <rect width="500" height="300" fill="#101010"/>
-
-          <ellipse
-            cx="250"
-            cy="245"
-            rx="190"
-            ry="18"
-            fill="#000"
-          />
-
-          <path
-            d="M65 220
-            L110 160
-            L180 125
-            L330 125
-            L405 165
-            L440 220
-            L430 245
-            L75 245Z"
-            fill="#aaa"
-          />
-
-          <path
-            d="M165 160
-            L195 130
-            L310 130
-            L345 160Z"
-            fill="#181818"
-          />
-
-          <circle cx="145" cy="230" r="43" fill="#050505"/>
-          <circle cx="145" cy="230" r="19" fill="#666"/>
-
-          <circle cx="365" cy="230" r="43" fill="#050505"/>
-          <circle cx="365" cy="230" r="19" fill="#666"/>
-
-        </svg>
-
-      </div>
-
-
-      <div class="info">
-
-        <h3>BMW M5</h3>
-
-        <p>
-          V8 • 625 HP • AWD
-        </p>
-
-        <div class="bottom">
-
-          <div class="price">
-            $110 000
-          </div>
-
-          <button
-            class="details"
-            onclick="details(
-              'BMW M5',
-              '625 HP',
-              '305 км/год',
-              '3.4 сек',
-              'V8',
-              'AWD',
-              '$110 000',
-              'Потужний спортивний седан з V8 та повним приводом.'
-            )"
-          >
-            Деталі
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- Porsche -->
-
-    <div class="card" data-type="Авто">
-
-      <div class="vehicle">
-
-        <span class="type">SPORT</span>
-
-        <button class="heart" onclick="favorite(this)">
-          ♡
-        </button>
-
-        <svg viewBox="0 0 500 300">
-
-          <rect width="500" height="300" fill="#101010"/>
-
-          <path
-            d="M60 220
-            Q100 170 180 150
-            Q250 105 335 150
-            Q405 160 440 220
-            L430 245
-            L70 245Z"
-            fill="#ff4d00"
-          />
-
-          <path
-            d="M175 155
-            Q235 115 315 150
-            L350 175
-            L145 175Z"
-            fill="#111"
-          />
-
-          <circle cx="140" cy="230" r="42" fill="#050505"/>
-          <circle cx="140" cy="230" r="18" fill="#777"/>
-
-          <circle cx="370" cy="230" r="42" fill="#050505"/>
-          <circle cx="370" cy="230" r="18" fill="#777"/>
-
-        </svg>
-
-      </div>
-
-
-      <div class="info">
-
-        <h3>Porsche 911</h3>
-
-        <p>
-          Flat-6 • 580 HP • Turbo
-        </p>
-
-        <div class="bottom">
-
-          <div class="price">
-            $145 000
-          </div>
-
-          <button
-            class="details"
-            onclick="details(
-              'Porsche 911',
-              '580 HP',
-              '320 км/год',
-              '2.7 сек',
-              'Flat-6',
-              'RWD',
-              '$145 000',
-              'Легендарний спортивний автомобіль з дуже швидким розгоном.'
-            )"
-          >
-            Деталі
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- Audi -->
-
-    <div class="card" data-type="Авто">
-
-      <div class="vehicle">
-
-        <span class="type">PREMIUM</span>
-
-        <button class="heart" onclick="favorite(this)">
-          ♡
-        </button>
-
-        <svg viewBox="0 0 500 300">
-
-          <rect width="500" height="300" fill="#101010"/>
-
-          <path
-            d="M60 220
-            L110 160
-            L180 135
-            L330 135
-            L405 165
-            L445 220
-            L430 245
-            L70 245Z"
-            fill="#ddd"
-          />
-
-          <path
-            d="M180 165
-            L205 140
-            L300 140
-            L345 165Z"
-            fill="#222"
-          />
-
-          <circle cx="140" cy="230" r="43" fill="#050505"/>
-          <circle cx="140" cy="230" r="19" fill="#888"/>
-
-          <circle cx="365" cy="230" r="43" fill="#050505"/>
-          <circle cx="365" cy="230" r="19" fill="#888"/>
-
-        </svg>
-
-      </div>
-
-
-      <div class="info">
-
-        <h3>Audi RS7</h3>
-
-        <p>
-          V8 • 591 HP • Quattro
-        </p>
-
-        <div class="bottom">
-
-          <div class="price">
-            $125 000
-          </div>
-
-          <button
-            class="details"
-            onclick="details(
-              'Audi RS7',
-              '591 HP',
-              '305 км/год',
-              '3.6 сек',
-              'V8',
-              'Quattro AWD',
-              '$125 000',
-              'Преміальний спортивний автомобіль з повним приводом.'
-            )"
-          >
-            Деталі
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- Mercedes -->
-
-    <div class="card" data-type="Авто">
-
-      <div class="vehicle">
-
-        <span class="type">LUXURY</span>
-
-        <button class="heart" onclick="favorite(this)">
-          ♡
-        </button>
-
-        <svg viewBox="0 0 500 300">
-
-          <rect width="500" height="300" fill="#101010"/>
-
-          <path
-            d="M65 220
-            L120 155
-            L195 125
-            L330 135
-            L410 170
-            L440 220
-            L430 245
-            L70 245Z"
-            fill="#777"
-          />
-
-          <path
-            d="M180 160
-            L210 130
-            L300 138
-            L345 165Z"
-            fill="#181818"
-          />
-
-          <circle cx="140" cy="230" r="42" fill="#050505"/>
-          <circle cx="140" cy="230" r="18" fill="#aaa"/>
-
-          <circle cx="370" cy="230" r="42" fill="#050505"/>
-          <circle cx="370" cy="230" r="18" fill="#aaa"/>
-
-        </svg>
-
-      </div>
-
-
-      <div class="info">
-
-        <h3>Mercedes AMG GT</h3>
-
-        <p>
-          V8 • 585 HP • AMG
-        </p>
-
-        <div class="bottom">
-
-          <div class="price">
-            $175 000
-          </div>
-
-          <button
-            class="details"
-            onclick="details(
-              'Mercedes AMG GT',
-              '585 HP',
-              '315 км/год',
-              '3.2 сек',
-              'V8 Biturbo',
-              'RWD',
-              '$175 000',
-              'Преміальний спортивний автомобіль AMG.'
-            )"
-          >
-            Деталі
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- Yamaha -->
-
-    <div class="card" data-type="Мото">
-
-      <div class="vehicle">
-
-        <span class="type">MOTO</span>
-
-        <button class="heart" onclick="favorite(this)">
-          ♡
-        </button>
-
-        <svg viewBox="0 0 500 300">
-
-          <rect width="500" height="300" fill="#101010"/>
-
-          <circle cx="140" cy="230" r="45" fill="#050505"/>
-          <circle cx="140" cy="230" r="20" fill="#777"/>
-
-          <circle cx="365" cy="230" r="45" fill="#050505"/>
-          <circle cx="365" cy="230" r="20" fill="#777"/>
-
-          <path
-            d="M140 225
-            L210 145
-            L300 145
-            L365 225
-            L320 230
-            L260 175
-            L205 230Z"
-            fill="#168cff"
-          />
-
-          <path
-            d="M290 145
-            L325 105
-            L350 145"
-            fill="none"
-            stroke="#aaa"
-            stroke-width="10"
-          />
-
-        </svg>
-
-      </div>
-
-
-      <div class="info">
-
-        <h3>Yamaha MT-09</h3>
-
-        <p>
-          889cc • 119 HP
-        </p>
-
-        <div class="bottom">
-
-          <div class="price">
-            $11 500
-          </div>
-
-          <button
-            class="details"
-            onclick="details(
-              'Yamaha MT-09',
-              '119 HP',
-              '230 км/год',
-              '3.5 сек',
-              '889cc',
-              'Chain Drive',
-              '$11 500',
-              'Легкий та потужний міський мотоцикл.'
-            )"
-          >
-            Деталі
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- Ducati -->
-
-    <div class="card" data-type="Мото">
-
-      <div class="vehicle">
-
-        <span class="type">SUPERBIKE</span>
-
-        <button class="heart" onclick="favorite(this)">
-          ♡
-        </button>
-
-        <svg viewBox="0 0 500 300">
-
-          <rect width="500" height="300" fill="#101010"/>
-
-          <circle cx="135" cy="230" r="43" fill="#050505"/>
-          <circle cx="135" cy="230" r="18" fill="#777"/>
-
-          <circle cx="370" cy="230" r="43" fill="#050505"/>
-          <circle cx="370" cy="230" r="18" fill="#777"/>
-
-          <path
-            d="M135 220
-            L200 145
-            L300 140
-            L370 220
-            L320 225
-            L265 170
-            L200 225Z"
-            fill="#d90000"
-          />
-
-          <path
-            d="M270 145
-            L320 95
-            L345 145"
-            fill="#222"
-          />
-
-        </svg>
-
-      </div>
-
-
-      <div class="info">
-
-        <h3>Ducati Panigale V4</h3>
-
-        <p>
-          V4 • 215 HP
-        </p>
-
-        <div class="bottom">
-
-          <div class="price">
-            $30 000
-          </div>
-
-          <button
-            class="details"
-            onclick="details(
-              'Ducati Panigale V4',
-              '215 HP',
-              '300+ км/год',
-              '3.0 сек',
-              'V4',
-              'Chain Drive',
-              '$30 000',
-              'Високопродуктивний спортивний мотоцикл.'
-            )"
-          >
-            Деталі
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- Kawasaki -->
-
-    <div class="card" data-type="Мото">
-
-      <div class="vehicle">
-
-        <span class="type">MOTO</span>
-
-        <button class="heart" onclick="favorite(this)">
-          ♡
-        </button>
-
-        <svg viewBox="0 0 500 300">
-
-          <rect width="500" height="300" fill="#101010"/>
-
-          <circle cx="135" cy="230" r="43" fill="#050505"/>
-          <circle cx="135" cy="230" r="18" fill="#777"/>
-
-          <circle cx="370" cy="230" r="43" fill="#050505"/>
-          <circle cx="370" cy="230" r="18" fill="#777"/>
-
-          <path
-            d="M135 220
-            L205 145
-            L305 150
-            L370 220
-            L315 225
-            L260 170
-            L200 225Z"
-            fill="#78d600"
-          />
-
-          <path
-            d="M285 150
-            L325 100
-            L350 150"
-            fill="#222"
-          />
-
-        </svg>
-
-      </div>
-
-
-      <div class="info">
-
-        <h3>Kawasaki Ninja ZX-6R</h3>
-
-        <p>
-          636cc • 130 HP
-        </p>
-
-        <div class="bottom">
-
-          <div class="price">
-            $14 000
-          </div>
-
-          <button
-            class="details"
-            onclick="details(
-              'Kawasaki Ninja ZX-6R',
-              '130 HP',
-              '260 км/год',
-              '3.5 сек',
-              '636cc',
-              'Chain Drive',
-              '$14 000',
-              'Спортивний мотоцикл класу Supersport.'
-            )"
-          >
-            Деталі
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- Vespa -->
-
-    <div class="card" data-type="Скутер">
-
-      <div class="vehicle">
-
-        <span class="type">SCOOTER</span>
-
-        <button class="heart" onclick="favorite(this)">
-          ♡
-        </button>
-
-        <svg viewBox="0 0 500 300">
-
-          <rect width="500" height="300" fill="#101010"/>
-
-          <circle cx="145" cy="235" r="40" fill="#050505"/>
-          <circle cx="145" cy="235" r="18" fill="#777"/>
-
-          <circle cx="355" cy="235" r="40" fill="#050505"/>
-          <circle cx="355" cy="235" r="18" fill="#777"/>
-
-          <path
-            d="M145 225
-            Q170 145 270 145
-            Q330 145 355 225
-            L320 235
-            L180 235Z"
-            fill="#eee"
-          />
-
-          <path
-            d="M275 145
-            L315 95
-            L345 145"
-            fill="none"
-            stroke="#aaa"
-            stroke-width="10"
-          />
-
-        </svg>
-
-      </div>
-
-
-      <div class="info">
-
-        <h3>Vespa GTS 300</h3>
-
-        <p>
-          300cc • City
-        </p>
-
-        <div class="bottom">
-
-          <div class="price">
-            $7 500
-          </div>
-
-          <button
-            class="details"
-            onclick="details(
-              'Vespa GTS 300',
-              '23 HP',
-              '120 км/год',
-              '8.0 сек',
-              '300cc',
-              'Automatic',
-              '$7 500',
-              'Стильний міський скутер для щоденних поїздок.'
-            )"
-          >
-            Деталі
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- Honda -->
-
-    <div class="card" data-type="Скутер">
-
-      <div class="vehicle">
-
-        <span class="type">CITY</span>
-
-        <button class="heart" onclick="favorite(this)">
-          ♡
-        </button>
-
-        <svg viewBox="0 0 500 300">
-
-          <rect width="500" height="300" fill="#101010"/>
-
-          <circle cx="145" cy="235" r="40" fill="#050505"/>
-          <circle cx="145" cy="235" r="18" fill="#777"/>
-
-          <circle cx="355" cy="235" r="40" fill="#050505"/>
-          <circle cx="355" cy="235" r="18" fill="#777"/>
-
-          <path
-            d="M145 225
-            Q170 145 265 145
-            Q325 150 355 225
-            L320 235
-            L180 235Z"
-            fill="#ff4d00"
-          />
-
-          <path
-            d="M275 145
-            L315 95
-            L345 145"
-            fill="none"
-            stroke="#aaa"
-            stroke-width="10"
-          />
-
-        </svg>
-
-      </div>
-
-
-      <div class="info">
-
-        <h3>Honda PCX</h3>
-
-        <p>
-          160cc • ABS • City
-        </p>
-
-        <div class="bottom">
-
-          <div class="price">
-            $4 800
-          </div>
-
-          <button
-            class="details"
-            onclick="details(
-              'Honda PCX',
-              '16 HP',
-              '105 км/год',
-              '10 сек',
-              '160cc',
-              'Automatic',
-              '$4 800',
-              'Економний та зручний скутер для міста.'
-            )"
-          >
-            Деталі
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- BMW GS -->
-
-    <div class="card" data-type="Мото">
-
-      <div class="vehicle">
-
-        <span class="type">ADVENTURE</span>
-
-        <button class="heart" onclick="favorite(this)">
-          ♡
-        </button>
-
-        <svg viewBox="0 0 500 300">
-
-          <rect width="500" height="300" fill="#101010"/>
-
-          <circle cx="135" cy="235" r="44" fill="#050505"/>
-          <circle cx="135" cy="235" r="19" fill="#777"/>
-
-          <circle cx="370" cy="235" r="44" fill="#050505"/>
-          <circle cx="370" cy="235" r="19" fill="#777"/>
-
-          <path
-            d="M135 220
-            L205 135
-            L305 145
-            L370 220
-            L320 230
-            L260 170
-            L200 230Z"
-            fill="#fff"
-          />
-
-          <path
-            d="M285 145
-            L325 90
-            L350 145"
-            fill="none"
-            stroke="#aaa"
-            stroke-width="10"
-          />
-
-        </svg>
-
-      </div>
-
-
-      <div class="info">
-
-        <h3>BMW R 1300 GS</h3>
-
-        <p>
-          1300cc • Adventure
-        </p>
-
-        <div class="bottom">
-
-          <div class="price">
-            $19 500
-          </div>
-
-          <button
-            class="details"
-            onclick="details(
-              'BMW R 1300 GS',
-              '145 HP',
-              '220 км/год',
-              '3.4 сек',
-              '1300cc Boxer',
-              'Cardan',
-              '$19 500',
-              'Потужний adventure-мотоцикл для довгих поїздок.'
-            )"
-          >
-            Деталі
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- XMAX -->
-
-    <div class="card" data-type="Скутер">
-
-      <div class="vehicle">
-
-        <span class="type">MAXI</span>
-
-        <button class="heart" onclick="favorite(this)">
-          ♡
-        </button>
-
-        <svg viewBox="0 0 500 300">
-
-          <rect width="500" height="300" fill="#101010"/>
-
-          <circle cx="140" cy="235" r="42" fill="#050505"/>
-          <circle cx="140" cy="235" r="19" fill="#777"/>
-
-          <circle cx="365" cy="235" r="42" fill="#050505"/>
-          <circle cx="365" cy="235" r="19" fill="#777"/>
-
-          <path
-            d="M140 220
-            Q165 135 270 140
-            Q330 145 365 220
-            L325 235
-            L175 235Z"
-            fill="#777"
-          />
-
-          <path
-            d="M270 140
-            L315 90
-            L345 140"
-            fill="none"
-            stroke="#aaa"
-            stroke-width="10"
-          />
-
-        </svg>
-
-      </div>
-
-
-      <div class="info">
-
-        <h3>Yamaha XMAX</h3>
-
-        <p>
-          300cc • Maxi Scooter
-        </p>
-
-        <div class="bottom">
-
-          <div class="price">
-            $7 900
-          </div>
-
-          <button
-            class="details"
-            onclick="details(
-              'Yamaha XMAX 300',
-              '28 HP',
-              '135 км/год',
-              '9.0 сек',
-              '292cc',
-              'Automatic',
-              '$7 900',
-              'Комфортний maxi-scooter для міста та траси.'
-            )"
-          >
-            Деталі
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section id="about">
-
-  <div class="stats">
-
-    <div class="stat">
-      <strong>12+</strong>
-      <span>моделей</span>
-    </div>
-
-    <div class="stat">
-      <strong>3</strong>
-      <span>категорії</span>
-    </div>
-
-    <div class="stat">
-      <strong>24/7</strong>
-      <span>каталог</span>
-    </div>
-
-    <div class="stat">
-      <strong>∞</strong>
-      <span>стилю</span>
-    </div>
-
-  </div>
-
-</section>
-
+<!-- FOOTER -->
 
 <footer>
-  <div>© 2026 GidHot.com</div>
-  <div>Авто • Мото • Скутери</div>
+    <strong>GidHot.</strong> — сучасний автомобільний каталог.
+    <br><br>
+    © 2026 GidHot. Made with passion for cars.
 </footer>
 
 
@@ -1589,185 +1360,285 @@ footer{
 
 <div class="modal" id="modal">
 
-  <div class="modal-box">
+    <div class="modal-content">
 
-    <button class="close" onclick="closeModal()">×</button>
+        <button class="close" onclick="closeModal()">×</button>
 
-    <h2 id="modalName">
-      BMW M5
-    </h2>
+        <img id="modalImage" class="modal-image" src="" alt="Car">
 
-    <div class="specs">
+        <h2 id="modalTitle"></h2>
 
-      <div class="spec">
-        <span>⚡ Потужність</span>
-        <strong id="modalPower"></strong>
-      </div>
+        <p id="modalDescription"></p>
 
-      <div class="spec">
-        <span>🏎️ Максимальна швидкість</span>
-        <strong id="modalSpeed"></strong>
-      </div>
-
-      <div class="spec">
-        <span>⏱️ 0–100 км/год</span>
-        <strong id="modalAcceleration"></strong>
-      </div>
-
-      <div class="spec">
-        <span>🔧 Двигун</span>
-        <strong id="modalEngine"></strong>
-      </div>
-
-      <div class="spec">
-        <span>⚙️ Привід</span>
-        <strong id="modalDrive"></strong>
-      </div>
-
-      <div class="spec">
-        <span>💰 Ціна</span>
-        <strong id="modalPrice"></strong>
-      </div>
+        <div class="modal-specs" id="modalSpecs"></div>
 
     </div>
-
-    <p
-      class="description"
-      id="modalDescription"
-    ></p>
-
-    <br>
-
-    <button
-      class="btn"
-      onclick="closeModal()"
-    >
-      ЗАКРИТИ
-    </button>
-
-  </div>
 
 </div>
 
 
 <script>
 
-let favorites = 0;
+/* ===== DATA ===== */
 
+const cars = {
+
+    "BMW M5":{
+        brand:"BMW",
+        image:"https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=90",
+        description:"Спортивний седан BMW з потужним V8, повним приводом та орієнтацією на динаміку.",
+        engine:"V8 4.4L",
+        hp:"625 HP",
+        drive:"xDrive",
+        zero:"3.4 сек",
+        price:"$110 000"
+    },
+
+    "Audi RS7":{
+        brand:"Audi",
+        image:"https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1200&q=90",
+        description:"Потужний спортивний ліфтбек Audi з двигуном V8 та системою повного приводу Quattro.",
+        engine:"V8 4.0L",
+        hp:"591 HP",
+        drive:"Quattro",
+        zero:"3.6 сек",
+        price:"$125 000"
+    },
+
+    "Porsche 911":{
+        brand:"Porsche",
+        image:"https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1200&q=90",
+        description:"Легендарний спортивний автомобіль Porsche з характерною формою та високою динамікою.",
+        engine:"Flat-6",
+        hp:"580 HP",
+        drive:"AWD",
+        zero:"2.7 сек",
+        price:"$145 000"
+    },
+
+    "Mercedes AMG GT":{
+        brand:"Mercedes-AMG",
+        image:"https://images.unsplash.com/photo-1618843479619-f3d0e3e9f8f8?auto=format&fit=crop&w=1200&q=90",
+        description:"Преміальний спортивний Mercedes-AMG з V8 та повним приводом 4MATIC+.",
+        engine:"V8 4.0L",
+        hp:"585 HP",
+        drive:"4MATIC+",
+        zero:"3.2 сек",
+        price:"$175 000"
+    }
+
+};
+
+
+/* ===== SEARCH ===== */
+
+let currentFilter="all";
+
+function filterCars(){
+
+    const text=document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+    document.querySelectorAll(".car-card").forEach(card=>{
+
+        const name=card.dataset.name.toLowerCase();
+        const brand=card.dataset.brand;
+
+        const textOK=name.includes(text);
+        const filterOK=currentFilter==="all" || brand===currentFilter;
+
+        card.style.display=(textOK && filterOK) ? "" : "none";
+
+    });
+}
+
+
+/* ===== FILTER ===== */
+
+function setFilter(filter,button){
+
+    currentFilter=filter;
+
+    document.querySelectorAll(".filter")
+        .forEach(b=>b.classList.remove("active"));
+
+    button.classList.add("active");
+
+    filterCars();
+}
+
+
+/* ===== FAVORITES ===== */
 
 function favorite(button){
 
-  if(button.innerHTML === "♡"){
+    button.classList.toggle("active");
 
-    button.innerHTML = "♥";
-    button.style.color = "#ff4d00";
-
-    favorites++;
-
-  }else{
-
-    button.innerHTML = "♡";
-    button.style.color = "#fff";
-
-    favorites--;
-
-  }
-
-  document.getElementById("favCount").innerText = favorites;
-
-}
-
-
-function filterType(type){
-
-  const cards = document.querySelectorAll(".card");
-
-  cards.forEach(card => {
-
-    if(type === "all"){
-
-      card.style.display = "";
-
+    if(button.classList.contains("active")){
+        button.innerHTML="♥";
     }else{
-
-      if(card.dataset.type === type){
-
-        card.style.display = "";
-
-      }else{
-
-        card.style.display = "none";
-
-      }
-
+        button.innerHTML="♡";
     }
-
-  });
-
-  document
-    .getElementById("catalog")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
-
 }
 
 
-function details(
-  name,
-  power,
-  speed,
-  acceleration,
-  engine,
-  drive,
-  price,
-  description
-){
+/* ===== MODAL ===== */
 
-  document.getElementById("modalName").innerText = name;
+function openCar(name){
 
-  document.getElementById("modalPower").innerText = power;
+    const car=cars[name];
 
-  document.getElementById("modalSpeed").innerText = speed;
+    if(!car) return;
 
-  document.getElementById("modalAcceleration").innerText =
-    acceleration;
+    document.getElementById("modalImage").src=car.image;
 
-  document.getElementById("modalEngine").innerText =
-    engine;
+    document.getElementById("modalTitle").textContent=name;
 
-  document.getElementById("modalDrive").innerText =
-    drive;
+    document.getElementById("modalDescription").textContent=
+        car.description;
 
-  document.getElementById("modalPrice").innerText =
-    price;
+    document.getElementById("modalSpecs").innerHTML=`
 
-  document.getElementById("modalDescription").innerText =
-    description;
+        <div>
+            <small>Двигун</small>
+            <b>${car.engine}</b>
+        </div>
 
-  document.getElementById("modal").style.display =
-    "flex";
+        <div>
+            <small>Потужність</small>
+            <b>${car.hp}</b>
+        </div>
 
+        <div>
+            <small>Привід</small>
+            <b>${car.drive}</b>
+        </div>
+
+        <div>
+            <small>0–100 км/год</small>
+            <b>${car.zero}</b>
+        </div>
+
+        <div>
+            <small>Орієнтовна ціна</small>
+            <b>${car.price}</b>
+        </div>
+
+        <div>
+            <small>Клас</small>
+            <b>${car.brand}</b>
+        </div>
+
+    `;
+
+    document.getElementById("modal").classList.add("show");
 }
 
 
 function closeModal(){
 
-  document.getElementById("modal").style.display =
-    "none";
+    document
+        .getElementById("modal")
+        .classList.remove("show");
 
 }
 
 
-document
-  .getElementById("modal")
-  .addEventListener("click",function(e){
+document.getElementById("modal").addEventListener("click",function(e){
 
-    if(e.target === this){
-      closeModal();
+    if(e.target===this){
+        closeModal();
     }
 
-  });
+});
+
+
+/* ===== COMPARE ===== */
+
+function compareCars(){
+
+    const a=document.getElementById("car1").value;
+    const b=document.getElementById("car2").value;
+
+    const carA=cars[a];
+    const carB=cars[b];
+
+    document.getElementById("compareResult").innerHTML=`
+
+        <table class="compare-table">
+
+            <tr>
+                <th>Характеристика</th>
+                <th>${a}</th>
+                <th>${b}</th>
+            </tr>
+
+            <tr>
+                <td>Двигун</td>
+                <td>${carA.engine}</td>
+                <td>${carB.engine}</td>
+            </tr>
+
+            <tr>
+                <td>Потужність</td>
+                <td>${carA.hp}</td>
+                <td>${carB.hp}</td>
+            </tr>
+
+            <tr>
+                <td>Привід</td>
+                <td>${carA.drive}</td>
+                <td>${carB.drive}</td>
+            </tr>
+
+            <tr>
+                <td>0–100 км/год</td>
+                <td>${carA.zero}</td>
+                <td>${carB.zero}</td>
+            </tr>
+
+            <tr>
+                <td>Ціна</td>
+                <td>${carA.price}</td>
+                <td>${carB.price}</td>
+            </tr>
+
+        </table>
+    `;
+}
+
+
+/* ===== SCROLL ===== */
+
+function scrollToCars(){
+
+    document
+        .getElementById("cars")
+        .scrollIntoView({behavior:"smooth"});
+
+}
+
+
+function scrollToCompare(){
+
+    document
+        .getElementById("compare")
+        .scrollIntoView({behavior:"smooth"});
+
+}
+
+
+/* ===== ESC CLOSE ===== */
+
+document.addEventListener("keydown",function(e){
+
+    if(e.key==="Escape"){
+        closeModal();
+    }
+
+});
 
 </script>
 
