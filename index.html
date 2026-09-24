@@ -33,15 +33,17 @@
       padding: 12px 10px;
       font-weight: bold;
       font-size: 14px;
+      box-shadow: 0 4px 12px rgba(255, 81, 0, 0.3);
     }
 
     /* Шапка */
     .hero-card {
-      background-color: #151c2c;
+      background: linear-gradient(145deg, #151c2c, #0f172a);
       border-radius: 16px;
       padding: 20px;
       margin-top: 15px;
       border: 1px solid #232d42;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     }
 
     .hero-title {
@@ -81,7 +83,7 @@
       color: #94a3b8;
     }
 
-    /* Пошук */
+    /* Пошук і фільтри */
     .search-section label {
       display: block;
       font-size: 13px;
@@ -98,26 +100,39 @@
       color: #fff;
       outline: none;
       margin-bottom: 12px;
+      transition: border 0.3s;
+    }
+
+    .search-section input:focus {
+      border-color: #2563eb;
     }
 
     .filter-buttons {
       display: flex;
-      gap: 8px;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 5px;
     }
 
     .filter-btn {
       flex: 1;
-      padding: 8px;
+      min-width: 80px;
+      padding: 8px 10px;
       background-color: #1e293b;
-      border: none;
+      border: 1px solid #334155;
       color: #fff;
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
+      font-size: 12px;
+      white-space: nowrap;
+      transition: all 0.3s;
     }
 
     .filter-btn.active {
       background-color: #2563eb;
+      border-color: #3b82f6;
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
     }
 
     /* Telegram банер */
@@ -268,13 +283,19 @@
     .power-stats .before { color: #94a3b8; }
     .power-stats .after { color: #22c55e; }
 
-    /* Картки авто та мото */
+    /* Картки каталогу */
     .catalog-card {
       background-color: #151c2c;
       border-radius: 16px;
       overflow: hidden;
       margin-top: 20px;
       border: 1px solid #232d42;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .catalog-card:hover {
+      transform: translateY(-3px);
+      border-color: #3b82f6;
     }
 
     .card-img {
@@ -296,7 +317,7 @@
     }
 
     .card-title {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: bold;
       display: flex;
       align-items: center;
@@ -308,10 +329,14 @@
       padding: 3px 8px;
       border-radius: 4px;
       font-weight: bold;
+      text-transform: uppercase;
     }
 
     .tag.red { background-color: #ef4444; color: #fff; }
     .tag.blue { background-color: #2563eb; color: #fff; }
+    .tag.orange { background-color: #f97316; color: #fff; }
+    .tag.green { background-color: #10b981; color: #fff; }
+    .tag.purple { background-color: #8b5cf6; color: #fff; }
 
     .price-list {
       list-style: none;
@@ -395,7 +420,7 @@
       outline: none;
     }
 
-    /* Кнопка */
+    /* Кнопки */
     .btn {
       width: 100%;
       padding: 12px;
@@ -407,11 +432,16 @@
       justify-content: center;
       align-items: center;
       gap: 8px;
+      transition: background-color 0.3s;
     }
 
     .btn-primary {
       background-color: #22c55e;
       color: #fff;
+    }
+
+    .btn-primary:hover {
+      background-color: #16a34a;
     }
   </style>
 </head>
@@ -428,18 +458,20 @@
         <h1>Професійний АвтоСервіс AutoFix</h1>
       </div>
       <div class="badges">
-        <span class="badge green"><i class="fa-solid fa-car"></i> 1500+ авто в базі</span>
-        <span class="badge dark"><i class="fa-solid fa-bolt"></i> Сервіс за 30 хв</span>
+        <span class="badge green"><i class="fa-solid fa-check"></i> Працюємо 24/7</span>
+        <span class="badge dark"><i class="fa-solid fa-bolt"></i> Швидкий сервіс</span>
         <span class="badge dark"><i class="fa-solid fa-shield-halved"></i> Гарантія якості</span>
       </div>
 
       <div class="search-section">
-        <label for="search-input"><i class="fa-solid fa-magnifying-glass"></i> Знайдіть бренд свого авто або мотоцикла:</label>
-        <input type="text" id="search-input" placeholder="Введіть марку (BMW, Porsche, Ducati, Ferrari, Kawasaki...)">
+        <label for="search-input"><i class="fa-solid fa-magnifying-glass"></i> Оберіть бренд або тип транспорту:</label>
+        <input type="text" id="search-input" placeholder="Введіть марку (BMW, Honda Dio, Kayo, Pitbike, Yamaha...)">
         <div class="filter-buttons">
           <button class="filter-btn active" data-filter="all">Усі</button>
           <button class="filter-btn" data-filter="car"><i class="fa-solid fa-car"></i> Авто</button>
           <button class="filter-btn" data-filter="moto"><i class="fa-solid fa-motorcycle"></i> Мото</button>
+          <button class="filter-btn" data-filter="scooter"><i class="fa-solid fa-moped"></i> Скутери</button>
+          <button class="filter-btn" data-filter="pitbike"><i class="fa-solid fa-person-biking"></i> Пітбайки</button>
         </div>
       </div>
     </header>
@@ -448,19 +480,19 @@
       <i class="fa-brands fa-telegram tg-icon"></i>
       <div>
         <h3>Відеозвіт у Telegram в реальному часі</h3>
-        <p>Отримуйте фото та відео фіксацію діагностики й обслуговування вашого авто прямо на смартфон.</p>
+        <p>Отримуйте фото та відео фіксацію діагностики й обслуговування вашої техніки прямо на смартфон.</p>
       </div>
     </section>
 
     <section class="promo-offer-card">
       <div class="offer-badge">ЕКСКЛЮЗИВ</div>
       <h3><i class="fa-solid fa-gauge-high"></i> Безкоштовний замір на диностенді</h3>
-      <p>Замовляйте комплексне ТО від 5 000 грн та отримуйте 1-й замір потужності безкоштовно!</p>
+      <p>Замовляйте комплексне ТО від 3 000 грн та отримуйте замір потужності в подарунок!</p>
     </section>
 
     <section class="interactive-card">
       <h2><i class="fa-solid fa-calculator"></i> Інтерактивний Калькулятор Тюнінгу та ТО</h2>
-      <p>Розрахуйте вартість робіт за пару кліків:</p>
+      <p>Розрахуйте вартість обслуговування за пару кліків:</p>
       
       <div class="calc-grid">
         <div class="calc-group">
@@ -468,6 +500,8 @@
           <select id="calc-type">
             <option value="car">Автомобіль</option>
             <option value="moto">Мотоцикл</option>
+            <option value="scooter">Скутер</option>
+            <option value="pitbike">Пітбайк</option>
           </select>
         </div>
         <div class="calc-group">
@@ -476,8 +510,8 @@
             <option value="1200">Комп'ютерна діагностика — 1 200 грн</option>
             <option value="3500">Заміна мастила та фільтрів — 3 500 грн</option>
             <option value="8500">Чип-тюнінг Stage 1 / Stage 2 — 8 500 грн</option>
-            <option value="4500">Тюнінг вихлопної системи — 4 500 грн</option>
-            <option value="2000">Замір потужності на диностенді — 2 000 грн</option>
+            <option value="800">Обслуговування варіатора / ЦПГ скутера — 800 грн</option>
+            <option value="1000">Налаштування карбюратора / клапанів пітбайка — 1 000 грн</option>
           </select>
         </div>
       </div>
@@ -504,6 +538,7 @@
       </div>
     </section>
 
+    <!-- Каталог -->
     <section id="catalog" class="catalog-grid"></section>
   </main>
 
@@ -515,21 +550,21 @@
 
       <form id="booking-form" onsubmit="handleBooking(event)">
         <div class="form-group">
-          <label>Обрати вільний підйомник / пост:</label>
+          <label>Обрати вільний пост:</label>
           <select required>
-            <option value="1">Пост 1 (Діагностика та Електрика)</option>
-            <option value="2">Пост 2 (Підйомник для ТО & Підвіски)</option>
-            <option value="3">Пост 3 (Диностенд & Stage Tuning)</option>
-            <option value="4">Пост 4 (Мото-сервіс & Десмодром)</option>
+            <option value="1">Пост 1 (Авто: Діагностика та Електрика)</option>
+            <option value="2">Пост 2 (Авто: Підйомник для ТО & Підвіски)</option>
+            <option value="3">Пост 3 (Мото / Скутер / Пітбайк сервіс)</option>
+            <option value="4">Пост 4 (Диностенд & Stage Tuning)</option>
           </select>
         </div>
 
         <div class="form-group">
           <label>Обрати майстра:</label>
           <select required>
-            <option value="m1">Олександр (Головний каламутник Stage 1-3)</option>
-            <option value="m2">Дмитро (Спеціаліст з VAG / Porsche / BMW)</option>
-            <option value="m3">Ігор (Мото-механік & Сервіс Ducati/BMW Motorrad)</option>
+            <option value="m1">Олександр (Головний спеціаліст Stage 1-3)</option>
+            <option value="m2">Дмитро (Електрика & Діагностика)</option>
+            <option value="m3">Ігор (Спеціаліст з Мото / Скутерів / Пітбайків)</option>
           </select>
         </div>
 
@@ -550,6 +585,7 @@
 
   <script>
     const catalogData = [
+      // 🚗 АВТОМОБІЛІ
       {
         name: "Ferrari & Lamborghini & McLaren",
         category: "car",
@@ -577,28 +613,28 @@
         ]
       },
       {
-        name: "Mercedes-AMG & Maybach S-Class",
+        name: "Mercedes-AMG & Maybach & E-Class",
         category: "car",
         tag: "AMG",
         tagColor: "blue",
         icon: "fa-car",
         image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&q=80",
         services: [
-          { name: "Скидання помилок блоків SAM через Star Diagnosis", price: "800 грн" },
-          { name: "Заміна мастила в автоматі 7G/9G-Tronic", price: "3 500 грн" },
+          { name: "Скидання помилок блоків SAM (Star Diagnosis)", price: "800 грн" },
+          { name: "Заміна мастила в АКПП 7G/9G-Tronic", price: "3 500 грн" },
           { name: "Перевірка пневмопідвіски Airmatic", price: "600 грн" }
         ]
       },
       {
-        name: "Audi RS3 / RS6 Avant / RS Q8 / R8",
+        name: "Volkswagen Golf R / GTI / Passat",
         category: "car",
-        tag: "RS SPORT",
-        tagColor: "red",
+        tag: "VAG SPORT",
+        tagColor: "blue",
         icon: "fa-car",
-        image: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=800&q=80",
         services: [
-          { name: "Діагностика муфти Haldex / Quattro", price: "1 000 грн" },
-          { name: "Заміна оливи в КПП S-Tronic / Tiptronic", price: "3 800 грн" }
+          { name: "Чип-тюнінг Stage 1 (2.0 TSI)", price: "6 000 грн" },
+          { name: "Обслуговування КПП DSG DQ250/DQ500", price: "2 800 грн" }
         ]
       },
       {
@@ -609,50 +645,26 @@
         icon: "fa-car",
         image: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=800&q=80",
         services: [
-          { name: "Спеціалізована діагностика PIWIS 3", price: "1 500 грн" },
-          { name: "Заміна мастила та сервіс КПП PDK", price: "4 200 грн" },
-          { name: "Калібрування пневмопідвіски PASM", price: "1 800 грн" }
+          { name: "Діагностика сканером PIWIS 3", price: "1 500 грн" },
+          { name: "Заміна мастила та сервіс КПП PDK", price: "4 200 грн" }
         ]
       },
       {
-        name: "Nissan GT-R / Supra A90 / Civic Type R",
-        category: "car",
-        tag: "JDM LEGENDS",
-        tagColor: "red",
-        icon: "fa-car",
-        image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=800&q=80",
-        services: [
-          { name: "Налаштування коробки GR6", price: "3 500 грн" },
-          { name: "Замір потужності на диностенді", price: "2 000 грн" },
-          { name: "Тюнінг вихлопної системи", price: "2 800 грн" }
-        ]
-      },
-      {
-        name: "Dodge Challenger SRT / Mustang / RAM TRX",
-        category: "car",
-        tag: "HEMI V8",
-        tagColor: "blue",
-        icon: "fa-car-side",
-        image: "https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?w=800&q=80",
-        services: [
-          { name: "Комплексне ТО двигунів HEMI / Coyote", price: "2 500 грн" },
-          { name: "Діагностика компресора Supercharger", price: "1 800 грн" }
-        ]
-      },
-      {
-        name: "Tesla Plaid / Lucid Air / Rivian / Taycan",
+        name: "Tesla Plaid / Model 3 / Model Y / Cybertruck",
         category: "car",
         tag: "ELECTRIC",
-        tagColor: "blue",
+        tagColor: "green",
         icon: "fa-bolt",
         image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=800&q=80",
         services: [
-          { name: "Діагностика батареї та охолодження High-Voltage", price: "2 000 грн" },
-          { name: "Сервіс редукторів та гальмівної системи", price: "1 800 грн" }
+          { name: "Діагностика високовольтної батареї", price: "2 000 грн" },
+          { name: "Заміна гальмівної рідини та сервіс супортів", price: "1 500 грн" }
         ]
       },
+
+      // 🏍️ МОТОЦИКЛИ
       {
-        name: "Ducati (Panigale V4 / Streetfighter / Diavel)",
+        name: "Ducati Panigale V4 / Streetfighter / Diavel",
         category: "moto",
         tag: "SUPERBIKE",
         tagColor: "red",
@@ -660,44 +672,99 @@
         image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800&q=80",
         services: [
           { name: "Десмодромний сервіс ГРМ (Desmo Service)", price: "5 500 грн" },
-          { name: "Заміна мастила та підготовка до сезону", price: "1 800 грн" },
-          { name: "Налаштування трек-підвіски Öhlins", price: "2 200 грн" }
+          { name: "Заміна мастила та підготовка до сезону", price: "1 800 грн" }
         ]
       },
       {
-        name: "BMW Motorrad (S1000RR / M1000RR / R1250 GS)",
+        name: "KTM Duke / RC 390 / 1290 Super Duke",
         category: "moto",
-        tag: "MOTO-TOP",
-        tagColor: "blue",
+        tag: "READY TO RACE",
+        tagColor: "orange",
         icon: "fa-motorcycle",
-        image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=800&q=80",
         services: [
-          { name: "Діагностика сканером BMW Motorrad", price: "800 грн" },
-          { name: "Обслуговування кардана та підвіски ESA", price: "2 500 грн" }
+          { name: "Налаштування підвіски WP", price: "1 500 грн" },
+          { name: "Комплексна діагностика та сервіс", price: "1 200 грн" }
         ]
       },
       {
         name: "Kawasaki Ninja / Yamaha R1 / Honda Fireblade",
         category: "moto",
-        tag: "SPORT",
+        tag: "JAPAN SPORT",
         tagColor: "blue",
         icon: "fa-motorcycle",
-        image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=800&q=80",
         services: [
           { name: "Синхронізація дросельних заслонок", price: "1 500 грн" },
           { name: "Заміна ланцюга та зірок", price: "1 200 грн" }
         ]
       },
+
+      // 🛵 СКУТЕРИ
       {
-        name: "Harley-Davidson & Custom Choppers",
-        category: "moto",
-        tag: "CUSTOM",
-        tagColor: "red",
-        icon: "fa-motorcycle",
-        image: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=800&q=80",
+        name: "Honda Dio / Tact / Giorno / Lead",
+        category: "scooter",
+        tag: "CITY SCOOTER",
+        tagColor: "green",
+        icon: "fa-moped",
+        image: "https://images.unsplash.com/photo-1520256862855-398228c41684?w=800&q=80",
         services: [
-          { name: "Сервіс двигунів Milwaukee-Eight / Twin Cam", price: "3 000 грн" },
-          { name: "Обслуговування ремінної передачі", price: "1 000 грн" }
+          { name: "Чистка та налаштування карбюратора", price: "450 грн" },
+          { name: "Заміна ременя варіатора та роликів", price: "600 грн" },
+          { name: "Капітальний ремонт ЦПГ (50cc - 90cc)", price: "1 800 грн" }
+        ]
+      },
+      {
+        name: "Yamaha Jog / Aerox / Bws / NMAX",
+        category: "scooter",
+        tag: "TUNING KING",
+        tagColor: "purple",
+        icon: "fa-moped",
+        image: "https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?w=800&q=80",
+        services: [
+          { name: "Тюнінг варіатора (Malossi / Polini)", price: "900 грн" },
+          { name: "Заміна поршневої системи 70cc Stage6", price: "2 200 грн" },
+          { name: "Ремонт та обслуговування редуктора", price: "700 грн" }
+        ]
+      },
+      {
+        name: "Vespa Primavera / GTS 300 / Sprint",
+        category: "scooter",
+        tag: "ITALIAN STYLE",
+        tagColor: "orange",
+        icon: "fa-moped",
+        image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800&q=80",
+        services: [
+          { name: "Планове ТО (мастило, фільтри, свічка)", price: "1 100 грн" },
+          { name: "Комп'ютерна діагностика інжектора", price: "600 грн" }
+        ]
+      },
+
+      // 🏁 ПІТБАЙКИ
+      {
+        name: "Kayo Basic / Evolution / TT140 / T2",
+        category: "pitbike",
+        tag: "ENDURO / PIT",
+        tagColor: "orange",
+        icon: "fa-person-biking",
+        image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&q=80",
+        services: [
+          { name: "Регулювання теплових зазорів клапанів", price: "500 грн" },
+          { name: "Налаштування карбюратора Nibbi / Mikuni", price: "450 грн" },
+          { name: "Заміна мастила та обслуговування вилки", price: "1 200 грн" }
+        ]
+      },
+      {
+        name: "BSE PH10 / MX125 / Geon X-Pit / Pitster Pro",
+        category: "pitbike",
+        tag: "STUNT / OFFROAD",
+        tagColor: "red",
+        icon: "fa-person-biking",
+        image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800&q=80",
+        services: [
+          { name: "Заміна ланцюга 428H та зірок", price: "500 грн" },
+          { name: "Прокачка гальмівної системи", price: "400 грн" },
+          { name: "Встановлення стлант-пегів та підготовка", price: "800 грн" }
         ]
       }
     ];
@@ -705,6 +772,11 @@
     function renderCatalog(items) {
       const container = document.getElementById("catalog");
       container.innerHTML = "";
+
+      if (items.length === 0) {
+        container.innerHTML = "<p style='text-align: center; color: #94a3b8; padding: 20px;'>За вашим запитом нічого не знайдено.</p>";
+        return;
+      }
 
       items.forEach(item => {
         const card = document.createElement("div");
@@ -764,7 +836,7 @@
       const query = searchInput.value.toLowerCase();
       const filtered = catalogData.filter(item => {
         const matchesFilter = currentFilter === "all" || item.category === currentFilter;
-        const matchesSearch = item.name.toLowerCase().includes(query);
+        const matchesSearch = item.name.toLowerCase().includes(query) || item.category.toLowerCase().includes(query);
         return matchesFilter && matchesSearch;
       });
       renderCatalog(filtered);
