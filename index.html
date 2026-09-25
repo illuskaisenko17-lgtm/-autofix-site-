@@ -2,1308 +2,646 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Zombie Battle 3D</title>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Zombie Survival 3D</title>
 
 <style>
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
-  user-select:none;
   -webkit-user-select:none;
+  user-select:none;
 }
 
 html,body{
   width:100%;
   height:100%;
   overflow:hidden;
-  background:#111;
+  background:#050505;
   font-family:Arial,sans-serif;
 }
 
 #game{
   position:fixed;
   inset:0;
+  width:100%;
+  height:100%;
+  background:#111;
 }
 
-canvas{
-  display:block;
-}
-
-#ui{
+#menu{
   position:fixed;
   inset:0;
+  z-index:20;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background:
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.8)),
+    radial-gradient(circle at center,#34472d,#080b08 70%);
   color:white;
-  pointer-events:none;
+  text-align:center;
+}
+
+#menu h1{
+  font-size:42px;
+  text-shadow:0 4px 15px black;
+  margin-bottom:10px;
+}
+
+#menu p{
+  color:#ccc;
+  margin-bottom:30px;
 }
 
 #start{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(#06120dee,#000f);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  pointer-events:auto;
-  z-index:20;
-}
-
-#start h1{
-  font-size:38px;
-  text-align:center;
-  margin-bottom:12px;
-}
-
-#start p{
-  color:#ddd;
-  text-align:center;
-  margin:0 25px 25px;
-}
-
-#play{
   border:0;
-  padding:16px 35px;
-  border-radius:15px;
-  background:#18d45a;
-  color:white;
-  font-size:20px;
-  font-weight:bold;
-  touch-action:manipulation;
-}
-
-.panel{
-  background:#0009;
-  border:1px solid #ffffff33;
-  border-radius:12px;
-  padding:8px 12px;
-}
-
-#top{
-  position:absolute;
-  top:12px;
-  left:12px;
-  right:12px;
-  display:flex;
-  justify-content:space-between;
-}
-
-#hpbg{
-  width:180px;
-  height:13px;
-  background:#333;
-  border-radius:10px;
-  overflow:hidden;
-  margin-top:5px;
-}
-
-#hp{
-  width:100%;
-  height:100%;
-  background:#22dc59;
-}
-
-#ammo{
+  border-radius:14px;
+  padding:18px 45px;
   font-size:21px;
   font-weight:bold;
+  color:white;
+  background:#e23b2f;
+  box-shadow:0 7px 0 #8d211a,0 10px 30px #000;
+  cursor:pointer;
 }
 
-#cross{
-  position:absolute;
-  left:50%;
-  top:50%;
-  width:24px;
-  height:24px;
-  transform:translate(-50%,-50%);
+#start:active{
+  transform:translateY(5px);
+  box-shadow:0 2px 0 #8d211a;
 }
 
-#cross:before,
-#cross:after{
-  content:"";
-  position:absolute;
-  background:white;
-}
-
-#cross:before{
-  width:2px;
-  height:24px;
-  left:11px;
-}
-
-#cross:after{
-  width:24px;
-  height:2px;
-  top:11px;
-}
-
-#msg{
-  position:absolute;
-  top:18%;
-  left:50%;
-  transform:translateX(-50%);
-  text-align:center;
-  font-size:25px;
-  font-weight:bold;
-  text-shadow:0 3px 10px #000;
+#hud{
+  position:fixed;
+  inset:0;
+  z-index:10;
+  pointer-events:none;
+  display:none;
+  color:white;
 }
 
 #stats{
   position:absolute;
-  left:12px;
-  bottom:12px;
-  font-size:14px;
-  line-height:22px;
+  top:15px;
+  left:15px;
+  background:rgba(0,0,0,.5);
+  padding:10px 14px;
+  border-radius:12px;
+  font-size:16px;
 }
 
-#weapon{
+#crosshair{
   position:absolute;
-  right:12px;
-  top:75px;
-  font-size:13px;
+  left:50%;
+  top:50%;
+  width:30px;
+  height:30px;
+  transform:translate(-50%,-50%);
 }
 
-.control{
+#crosshair:before,
+#crosshair:after{
+  content:"";
   position:absolute;
-  width:70px;
-  height:70px;
+  background:white;
+  box-shadow:0 0 4px black;
+}
+
+#crosshair:before{
+  width:2px;
+  height:30px;
+  left:14px;
+}
+
+#crosshair:after{
+  height:2px;
+  width:30px;
+  top:14px;
+}
+
+#shoot{
+  position:absolute;
+  right:25px;
+  bottom:30px;
+  width:85px;
+  height:85px;
   border-radius:50%;
+  background:rgba(220,40,30,.75);
+  border:3px solid white;
+  pointer-events:auto;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#0009;
-  border:2px solid #fff4;
-  color:white;
   font-weight:bold;
-  pointer-events:auto;
-  touch-action:none;
 }
 
-#fire{
-  right:20px;
-  bottom:35px;
-  width:95px;
-  height:95px;
-  background:#d5222299;
+#shoot:active{
+  background:#ff3d30;
 }
 
-#reload{
-  right:125px;
-  bottom:48px;
-}
-
-#heal{
-  right:125px;
-  bottom:135px;
-}
-
-#loot{
-  right:25px;
-  bottom:150px;
-}
-
-#run{
-  left:160px;
-  bottom:35px;
-}
-
-#joy{
+#info{
   position:absolute;
-  left:20px;
-  bottom:25px;
-  width:125px;
-  height:125px;
-  border-radius:50%;
-  background:#ffffff18;
-  border:2px solid #fff3;
-  pointer-events:auto;
-  touch-action:none;
+  bottom:15px;
+  left:15px;
+  font-size:13px;
+  color:#ddd;
 }
 
-#stick{
+#message{
   position:absolute;
-  width:52px;
-  height:52px;
-  left:35px;
-  top:35px;
-  border-radius:50%;
-  background:#ffffff66;
+  top:90px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:25px;
+  font-weight:bold;
+  text-shadow:0 2px 8px black;
 }
 
-@media(min-width:800px){
-  #joy,
-  #fire,
-  #reload,
-  #heal,
-  #loot,
-  #run{
-    display:none;
-  }
+#gameOver{
+  position:fixed;
+  inset:0;
+  z-index:30;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  background:rgba(0,0,0,.75);
+  color:white;
+}
+
+#gameOver h2{
+  font-size:40px;
+  margin-bottom:20px;
+}
+
+#restart{
+  padding:15px 35px;
+  border:0;
+  border-radius:12px;
+  background:#e33;
+  color:white;
+  font-size:19px;
+  font-weight:bold;
 }
 </style>
 </head>
 
 <body>
 
-<div id="game"></div>
+<canvas id="game"></canvas>
 
-<div id="ui">
-
-  <div id="top">
-    <div class="panel">
-      ❤️ <span id="hpText">100</span>
-      <div id="hpbg">
-        <div id="hp"></div>
-      </div>
-    </div>
-
-    <div class="panel">
-      🔫 <span id="ammo">30</span> /
-      <span id="reserve">180</span>
-    </div>
-  </div>
-
-  <div id="weapon" class="panel">
-    ASSAULT RIFLE
-  </div>
-
-  <div id="cross"></div>
-
-  <div id="msg"></div>
-
-  <div id="stats">
-    🧟 Зомбі: <span id="zcount">0</span><br>
-    🌊 Хвиля: <span id="wave">1</span><br>
-    💰 Монети: <span id="coins">0</span>
-  </div>
-
-  <div id="joy">
-    <div id="stick"></div>
-  </div>
-
-  <div id="run" class="control">RUN</div>
-  <div id="heal" class="control">❤️</div>
-  <div id="reload" class="control">↻</div>
-  <div id="loot" class="control">📦</div>
-  <div id="fire" class="control">FIRE</div>
-
-  <div id="start">
-    <h1>🧟 ZOMBIE DROP 3D</h1>
-    <p>Виживи серед зомбі та пройди хвилі.</p>
-    <button id="play">ПОЧАТИ ГРУ</button>
-  </div>
-
+<div id="menu">
+  <h1>🧟 ZOMBIE SURVIVAL</h1>
+  <p>3D-style мобільний шутер</p>
+  <button id="start">ПОЧАТИ ГРУ</button>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
+<div id="hud">
+  <div id="stats">
+    ❤️ HP: <span id="hp">100</span><br>
+    🔫 Патрони: <span id="ammo">30</span><br>
+    🧟 Зомбі: <span id="zombies">0</span><br>
+    ⭐ Хвиля: <span id="wave">1</span>
+  </div>
+
+  <div id="message"></div>
+  <div id="crosshair"></div>
+
+  <div id="info">
+    Рухай телефоном/пальцем для прицілу • 🔴 стріляй
+  </div>
+
+  <button id="shoot">🔫</button>
+</div>
+
+<div id="gameOver">
+  <h2>💀 ТИ ПРОГРАВ</h2>
+  <button id="restart">ГРАТИ ЩЕ РАЗ</button>
+</div>
 
 <script>
+"use strict";
 
-let scene;
-let camera;
-let renderer;
-let player;
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
 
-let zombies=[];
-let loot=[];
+const menu = document.getElementById("menu");
+const hud = document.getElementById("hud");
+const start = document.getElementById("start");
+const shoot = document.getElementById("shoot");
+const restart = document.getElementById("restart");
 
-let running=false;
-let hp=100;
-let ammo=30;
-let reserve=180;
-let coins=0;
-let wave=1;
+const hpText = document.getElementById("hp");
+const ammoText = document.getElementById("ammo");
+const zombieText = document.getElementById("zombies");
+const waveText = document.getElementById("wave");
+const message = document.getElementById("message");
 
-let joyX=0;
-let joyY=0;
-let sprinting=false;
-let yaw=0;
-let pitch=.2;
+let W = 0;
+let H = 0;
 
-let lastShot=0;
-
-const keys={};
-
-function init(){
-
-  scene=new THREE.Scene();
-
-  scene.background=new THREE.Color(0x83aeca);
-
-  scene.fog=new THREE.Fog(
-    0x83aeca,
-    45,
-    250
-  );
-
-  camera=new THREE.PerspectiveCamera(
-    68,
-    innerWidth/innerHeight,
-    .1,
-    600
-  );
-
-  renderer=new THREE.WebGLRenderer({
-    antialias:true
-  });
-
-  renderer.setSize(
-    innerWidth,
-    innerHeight
-  );
-
-  renderer.setPixelRatio(
-    Math.min(devicePixelRatio,2)
-  );
-
-  document
-    .getElementById("game")
-    .appendChild(renderer.domElement);
-
-  const light=
-    new THREE.HemisphereLight(
-      0xffffff,
-      0x304030,
-      2
-    );
-
-  scene.add(light);
-
-  const sun=
-    new THREE.DirectionalLight(
-      0xffffff,
-      2
-    );
-
-  sun.position.set(
-    80,
-    120,
-    50
-  );
-
-  scene.add(sun);
-
-  createWorld();
-
-  createPlayer();
-
-  createZombies(15);
-
-  updateUI();
-
-  animate();
+function resize(){
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
 }
 
-function createWorld(){
+window.addEventListener("resize", resize);
+resize();
 
-  const ground=
-    new THREE.Mesh(
-      new THREE.PlaneGeometry(
-        500,
-        500
-      ),
-      new THREE.MeshStandardMaterial({
-        color:0x39733a
-      })
-    );
+let playing = false;
+let hp = 100;
+let ammo = 30;
+let wave = 1;
+let score = 0;
 
-  ground.rotation.x=-Math.PI/2;
+let player = {
+  x:0,
+  y:0,
+  angle:0
+};
 
-  scene.add(ground);
+let zombies = [];
+let bullets = [];
 
-  createRoad(0,0,18,500);
-  createRoad(0,0,500,18);
+function randomZombie(){
+  const side = Math.floor(Math.random()*4);
 
-  for(let i=0;i<45;i++){
+  let x,y;
 
-    const x=
-      (Math.random()-.5)*430;
-
-    const z=
-      (Math.random()-.5)*430;
-
-    if(
-      Math.abs(x)<30 ||
-      Math.abs(z)<30
-    ) continue;
-
-    createBuilding(x,z);
+  if(side === 0){
+    x = Math.random()*W;
+    y = -50;
   }
 
-  for(let i=0;i<100;i++){
-
-    const x=
-      (Math.random()-.5)*450;
-
-    const z=
-      (Math.random()-.5)*450;
-
-    createTree(x,z);
+  if(side === 1){
+    x = W+50;
+    y = Math.random()*H;
   }
 
-  for(let i=0;i<15;i++){
-
-    const car=
-      new THREE.Mesh(
-        new THREE.BoxGeometry(
-          2.5,
-          1,
-          4
-        ),
-        new THREE.MeshStandardMaterial({
-          color:0x263b60
-        })
-      );
-
-    car.position.set(
-      (Math.random()-.5)*350,
-      .5,
-      (Math.random()-.5)*350
-    );
-
-    scene.add(car);
+  if(side === 2){
+    x = Math.random()*W;
+    y = H+50;
   }
-}
 
-function createRoad(x,z,w,d){
-
-  const road=
-    new THREE.Mesh(
-      new THREE.BoxGeometry(
-        w,
-        .08,
-        d
-      ),
-      new THREE.MeshStandardMaterial({
-        color:0x292929
-      })
-    );
-
-  road.position.set(
-    x,
-    .04,
-    z
-  );
-
-  scene.add(road);
-}
-
-function createBuilding(x,z){
-
-  const w=8+Math.random()*8;
-  const h=5+Math.random()*8;
-  const d=8+Math.random()*8;
-
-  const building=
-    new THREE.Mesh(
-      new THREE.BoxGeometry(
-        w,
-        h,
-        d
-      ),
-      new THREE.MeshStandardMaterial({
-        color:0x727272
-      })
-    );
-
-  building.position.set(
-    x,
-    h/2,
-    z
-  );
-
-  scene.add(building);
-}
-
-function createTree(x,z){
-
-  const trunk=
-    new THREE.Mesh(
-      new THREE.CylinderGeometry(
-        .4,
-        .6,
-        4,
-        8
-      ),
-      new THREE.MeshStandardMaterial({
-        color:0x68421f
-      })
-    );
-
-  trunk.position.set(
-    x,
-    2,
-    z
-  );
-
-  scene.add(trunk);
-
-  const crown=
-    new THREE.Mesh(
-      new THREE.SphereGeometry(
-        2.5,
-        8,
-        8
-      ),
-      new THREE.MeshStandardMaterial({
-        color:0x195f2a
-      })
-    );
-
-  crown.position.set(
-    x,
-    5,
-    z
-  );
-
-  scene.add(crown);
-}
-
-function createPlayer(){
-
-  player=new THREE.Group();
-
-  const body=
-    new THREE.Mesh(
-      new THREE.CapsuleGeometry(
-        .5,
-        1.25,
-        5,
-        10
-      ),
-      new THREE.MeshStandardMaterial({
-        color:0x246db0
-      })
-    );
-
-  body.position.y=1.15;
-
-  player.add(body);
-
-  const head=
-    new THREE.Mesh(
-      new THREE.SphereGeometry(
-        .43,
-        16,
-        16
-      ),
-      new THREE.MeshStandardMaterial({
-        color:0xffc39c
-      })
-    );
-
-  head.position.y=2.25;
-
-  player.add(head);
-
-  const gun=
-    new THREE.Mesh(
-      new THREE.BoxGeometry(
-        .18,
-        .18,
-        1.6
-      ),
-      new THREE.MeshStandardMaterial({
-        color:0x111111
-      })
-    );
-
-  gun.position.set(
-    .58,
-    1.3,
-    -.75
-  );
-
-  player.add(gun);
-
-  player.position.set(
-    0,
-    0,
-    0
-  );
-
-  scene.add(player);
-}
-
-function createZombies(amount){
-
-  for(let i=0;i<amount;i++){
-
-    const angle=
-      Math.random()*Math.PI*2;
-
-    const distance=
-      45+Math.random()*90;
-
-    const zombie=
-      new THREE.Group();
-
-    const body=
-      new THREE.Mesh(
-        new THREE.CapsuleGeometry(
-          .52,
-          1.2,
-          5,
-          8
-        ),
-        new THREE.MeshStandardMaterial({
-          color:0x5d914f
-        })
-      );
-
-    body.position.y=1.15;
-
-    zombie.add(body);
-
-    const head=
-      new THREE.Mesh(
-        new THREE.SphereGeometry(
-          .45,
-          12,
-          12
-        ),
-        new THREE.MeshStandardMaterial({
-          color:0x72985a
-        })
-      );
-
-    head.position.y=2.2;
-
-    zombie.add(head);
-
-    zombie.position.set(
-      Math.cos(angle)*distance,
-      0,
-      Math.sin(angle)*distance
-    );
-
-    zombie.userData={
-      hp:100,
-      speed:.02+Math.random()*.02,
-      attack:0
-    };
-
-    scene.add(zombie);
-
-    zombies.push(zombie);
+  if(side === 3){
+    x = -50;
+    y = Math.random()*H;
   }
+
+  return {
+    x:x,
+    y:y,
+    size:35 + Math.random()*15,
+    speed:0.4 + Math.random()*0.5,
+    hp:2
+  };
 }
 
-function shoot(){
+function createWave(){
+  zombies = [];
 
-  if(!running)return;
+  const count = 5 + wave * 2;
 
-  const now=Date.now();
+  for(let i=0;i<count;i++){
+    zombies.push(randomZombie());
+  }
 
-  if(now-lastShot<150)return;
+  waveText.textContent = wave;
+}
 
-  lastShot=now;
+function startGame(e){
+  if(e){
+    e.preventDefault();
+  }
 
-  if(ammo<=0){
+  if(playing) return;
 
-    showMessage(
-      "ПЕРЕЗАРЯДИСЬ!"
-    );
+  playing = true;
 
+  hp = 100;
+  ammo = 30;
+  wave = 1;
+  score = 0;
+
+  menu.style.display = "none";
+  hud.style.display = "block";
+  document.getElementById("gameOver").style.display = "none";
+
+  player.x = W/2;
+  player.y = H/2;
+
+  createWave();
+  updateHUD();
+}
+
+start.addEventListener("click",startGame);
+start.addEventListener("touchstart",startGame,{passive:false});
+
+restart.addEventListener("click",startGame);
+
+shoot.addEventListener("touchstart",function(e){
+  e.preventDefault();
+  shootZombie();
+},{passive:false});
+
+shoot.addEventListener("click",function(e){
+  e.preventDefault();
+  shootZombie();
+});
+
+function shootZombie(){
+
+  if(!playing) return;
+
+  if(ammo <= 0){
+    message.textContent = "Немає патронів!";
+    setTimeout(()=>message.textContent="",1000);
     return;
   }
 
   ammo--;
 
-  updateUI();
+  let nearest = null;
+  let nearestDistance = Infinity;
 
-  const ray=
-    new THREE.Raycaster();
+  for(const z of zombies){
 
-  ray.setFromCamera(
-    new THREE.Vector2(0,0),
-    camera
-  );
+    const dx = z.x - player.x;
+    const dy = z.y - player.y;
+    const distance = Math.sqrt(dx*dx+dy*dy);
 
-  const targets=[];
-
-  zombies.forEach(z=>{
-    z.traverse(o=>{
-      if(o.isMesh)
-        targets.push(o);
-    });
-  });
-
-  const hits=
-    ray.intersectObjects(
-      targets,
-      false
-    );
-
-  if(hits.length){
-
-    let object=
-      hits[0].object;
-
-    while(
-      object.parent &&
-      !zombies.includes(object)
-    ){
-      object=object.parent;
-    }
-
-    if(zombies.includes(object)){
-
-      object.userData.hp-=50;
-
-      if(object.userData.hp<=0){
-
-        scene.remove(object);
-
-        zombies=
-          zombies.filter(
-            z=>z!==object
-          );
-
-        coins+=10;
-
-        updateUI();
-
-        showMessage(
-          "+10 💰"
-        );
-
-        if(zombies.length===0){
-
-          wave++;
-
-          showMessage(
-            "ХВИЛЯ ПРОЙДЕНА!"
-          );
-
-          setTimeout(()=>{
-            createZombies(
-              10+wave*3
-            );
-
-            updateUI();
-
-          },1500);
-        }
-      }
+    if(distance < nearestDistance){
+      nearestDistance = distance;
+      nearest = z;
     }
   }
-}
 
-function reload(){
+  if(nearest && nearestDistance < 500){
 
-  if(
-    ammo>=30 ||
-    reserve<=0
-  ) return;
+    nearest.hp--;
 
-  const amount=
-    Math.min(
-      30-ammo,
-      reserve
-    );
-
-  ammo+=amount;
-  reserve-=amount;
-
-  updateUI();
-}
-
-function heal(){
-
-  if(hp>=100)return;
-
-  hp=
-    Math.min(
-      100,
-      hp+30
-    );
-
-  updateUI();
-}
-
-function collectLoot(){
-
-  for(
-    let i=loot.length-1;
-    i>=0;
-    i--
-  ){
-
-    const box=loot[i];
-
-    if(
-      player.position.distanceTo(
-        box.position
-      )<4
-    ){
-
-      reserve+=30;
-
-      scene.remove(box);
-
-      loot.splice(i,1);
-
-      showMessage(
-        "+30 ПАТРОНІВ"
-      );
-
-      updateUI();
+    if(nearest.hp <= 0){
+      zombies = zombies.filter(z=>z!==nearest);
+      score++;
     }
-  }
-}
 
-function updateZombies(){
-
-  zombies.forEach(z=>{
-
-    const distance=
-      z.position.distanceTo(
-        player.position
-      );
-
-    if(distance<60){
-
-      z.lookAt(
-        player.position.x,
-        z.position.y,
-        player.position.z
-      );
-
-      if(distance>2){
-
-        const direction=
-          new THREE.Vector3()
-          .subVectors(
-            player.position,
-            z.position
-          )
-          .normalize();
-
-        z.position.add(
-          direction.multiplyScalar(
-            z.userData.speed
-          )
-        );
-
-      }else{
-
-        z.userData.attack--;
-
-        if(
-          z.userData.attack<=0
-        ){
-
-          hp-=4;
-
-          z.userData.attack=55;
-
-          updateUI();
-
-          if(hp<=0){
-            gameOver();
-          }
-        }
-      }
-    }
-  });
-}
-
-function movePlayer(){
-
-  if(!running)return;
-
-  let x=0;
-  let z=0;
-
-  if(keys.w)z-=1;
-  if(keys.s)z+=1;
-  if(keys.a)x-=1;
-  if(keys.d)x+=1;
-
-  x+=joyX;
-  z+=joyY;
-
-  const length=
-    Math.hypot(x,z);
-
-  if(length>0){
-
-    x/=length;
-    z/=length;
-
-    const speed=
-      sprinting ? .22 : .12;
-
-    player.position.x+=
-      x*speed;
-
-    player.position.z+=
-      z*speed;
-
-    player.rotation.y=
-      Math.atan2(x,z);
   }
 
-  const distance=8;
-
-  const target=
-    new THREE.Vector3(
-      player.position.x-
-      Math.sin(yaw)*distance,
-
-      player.position.y+
-      4.5+
-      pitch*3,
-
-      player.position.z-
-      Math.cos(yaw)*distance
-    );
-
-  camera.position.lerp(
-    target,
-    .12
-  );
-
-  camera.lookAt(
-    player.position.x,
-    player.position.y+1.2,
-    player.position.z
-  );
+  updateHUD();
 }
 
-function updateUI(){
+function updateHUD(){
 
-  document.getElementById(
-    "hpText"
-  ).textContent=
-    Math.max(
-      0,
-      Math.floor(hp)
-    );
-
-  document.getElementById(
-    "hp"
-  ).style.width=
-    Math.max(
-      0,
-      hp
-    )+"%";
-
-  document.getElementById(
-    "ammo"
-  ).textContent=ammo;
-
-  document.getElementById(
-    "reserve"
-  ).textContent=reserve;
-
-  document.getElementById(
-    "coins"
-  ).textContent=coins;
-
-  document.getElementById(
-    "wave"
-  ).textContent=wave;
-
-  document.getElementById(
-    "zcount"
-  ).textContent=zombies.length;
+  hpText.textContent = Math.max(0,Math.floor(hp));
+  ammoText.textContent = ammo;
+  zombieText.textContent = zombies.length;
 }
 
-function showMessage(text){
+function update(){
 
-  const msg=
-    document.getElementById(
-      "msg"
-    );
+  if(!playing) return;
 
-  msg.textContent=text;
+  for(const z of zombies){
 
-  setTimeout(()=>{
-    if(msg.textContent===text)
-      msg.textContent="";
-  },1200);
+    const dx = player.x-z.x;
+    const dy = player.y-z.y;
+
+    const distance = Math.sqrt(dx*dx+dy*dy);
+
+    if(distance > 35){
+
+      z.x += dx/distance*z.speed;
+      z.y += dy/distance*z.speed;
+
+    }else{
+
+      hp -= 0.12;
+
+    }
+  }
+
+  if(zombies.length === 0){
+
+    wave++;
+
+    message.textContent = "🔥 НОВА ХВИЛЯ!";
+
+    setTimeout(()=>{
+      message.textContent="";
+    },1200);
+
+    createWave();
+  }
+
+  if(hp <= 0){
+    gameOver();
+  }
+
+  updateHUD();
 }
 
 function gameOver(){
 
-  running=false;
+  playing = false;
 
-  document.getElementById(
-    "msg"
-  ).innerHTML=
-    "💀 ТИ ПРОГРАВ<br><br>"+
-    "<button onclick='location.reload()'>ЗАНОВО</button>";
+  document.getElementById("gameOver").style.display = "flex";
 }
 
-function setupControls(){
+function drawBackground(){
 
-  document.addEventListener(
-    "keydown",
-    e=>{
-      keys[
-        e.key.toLowerCase()
-      ]=true;
+  ctx.fillStyle = "#182519";
+  ctx.fillRect(0,0,W,H);
 
-      if(
-        e.key.toLowerCase()==="r"
-      ) reload();
+  // земля
+  ctx.fillStyle = "#29402b";
 
-      if(
-        e.key.toLowerCase()==="h"
-      ) heal();
+  for(let x=0;x<W;x+=50){
 
-      if(e.key===" ")
-        shoot();
+    for(let y=0;y<H;y+=50){
+
+      ctx.strokeStyle = "rgba(255,255,255,.025)";
+      ctx.strokeRect(x,y,50,50);
+
     }
-  );
-
-  document.addEventListener(
-    "keyup",
-    e=>{
-      keys[
-        e.key.toLowerCase()
-      ]=false;
-    }
-  );
-
-  const play=
-    document.getElementById(
-      "play"
-    );
-
-  function startGame(e){
-
-    e.preventDefault();
-
-    if(running)return;
-
-    running=true;
-
-    document.getElementById(
-      "start"
-    ).style.display="none";
   }
 
-  play.addEventListener(
-    "click",
-    startGame
-  );
+  // дорога
+  ctx.fillStyle = "#303030";
+  ctx.fillRect(0,H/2-55,W,110);
 
-  play.addEventListener(
-    "touchstart",
-    startGame,
-    {passive:false}
-  );
+  ctx.fillStyle = "#d6b84a";
 
-  document.getElementById(
-    "fire"
-  ).addEventListener(
-    "touchstart",
-    e=>{
-      e.preventDefault();
-      shoot();
-    },
-    {passive:false}
-  );
-
-  document.getElementById(
-    "reload"
-  ).addEventListener(
-    "touchstart",
-    e=>{
-      e.preventDefault();
-      reload();
-    },
-    {passive:false}
-  );
-
-  document.getElementById(
-    "heal"
-  ).addEventListener(
-    "touchstart",
-    e=>{
-      e.preventDefault();
-      heal();
-    },
-    {passive:false}
-  );
-
-  document.getElementById(
-    "loot"
-  ).addEventListener(
-    "touchstart",
-    e=>{
-      e.preventDefault();
-      collectLoot();
-    },
-    {passive:false}
-  );
-
-  const run=
-    document.getElementById(
-      "run"
-    );
-
-  run.addEventListener(
-    "touchstart",
-    e=>{
-      e.preventDefault();
-      sprinting=true;
-    },
-    {passive:false}
-  );
-
-  run.addEventListener(
-    "touchend",
-    ()=>{
-      sprinting=false;
-    }
-  );
-
-  const joy=
-    document.getElementById(
-      "joy"
-    );
-
-  const stick=
-    document.getElementById(
-      "stick"
-    );
-
-  function moveJoy(e){
-
-    const rect=
-      joy.getBoundingClientRect();
-
-    const touch=
-      e.touches[0];
-
-    let x=
-      touch.clientX-
-      (rect.left+
-      rect.width/2);
-
-    let y=
-      touch.clientY-
-      (rect.top+
-      rect.height/2);
-
-    const max=45;
-
-    const distance=
-      Math.hypot(x,y);
-
-    if(distance>max){
-
-      x=x/distance*max;
-      y=y/distance*max;
-    }
-
-    stick.style.transform=
-      "translate("+
-      x+"px,"+
-      y+"px)";
-
-    joyX=x/max;
-    joyY=y/max;
+  for(let x=0;x<W;x+=80){
+    ctx.fillRect(x,H/2-3,45,6);
   }
 
-  joy.addEventListener(
-    "touchstart",
-    e=>{
-      e.preventDefault();
-      moveJoy(e);
-    },
-    {passive:false}
-  );
+  // будинки
+  drawBuilding(70,100,130,100);
+  drawBuilding(W-210,90,140,110);
+  drawBuilding(80,H-190,150,100);
+  drawBuilding(W-240,H-180,160,110);
 
-  joy.addEventListener(
-    "touchmove",
-    e=>{
-      e.preventDefault();
-      moveJoy(e);
-    },
-    {passive:false}
-  );
-
-  joy.addEventListener(
-    "touchend",
-    ()=>{
-      joyX=0;
-      joyY=0;
-      stick.style.transform=
-        "translate(0,0)";
-    }
-  );
-
-  let lastX=0;
-
-  renderer.domElement.addEventListener(
-    "touchstart",
-    e=>{
-      if(
-        e.touches.length===1
-      ){
-        lastX=
-          e.touches[0].clientX;
-      }
-    }
-  );
-
-  renderer.domElement.addEventListener(
-    "touchmove",
-    e=>{
-
-      if(
-        e.touches.length===1
-      ){
-
-        const x=
-          e.touches[0].clientX;
-
-        yaw+=
-          (x-lastX)*.006;
-
-        lastX=x;
-      }
-    }
-  );
 }
 
-function animate(){
+function drawBuilding(x,y,w,h){
 
-  requestAnimationFrame(
-    animate
-  );
+  ctx.fillStyle="#4b4b4b";
+  ctx.fillRect(x,y,w,h);
 
-  movePlayer();
+  ctx.fillStyle="#242424";
 
-  updateZombies();
-
-  renderer.render(
-    scene,
-    camera
-  );
+  for(let xx=x+20;xx<x+w-10;xx+=40){
+    for(let yy=y+20;yy<y+h-10;yy+=35){
+      ctx.fillRect(xx,yy,18,20);
+    }
+  }
 }
 
-window.addEventListener(
-  "resize",
-  ()=>{
-    camera.aspect=
-      innerWidth/innerHeight;
+function drawPlayer(){
 
-    camera.updateProjectionMatrix();
+  ctx.save();
 
-    renderer.setSize(
-      innerWidth,
-      innerHeight
-    );
+  ctx.translate(player.x,player.y);
+
+  // тінь
+  ctx.fillStyle="rgba(0,0,0,.4)";
+  ctx.beginPath();
+  ctx.ellipse(0,20,22,10,0,0,Math.PI*2);
+  ctx.fill();
+
+  // тіло
+  ctx.fillStyle="#2474d8";
+  ctx.fillRect(-14,-5,28,30);
+
+  // голова
+  ctx.fillStyle="#e4b58c";
+  ctx.beginPath();
+  ctx.arc(0,-17,13,0,Math.PI*2);
+  ctx.fill();
+
+  // зброя
+  ctx.rotate(player.angle);
+
+  ctx.fillStyle="#171717";
+  ctx.fillRect(10,-4,30,8);
+
+  ctx.restore();
+}
+
+function drawZombie(z){
+
+  const angle = Math.atan2(
+    player.y-z.y,
+    player.x-z.x
+  );
+
+  ctx.save();
+
+  ctx.translate(z.x,z.y);
+
+  // тінь
+  ctx.fillStyle="rgba(0,0,0,.4)";
+  ctx.beginPath();
+  ctx.ellipse(0,20,22,9,0,0,Math.PI*2);
+  ctx.fill();
+
+  // тіло
+  ctx.fillStyle="#4e873f";
+  ctx.fillRect(-14,-5,28,30);
+
+  // голова
+  ctx.fillStyle="#86a85b";
+  ctx.beginPath();
+  ctx.arc(0,-18,14,0,Math.PI*2);
+  ctx.fill();
+
+  // очі
+  ctx.fillStyle="#111";
+  ctx.fillRect(-7,-20,4,4);
+  ctx.fillRect(3,-20,4,4);
+
+  // руки
+  ctx.strokeStyle="#86a85b";
+  ctx.lineWidth=7;
+
+  ctx.beginPath();
+  ctx.moveTo(-12,0);
+  ctx.lineTo(-27,12);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(12,0);
+  ctx.lineTo(27,12);
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+function draw(){
+
+  drawBackground();
+
+  for(const z of zombies){
+    drawZombie(z);
   }
-);
 
-init();
+  drawPlayer();
+
+}
+
+function loop(){
+
+  update();
+  draw();
+
+  requestAnimationFrame(loop);
+}
+
+loop();
+
+let touching = false;
+
+canvas.addEventListener("touchstart",function(e){
+
+  touching=true;
+
+},{passive:true});
+
+canvas.addEventListener("touchmove",function(e){
+
+  if(!playing || !touching) return;
+
+  const touch=e.touches[0];
+
+  player.angle = Math.atan2(
+    touch.clientY-player.y,
+    touch.clientX-player.x
+  );
+
+},{passive:true});
+
+canvas.addEventListener("touchend",function(){
+
+  touching=false;
+
+});
+
+document.addEventListener("keydown",function(e){
+
+  if(e.code==="Space"){
+    shootZombie();
+  }
+
+  if(e.code==="KeyR"){
+    ammo=30;
+    updateHUD();
+  }
+
+});
 
 </script>
 
