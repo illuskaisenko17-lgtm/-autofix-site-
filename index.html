@@ -2,57 +2,760 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Тест гри</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>ZONE: AFTERMATH</title>
 
 <style>
-body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#111;
-    color:white;
-    font-family:Arial;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  user-select:none;
+  -webkit-user-select:none;
 }
 
-button{
-    padding:20px 40px;
-    font-size:22px;
-    border:0;
-    border-radius:15px;
-    background:red;
-    color:white;
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#101510;
+  font-family:Arial,sans-serif;
+}
+
+canvas{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+
+#menu{
+  position:fixed;
+  inset:0;
+  z-index:10;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  background:
+    radial-gradient(circle,#39452f 0%,#111710 55%,#050705 100%);
+}
+
+#menu h1{
+  font-size:46px;
+  letter-spacing:5px;
+  text-shadow:0 4px 15px #000;
+}
+
+#menu p{
+  margin:12px 0 30px;
+  color:#aaa;
+}
+
+#start{
+  padding:18px 45px;
+  border:1px solid #88936d;
+  border-radius:8px;
+  background:#333d29;
+  color:white;
+  font-size:20px;
+  font-weight:bold;
+}
+
+#start:active{
+  background:#596844;
+}
+
+#hud{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:5;
+  pointer-events:none;
+  color:white;
+}
+
+#stats{
+  position:absolute;
+  left:15px;
+  top:15px;
+  padding:12px;
+  background:rgba(0,0,0,.55);
+  border-left:3px solid #a9b875;
+  font-size:15px;
+  line-height:1.7;
+}
+
+#crosshair{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:25px;
+  height:25px;
+}
+
+#crosshair:before,
+#crosshair:after{
+  content:"";
+  position:absolute;
+  background:#ddd;
+}
+
+#crosshair:before{
+  width:2px;
+  height:25px;
+  left:11px;
+}
+
+#crosshair:after{
+  width:25px;
+  height:2px;
+  top:11px;
+}
+
+#shoot{
+  pointer-events:auto;
+  position:absolute;
+  right:25px;
+  bottom:35px;
+  width:85px;
+  height:85px;
+  border-radius:50%;
+  border:2px solid #aaa;
+  background:rgba(80,80,70,.7);
+  color:white;
+  font-size:30px;
+}
+
+#shoot:active{
+  background:#9a4d32;
+}
+
+#loot{
+  pointer-events:auto;
+  position:absolute;
+  right:30px;
+  bottom:135px;
+  padding:12px 18px;
+  border:1px solid #999;
+  border-radius:7px;
+  background:rgba(30,35,25,.8);
+  color:white;
+}
+
+#message{
+  position:absolute;
+  top:80px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:22px;
+  font-weight:bold;
+  text-shadow:0 2px 8px black;
+}
+
+#gameover{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:20;
+  background:rgba(0,0,0,.85);
+  color:white;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  text-align:center;
+}
+
+#gameover h2{
+  font-size:42px;
+  margin-bottom:20px;
+}
+
+#again{
+  padding:15px 35px;
+  border:0;
+  border-radius:8px;
+  background:#485538;
+  color:white;
+  font-size:19px;
 }
 </style>
 </head>
 
 <body>
 
-<button id="start">ПОЧАТИ ГРУ</button>
+<canvas id="game"></canvas>
+
+<div id="menu">
+  <h1>ZONE</h1>
+  <p>AFTERMATH • Чорнобильська Зона</p>
+  <button id="start">УВІЙТИ В ЗОНУ</button>
+</div>
+
+<div id="hud">
+
+  <div id="stats">
+    ❤️ Здоров'я: <span id="hp">100</span><br>
+    ☢️ Радіація: <span id="rad">0</span>%<br>
+    🔫 Патрони: <span id="ammo">30</span><br>
+    💰 Рублі: <span id="money">0</span><br>
+    🧟 Монстрів: <span id="monsters">0</span>
+  </div>
+
+  <div id="message"></div>
+
+  <div id="crosshair"></div>
+
+  <button id="loot">🎒 ЛУТ</button>
+  <button id="shoot">🔫</button>
+
+</div>
+
+<div id="gameover">
+  <h2>☠️ ТИ ЗАГИНУВ У ЗОНІ</h2>
+  <button id="again">ПОВЕРНУТИСЯ</button>
+</div>
 
 <script>
-document.getElementById("start").addEventListener("click", function(){
 
-    document.body.innerHTML = `
-        <div style="
-            width:100%;
-            height:100vh;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            background:#182519;
-            color:white;
-            font-family:Arial;
-            font-size:35px;
-        ">
-            🧟 ГРА ЗАПУСТИЛАСЯ!
-        </div>
-    `;
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
 
+const menu=document.getElementById("menu");
+const hud=document.getElementById("hud");
+const start=document.getElementById("start");
+const shoot=document.getElementById("shoot");
+const loot=document.getElementById("loot");
+const gameover=document.getElementById("gameover");
+const again=document.getElementById("again");
+
+const hpText=document.getElementById("hp");
+const radText=document.getElementById("rad");
+const ammoText=document.getElementById("ammo");
+const moneyText=document.getElementById("money");
+const monstersText=document.getElementById("monsters");
+const message=document.getElementById("message");
+
+let W,H;
+
+function resize(){
+  W=canvas.width=innerWidth;
+  H=canvas.height=innerHeight;
+}
+
+resize();
+addEventListener("resize",resize);
+
+let running=false;
+
+let hp=100;
+let radiation=0;
+let ammo=30;
+let money=0;
+
+let player={
+  x:0,
+  y:0,
+  angle:0,
+  speed:3
+};
+
+let monsters=[];
+let artifacts=[];
+let bullets=[];
+
+let keys={};
+
+document.addEventListener("keydown",e=>{
+  keys[e.key.toLowerCase()]=true;
+
+  if(e.key===" "){
+    shootWeapon();
+  }
+
+  if(e.key.toLowerCase()==="r"){
+    ammo=30;
+    updateHUD();
+  }
 });
+
+document.addEventListener("keyup",e=>{
+  keys[e.key.toLowerCase()]=false;
+});
+
+function startGame(e){
+
+  if(e)e.preventDefault();
+
+  running=true;
+
+  menu.style.display="none";
+  hud.style.display="block";
+  gameover.style.display="none";
+
+  hp=100;
+  radiation=0;
+  ammo=30;
+  money=0;
+
+  player.x=W/2;
+  player.y=H/2;
+
+  createWorld();
+
+  updateHUD();
+}
+
+start.addEventListener("click",startGame);
+
+start.addEventListener("touchstart",startGame,{
+  passive:false
+});
+
+again.addEventListener("click",startGame);
+
+function createWorld(){
+
+  monsters=[];
+  artifacts=[];
+
+  for(let i=0;i<7;i++){
+
+    monsters.push({
+      x:Math.random()*W,
+      y:Math.random()*H,
+      hp:3,
+      speed:.4+Math.random()*.5,
+      type:i%2
+    });
+  }
+
+  for(let i=0;i<5;i++){
+
+    artifacts.push({
+      x:100+Math.random()*(W-200),
+      y:100+Math.random()*(H-200),
+      taken:false
+    });
+  }
+}
+
+function updateHUD(){
+
+  hpText.textContent=Math.max(0,Math.floor(hp));
+  radText.textContent=Math.floor(radiation);
+  ammoText.textContent=ammo;
+  moneyText.textContent=money;
+  monstersText.textContent=monsters.length;
+}
+
+function movePlayer(){
+
+  if(keys["w"]||keys["arrowup"])
+    player.y-=player.speed;
+
+  if(keys["s"]||keys["arrowdown"])
+    player.y+=player.speed;
+
+  if(keys["a"]||keys["arrowleft"])
+    player.x-=player.speed;
+
+  if(keys["d"]||keys["arrowright"])
+    player.x+=player.speed;
+
+  player.x=Math.max(20,Math.min(W-20,player.x));
+  player.y=Math.max(20,Math.min(H-20,player.y));
+}
+
+function updateMonsters(){
+
+  for(const m of monsters){
+
+    const dx=player.x-m.x;
+    const dy=player.y-m.y;
+
+    const dist=Math.sqrt(dx*dx+dy*dy);
+
+    if(dist>30){
+
+      m.x+=dx/dist*m.speed;
+      m.y+=dy/dist*m.speed;
+
+    }else{
+
+      hp-=.08;
+
+    }
+  }
+}
+
+function shootWeapon(){
+
+  if(!running)return;
+
+  if(ammo<=0){
+
+    message.textContent="Немає патронів";
+
+    setTimeout(()=>{
+      message.textContent="";
+    },1000);
+
+    return;
+  }
+
+  ammo--;
+
+  let target=null;
+  let best=Infinity;
+
+  for(const m of monsters){
+
+    const dx=m.x-player.x;
+    const dy=m.y-player.y;
+
+    const dist=Math.sqrt(dx*dx+dy*dy);
+
+    if(dist<best && dist<500){
+
+      best=dist;
+      target=m;
+    }
+  }
+
+  if(target){
+
+    target.hp--;
+
+    if(target.hp<=0){
+
+      monsters=monsters.filter(m=>m!==target);
+
+      money+=100;
+
+      message.textContent="+100₽";
+
+      setTimeout(()=>{
+        message.textContent="";
+      },700);
+    }
+  }
+
+  updateHUD();
+}
+
+shoot.addEventListener("click",e=>{
+  e.preventDefault();
+  shootWeapon();
+});
+
+shoot.addEventListener("touchstart",e=>{
+  e.preventDefault();
+  shootWeapon();
+},{
+  passive:false
+});
+
+loot.addEventListener("click",collectLoot);
+
+function collectLoot(){
+
+  for(const a of artifacts){
+
+    if(a.taken)continue;
+
+    const dx=a.x-player.x;
+    const dy=a.y-player.y;
+
+    const d=Math.sqrt(dx*dx+dy*dy);
+
+    if(d<70){
+
+      a.taken=true;
+      money+=500;
+
+      message.textContent="💎 Артефакт +500₽";
+
+      setTimeout(()=>{
+        message.textContent="";
+      },1200);
+
+      updateHUD();
+      return;
+    }
+  }
+
+  message.textContent="Підійди ближче до артефакту";
+
+  setTimeout(()=>{
+    message.textContent="";
+  },1000);
+}
+
+function updateRadiation(){
+
+  // невеликі радіаційні зони
+  const dangerX=W*.72;
+  const dangerY=H*.3;
+
+  const dx=player.x-dangerX;
+  const dy=player.y-dangerY;
+
+  const d=Math.sqrt(dx*dx+dy*dy);
+
+  if(d<130){
+
+    radiation+=.03;
+
+    if(radiation>100){
+      hp-=.04;
+    }
+
+  }else{
+
+    radiation=Math.max(0,radiation-.015);
+
+  }
+}
+
+function update(){
+
+  if(!running)return;
+
+  movePlayer();
+  updateMonsters();
+  updateRadiation();
+
+  if(hp<=0){
+
+    running=false;
+    gameover.style.display="flex";
+  }
+
+  updateHUD();
+}
+
+function drawBackground(){
+
+  ctx.fillStyle="#202a20";
+  ctx.fillRect(0,0,W,H);
+
+  // трава
+  for(let i=0;i<150;i++){
+
+    const x=(i*83)%W;
+    const y=(i*137)%H;
+
+    ctx.strokeStyle="rgba(120,140,90,.18)";
+
+    ctx.beginPath();
+    ctx.moveTo(x,y);
+    ctx.lineTo(x+3,y-8);
+    ctx.stroke();
+  }
+
+  // дорога
+  ctx.fillStyle="#363833";
+  ctx.fillRect(0,H*.52,W,90);
+
+  ctx.fillStyle="#77786b";
+
+  for(let x=0;x<W;x+=90){
+    ctx.fillRect(x,H*.52+43,50,4);
+  }
+
+  // будинки
+  building(60,90,150,100);
+  building(W-220,80,150,110);
+  building(50,H-200,170,110);
+  building(W-230,H-210,180,120);
+
+  // радіаційна зона
+  ctx.fillStyle="rgba(120,190,50,.15)";
+  ctx.beginPath();
+  ctx.arc(W*.72,H*.3,130,0,Math.PI*2);
+  ctx.fill();
+
+  ctx.strokeStyle="rgba(180,220,90,.45)";
+  ctx.lineWidth=2;
+  ctx.beginPath();
+  ctx.arc(W*.72,H*.3,130,0,Math.PI*2);
+  ctx.stroke();
+
+  ctx.fillStyle="#b8d45b";
+  ctx.font="22px Arial";
+  ctx.fillText("☢",W*.72-11,H*.3+8);
+}
+
+function building(x,y,w,h){
+
+  ctx.fillStyle="#454841";
+  ctx.fillRect(x,y,w,h);
+
+  ctx.fillStyle="#171a17";
+
+  for(let xx=x+20;xx<x+w-20;xx+=42){
+
+    for(let yy=y+20;yy<y+h-15;yy+=38){
+
+      ctx.fillRect(xx,yy,20,22);
+    }
+  }
+
+  ctx.strokeStyle="#687060";
+  ctx.strokeRect(x,y,w,h);
+}
+
+function drawArtifacts(){
+
+  for(const a of artifacts){
+
+    if(a.taken)continue;
+
+    ctx.save();
+
+    ctx.translate(a.x,a.y);
+
+    ctx.rotate(Date.now()/1000);
+
+    ctx.fillStyle="#8fc85a";
+    ctx.shadowColor="#aaff55";
+    ctx.shadowBlur=15;
+
+    ctx.beginPath();
+    ctx.moveTo(0,-14);
+    ctx.lineTo(10,0);
+    ctx.lineTo(0,14);
+    ctx.lineTo(-10,0);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.restore();
+  }
+}
+
+function drawMonsters(){
+
+  for(const m of monsters){
+
+    ctx.save();
+
+    ctx.translate(m.x,m.y);
+
+    ctx.fillStyle="#49613e";
+    ctx.fillRect(-15,-5,30,30);
+
+    ctx.fillStyle="#738c55";
+
+    ctx.beginPath();
+    ctx.arc(0,-18,14,0,Math.PI*2);
+    ctx.fill();
+
+    ctx.fillStyle="#151515";
+
+    ctx.fillRect(-7,-20,4,4);
+    ctx.fillRect(3,-20,4,4);
+
+    ctx.restore();
+  }
+}
+
+function drawPlayer(){
+
+  ctx.save();
+
+  ctx.translate(player.x,player.y);
+
+  // тінь
+  ctx.fillStyle="rgba(0,0,0,.5)";
+  ctx.beginPath();
+  ctx.ellipse(0,18,22,8,0,0,Math.PI*2);
+  ctx.fill();
+
+  // куртка сталкера
+  ctx.fillStyle="#4a5143";
+  ctx.fillRect(-14,-5,28,30);
+
+  // голова
+  ctx.fillStyle="#b98d68";
+  ctx.beginPath();
+  ctx.arc(0,-18,12,0,Math.PI*2);
+  ctx.fill();
+
+  // зброя
+  ctx.rotate(player.angle);
+
+  ctx.fillStyle="#171717";
+  ctx.fillRect(10,-4,35,7);
+
+  ctx.restore();
+}
+
+function draw(){
+
+  drawBackground();
+  drawArtifacts();
+  drawMonsters();
+  drawPlayer();
+
+  // затемнення по краях
+  const gradient=ctx.createRadialGradient(
+    W/2,H/2,100,
+    W/2,H/2,Math.max(W,H)*.7
+  );
+
+  gradient.addColorStop(0,"rgba(0,0,0,0)");
+  gradient.addColorStop(1,"rgba(0,0,0,.55)");
+
+  ctx.fillStyle=gradient;
+  ctx.fillRect(0,0,W,H);
+}
+
+function loop(){
+
+  update();
+  draw();
+
+  requestAnimationFrame(loop);
+}
+
+loop();
+
+let touchX=0;
+let touchY=0;
+
+canvas.addEventListener("touchstart",e=>{
+
+  const t=e.touches[0];
+
+  touchX=t.clientX;
+  touchY=t.clientY;
+
+},{
+  passive:true
+});
+
+canvas.addEventListener("touchmove",e=>{
+
+  if(!running)return;
+
+  const t=e.touches[0];
+
+  const dx=t.clientX-touchX;
+  const dy=t.clientY-touchY;
+
+  player.angle=Math.atan2(dy,dx);
+
+  touchX=t.clientX;
+  touchY=t.clientY;
+
+},{
+  passive:true
+});
+
 </script>
 
 </body>
