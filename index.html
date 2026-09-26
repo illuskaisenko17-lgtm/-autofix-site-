@@ -2,169 +2,179 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#071017">
-<title>AUTO MECHANIC PRO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Car Repair Center</title>
 
 <style>
 :root{
   --bg:#071017;
-  --bg2:#0d1820;
-  --panel:rgba(10,19,27,.94);
-  --panel2:#111f29;
-  --line:#28414f;
-  --cyan:#39dfff;
-  --cyan2:#0da7d4;
-  --yellow:#ffd54a;
-  --green:#52e7a4;
-  --red:#ff5c68;
-  --orange:#ff9c22;
-  --text:#f6fbff;
-  --muted:#aab9c4;
-  --shadow:0 20px 60px rgba(0,0,0,.45);
+  --panel:rgba(9,16,22,.92);
+  --line:#32444f;
+  --cyan:#3bdcff;
+  --blue:#0a8fd0;
+  --green:#48e39e;
+  --yellow:#ffd84a;
+  --orange:#ff9c21;
+  --red:#ff4c5f;
+  --white:#f7fbff;
+  --muted:#9caeb9;
 }
 
 *{
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
+  user-select:none;
 }
 
 html,body{
-  margin:0;
   width:100%;
   height:100%;
+  margin:0;
   overflow:hidden;
-  background:#050a0e;
-  color:var(--text);
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#02070a;
+  color:var(--white);
+  font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-  user-select:none;
-  touch-action:manipulation;
+  touch-action:none;
 }
 
 button{
-  font:inherit;
-  color:white;
   border:0;
-  cursor:pointer;
+  color:white;
+  font-family:inherit;
 }
 
-.app{
+#game{
   position:relative;
   width:100%;
-  height:100dvh;
+  height:100%;
   overflow:hidden;
   background:
-    radial-gradient(circle at 50% 0%,rgba(40,133,160,.18),transparent 32%),
-    linear-gradient(#081017,#071017 55%,#04080b);
+    radial-gradient(circle at 50% 28%,rgba(42,105,127,.22),transparent 28%),
+    linear-gradient(#071018,#0a151c 60%,#05090d);
 }
 
-/* BACKGROUND */
-.garage{
+/* -------------------------------------------------------
+   GARAGE
+------------------------------------------------------- */
+
+.garage-bg{
   position:absolute;
   inset:0;
   overflow:hidden;
 }
 
-.beams{
+.wall{
   position:absolute;
-  inset:0;
+  inset:0 0 34% 0;
+  background:
+    linear-gradient(90deg,
+      rgba(255,255,255,.03) 1px,
+      transparent 1px),
+    linear-gradient(
+      rgba(255,255,255,.025) 1px,
+      transparent 1px),
+    linear-gradient(#0a151d,#081119);
+  background-size:72px 72px,72px 72px,100% 100%;
+}
+
+.wall-lines{
+  position:absolute;
+  top:14%;
+  left:0;
+  right:0;
+  height:8px;
   background:
     linear-gradient(90deg,
       transparent 0 6%,
-      rgba(35,55,66,.8) 6% 7%,
-      transparent 7% 20%,
-      rgba(35,55,66,.8) 20% 21%,
-      transparent 21% 42%,
-      rgba(35,55,66,.8) 42% 43%,
-      transparent 43% 65%,
-      rgba(35,55,66,.8) 65% 66%,
-      transparent 66% 87%,
-      rgba(35,55,66,.8) 87% 88%,
-      transparent 88%);
-  opacity:.55;
-}
-
-.neon{
-  position:absolute;
-  height:5px;
-  border-radius:10px;
-  background:#c9f8ff;
+      #5defff 6% 26%,
+      transparent 26% 33%,
+      #5defff 33% 53%,
+      transparent 53% 62%,
+      #5defff 62% 85%,
+      transparent 85%);
   box-shadow:
-    0 0 8px #7cecff,
-    0 0 18px #28dfff,
-    0 0 35px #00a6ff;
-  animation:flicker 4s infinite;
+    0 0 12px #5defff,
+    0 0 30px #21b9e8;
+  opacity:.8;
 }
 
-.n1{top:88px;left:10%;width:22%}
-.n2{top:88px;right:9%;width:25%}
-.n3{top:190px;left:31%;width:38%;opacity:.35}
-.n4{bottom:19%;left:8%;width:22%;opacity:.25}
-.n5{bottom:19%;right:8%;width:22%;opacity:.25}
+.panel-wall{
+  position:absolute;
+  left:5%;
+  right:5%;
+  top:24%;
+  height:40%;
+  border:2px solid #263c48;
+  background:
+    linear-gradient(90deg,rgba(20,34,42,.88),rgba(2,7,11,.92),rgba(20,34,42,.88));
+  box-shadow:inset 0 0 70px #000;
+}
 
-@keyframes flicker{
-  0%,18%,20%,52%,100%{opacity:.95}
-  19%,51%{opacity:.5}
+.work-lights{
+  position:absolute;
+  top:8%;
+  left:4%;
+  right:4%;
+  display:flex;
+  justify-content:space-between;
+}
+
+.work-light{
+  width:16%;
+  height:4px;
+  border-radius:20px;
+  background:#c9fbff;
+  box-shadow:0 0 8px #bdfaff,0 0 22px #25dcff;
 }
 
 .floor{
   position:absolute;
-  left:-10%;
-  right:-10%;
-  bottom:-5%;
-  height:43%;
-  transform:perspective(700px) rotateX(58deg);
+  left:-15%;
+  right:-15%;
+  bottom:-10%;
+  height:52%;
+  transform:perspective(700px) rotateX(61deg);
   transform-origin:bottom;
   background:
-    repeating-linear-gradient(90deg,
-      transparent 0 9.5%,
-      rgba(88,112,125,.13) 9.6% 9.8%),
-    repeating-linear-gradient(0deg,
-      transparent 0 16%,
-      rgba(88,112,125,.12) 16.2% 16.5%),
-    linear-gradient(#0b141a,#050a0d);
-}
-
-.back-wall{
-  position:absolute;
-  left:7%;
-  right:7%;
-  top:31%;
-  height:40%;
-  border:3px solid #294653;
-  border-radius:8px 8px 0 0;
-  background:
-    linear-gradient(90deg,
-      rgba(18,31,40,.85),
-      rgba(3,8,11,.85) 50%,
-      rgba(18,31,40,.85));
-  box-shadow:inset 0 0 70px #000;
-}
-
-.back-wall::before{
-  content:"";
-  position:absolute;
-  top:17%;
-  left:8%;
-  width:26%;
-  height:55%;
-  background:
     repeating-linear-gradient(
-      #172731 0 38px,
-      #243541 38px 41px,
-      #172731 41px 74px
-    );
-  opacity:.8;
+      90deg,
+      transparent 0 8%,
+      rgba(127,150,160,.12) 8.2% 8.5%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 13%,
+      rgba(127,150,160,.10) 13.2% 13.6%),
+    linear-gradient(#0d181e,#03080c);
 }
 
-/* TOP UI */
-.topbar{
+.tool-cabinet{
   position:absolute;
-  z-index:20;
+  left:3%;
+  bottom:25%;
+  width:14%;
+  height:31%;
+  min-width:70px;
+  background:linear-gradient(#182931,#0d171d);
+  border:2px solid #253b46;
+}
+
+.tool-cabinet div{
+  height:19%;
+  margin:5%;
+  background:#233640;
+  border:1px solid #314b57;
+}
+
+/* -------------------------------------------------------
+   HUD
+------------------------------------------------------- */
+
+.top-ui{
+  position:absolute;
+  z-index:50;
   top:14px;
   left:14px;
   right:14px;
@@ -173,346 +183,415 @@ button{
   align-items:stretch;
 }
 
-.brand{
+.logo-box{
   flex:1;
   min-width:0;
-  padding:12px 14px;
-  border:1px solid rgba(124,237,255,.18);
+  padding:12px 15px;
+  border:1px solid rgba(104,193,220,.25);
   border-radius:20px;
-  background:linear-gradient(135deg,rgba(8,18,25,.96),rgba(12,26,35,.92));
-  box-shadow:var(--shadow);
-  backdrop-filter:blur(14px);
+  background:rgba(8,16,23,.91);
+  backdrop-filter:blur(12px);
 }
 
-.brand-top{
-  display:flex;
-  align-items:center;
-  gap:8px;
+.logo-title{
   font-size:clamp(15px,4vw,22px);
   font-weight:900;
-  letter-spacing:.8px;
 }
 
-.brand-sub{
-  margin-top:5px;
+.logo-sub{
+  margin-top:4px;
+  color:var(--muted);
   font-size:12px;
-  color:#9dafbb;
 }
 
-.cash{
-  min-width:116px;
+.money-box{
+  min-width:112px;
+  padding:0 15px;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:8px;
-  padding:0 16px;
-  border:1px solid rgba(255,213,74,.2);
+  border:1px solid rgba(255,216,74,.2);
   border-radius:20px;
-  background:linear-gradient(135deg,#101a20,#0b1217);
-  box-shadow:var(--shadow);
-  font-size:18px;
+  background:rgba(8,14,18,.95);
+  font-size:17px;
   font-weight:900;
+  white-space:nowrap;
 }
 
-.cash b{
+.money-box span{
   color:var(--yellow);
 }
 
-/* MISSION */
-.mission{
+.quest{
   position:absolute;
-  z-index:18;
-  top:105px;
-  left:18px;
-  right:18px;
-  padding:17px;
-  border:1px solid rgba(108,157,179,.3);
-  border-radius:22px;
+  z-index:48;
+  top:95px;
+  left:14px;
+  right:14px;
+  padding:14px;
+  border-radius:20px;
+  border:1px solid rgba(96,139,158,.28);
   background:rgba(5,11,16,.88);
-  backdrop-filter:blur(14px);
-  box-shadow:var(--shadow);
+  backdrop-filter:blur(12px);
 }
 
-.mission h1{
-  margin:0;
-  font-size:clamp(23px,6vw,39px);
-  line-height:1;
-  letter-spacing:-1px;
+.quest-title{
+  font-size:23px;
+  font-weight:900;
+  margin-bottom:6px;
 }
 
-.mission p{
-  margin:9px 0 0;
-  color:#aab7c0;
-  font-size:14px;
+.quest-text{
+  color:#aab9c4;
+  font-size:13px;
   line-height:1.35;
 }
 
-.progress{
-  height:7px;
+.quest-progress{
+  margin-top:10px;
+  height:6px;
+  overflow:hidden;
   border-radius:10px;
-  background:#182832;
-  overflow:hidden;
-  margin-top:12px;
+  background:#172630;
 }
 
-.progress > div{
-  width:34%;
+.quest-progress div{
   height:100%;
-  background:linear-gradient(90deg,var(--cyan),#8ff8ff);
-  box-shadow:0 0 16px rgba(57,223,255,.45);
-  transition:.35s;
+  width:0%;
+  background:linear-gradient(90deg,#28d6ff,#8ef7ff);
+  box-shadow:0 0 14px #28d6ff;
+  transition:.25s;
 }
 
-/* CAR AREA */
-.car-scene{
+/* -------------------------------------------------------
+   3D GAME WORLD
+------------------------------------------------------- */
+
+.world{
   position:absolute;
-  z-index:8;
-  left:0;
-  right:0;
-  top:28%;
-  bottom:17%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  inset:0;
   overflow:hidden;
 }
 
-.car-wrap{
-  position:relative;
-  width:min(94vw,720px);
-  height:min(62vh,500px);
-  transform:translateY(3%);
-  filter:drop-shadow(0 35px 28px rgba(0,0,0,.65));
-  transition:.35s;
-}
-
-.car-wrap.lifted{
-  transform:translateY(-11%) scale(.96);
-}
-
-.car-wrap.broken{
-  animation:shake .18s 2;
-}
-
-@keyframes shake{
-  0%,100%{transform:translateY(3%) translateX(0)}
-  25%{transform:translateY(3%) translateX(-7px)}
-  75%{transform:translateY(3%) translateX(7px)}
+.game-camera{
+  position:absolute;
+  inset:0;
+  transform-origin:center center;
+  transition:transform .15s linear;
 }
 
 .car-shadow{
   position:absolute;
-  left:7%;
-  right:7%;
-  bottom:6%;
-  height:20%;
+  z-index:3;
+  left:50%;
+  bottom:24%;
+  width:60%;
+  height:9%;
+  transform:translateX(-50%);
   border-radius:50%;
-  background:#000;
-  opacity:.78;
+  background:rgba(0,0,0,.65);
   filter:blur(14px);
 }
 
 .car{
   position:absolute;
-  left:4%;
-  right:4%;
-  top:4%;
-  bottom:8%;
+  z-index:10;
+  left:50%;
+  top:52%;
+  width:min(86vw,620px);
+  height:min(40vw,300px);
+  max-height:330px;
+  transform:translate(-50%,-50%);
+  transition:.35s;
+  filter:drop-shadow(0 25px 24px rgba(0,0,0,.65));
 }
 
-svg{
+.car.lifted{
+  transform:translate(-50%,-62%) scale(.92);
+}
+
+.car.hit{
+  animation:shake .16s 2;
+}
+
+@keyframes shake{
+  0%,100%{transform:translate(-50%,-50%)}
+  25%{transform:translate(calc(-50% - 6px),-50%)}
+  75%{transform:translate(calc(-50% + 6px),-50%)}
+}
+
+.car-svg{
   width:100%;
   height:100%;
-  overflow:visible;
 }
 
-.car-part{
-  transition:.18s;
-  transform-box:fill-box;
-  transform-origin:center;
-}
-
-.car-part.active{
-  filter:
-    drop-shadow(0 0 5px #fff)
-    drop-shadow(0 0 16px var(--cyan));
-}
-
-.car-part.fix{
-  animation:pulsePart 1s infinite alternate;
-}
-
-@keyframes pulsePart{
-  from{opacity:.72}
-  to{opacity:1;filter:drop-shadow(0 0 12px #ff8a22)}
-}
-
-.headlight.blink{
-  animation:headlight 0.7s infinite alternate;
-}
-
-@keyframes headlight{
-  from{filter:drop-shadow(0 0 2px #ffe36d)}
-  to{filter:drop-shadow(0 0 25px #fff27b)}
-}
-
-/* TARGET HINTS */
-.target{
-  position:absolute;
-  z-index:12;
-  width:46px;
-  height:46px;
-  border:2px solid rgba(57,223,255,.9);
-  border-radius:50%;
-  background:rgba(9,26,34,.7);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:#fff;
-  font-size:19px;
-  box-shadow:0 0 20px rgba(57,223,255,.25);
-  animation:float 1.4s infinite ease-in-out;
-}
-
-.target.hidden{
-  display:none;
-}
-
-.target:hover{
-  background:#17343e;
-}
-
-.target1{left:12%;top:39%}
-.target2{left:41%;top:48%}
-.target3{right:12%;top:39%}
-.target4{left:50%;top:17%}
-.target5{right:31%;top:60%}
-
-@keyframes float{
-  50%{transform:translateY(-5px) scale(1.08)}
-}
-
-/* BOTTOM PANEL */
-.bottom-ui{
+.hotspot{
   position:absolute;
   z-index:20;
-  left:14px;
-  right:14px;
-  bottom:12px;
-}
-
-.action-row{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:10px;
-}
-
-.action{
-  min-height:58px;
-  border-radius:19px;
-  border:1px solid rgba(255,255,255,.15);
-  font-weight:900;
-  font-size:14px;
-  letter-spacing:.2px;
-  box-shadow:0 9px 25px rgba(0,0,0,.35);
-  transition:transform .12s,filter .12s;
-}
-
-.action:active{
-  transform:scale(.96);
-}
-
-.action.blue{
-  background:linear-gradient(135deg,#0f8fd1,#0a6eb5);
-}
-
-.action.orange{
-  background:linear-gradient(135deg,#d89000,#b85f00);
-}
-
-.action.dark{
-  background:linear-gradient(135deg,#1f2f38,#111b22);
-}
-
-.tool-row{
-  display:none;
-  margin-top:10px;
-  grid-template-columns:repeat(5,1fr);
-  gap:7px;
-}
-
-.tool{
-  min-height:54px;
-  border-radius:15px;
-  background:#10202a;
-  border:1px solid #29434f;
-  font-size:11px;
-  font-weight:800;
-}
-
-.tool.active{
-  outline:2px solid var(--cyan);
-  background:#143946;
-}
-
-.tool span{
-  display:block;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:rgba(7,25,33,.88);
+  border:2px solid var(--cyan);
+  color:white;
+  box-shadow:0 0 18px rgba(49,220,255,.35);
   font-size:21px;
-  margin-bottom:2px;
+  animation:bob 1.2s infinite ease-in-out;
 }
 
-/* MODAL */
-.overlay{
+.hotspot.hide{
+  display:none;
+}
+
+.hotspot:active{
+  transform:scale(.92);
+}
+
+@keyframes bob{
+  50%{
+    transform:translateY(-5px) scale(1.05);
+  }
+}
+
+.hs-engine{left:29%;top:24%}
+.hs-wheel{left:12%;top:63%}
+.hs-light{left:5%;top:40%}
+.hs-body{right:23%;top:54%}
+.hs-hood{right:35%;top:27%}
+
+/* -------------------------------------------------------
+   CHARACTER
+------------------------------------------------------- */
+
+.player{
   position:absolute;
-  z-index:40;
+  z-index:13;
+  left:29%;
+  bottom:31%;
+  width:48px;
+  height:86px;
+  transition:left .08s linear,bottom .08s linear,transform .15s;
+}
+
+.player .head{
+  width:24px;
+  height:24px;
+  margin:auto;
+  border-radius:50%;
+  background:#d7976c;
+  border:2px solid #8e5540;
+}
+
+.player .body{
+  position:absolute;
+  left:9px;
+  top:23px;
+  width:30px;
+  height:40px;
+  border-radius:12px 12px 7px 7px;
+  background:linear-gradient(#f1ae36,#a86110);
+}
+
+.player .arm1,
+.player .arm2{
+  position:absolute;
+  top:28px;
+  width:8px;
+  height:32px;
+  border-radius:10px;
+  background:#c98556;
+}
+
+.player .arm1{left:2px;transform:rotate(24deg)}
+.player .arm2{right:2px;transform:rotate(-24deg)}
+
+.player .leg1,
+.player .leg2{
+  position:absolute;
+  top:57px;
+  width:9px;
+  height:30px;
+  border-radius:10px;
+  background:#3b4650;
+}
+
+.player .leg1{left:10px;transform:rotate(7deg)}
+.player .leg2{right:10px;transform:rotate(-7deg)}
+
+/* -------------------------------------------------------
+   CONTROLS
+------------------------------------------------------- */
+
+.controls{
+  position:absolute;
+  z-index:60;
+  left:15px;
+  right:15px;
+  bottom:14px;
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  pointer-events:none;
+}
+
+.joystick-zone{
+  width:138px;
+  height:138px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(8,16,21,.55);
+  backdrop-filter:blur(7px);
+  position:relative;
+  pointer-events:auto;
+}
+
+.joystick-ring{
+  position:absolute;
+  inset:17px;
+  border-radius:50%;
+  border:2px solid rgba(113,158,174,.23);
+}
+
+.joystick{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:58px;
+  height:58px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:linear-gradient(#34505c,#17262f);
+  border:2px solid #56717e;
+  box-shadow:0 8px 18px rgba(0,0,0,.35);
+}
+
+.right-controls{
+  display:grid;
+  grid-template-columns:repeat(2,70px);
+  gap:9px;
+  pointer-events:auto;
+}
+
+.control-btn{
+  width:70px;
+  height:58px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(11,23,30,.92);
+  font-size:24px;
+  box-shadow:0 8px 22px rgba(0,0,0,.34);
+}
+
+.control-btn span{
+  display:block;
+  margin-top:1px;
+  font-size:10px;
+  color:#a8bac4;
+}
+
+.control-btn.blue{
+  background:linear-gradient(135deg,#0b91cf,#075f8d);
+}
+
+.control-btn.orange{
+  background:linear-gradient(135deg,#db8700,#a95200);
+}
+
+.control-btn.green{
+  background:linear-gradient(135deg,#1d9e70,#11664b);
+}
+
+/* -------------------------------------------------------
+   ACTION BAR
+------------------------------------------------------- */
+
+.action-panel{
+  position:absolute;
+  z-index:62;
+  left:50%;
+  bottom:145px;
+  width:min(94%,690px);
+  transform:translateX(-50%);
+  padding:8px;
+  border:1px solid rgba(94,130,144,.28);
+  border-radius:20px;
+  background:rgba(7,14,19,.87);
+  backdrop-filter:blur(12px);
+}
+
+.action-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+
+.action-btn{
+  min-height:50px;
+  border-radius:14px;
+  background:#13252d;
+  border:1px solid #2d4651;
+  font-size:12px;
+  font-weight:900;
+}
+
+.action-btn.blue{background:linear-gradient(135deg,#0d91d0,#08669c)}
+.action-btn.orange{background:linear-gradient(135deg,#d98c0a,#ae5c00)}
+.action-btn.green{background:linear-gradient(135deg,#1a9c72,#12654d)}
+
+/* -------------------------------------------------------
+   MENU / MODALS
+------------------------------------------------------- */
+
+.modal-bg{
+  position:absolute;
+  z-index:100;
   inset:0;
-  background:rgba(2,6,9,.72);
-  backdrop-filter:blur(10px);
   display:none;
   align-items:flex-end;
   justify-content:center;
+  background:rgba(1,5,8,.72);
+  backdrop-filter:blur(10px);
 }
 
-.overlay.show{
+.modal-bg.show{
   display:flex;
 }
 
-.panel{
+.modal{
   width:min(760px,100%);
   max-height:88%;
   overflow:auto;
   padding:18px;
-  border:1px solid #2d4a58;
   border-radius:28px 28px 0 0;
-  background:
-    linear-gradient(180deg,#101e27,#091118);
-  box-shadow:0 -20px 80px rgba(0,0,0,.5);
-  animation:slideUp .25s ease;
+  border:1px solid #304a56;
+  background:linear-gradient(#11202a,#081116);
+  box-shadow:0 -25px 80px rgba(0,0,0,.55);
+  animation:up .22s ease;
 }
 
-@keyframes slideUp{
+@keyframes up{
   from{transform:translateY(100%)}
   to{transform:translateY(0)}
 }
 
-.panel-head{
+.modal-head{
   display:flex;
   justify-content:space-between;
-  gap:15px;
   align-items:center;
+  gap:10px;
 }
 
-.panel h2{
+.modal-head h2{
   margin:0;
   font-size:27px;
 }
 
-.close{
-  width:43px;
-  height:43px;
+.close-btn{
+  width:44px;
+  height:44px;
   border-radius:14px;
   background:#1a2c35;
-  font-size:22px;
+  font-size:20px;
 }
 
 .cards{
@@ -525,773 +604,1312 @@ svg{
 .card{
   padding:14px;
   border-radius:18px;
-  background:#0c171e;
-  border:1px solid #243942;
+  border:1px solid #263e49;
+  background:#0b171e;
 }
 
-.card h3{
-  margin:0;
-  font-size:15px;
+.card-title{
+  font-weight:900;
+  margin-bottom:5px;
 }
 
-.card p{
-  color:#9eafb9;
+.card-text{
+  color:#9fb0ba;
   font-size:12px;
-  line-height:1.4;
-  margin:6px 0 0;
+  line-height:1.45;
 }
 
-.stat{
-  display:flex;
-  justify-content:space-between;
-  padding:9px 0;
-  border-bottom:1px solid #172932;
+.card-value{
+  font-size:24px;
+  font-weight:900;
+  margin-top:7px;
 }
 
-.stat:last-child{
-  border-bottom:0;
-}
+.blue-text{color:var(--cyan)}
+.green-text{color:var(--green)}
+.yellow-text{color:var(--yellow)}
+.red-text{color:var(--red)}
 
-.green{color:var(--green)}
-.yellow{color:var(--yellow)}
-.red{color:var(--red)}
-.cyan{color:var(--cyan)}
-
-.big-button{
+.full-btn{
   width:100%;
-  padding:16px;
-  border-radius:17px;
-  margin-top:14px;
-  background:linear-gradient(135deg,#0c9fd3,#087ab1);
+  margin-top:13px;
+  min-height:52px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#0994d0,#0870a6);
   font-weight:900;
 }
 
-/* DIAGNOSTICS */
-.scan{
-  margin-top:14px;
-  border-radius:20px;
+.scan-box{
+  margin-top:13px;
+  border:1px solid #28424d;
+  border-radius:18px;
   overflow:hidden;
-  border:1px solid #2a4a58;
-  background:#081118;
+  background:#061016;
 }
 
-.scan-top{
-  padding:12px 14px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  background:#0e1e27;
-}
-
-.scan-line{
-  height:5px;
-  background:#102630;
-}
-
-.scan-line div{
-  width:0%;
-  height:100%;
-  background:linear-gradient(90deg,#00d8ff,#7dffdb);
-  box-shadow:0 0 16px #00d8ff;
-  transition:width .2s;
-}
-
-.logs{
-  height:160px;
+.scan-head{
   padding:12px;
-  overflow:auto;
-  font:12px ui-monospace,SFMono-Regular,monospace;
-  color:#8ef6ff;
+  display:flex;
+  justify-content:space-between;
+  background:#10212a;
+  font-size:12px;
+  font-weight:800;
+}
+
+.scan-progress{
+  height:5px;
+  background:#13262f;
+}
+
+.scan-progress div{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#24d9ff,#89f7ff);
+  transition:.2s;
+}
+
+.log{
+  min-height:145px;
+  padding:12px;
+  color:#81eef8;
+  font:12px monospace;
   white-space:pre-wrap;
 }
 
-/* REPAIR MINIGAME */
-.repair-game{
+.repair-area{
   position:relative;
-  margin-top:15px;
-  height:250px;
-  border-radius:20px;
-  border:1px solid #28434e;
+  margin-top:13px;
+  height:230px;
+  border:1px solid #29444f;
+  border-radius:19px;
   overflow:hidden;
   background:
-    radial-gradient(circle at center,rgba(40,96,113,.25),transparent 52%),
+    radial-gradient(circle at center,rgba(32,111,129,.18),transparent 45%),
     #071117;
 }
 
-.gauge{
+.repair-label{
+  position:absolute;
+  top:25px;
+  left:0;
+  right:0;
+  text-align:center;
+  color:#b5c7d0;
+  font-weight:800;
+  font-size:13px;
+}
+
+.repair-bar{
   position:absolute;
   left:10%;
   right:10%;
-  top:52%;
+  top:100px;
   height:25px;
   border-radius:20px;
-  background:#1a2930;
-  overflow:hidden;
+  background:#1a2931;
 }
 
-.gauge-good{
+.good-zone{
   position:absolute;
   left:44%;
   width:12%;
   top:0;
   bottom:0;
-  background:#48e2a2;
-  box-shadow:0 0 20px #48e2a2;
+  background:#49e3a1;
+  box-shadow:0 0 16px #49e3a1;
 }
 
 .needle{
   position:absolute;
-  top:41%;
+  top:85px;
+  left:10%;
   width:4px;
   height:55px;
   border-radius:4px;
-  background:white;
-  box-shadow:0 0 12px #fff;
-  left:10%;
+  background:#fff;
+  box-shadow:0 0 15px white;
 }
 
-.repair-tip{
-  position:absolute;
-  left:0;
-  right:0;
-  top:16%;
-  text-align:center;
-  font-weight:800;
-  color:#b7c8d1;
-}
-
-.repair-btn{
+.repair-button{
   position:absolute;
   left:50%;
+  bottom:20px;
   transform:translateX(-50%);
-  bottom:17px;
-  width:170px;
-  padding:13px;
+  width:175px;
+  min-height:46px;
   border-radius:14px;
-  background:#157ca9;
+  background:#167faa;
   font-weight:900;
 }
 
-/* CUSTOMER / TOAST */
+/* -------------------------------------------------------
+   TOAST
+------------------------------------------------------- */
+
 .toast{
   position:absolute;
-  z-index:60;
-  top:18px;
+  z-index:200;
   left:50%;
+  top:18px;
   transform:translate(-50%,-140px);
-  padding:13px 18px;
-  border-radius:14px;
-  background:#10222c;
-  border:1px solid #31505e;
-  box-shadow:var(--shadow);
-  font-weight:800;
-  transition:.3s;
+  max-width:90%;
   white-space:nowrap;
+  padding:13px 17px;
+  border-radius:14px;
+  border:1px solid #34515e;
+  background:#10212a;
+  box-shadow:0 15px 35px rgba(0,0,0,.45);
+  font-weight:900;
+  transition:.3s;
 }
 
 .toast.show{
   transform:translate(-50%,0);
 }
 
-.damage{
-  position:absolute;
-  z-index:10;
-  pointer-events:none;
-}
+/* -------------------------------------------------------
+   MOBILE
+------------------------------------------------------- */
 
-.spark{
-  position:absolute;
-  width:4px;
-  height:4px;
-  border-radius:50%;
-  background:#fff;
-  box-shadow:0 0 10px #ffe27b;
-  animation:spark .7s forwards;
-}
+@media(max-width:520px){
+  .quest{
+    top:93px;
+  }
 
-@keyframes spark{
-  to{
-    transform:translate(var(--x),var(--y));
-    opacity:0;
+  .quest-title{
+    font-size:21px;
   }
-}
 
-/* RESPONSIVE */
-@media (min-width:700px){
-  .topbar{top:20px;left:22px;right:22px}
-  .mission{left:22px;right:22px;top:118px}
-  .bottom-ui{left:22px;right:22px}
-  .action{min-height:64px;font-size:16px}
-}
+  .action-panel{
+    bottom:145px;
+  }
 
-@media (max-height:700px){
-  .mission{
-    top:94px;
-    padding:12px;
+  .action-grid{
+    grid-template-columns:repeat(2,1fr);
   }
-  .mission p{
-    margin-top:4px;
-    font-size:12px;
+
+  .car{
+    width:94vw;
+    height:40vw;
   }
-  .car-scene{
-    top:26%;
-    bottom:15%;
-  }
-  .bottom-ui{
-    bottom:7px;
+
+  .cards{
+    grid-template-columns:1fr 1fr;
   }
 }
 
-@media (max-width:480px){
-  .cash{
-    min-width:102px;
-    font-size:16px;
-    padding:0 10px;
+@media(max-height:720px){
+  .quest{
+    padding:10px;
   }
-  .brand-sub{
-    font-size:10px;
+
+  .quest-text{
+    font-size:11px;
   }
-  .action{
-    min-height:55px;
-    font-size:12px;
+
+  .car{
+    top:54%;
+  }
+
+  .action-panel{
+    bottom:138px;
   }
 }
 </style>
 </head>
 
 <body>
-<div class="app">
 
-  <div class="garage">
-    <div class="beams"></div>
-    <div class="neon n1"></div>
-    <div class="neon n2"></div>
-    <div class="neon n3"></div>
-    <div class="neon n4"></div>
-    <div class="neon n5"></div>
-    <div class="back-wall"></div>
+<div id="game">
+
+  <!-- BACKGROUND -->
+  <div class="garage-bg">
+    <div class="wall"></div>
+    <div class="wall-lines"></div>
+
+    <div class="work-lights">
+      <div class="work-light"></div>
+      <div class="work-light"></div>
+      <div class="work-light"></div>
+      <div class="work-light"></div>
+    </div>
+
+    <div class="panel-wall"></div>
+
+    <div class="tool-cabinet">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
     <div class="floor"></div>
   </div>
 
-  <!-- TOP -->
-  <div class="topbar">
-    <div class="brand">
-      <div class="brand-top">🔧 AUTO MECHANIC PRO</div>
-      <div class="brand-sub" id="brandSub">Приймання автомобіля • Рівень 1</div>
+  <!-- HUD -->
+  <div class="top-ui">
+    <div class="logo-box">
+      <div class="logo-title">🔧 CAR REPAIR CENTER</div>
+      <div class="logo-sub" id="subTitle">Автомайстерня • Рівень 1</div>
     </div>
 
-    <div class="cash">💰 <b id="money">$1840</b></div>
-  </div>
-
-  <!-- MISSION -->
-  <div class="mission">
-    <h1 id="missionTitle">ДІАГНОСТИКА</h1>
-    <p id="missionText">
-      Оглянь машину, знайди несправності та відремонтуй її.
-      Можна натискати прямо на деталі автомобіля.
-    </p>
-    <div class="progress">
-      <div id="progress"></div>
+    <div class="money-box">
+      💰 <span id="money">$1840</span>
     </div>
   </div>
 
-  <!-- CAR -->
-  <div class="car-scene">
+  <div class="quest">
+    <div class="quest-title" id="questTitle">ПРИЙМАННЯ АВТОМОБІЛЯ</div>
 
-    <div class="car-wrap" id="carWrap">
+    <div class="quest-text" id="questText">
+      Підійди до автомобіля та оглянь його. Знайди несправні деталі.
+    </div>
+
+    <div class="quest-progress">
+      <div id="progressBar"></div>
+    </div>
+  </div>
+
+  <!-- WORLD -->
+  <div class="world">
+
+    <div class="game-camera" id="camera">
+
       <div class="car-shadow"></div>
 
-      <div class="car" id="carGraphic">
+      <!-- PLAYER -->
+      <div class="player" id="player">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="arm1"></div>
+        <div class="arm2"></div>
+        <div class="leg1"></div>
+        <div class="leg2"></div>
+      </div>
 
-        <!-- MAIN CAR -->
-        <svg viewBox="0 0 900 520"
-             xmlns="http://www.w3.org/2000/svg"
-             aria-label="car">
+      <!-- CAR -->
+      <div class="car" id="car">
+
+        <svg class="car-svg"
+             viewBox="0 0 900 460"
+             xmlns="http://www.w3.org/2000/svg">
 
           <defs>
 
-            <linearGradient id="bodyRed" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#db4050"/>
-              <stop offset="45%" stop-color="#a21f2f"/>
-              <stop offset="100%" stop-color="#470d18"/>
+            <linearGradient id="bodyPaint" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e44d59"/>
+              <stop offset="48%" stop-color="#aa2738"/>
+              <stop offset="100%" stop-color="#4a1019"/>
             </linearGradient>
 
-            <linearGradient id="hood" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#ec5965"/>
-              <stop offset="55%" stop-color="#b52b39"/>
-              <stop offset="100%" stop-color="#681723"/>
+            <linearGradient id="glassPaint" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#23566c"/>
+              <stop offset="45%" stop-color="#0b2633"/>
+              <stop offset="100%" stop-color="#051116"/>
             </linearGradient>
 
-            <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#183e51"/>
-              <stop offset="50%" stop-color="#081a25"/>
-              <stop offset="100%" stop-color="#051017"/>
+            <linearGradient id="rubber" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#141a1e"/>
+              <stop offset="100%" stop-color="#020304"/>
             </linearGradient>
 
-            <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#b7c6cd"/>
-              <stop offset="45%" stop-color="#55656d"/>
-              <stop offset="100%" stop-color="#26323a"/>
-            </linearGradient>
-
-            <linearGradient id="wheel" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#161d21"/>
-              <stop offset="100%" stop-color="#020405"/>
-            </linearGradient>
-
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="6" result="blur"/>
+            <filter id="lightGlow">
+              <feGaussianBlur stdDeviation="5" result="b"/>
               <feMerge>
-                <feMergeNode in="blur"/>
+                <feMergeNode in="b"/>
                 <feMergeNode in="SourceGraphic"/>
               </feMerge>
             </filter>
 
           </defs>
 
-          <!-- BODY SHADOW -->
-          <ellipse cx="450" cy="453" rx="355" ry="35" fill="#000" opacity=".55"/>
+          <!-- shadow -->
+          <ellipse cx="450" cy="407" rx="350" ry="28"
+                   fill="#000" opacity=".6"/>
 
-          <!-- REAR / MAIN BODY -->
-          <path
-            class="car-part"
-            id="partBody"
-            d="M88 335
-               C88 280 128 250 180 242
-               L267 230
-               L335 157
-               C355 134 389 122 425 122
-               L567 122
-               C603 122 640 139 662 165
-               L726 241
-               C785 248 817 276 817 330
-               L817 375
-               C817 409 793 430 758 430
-               L144 430
-               C110 430 88 407 88 375Z"
-            fill="url(#bodyRed)"
-            stroke="#341018"
+          <!-- BODY -->
+          <path id="carBody"
+            d="M75 320
+               C77 274 113 244 167 237
+               L259 226
+               L328 147
+               C350 122 380 110 420 110
+               L566 110
+               C605 110 637 126 664 156
+               L728 232
+               C787 242 820 270 823 321
+               L823 356
+               C823 388 799 407 764 411
+               L136 411
+               C100 407 75 386 75 356Z"
+            fill="url(#bodyPaint)"
+            stroke="#340c15"
             stroke-width="7"/>
 
-          <!-- ROOF -->
+          <!-- ROOF FRAME -->
           <path
-            class="car-part"
-            d="M264 229
-               L335 150
-               C355 127 385 115 423 115
-               L570 115
-               C609 115 640 132 667 165
-               L726 241"
+            d="M257 226L328 147C350 122 380 110 420 110H566C605 110 637 126 664 156L728 232"
             fill="none"
-            stroke="#d74a56"
-            stroke-width="11"/>
+            stroke="#e35963"
+            stroke-width="10"/>
 
-          <!-- WINDOWS -->
-          <path
-            class="car-part"
-            id="partWindows"
-            d="M290 220 L347 157
-               C360 143 383 136 408 136
-               L430 136 L430 220Z"
-            fill="url(#glass)"
-            stroke="#253944"
+          <!-- GLASS -->
+          <path id="window1"
+            d="M283 219L343 151C356 136 382 128 408 128H426V219Z"
+            fill="url(#glassPaint)"
+            stroke="#233b47"
             stroke-width="6"/>
 
-          <path
-            class="car-part"
-            d="M445 136
-               L565 136
-               C591 136 612 147 629 168
-               L670 220
-               L445 220Z"
-            fill="url(#glass)"
-            stroke="#253944"
+          <path id="window2"
+            d="M441 128H564C588 128 610 140 628 161L672 219H441Z"
+            fill="url(#glassPaint)"
+            stroke="#233b47"
             stroke-width="6"/>
 
           <!-- WINDOW REFLECTION -->
-          <path d="M356 159L401 145L382 214L330 214Z"
-                fill="#65dcff" opacity=".13"/>
-          <path d="M476 145L538 145L524 214L472 214Z"
-                fill="#65dcff" opacity=".09"/>
+          <path d="M350 154L394 139L378 214H323Z"
+                fill="#a8f5ff" opacity=".12"/>
+
+          <path d="M474 141L534 139L523 211L469 211Z"
+                fill="#b5f8ff" opacity=".08"/>
 
           <!-- HOOD -->
-          <path
-            class="car-part"
-            id="partHood"
-            d="M88 335
-               C91 285 132 256 183 249
-               L266 239
-               L330 230
-               L354 284
-               L329 357
-               L89 357Z"
-            fill="url(#hood)"
-            stroke="#641622"
+          <path id="hoodPart"
+            d="M75 320
+               C79 277 115 246 167 239
+               L259 228
+               L328 221
+               L345 283
+               L322 351
+               L78 351Z"
+            fill="url(#bodyPaint)"
+            stroke="#65131e"
             stroke-width="6"/>
 
-          <!-- FRONT -->
-          <path
-            class="car-part"
-            d="M89 334
-               C91 310 99 292 119 277
-               L166 263
-               L176 355
-               L89 355Z"
-            fill="#9f2130"/>
-
-          <!-- SIDE PANEL -->
-          <path
-            d="M330 230 L655 230
-               C675 232 697 242 715 256
-               L742 278
-               L744 356
-               L322 356Z"
-            fill="#981f2d"
-            opacity=".65"/>
-
-          <!-- DOORS -->
-          <path
-            class="car-part"
-            id="partDoor"
-            d="M335 231 L442 231 L442 352 L321 352 L321 280Z"
-            fill="#a82331"
-            stroke="#5d1720"
+          <!-- DOOR -->
+          <path id="doorPart"
+            d="M331 225L441 225V348H319V279Z"
+            fill="#9f2230"
+            stroke="#5e1720"
             stroke-width="4"/>
 
           <path
-            class="car-part"
-            d="M451 231 L650 231
-               C671 236 694 249 709 269
-               L718 352 L451 352Z"
-            fill="#9e202e"
-            stroke="#5d1720"
+            d="M451 225H645C675 229 695 243 711 263L720 349H451Z"
+            fill="#961f2d"
+            stroke="#5e1720"
             stroke-width="4"/>
 
-          <!-- DOOR HANDLE -->
-          <rect x="539" y="252" width="42" height="7" rx="4"
-                fill="#d8e2e7" opacity=".6"/>
+          <!-- HANDLE -->
+          <rect x="542" y="249"
+                width="40"
+                height="7"
+                rx="4"
+                fill="#e1e8eb"
+                opacity=".65"/>
 
           <!-- FRONT LIGHT -->
-          <path
-            class="car-part headlight blink"
-            id="partHeadlight"
-            d="M112 302
-               Q133 281 163 284
-               L164 324
-               Q134 329 109 319Z"
-            fill="#fff5ab"
-            stroke="#fff5bb"
+          <path id="lightPart"
+            d="M100 294
+               Q129 272 164 279
+               L165 319
+               Q130 326 100 316Z"
+            fill="#fff2a2"
+            stroke="#fffbd5"
             stroke-width="3"
-            filter="url(#glow)"/>
+            filter="url(#lightGlow)"/>
 
           <!-- REAR LIGHT -->
           <path
-            class="car-part"
-            id="partTaillight"
-            d="M744 283 Q783 285 800 300 L802 325 Q778 335 748 330Z"
-            fill="#ff2538"
-            stroke="#c0081e"
+            d="M744 278Q782 281 804 296L805 319Q782 331 747 324Z"
+            fill="#f51f36"
+            stroke="#c1071c"
             stroke-width="4"/>
 
           <!-- BUMPER -->
           <path
-            d="M96 356 Q450 383 812 356 L812 390 Q800 417 765 424
-               L142 424 Q109 415 96 390Z"
-            fill="#191e23"/>
+            d="M80 348Q450 378 819 348V377Q804 402 766 410H135Q97 401 80 377Z"
+            fill="#161d21"/>
 
-          <!-- FRONT GRILLE -->
-          <path
-            class="car-part"
-            id="partGrille"
-            d="M282 345 Q450 327 617 345 L594 383 Q450 392 306 383Z"
-            fill="#071015"
-            stroke="#283941"
+          <!-- GRILLE -->
+          <path id="grille"
+            d="M283 342Q450 325 617 342L596 380Q450 389 305 380Z"
+            fill="#061015"
+            stroke="#2c3f47"
             stroke-width="5"/>
 
-          <g opacity=".6">
-            <path d="M329 347L343 385" stroke="#6a7980" stroke-width="3"/>
-            <path d="M364 342L374 388" stroke="#6a7980" stroke-width="3"/>
-            <path d="M400 339L405 390" stroke="#6a7980" stroke-width="3"/>
-            <path d="M435 338L438 390" stroke="#6a7980" stroke-width="3"/>
-            <path d="M470 338L468 390" stroke="#6a7980" stroke-width="3"/>
-            <path d="M505 339L499 390" stroke="#6a7980" stroke-width="3"/>
-            <path d="M540 341L529 389" stroke="#6a7980" stroke-width="3"/>
-            <path d="M575 345L558 385" stroke="#6a7980" stroke-width="3"/>
+          <g opacity=".55">
+            <path d="M326 344L342 383" stroke="#7b8a90" stroke-width="3"/>
+            <path d="M362 340L373 386" stroke="#7b8a90" stroke-width="3"/>
+            <path d="M399 337L404 388" stroke="#7b8a90" stroke-width="3"/>
+            <path d="M436 336L438 389" stroke="#7b8a90" stroke-width="3"/>
+            <path d="M473 337L468 389" stroke="#7b8a90" stroke-width="3"/>
+            <path d="M510 339L498 387" stroke="#7b8a90" stroke-width="3"/>
+            <path d="M548 340L530 385" stroke="#7b8a90" stroke-width="3"/>
+            <path d="M582 343L560 383" stroke="#7b8a90" stroke-width="3"/>
           </g>
 
-          <!-- LICENSE -->
-          <rect x="385" y="397" width="130" height="31" rx="6"
-                fill="#edf4f7"/>
-          <text x="450" y="419"
+          <!-- PLATE -->
+          <rect x="386" y="388"
+                width="129"
+                height="29"
+                rx="6"
+                fill="#eef4f6"/>
+
+          <text id="plateText"
+                x="450"
+                y="409"
                 text-anchor="middle"
-                font-family="Arial"
-                font-size="20"
+                font-size="18"
                 font-weight="900"
-                fill="#182027">AUTO-174</text>
+                fill="#172128"
+                font-family="Arial">
+            AUTO-174
+          </text>
 
           <!-- WHEELS -->
-          <g id="partWheels" class="car-part">
-            <circle cx="185" cy="383" r="73" fill="#030608" stroke="#131c20" stroke-width="8"/>
-            <circle cx="185" cy="383" r="46" fill="url(#wheel)" stroke="#69777e" stroke-width="6"/>
-            <circle cx="185" cy="383" r="15" fill="#9caab1"/>
-            <path d="M185 341V368 M185 398V425 M143 383H170 M200 383H227"
-                  stroke="#e3ecef" stroke-width="8" stroke-linecap="round"/>
-            <circle cx="715" cy="383" r="73" fill="#030608" stroke="#131c20" stroke-width="8"/>
-            <circle cx="715" cy="383" r="46" fill="url(#wheel)" stroke="#69777e" stroke-width="6"/>
-            <circle cx="715" cy="383" r="15" fill="#9caab1"/>
-            <path d="M715 341V368 M715 398V425 M673 383H700 M730 383H757"
-                  stroke="#e3ecef" stroke-width="8" stroke-linecap="round"/>
+          <g id="wheelsPart">
+
+            <circle cx="182" cy="360" r="70"
+                    fill="#020405"
+                    stroke="#12191d"
+                    stroke-width="9"/>
+
+            <circle cx="182" cy="360" r="43"
+                    fill="url(#rubber)"
+                    stroke="#77848b"
+                    stroke-width="6"/>
+
+            <circle cx="182" cy="360" r="13"
+                    fill="#a6b2b8"/>
+
+            <path d="M182 321V347M182 373V399M143 360H169M195 360H221"
+                  stroke="#e4ecef"
+                  stroke-width="7"
+                  stroke-linecap="round"/>
+
+            <circle cx="718" cy="360" r="70"
+                    fill="#020405"
+                    stroke="#12191d"
+                    stroke-width="9"/>
+
+            <circle cx="718" cy="360" r="43"
+                    fill="url(#rubber)"
+                    stroke="#77848b"
+                    stroke-width="6"/>
+
+            <circle cx="718" cy="360" r="13"
+                    fill="#a6b2b8"/>
+
+            <path d="M718 321V347M718 373V399M679 360H705M731 360H757"
+                  stroke="#e4ecef"
+                  stroke-width="7"
+                  stroke-linecap="round"/>
+
           </g>
 
-          <!-- SIDE STRIPE -->
-          <path d="M148 300 Q440 275 752 303"
-                stroke="#eef8fb"
+          <!-- BODY LINE -->
+          <path d="M140 293Q448 266 763 298"
+                stroke="#f8ffff"
                 stroke-width="4"
-                opacity=".32"/>
-
-          <!-- UNDERGLOW -->
-          <ellipse cx="448" cy="427" rx="270" ry="21"
-                   fill="#16b8e7" opacity=".08" filter="url(#glow)"/>
+                opacity=".25"/>
 
         </svg>
 
-        <!-- TARGETS -->
-        <button class="target target1" id="tWheel" onclick="inspectPart('wheels')">⚙️</button>
-        <button class="target target2" id="tEngine" onclick="inspectPart('engine')">🔧</button>
-        <button class="target target3" id="tLamp" onclick="inspectPart('light')">💡</button>
-        <button class="target target4" id="tHood" onclick="inspectPart('hood')">🧰</button>
-        <button class="target target5" id="tBody" onclick="inspectPart('body')">🔍</button>
+        <!-- HOTSPOTS -->
+        <button class="hotspot hs-engine" id="engineHotspot">🔧</button>
+        <button class="hotspot hs-wheel" id="wheelHotspot">🛞</button>
+        <button class="hotspot hs-light" id="lightHotspot">💡</button>
+        <button class="hotspot hs-body" id="bodyHotspot">🔍</button>
+        <button class="hotspot hs-hood" id="hoodHotspot">🧰</button>
 
       </div>
+
+    </div>
+
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="action-panel">
+    <div class="action-grid">
+
+      <button class="action-btn blue" id="openHoodBtn">
+        🔓 КАПОТ
+      </button>
+
+      <button class="action-btn orange" id="liftBtn">
+        ⬆️ ПІДЙОМНИК
+      </button>
+
+      <button class="action-btn green" id="scanBtn">
+        📡 ДІАГНОСТИКА
+      </button>
+
+      <button class="action-btn" id="garageBtn">
+        🧰 ГАРАЖ
+      </button>
+
     </div>
   </div>
 
-  <!-- BOTTOM -->
-  <div class="bottom-ui">
+  <!-- MOBILE CONTROLS -->
+  <div class="controls">
 
-    <div class="action-row">
-      <button class="action blue" id="hoodBtn" onclick="toggleHood()">
-        🔓 ВІДКРИТИ КАПОТ
-      </button>
-
-      <button class="action orange" id="liftBtn" onclick="toggleLift()">
-        ⬆️ ПІДНЯТИ АВТО
-      </button>
-
-      <button class="action dark" onclick="openGarage()">
-        🧰 ГАРАЖ
-      </button>
+    <div class="joystick-zone" id="joystickZone">
+      <div class="joystick-ring"></div>
+      <div class="joystick" id="joystick"></div>
     </div>
 
-    <div class="tool-row" id="toolRow">
-      <button class="tool" onclick="selectTool('scan')">
-        <span>📡</span>Сканер
+    <div class="right-controls">
+
+      <button class="control-btn blue" id="interactBtn">
+        🤝
+        <span>ДІЯ</span>
       </button>
-      <button class="tool" onclick="selectTool('wrench')">
-        <span>🔧</span>Ключ
+
+      <button class="control-btn" id="cameraBtn">
+        🎥
+        <span>КАМЕРА</span>
       </button>
-      <button class="tool" onclick="selectTool('hammer')">
-        <span>🔨</span>Молоток
+
+      <button class="control-btn orange" id="toolBtn">
+        🔧
+        <span>ІНСТРУМЕНТ</span>
       </button>
-      <button class="tool" onclick="selectTool('pump')">
-        <span>💨</span>Компресор
+
+      <button class="control-btn green" id="brakeBtn">
+        🛠️
+        <span>РЕМОНТ</span>
       </button>
-      <button class="tool" onclick="selectTool('battery')">
-        <span>🔋</span>АКБ
-      </button>
+
     </div>
 
   </div>
 
   <!-- MODAL -->
-  <div class="overlay" id="overlay">
-    <div class="panel" id="panel">
-    </div>
+  <div class="modal-bg" id="modalBg">
+    <div class="modal" id="modal"></div>
   </div>
 
+  <!-- TOAST -->
   <div class="toast" id="toast"></div>
+
 </div>
 
 <script>
 /* =========================================================
-   AUTO MECHANIC PRO
-   SINGLE FILE MOBILE GAME
+   CAR REPAIR CENTER
+   МОБІЛЬНА ГРА В ОДНОМУ HTML
 ========================================================= */
 
-const game = {
-  money: Number(localStorage.getItem("amp_money") || 1840),
-  xp: Number(localStorage.getItem("amp_xp") || 0),
-  level: Number(localStorage.getItem("amp_level") || 1),
-  carsDone: Number(localStorage.getItem("amp_cars") || 0),
-  selectedTool: "scan",
-  hoodOpen: false,
-  lifted: false,
-  scanning: false,
-  repairMode: false,
-  repairFinished: false,
-  currentCar: 0,
-  sound: true,
+const state = {
+  money: Number(localStorage.getItem("crc_money") || 1840),
+  xp: Number(localStorage.getItem("crc_xp") || 0),
+  level: Number(localStorage.getItem("crc_level") || 1),
+  repaired: Number(localStorage.getItem("crc_repaired") || 0),
 
-  cars: [
-    {
-      name:"Night Runner",
-      type:"Sport Sedan",
-      plate:"AUTO-174",
-      color:"#b52b39",
-      reward:420,
-      faults:["engine","wheels","light"]
-    },
-    {
-      name:"Urban Beast",
-      type:"Street SUV",
-      plate:"AUTO-293",
-      color:"#315e80",
-      reward:610,
-      faults:["hood","wheels","body"]
-    },
-    {
-      name:"Silver Rocket",
-      type:"Performance Coupe",
-      plate:"AUTO-411",
-      color:"#a8b0b7",
-      reward:780,
-      faults:["engine","light","body"]
-    },
-    {
-      name:"Black Phantom",
-      type:"Luxury Sport",
-      plate:"AUTO-777",
-      color:"#252a30",
-      reward:980,
-      faults:["engine","hood","wheels","light"]
-    },
-    {
-      name:"Red Thunder",
-      type:"Rally Hatch",
-      plate:"AUTO-808",
-      color:"#d84343",
-      reward:1220,
-      faults:["engine","wheels","body","light"]
-    }
-  ]
+  carIndex: Number(localStorage.getItem("crc_car") || 0),
+
+  hoodOpen:false,
+  lifted:false,
+
+  playerX:29,
+  playerY:31,
+
+  camera:0,
+
+  detected:new Set(),
+  fixed:new Set(),
+
+  tool:"scanner",
+
+  joystickActive:false,
+  joystickId:null
 };
 
-const faultNames = {
-  engine:"Двигун / паливна система",
-  wheels:"Підвіска / колеса",
-  light:"Фара / електрика",
-  hood:"Підкапотний вузол",
-  body:"Кузов / кріплення"
-};
+const cars = [
+  {
+    name:"Night Runner",
+    type:"Sport Sedan",
+    plate:"AUTO-174",
+    color:"#c02f40",
+    reward:420,
+    faults:["engine","wheel","light"]
+  },
+  {
+    name:"Urban Beast",
+    type:"Street SUV",
+    plate:"AUTO-293",
+    color:"#325f82",
+    reward:570,
+    faults:["hood","wheel","body"]
+  },
+  {
+    name:"Silver Rocket",
+    type:"Performance Coupe",
+    plate:"AUTO-411",
+    color:"#9ea7ad",
+    reward:690,
+    faults:["engine","light","body"]
+  },
+  {
+    name:"Black Phantom",
+    type:"Luxury Sport",
+    plate:"AUTO-777",
+    color:"#2b3035",
+    reward:850,
+    faults:["engine","hood","wheel","light"]
+  },
+  {
+    name:"Red Thunder",
+    type:"Rally Hatch",
+    plate:"AUTO-808",
+    color:"#dc3949",
+    reward:1040,
+    faults:["engine","wheel","body","light"]
+  },
+  {
+    name:"Blue Monster",
+    type:"Off-Road SUV",
+    plate:"AUTO-909",
+    color:"#2d648e",
+    reward:1220,
+    faults:["hood","wheel","body","engine"]
+  }
+];
 
-const faultIcons = {
-  engine:"⚙️",
-  wheels:"🛞",
-  light:"💡",
-  hood:"🧰",
-  body:"🔩"
-};
+const faultInfo = {
+  engine:{
+    icon:"🔧",
+    name:"Двигун",
+    code:"P0302",
+    symptom:"Двигун працює нерівно, є вібрація та втрата потужності.",
+    cost:190
+  },
 
-let fixed = new Set();
-let knownFaults = new Set();
+  wheel:{
+    icon:"🛞",
+    name:"Ходова",
+    code:"C1234",
+    symptom:"Є люфт колеса та вібрація на нерівностях.",
+    cost:145
+  },
+
+  light:{
+    icon:"💡",
+    name:"Освітлення",
+    code:"B1245",
+    symptom:"Передня фара працює нестабільно.",
+    cost:95
+  },
+
+  hood:{
+    icon:"🧰",
+    name:"Підкапотний вузол",
+    code:"P0171",
+    symptom:"Під капотом чути сторонній звук.",
+    cost:125
+  },
+
+  body:{
+    icon:"🔩",
+    name:"Кузов",
+    code:"U1102",
+    symptom:"Є люфт і пошкодження кріплення кузова.",
+    cost:110
+  }
+};
 
 const $ = id => document.getElementById(id);
 
 function save(){
-  localStorage.setItem("amp_money", game.money);
-  localStorage.setItem("amp_xp", game.xp);
-  localStorage.setItem("amp_level", game.level);
-  localStorage.setItem("amp_cars", game.carsDone);
+  localStorage.setItem("crc_money",state.money);
+  localStorage.setItem("crc_xp",state.xp);
+  localStorage.setItem("crc_level",state.level);
+  localStorage.setItem("crc_repaired",state.repaired);
+  localStorage.setItem("crc_car",state.carIndex);
 }
 
-function moneyText(v){
+function money(v){
   return "$" + Math.floor(v).toLocaleString("en-US");
 }
 
-function updateTop(){
-  $("money").textContent = moneyText(game.money);
-  $("brandSub").textContent =
-    `Приймання автомобіля • Рівень ${game.level} • ${game.carsDone} авто відремонтовано`;
+function currentCar(){
+  return cars[state.carIndex];
 }
 
 function toast(text){
   const el = $("toast");
+
   el.textContent = text;
   el.classList.add("show");
+
   clearTimeout(window.toastTimer);
-  window.toastTimer = setTimeout(() => {
+
+  window.toastTimer = setTimeout(()=>{
     el.classList.remove("show");
   },2400);
 }
 
-function xpAdd(amount){
-  game.xp += amount;
-
-  const need = game.level * 500;
-
-  if(game.xp >= need){
-    game.xp -= need;
-    game.level++;
-    toast(`🔥 Новий рівень: ${game.level}!`);
-  }
-
-  save();
-  updateTop();
+function setProgress(value){
+  const n = Math.max(0,Math.min(100,value));
+  $("progressBar").style.width=n+"%";
 }
 
-function progress(v){
-  $("progress").style.width = Math.max(0,Math.min(100,v)) + "%";
+function updateHud(){
+
+  $("money").textContent=money(state.money);
+
+  $("subTitle").textContent =
+    `Автомайстерня • Рівень ${state.level} • ${state.repaired} ремонтів`;
+
+  const car=currentCar();
+
+  $("plateText").textContent=car.plate;
+
+  $("questText").textContent =
+    `${car.name} • ${car.type}. Оглянь автомобіль, знайди несправності та відремонтуй їх.`;
+
+  updateProgress();
+}
+
+function updateProgress(){
+
+  const total=currentCar().faults.length;
+  const found=state.detected.size;
+  const done=state.fixed.size;
+
+  let value=0;
+
+  if(total>0){
+    value=
+      10+
+      (found/total)*35+
+      (done/total)*50;
+  }
+
+  if(done>=total){
+    value=100;
+  }
+
+  setProgress(value);
+
+  if(done>=total){
+    $("questTitle").textContent="АВТО ГОТОВЕ ✅";
+  }
+  else if(found>=total){
+    $("questTitle").textContent="УСІ ПРОБЛЕМИ ЗНАЙДЕНІ";
+  }
+  else if(found>0){
+    $("questTitle").textContent="ДІАГНОСТИКА ПРОДОВЖУЄТЬСЯ";
+  }
+  else{
+    $("questTitle").textContent="ПРИЙМАННЯ АВТОМОБІЛЯ";
+  }
 }
 
 /* ---------------------------------------------------------
-   CAR COLORS / VARIANTS
+   CAR VISUALS
 --------------------------------------------------------- */
 
-function paintCar(){
-  const car = game.cars[game.currentCar];
-  const color = car.color;
+function setPaint(color){
 
-  const body = document.getElementById("partBody");
-  const hood = document.getElementById("partHood");
-  const door = document.getElementById("partDoor");
+  const stop1=document.querySelector("#carBody stop:nth-child(1)");
+  const stop2=document.querySelector("#carBody stop:nth-child(2)");
+  const stop3=document.querySelector("#carBody stop:nth-child(3)");
 
-  body.setAttribute("fill",color);
-  hood.setAttribute("fill",color);
-  door.setAttribute("fill",color);
+  if(stop1) stop1.setAttribute("stop-color",lighten(color));
+  if(stop2) stop2.setAttribute("stop-color",color);
+  if(stop3) stop3.setAttribute("stop-color",darken(color));
 
-  $("carGraphic").querySelectorAll(".car-part").forEach(el=>{
-    el.classList.remove("fix");
-    el.classList.remove("active");
+  const hood=$("hoodPart");
+
+  if(hood){
+    const fills=hood.querySelectorAll("stop");
+
+    if(fills[0]) fills[0].setAttribute("stop-color",lighten(color));
+    if(fills[1]) fills[1].setAttribute("stop-color",color);
+    if(fills[2]) fills[2].setAttribute("stop-color",darken(color));
+  }
+}
+
+function hexToRgb(hex){
+  const c=hex.replace("#","");
+
+  const full=c.length===3
+    ? c.split("").map(x=>x+x).join("")
+    : c;
+
+  return {
+    r:parseInt(full.substring(0,2),16),
+    g:parseInt(full.substring(2,4),16),
+    b:parseInt(full.substring(4,6),16)
+  };
+}
+
+function rgbHex(r,g,b){
+  return "#"+[r,g,b]
+    .map(x=>Math.max(0,Math.min(255,Math.round(x))).toString(16).padStart(2,"0"))
+    .join("");
+}
+
+function lighten(hex){
+  const c=hexToRgb(hex);
+  return rgbHex(c.r+45,c.g+45,c.b+45);
+}
+
+function darken(hex){
+  const c=hexToRgb(hex);
+  return rgbHex(c.r*.55,c.g*.55,c.b*.55);
+}
+
+function prepareCar(){
+
+  const car=currentCar();
+
+  setPaint(car.color);
+
+  state.detected=new Set();
+  state.fixed=new Set();
+
+  const hot={
+    engine:$("engineHotspot"),
+    wheel:$("wheelHotspot"),
+    light:$("lightHotspot"),
+    hood:$("hoodHotspot"),
+    body:$("bodyHotspot")
+  };
+
+  Object.keys(hot).forEach(key=>{
+    hot[key].classList.toggle("hide",!car.faults.includes(key));
   });
 
-  fixed.clear();
-  knownFaults.clear();
-
-  $("tWheel").classList.remove("hidden");
-  $("tEngine").classList.remove("hidden");
-  $("tLamp").classList.remove("hidden");
-  $("tHood").classList.remove("hidden");
-  $("tBody").classList.remove("hidden");
-
-  // Make targets correspond to current faults.
-  const faults = car.faults;
-
-  ["tWheel","tEngine","tLamp","tHood","tBody"].forEach(id=>{
-    $(id).classList.add("hidden");
+  document.querySelectorAll(".hotspot").forEach(btn=>{
+    btn.style.borderColor="var(--cyan)";
+    btn.style.boxShadow="0 0 18px rgba(49,220,255,.35)";
   });
 
-  if(faults.includes("wheels")) $("tWheel").classList.remove("hidden");
-  if(faults.includes("engine")) $("tEngine").classList.remove("hidden");
-  if(faults.includes("light")) $("tLamp").classList.remove("hidden");
-  if(faults.includes("hood")) $("tHood").classList.remove("hidden");
-  if(faults.includes("body")) $("tBody").classList.remove("hidden");
+  $("car").classList.remove("lifted");
 
-  $("missionTitle").textContent = "ДІАГНОСТИКА";
-  $("missionText").textContent =
-    `${car.name} • ${car.type}. Знайди всі проблеми, натискаючи на деталі автомобіля.`;
+  state.hoodOpen=false;
+  state.lifted=false;
 
-  progress(5);
-  updateTop();
+  $("openHoodBtn").textContent="🔓 КАПОТ";
+  $("liftBtn").textContent="⬆️ ПІДЙОМНИК";
+
+  updateHud();
+}
+
+/* ---------------------------------------------------------
+   FIND FAULT
+--------------------------------------------------------- */
+
+function inspectFault(type){
+
+  const car=currentCar();
+
+  if(!car.faults.includes(type)){
+    toast("✅ Тут несправність не знайдена.");
+    return;
+  }
+
+  state.detected.add(type);
+
+  pulsePart(type);
+
+  showDiagnostic(type);
+
+  updateProgress();
+
+  if(state.detected.size===car.faults.length){
+    toast("🔥 Усі несправності знайдено!");
+  }else{
+    toast(
+      `${faultInfo[type].icon} Виявлено: ${faultInfo[type].name}`
+    );
+  }
+}
+
+function pulsePart(type){
+
+  const target={
+    engine:$("carBody"),
+    wheel:$("wheelsPart"),
+    light:$("lightPart"),
+    hood:$("hoodPart"),
+    body:$("doorPart")
+  }[type];
+
+  if(!target) return;
+
+  target.style.filter=
+    "drop-shadow(0 0 5px #fff) drop-shadow(0 0 17px #30ddff)";
+
+  setTimeout(()=>{
+    target.style.filter="";
+  },1600);
+}
+
+/* ---------------------------------------------------------
+   DIAGNOSTIC WINDOW
+--------------------------------------------------------- */
+
+function showDiagnostic(type){
+
+  const info=faultInfo[type];
+  const car=currentCar();
+
+  openModal(`
+    <div class="modal-head">
+
+      <div>
+        <div class="blue-text"
+             style="font-size:12px;font-weight:900">
+          ДІАГНОСТИЧНИЙ СКАНЕР
+        </div>
+
+        <h2>${info.icon} ${info.name}</h2>
+      </div>
+
+      <button class="close-btn" data-close>✕</button>
+
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-title">🚨 Симптом</div>
+        <div class="card-text">${info.symptom}</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🧾 Код</div>
+        <div class="card-value red-text">${info.code}</div>
+      </div>
+
+    </div>
+
+    <div class="scan-box">
+
+      <div class="scan-head">
+        <span>VEHICLE SCANNER</span>
+        <span class="blue-text">CONNECTED</span>
+      </div>
+
+      <div class="scan-progress">
+        <div id="modalScanBar"></div>
+      </div>
+
+      <div class="log" id="scanLog">
+[INIT] підключення до ${car.name}
+[CAN] мережа автомобіля: ONLINE
+[ECU] читання блоків керування...
+[ABS] перевірка датчиків...
+[LIGHT] перевірка освітлення...
+[SCAN] пошук помилок...
+      </div>
+
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <div class="card-title">💰 Вартість ремонту</div>
+      <div class="card-value yellow-text">
+        ${money(info.cost + state.level*12)}
+      </div>
+    </div>
+
+    <button class="full-btn" id="repairFaultBtn">
+      🔧 ПОЧАТИ РЕМОНТ
+    </button>
+  `);
+
+  setTimeout(()=>{
+    const bar=$("modalScanBar");
+    if(bar) bar.style.width="28%";
+  },100);
+
+  setTimeout(()=>{
+    const bar=$("modalScanBar");
+    if(bar) bar.style.width="62%";
+  },350);
+
+  setTimeout(()=>{
+    const bar=$("modalScanBar");
+    if(bar) bar.style.width="100%";
+  },750);
+
+  setTimeout(()=>{
+    const log=$("scanLog");
+
+    if(log){
+      log.textContent +=
+        `\n[FAULT] ${info.code} DETECTED`+
+        `\n[INFO] потрібен ремонт: ${info.name}`;
+    }
+  },800);
+
+  $("repairFaultBtn").addEventListener("click",()=>{
+    startRepair(type);
+  });
+}
+
+/* ---------------------------------------------------------
+   REPAIR MINI GAME
+--------------------------------------------------------- */
+
+let repairTimer=null;
+let needle=10;
+let direction=1;
+let repairType=null;
+
+function startRepair(type){
+
+  repairType=type;
+
+  clearInterval(repairTimer);
+
+  openModal(`
+    <div class="modal-head">
+
+      <div>
+        <div class="green-text"
+             style="font-size:12px;font-weight:900">
+          SERVICE BAY
+        </div>
+
+        <h2>🔧 Ремонт ${faultInfo[type].name}</h2>
+      </div>
+
+      <button class="close-btn" data-close>✕</button>
+
+    </div>
+
+    <div class="card-text" style="margin-top:10px">
+      Натисни кнопку, коли індикатор потрапить у зелену зону.
+    </div>
+
+    <div class="repair-area">
+
+      <div class="repair-label">
+        ТОЧНЕ НАЛАШТУВАННЯ
+      </div>
+
+      <div class="repair-bar">
+        <div class="good-zone"></div>
+      </div>
+
+      <div class="needle" id="repairNeedle"></div>
+
+      <button class="repair-button" id="repairHitBtn">
+        🔧 ЗАФІКСУВАТИ
+      </button>
+
+    </div>
+  `);
+
+  needle=10;
+  direction=1;
+
+  repairTimer=setInterval(()=>{
+
+    needle += direction*2.3;
+
+    if(needle>=90){
+      needle=90;
+      direction=-1;
+    }
+
+    if(needle<=10){
+      needle=10;
+      direction=1;
+    }
+
+    const n=$("repairNeedle");
+
+    if(n){
+      n.style.left=needle+"%";
+    }
+
+  },35);
+
+  $("repairHitBtn").addEventListener("click",finishRepair);
+}
+
+function finishRepair(){
+
+  clearInterval(repairTimer);
+
+  const type=repairType;
+
+  const accuracy=
+    Math.max(
+      0,
+      100-Math.abs(needle-50)*2
+    );
+
+  let multiplier=1;
+
+  if(accuracy>=92){
+    multiplier=1.5;
+  }
+  else if(accuracy>=78){
+    multiplier=1.25;
+  }
+  else if(accuracy>=60){
+    multiplier=1.1;
+  }
+
+  const base=
+    faultInfo[type].cost+
+    state.level*12;
+
+  const payment=
+    Math.floor(base*multiplier);
+
+  state.fixed.add(type);
+
+  closeModal();
+
+  state.money += payment;
+
+  addXP(
+    70+
+    Math.floor(accuracy)
+  );
+
+  toast(
+    `✅ ${faultInfo[type].name} відремонтовано • +${money(payment)}`
+  );
+
+  save();
+  updateHud();
+
+  if(
+    state.fixed.size >=
+    currentCar().faults.length
+  ){
+    setTimeout(finishCar,500);
+  }
+}
+
+/* ---------------------------------------------------------
+   COMPLETE CAR
+--------------------------------------------------------- */
+
+function finishCar(){
+
+  const car=currentCar();
+
+  const serviceBonus=
+    state.level*45;
+
+  const finalPayment=
+    car.reward+
+    serviceBonus;
+
+  state.money += finalPayment;
+  state.repaired++;
+
+  addXP(130);
+
+  save();
+  updateHud();
+
+  openModal(`
+
+    <div style="text-align:center">
+
+      <div style="font-size:64px">
+        🏆
+      </div>
+
+      <div class="green-text"
+           style="font-size:13px;font-weight:900">
+        РЕМОНТ ЗАВЕРШЕНО
+      </div>
+
+      <h2 style="margin:7px 0">
+        ${car.name}
+      </h2>
+
+      <div class="card-text">
+        Автомобіль повністю готовий.
+      </div>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-title">
+            💵 ОПЛАТА
+          </div>
+
+          <div class="card-value yellow-text">
+            ${money(finalPayment)}
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            ⭐ XP
+          </div>
+
+          <div class="card-value green-text">
+            +130
+          </div>
+        </div>
+
+      </div>
+
+      <button class="full-btn" id="nextCarBtn">
+        🚘 НАСТУПНИЙ КЛІЄНТ
+      </button>
+
+    </div>
+  `);
+
+  $("nextCarBtn").addEventListener("click",nextCar);
+}
+
+function nextCar(){
+
+  state.carIndex=
+    (state.carIndex+1)%
+    cars.length;
+
+  prepareCar();
+
+  closeModal();
+
+  toast(
+    `🚘 Нове авто: ${currentCar().name}`
+  );
+}
+
+/* ---------------------------------------------------------
+   XP
+--------------------------------------------------------- */
+
+function addXP(amount){
+
+  state.xp += amount;
+
+  let need=
+    state.level*500;
+
+  while(state.xp>=need){
+
+    state.xp-=need;
+    state.level++;
+
+    toast(
+      `🔥 Новий рівень: ${state.level}!`
+    );
+
+    need=state.level*500;
+  }
+
+  save();
+  updateHud();
 }
 
 /* ---------------------------------------------------------
@@ -1299,20 +1917,25 @@ function paintCar(){
 --------------------------------------------------------- */
 
 function toggleHood(){
-  game.hoodOpen = !game.hoodOpen;
 
-  $("hoodBtn").innerHTML = game.hoodOpen
-    ? "🔒 ЗАКРИТИ КАПОТ"
-    : "🔓 ВІДКРИТИ КАПОТ";
+  state.hoodOpen=!state.hoodOpen;
 
-  $("carGraphic").style.transform =
-    game.hoodOpen ? "translateY(-22px)" : "translateY(0)";
+  if(state.hoodOpen){
 
-  if(game.hoodOpen){
-    toast("Капот відкритий — перевір двигун.");
-    $("tHood").classList.remove("hidden");
+    $("openHoodBtn").textContent="🔒 КАПОТ";
+
+    $("questTitle").textContent="КАПОТ ВІДКРИТО";
+
+    $("questText").textContent=
+      "Перевір підкапотний вузол та двигун.";
+
+    toast("🔓 Капот відкрито.");
+
   }else{
-    toast("Капот закрито.");
+
+    $("openHoodBtn").textContent="🔓 КАПОТ";
+
+    toast("🔒 Капот закрито.");
   }
 }
 
@@ -1321,414 +1944,146 @@ function toggleHood(){
 --------------------------------------------------------- */
 
 function toggleLift(){
-  game.lifted = !game.lifted;
-  $("carWrap").classList.toggle("lifted",game.lifted);
 
-  $("liftBtn").innerHTML = game.lifted
-    ? "⬇️ ОПУСТИТИ АВТО"
-    : "⬆️ ПІДНЯТИ АВТО";
+  state.lifted=!state.lifted;
 
-  toast(game.lifted
-    ? "Авто піднято. Перевір ходову."
-    : "Авто опущено.");
-}
-
-/* ---------------------------------------------------------
-   INSPECTION
---------------------------------------------------------- */
-
-function inspectPart(type){
-
-  const car = game.cars[game.currentCar];
-
-  if(!car.faults.includes(type)){
-    toast("✅ Тут несправностей не знайдено.");
-    return;
-  }
-
-  knownFaults.add(type);
-
-  const map = {
-    engine:"partBody",
-    wheels:"partWheels",
-    light:"partHeadlight",
-    hood:"partHood",
-    body:"partDoor"
-  };
-
-  if($(map[type])){
-    $(map[type]).classList.add("active");
-    $(map[type]).classList.add("fix");
-  }
-
-  createSparks(type);
-
-  openDiagnostic(type);
-  updateMissionProgress();
-}
-
-function updateMissionProgress(){
-
-  const total = game.cars[game.currentCar].faults.length;
-
-  progress(8 + (knownFaults.size / total) * 37);
-
-  $("missionTitle").textContent = "НЕСПРАВНОСТІ ЗНАЙДЕНІ";
-  $("missionText").textContent =
-    `Знайдено ${knownFaults.size} з ${total}. Обери інструмент та ремонтуй машину.`;
-
-  if(knownFaults.size === total){
-    $("missionTitle").textContent = "УСІ ПРОБЛЕМИ ЗНАЙДЕНІ";
-    $("missionText").textContent =
-      "Тепер відремонтуй кожну несправність та отримай оплату.";
-    progress(48);
-  }
-}
-
-/* ---------------------------------------------------------
-   DIAGNOSTIC MODAL
---------------------------------------------------------- */
-
-function openDiagnostic(type){
-
-  const car = game.cars[game.currentCar];
-  const cost = repairCost(type);
-
-  $("overlay").classList.add("show");
-
-  $("panel").innerHTML = `
-    <div class="panel-head">
-      <div>
-        <div style="color:#70eaff;font-size:12px;font-weight:800">
-          СИСТЕМА ДІАГНОСТИКИ
-        </div>
-        <h2>${faultIcons[type]} ${faultNames[type]}</h2>
-      </div>
-      <button class="close" onclick="closePanel()">✕</button>
-    </div>
-
-    <div class="cards">
-      <div class="card">
-        <h3>🚨 Симптом</h3>
-        <p>${symptom(type)}</p>
-      </div>
-
-      <div class="card">
-        <h3>💰 Нарахування</h3>
-        <p>Орієнтовна вартість ремонту: <b class="yellow">${moneyText(cost)}</b></p>
-      </div>
-    </div>
-
-    <div class="scan">
-      <div class="scan-top">
-        <span>OBD / SENSOR SCAN</span>
-        <b class="cyan">${Math.floor(91 + Math.random()*8)}%</b>
-      </div>
-
-      <div class="scan-line">
-        <div id="scanProgress"></div>
-      </div>
-
-      <div class="logs" id="logs">
-[INIT] Connected to vehicle...
-[BUS] CAN network: ONLINE
-[ECU] Reading control unit...
-[ABS] Reading wheel sensors...
-[LIGHT] Reading lighting module...
-[SCAN] Searching for fault codes...
-      </div>
-    </div>
-
-    <button class="big-button" onclick="startRepair('${type}')">
-      🔧 ПОЧАТИ РЕМОНТ
-    </button>
-  `;
-
-  const bar = $("scanProgress");
-
-  setTimeout(()=>bar.style.width="25%",100);
-  setTimeout(()=>bar.style.width="57%",350);
-  setTimeout(()=>bar.style.width="84%",650);
-  setTimeout(()=>bar.style.width="100%",950);
-
-  setTimeout(()=>{
-    const logs = $("logs");
-    logs.innerHTML +=
-      `\n[FAULT] ${faultCode(type)} detected.` +
-      `\n[INFO] ${faultNames[type]} requires service.`;
-    logs.scrollTop = logs.scrollHeight;
-  },1000);
-}
-
-function symptom(type){
-
-  const s = {
-    engine:"Двигун працює нестабільно, є вібрація та падіння потужності.",
-    wheels:"На нерівностях відчувається люфт. Кермо має зайву вібрацію.",
-    light:"Фара працює нестабільно. Є помилка в модулі освітлення.",
-    hood:"Під капотом чути сторонній звук. Потрібно перевірити вузол.",
-    body:"Пошкоджене кріплення панелі та є люфт кузовного елемента."
-  };
-
-  return s[type];
-}
-
-function faultCode(type){
-  const c = {
-    engine:"P0302",
-    wheels:"C1234",
-    light:"B1245",
-    hood:"P0171",
-    body:"U1102"
-  };
-  return c[type];
-}
-
-function repairCost(type){
-  const base = {
-    engine:180,
-    wheels:140,
-    light:95,
-    hood:125,
-    body:110
-  };
-  return base[type] * (1 + (game.level-1)*.12);
-}
-
-/* ---------------------------------------------------------
-   REPAIR MINIGAME
---------------------------------------------------------- */
-
-let needleTimer = null;
-let needlePos = 10;
-let needleDir = 1;
-
-function startRepair(type){
-
-  $("panel").innerHTML = `
-    <div class="panel-head">
-      <div>
-        <div style="color:#70eaff;font-size:12px;font-weight:800">
-          SERVICE BAY
-        </div>
-        <h2>🔧 Ремонт</h2>
-      </div>
-      <button class="close" onclick="closePanel()">✕</button>
-    </div>
-
-    <p style="color:#aab9c4">
-      Зупини індикатор у зеленій зоні.
-      Чим точніше — тим більша премія.
-    </p>
-
-    <div class="repair-game">
-      <div class="repair-tip">НАСТРОЮВАННЯ ДЕТАЛІ</div>
-
-      <div class="gauge">
-        <div class="gauge-good"></div>
-      </div>
-
-      <div class="needle" id="needle"></div>
-
-      <button class="repair-btn" onclick="hitRepair('${type}')">
-        🔧 ЗАФІКСУВАТИ
-      </button>
-    </div>
-  `;
-
-  needlePos = 10;
-  needleDir = 1;
-
-  clearInterval(needleTimer);
-
-  needleTimer = setInterval(()=>{
-    needlePos += needleDir * 2.4;
-
-    if(needlePos >= 90){
-      needlePos = 90;
-      needleDir = -1;
-    }
-
-    if(needlePos <= 10){
-      needlePos = 10;
-      needleDir = 1;
-    }
-
-    $("needle").style.left = needlePos + "%";
-  },35);
-}
-
-function hitRepair(type){
-
-  clearInterval(needleTimer);
-
-  const accuracy = 100 - Math.abs(needlePos - 50) * 2;
-  let bonus = 1;
-
-  if(accuracy >= 92) bonus = 1.5;
-  else if(accuracy >= 78) bonus = 1.25;
-  else if(accuracy >= 60) bonus = 1.1;
-
-  const cost = Math.floor(repairCost(type));
-  const payment = Math.floor(cost * bonus);
-
-  fixed.add(type);
-
-  const map = {
-    engine:"partBody",
-    wheels:"partWheels",
-    light:"partHeadlight",
-    hood:"partHood",
-    body:"partDoor"
-  };
-
-  if($(map[type])){
-    $(map[type]).classList.remove("fix");
-    $(map[type]).classList.remove("active");
-  }
-
-  closePanel();
-
-  xpAdd(80 + Math.floor(accuracy));
-
-  progress(
-    50 +
-    (fixed.size / game.cars[game.currentCar].faults.length) * 45
+  $("car").classList.toggle(
+    "lifted",
+    state.lifted
   );
 
-  toast(`✅ Ремонт виконано • +${moneyText(payment)}`);
+  $("liftBtn").textContent=
+    state.lifted
+      ? "⬇️ ОПУСТИТИ"
+      : "⬆️ ПІДЙОМНИК";
 
-  if(fixed.size >= game.cars[game.currentCar].faults.length){
-    setTimeout(finishCar,450);
-  }
+  toast(
+    state.lifted
+      ? "⬆️ Автомобіль піднято."
+      : "⬇️ Автомобіль опущено."
+  );
 }
 
 /* ---------------------------------------------------------
-   FINISH CAR
+   SCANNER
 --------------------------------------------------------- */
 
-function finishCar(){
+function startQuickScan(){
 
-  const car = game.cars[game.currentCar];
-  const bonus = game.level * 40;
-  const total = car.reward + bonus;
+  const car=currentCar();
 
-  game.money += total;
-  game.carsDone++;
+  openModal(`
+    <div class="modal-head">
 
-  save();
-  updateTop();
-
-  $("missionTitle").textContent = "АВТО ГОТОВЕ ✅";
-  $("missionText").textContent =
-    `${car.name} відремонтовано. Клієнт отримав авто без несправностей.`;
-
-  progress(100);
-
-  $("overlay").classList.add("show");
-
-  $("panel").innerHTML = `
-    <div style="text-align:center">
-      <div style="font-size:64px">🏆</div>
-
-      <div style="color:#67edbb;font-weight:900;font-size:13px">
-        РЕМОНТ ЗАВЕРШЕНО
+      <div>
+        <div class="blue-text"
+             style="font-size:12px;font-weight:900">
+          FULL VEHICLE CHECK
+        </div>
+        <h2>📡 Повна діагностика</h2>
       </div>
 
-      <h2 style="margin-top:7px">${car.name}</h2>
+      <button class="close-btn" data-close>✕</button>
 
-      <p style="color:#aab9c4">
-        Усі несправності усунено.
-      </p>
-
-      <div class="cards">
-
-        <div class="card">
-          <h3>💵 Зароблено</h3>
-          <p class="yellow" style="font-size:24px;font-weight:900">
-            ${moneyText(total)}
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>⭐ XP</h3>
-          <p class="green" style="font-size:24px;font-weight:900">
-            +${120 + game.level*10}
-          </p>
-        </div>
-
-      </div>
-
-      <button class="big-button" onclick="nextCar()">
-        🚘 НАСТУПНИЙ АВТОМОБІЛЬ
-      </button>
     </div>
-  `;
 
-  xpAdd(120 + game.level * 10);
-}
+    <div class="scan-box">
 
-function nextCar(){
+      <div class="scan-head">
+        <span>${car.name}</span>
+        <span class="blue-text">SCAN</span>
+      </div>
 
-  closePanel();
+      <div class="scan-progress">
+        <div id="fullScanBar"></div>
+      </div>
 
-  game.currentCar = (game.currentCar + 1) % game.cars.length;
-  game.hoodOpen = false;
-  game.lifted = false;
+      <div class="log" id="fullScanLog">
+[SCAN] Vehicle connected.
+[SCAN] Reading ECU.
+[SCAN] Reading ABS.
+[SCAN] Reading lighting.
+[SCAN] Checking body modules.
+[SCAN] Checking suspension.
+      </div>
 
-  $("carWrap").classList.remove("lifted");
-  $("hoodBtn").innerHTML="🔓 ВІДКРИТИ КАПОТ";
-  $("liftBtn").innerHTML="⬆️ ПІДНЯТИ АВТО";
+    </div>
 
-  paintCar();
-
-  toast(`🚘 Приїхав новий клієнт: ${game.cars[game.currentCar].name}`);
+    <button class="full-btn" id="scanDone">
+      ✅ ПЕРЕГЛЯНУТИ РЕЗУЛЬТАТ
+    </button>
+  `);
 
   setTimeout(()=>{
-    $("missionTitle").textContent = "НОВЕ ЗАМОВЛЕННЯ";
-    $("missionText").textContent =
-      "Починай діагностику з огляду машини.";
+    if($("fullScanBar"))
+      $("fullScanBar").style.width="20%";
+  },100);
+
+  setTimeout(()=>{
+    if($("fullScanBar"))
+      $("fullScanBar").style.width="52%";
   },350);
-}
 
-/* ---------------------------------------------------------
-   TOOL SYSTEM
---------------------------------------------------------- */
+  setTimeout(()=>{
+    if($("fullScanBar"))
+      $("fullScanBar").style.width="78%";
+  },600);
 
-function selectTool(tool){
+  setTimeout(()=>{
+    if($("fullScanBar"))
+      $("fullScanBar").style.width="100%";
+  },900);
 
-  game.selectedTool = tool;
+  setTimeout(()=>{
+    const log=$("fullScanLog");
 
-  document.querySelectorAll(".tool").forEach(x=>{
-    x.classList.remove("active");
+    if(log){
+      log.textContent +=
+        "\n\n[RESULT] знайдено несправностей: "+
+        car.faults.length+
+        "\n[RESULT] автомобіль потребує ремонту.";
+    }
+  },1000);
+
+  $("scanDone").addEventListener("click",()=>{
+    const html=car.faults.map(type=>`
+      <div class="card">
+        <div class="card-title">
+          ${faultInfo[type].icon}
+          ${faultInfo[type].name}
+        </div>
+
+        <div class="card-text">
+          Код: <b>${faultInfo[type].code}</b><br>
+          ${faultInfo[type].symptom}
+        </div>
+      </div>
+    `).join("");
+
+    openModal(`
+      <div class="modal-head">
+
+        <div>
+          <div class="blue-text"
+               style="font-size:12px;font-weight:900">
+            РЕЗУЛЬТАТ ДІАГНОСТИКИ
+          </div>
+          <h2>${car.name}</h2>
+        </div>
+
+        <button class="close-btn" data-close>✕</button>
+
+      </div>
+
+      <div class="cards">
+        ${html}
+      </div>
+
+      <button class="full-btn" data-close>
+        🔧 ПЕРЕЙТИ ДО РЕМОНТУ
+      </button>
+    `);
   });
-
-  const list = [...document.querySelectorAll(".tool")];
-  const index = ["scan","wrench","hammer","pump","battery"].indexOf(tool);
-
-  if(list[index]){
-    list[index].classList.add("active");
-  }
-
-  if(tool === "scan"){
-    toast("📡 Сканер готовий до діагностики.");
-  }
-
-  if(tool === "wrench"){
-    toast("🔧 Обрано гайковий ключ.");
-  }
-
-  if(tool === "hammer"){
-    toast("🔨 Обрано молоток.");
-  }
-
-  if(tool === "pump"){
-    toast("💨 Компресор підключено.");
-  }
-
-  if(tool === "battery"){
-    toast("🔋 Обрано сервіс АКБ.");
-  }
 }
 
 /* ---------------------------------------------------------
@@ -1737,207 +2092,251 @@ function selectTool(tool){
 
 function openGarage(){
 
-  $("overlay").classList.add("show");
+  openModal(`
 
-  $("panel").innerHTML = `
-    <div class="panel-head">
+    <div class="modal-head">
+
       <div>
-        <div style="color:#70eaff;font-size:12px;font-weight:800">
-          YOUR WORKSHOP
+        <div class="blue-text"
+             style="font-size:12px;font-weight:900">
+          WORKSHOP
         </div>
-        <h2>🧰 Гараж</h2>
+        <h2>🧰 Твоя майстерня</h2>
       </div>
-      <button class="close" onclick="closePanel()">✕</button>
+
+      <button class="close-btn" data-close>✕</button>
+
     </div>
 
     <div class="cards">
 
       <div class="card">
-        <h3>👨‍🔧 Майстер</h3>
-        <p>Рівень: <b class="yellow">${game.level}</b></p>
-        <p>XP: <b class="cyan">${game.xp}</b></p>
+        <div class="card-title">
+          👨‍🔧 Майстер
+        </div>
+        <div class="card-text">
+          Рівень
+        </div>
+        <div class="card-value blue-text">
+          ${state.level}
+        </div>
       </div>
 
       <div class="card">
-        <h3>🚘 Статистика</h3>
-        <p>Відремонтовано: <b>${game.carsDone}</b></p>
+        <div class="card-title">
+          ⭐ XP
+        </div>
+        <div class="card-value green-text">
+          ${state.xp}
+        </div>
       </div>
 
       <div class="card">
-        <h3>💰 Баланс</h3>
-        <p class="yellow" style="font-size:22px;font-weight:900">
-          ${moneyText(game.money)}
-        </p>
+        <div class="card-title">
+          🚘 Авто
+        </div>
+        <div class="card-value">
+          ${state.repaired}
+        </div>
       </div>
 
       <div class="card">
-        <h3>🏆 Майстерня</h3>
-        <p>${garageStatus()}</p>
+        <div class="card-title">
+          💰 Баланс
+        </div>
+        <div class="card-value yellow-text">
+          ${money(state.money)}
+        </div>
       </div>
 
     </div>
 
-    <button class="big-button" onclick="nextCar();closePanel()">
+    <button class="full-btn" id="acceptClient">
       🚗 ПРИЙНЯТИ КЛІЄНТА
     </button>
 
-    <button
-      class="big-button"
-      style="background:linear-gradient(135deg,#273943,#15242c)"
-      onclick="resetGame()">
+    <button class="full-btn"
+            id="resetGame"
+            style="background:linear-gradient(135deg,#293a43,#17252c)">
       ♻️ СКИНУТИ ПРОГРЕС
     </button>
-  `;
-}
+  `);
 
-function garageStatus(){
+  $("acceptClient").addEventListener("click",()=>{
+    closeModal();
 
-  if(game.level < 3) return "Маленький сервіс";
-  if(game.level < 6) return "Міська майстерня";
-  if(game.level < 10) return "PRO Garage";
-  return "🏆 ELITE AUTO CENTER";
-}
+    toast(
+      `🚘 Клієнт приїхав: ${currentCar().name}`
+    );
+  });
 
-/* ---------------------------------------------------------
-   CLOSE
---------------------------------------------------------- */
-
-function closePanel(){
-  $("overlay").classList.remove("show");
-  clearInterval(needleTimer);
-}
-
-/* ---------------------------------------------------------
-   SPARKS
---------------------------------------------------------- */
-
-function createSparks(type){
-
-  const map = {
-    engine:[49,36],
-    wheels:[20,70],
-    light:[13,48],
-    hood:[35,28],
-    body:[58,58]
-  };
-
-  const p = map[type] || [50,50];
-
-  const scene = document.querySelector(".car-wrap");
-
-  for(let i=0;i<9;i++){
-
-    const s = document.createElement("div");
-    s.className = "spark";
-
-    s.style.left = p[0] + "%";
-    s.style.top = p[1] + "%";
-
-    s.style.setProperty("--x",
-      ((Math.random()*100)-50) + "px");
-
-    s.style.setProperty("--y",
-      ((Math.random()*100)-50) + "px");
-
-    scene.appendChild(s);
-
-    setTimeout(()=>s.remove(),750);
-  }
-}
-
-/* ---------------------------------------------------------
-   RANDOM EVENTS
---------------------------------------------------------- */
-
-function randomEvent(){
-
-  const chance = Math.random();
-
-  if(chance < .25){
-    toast("📞 Нове замовлення: клієнт вже біля боксу!");
-  }
-
-  if(chance >= .25 && chance < .4){
-    toast("⚡ Напруга стабільна. Майстерня готова.");
-  }
-}
-
-/* ---------------------------------------------------------
-   BUTTON LONG PRESS DETAILS
---------------------------------------------------------- */
-
-let pressTimer = null;
-
-document.addEventListener("touchstart",e=>{
-  const target = e.target.closest(".car-part");
-
-  if(!target) return;
-
-  pressTimer = setTimeout(()=>{
-    toast("🔍 Утримуй натискання — деталь можна оглянути.");
-  },650);
-},{passive:true});
-
-document.addEventListener("touchend",()=>{
-  clearTimeout(pressTimer);
-},{passive:true});
-
-/* ---------------------------------------------------------
-   KEYBOARD DESKTOP SUPPORT
---------------------------------------------------------- */
-
-document.addEventListener("keydown",e=>{
-
-  if(e.key === "h") toggleHood();
-  if(e.key === "l") toggleLift();
-  if(e.key === "g") openGarage();
-
-  if(e.key === "1") selectTool("scan");
-  if(e.key === "2") selectTool("wrench");
-  if(e.key === "3") selectTool("hammer");
-  if(e.key === "4") selectTool("pump");
-  if(e.key === "5") selectTool("battery");
-});
-
-/* ---------------------------------------------------------
-   RESET
---------------------------------------------------------- */
-
-function resetGame(){
-
-  localStorage.removeItem("amp_money");
-  localStorage.removeItem("amp_xp");
-  localStorage.removeItem("amp_level");
-  localStorage.removeItem("amp_cars");
-
-  location.reload();
-}
-
-/* ---------------------------------------------------------
-   INIT
---------------------------------------------------------- */
-
-function init(){
-
-  updateTop();
-  paintCar();
-
-  setTimeout(()=>{
-    toast("🔧 Клієнт чекає на діагностику.");
-  },700);
-
-  setInterval(randomEvent,8500);
-
-  // Tap overlay background to close.
-  $("overlay").addEventListener("click",e=>{
-    if(e.target === $("overlay")){
-      closePanel();
-    }
+  $("resetGame").addEventListener("click",()=>{
+    localStorage.removeItem("crc_money");
+    localStorage.removeItem("crc_xp");
+    localStorage.removeItem("crc_level");
+    localStorage.removeItem("crc_repaired");
+    localStorage.removeItem("crc_car");
+    location.reload();
   });
 }
 
-init();
-</script>
+/* ---------------------------------------------------------
+   MODAL
+--------------------------------------------------------- */
 
-</body>
-</html>
+function openModal(content){
+
+  $("modal").innerHTML=content;
+  $("modalBg").classList.add("show");
+
+  document.querySelectorAll("[data-close]").forEach(btn=>{
+    btn.addEventListener("click",closeModal);
+  });
+}
+
+function closeModal(){
+
+  $("modalBg").classList.remove("show");
+
+  clearInterval(repairTimer);
+}
+
+$("modalBg").addEventListener("click",e=>{
+  if(e.target===$("modalBg")){
+    closeModal();
+  }
+});
+
+/* ---------------------------------------------------------
+   PLAYER MOVEMENT
+--------------------------------------------------------- */
+
+function clamp(v,min,max){
+  return Math.max(min,Math.min(max,v));
+}
+
+function movePlayer(dx,dy){
+
+  state.playerX += dx;
+  state.playerY += dy;
+
+  state.playerX=
+    clamp(state.playerX,8,82);
+
+  state.playerY=
+    clamp(state.playerY,19,58);
+
+  $("player").style.left=
+    state.playerX+"%";
+
+  $("player").style.bottom=
+    state.playerY+"%";
+
+  updateCamera();
+}
+
+function updateCamera(){
+
+  const cx=(state.playerX-45)*.12;
+  const cy=(state.playerY-38)*.04;
+
+  $("camera").style.transform=
+    `translate(${-cx}px,${cy}px)`;
+}
+
+/* ---------------------------------------------------------
+   TOUCH JOYSTICK
+--------------------------------------------------------- */
+
+const joystickZone=$("joystickZone");
+const joystick=$("joystick");
+
+let touchStartX=0;
+let touchStartY=0;
+
+function joystickMove(clientX,clientY){
+
+  const r=
+    joystickZone.getBoundingClientRect();
+
+  const centerX=
+    r.left+r.width/2;
+
+  const centerY=
+    r.top+r.height/2;
+
+  let dx=clientX-centerX;
+  let dy=clientY-centerY;
+
+  const max=42;
+
+  const len=Math.sqrt(dx*dx+dy*dy);
+
+  if(len>max){
+    dx=dx/len*max;
+    dy=dy/len*max;
+  }
+
+  joystick.style.transform=
+    `translate(calc(-50% + ${dx}px),calc(-50% + ${dy}px))`;
+
+  movePlayer(dx/max*.7,-dy/max*.55);
+}
+
+function joystickReset(){
+
+  joystick.style.transform=
+    "translate(-50%,-50%)";
+}
+
+joystickZone.addEventListener("touchstart",e=>{
+  e.preventDefault();
+
+  state.joystickActive=true;
+  state.joystickId=e.changedTouches[0].identifier;
+
+  const t=e.changedTouches[0];
+
+  touchStartX=t.clientX;
+  touchStartY=t.clientY;
+
+},{passive:false});
+
+joystickZone.addEventListener("touchmove",e=>{
+  e.preventDefault();
+
+  if(!state.joystickActive) return;
+
+  for(const t of e.changedTouches){
+
+    if(t.identifier===state.joystickId){
+
+      joystickMove(
+        t.clientX,
+        t.clientY
+      );
+
+      break;
+    }
+  }
+
+},{passive:false});
+
+joystickZone.addEventListener("touchend",e=>{
+  e.preventDefault();
+
+  state.joystickActive=false;
+  joystickReset();
+
+},{passive:false});
+
+joystickZone.addEventListener("touchcancel",()=>{
+  state.joystickActive=false;
+  joystickReset();
+});
+
+/* ---------------------------------------------------------
+   CAMERA
+--------------------------------------------------------- */
+
+$("
