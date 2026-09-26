@@ -2,159 +2,203 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>3D Garage Simulator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Top 3D Car Garage</title>
     <style>
-        body { margin: 0; overflow: hidden; font-family: sans-serif; background: #111; color: #fff; }
-        #crosshair { position: absolute; top: 50%; left: 50%; width: 8px; height: 8px; background: #ff9900; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; z-index: 10; }
-        #instructions { position: absolute; top: 20px; left: 20px; z-index: 10; background: rgba(0,0,0,0.85); padding: 15px; border-radius: 8px; border: 1px solid #ff9900; }
+        body { margin: 0; overflow: hidden; background: #0a0a0a; font-family: 'Segoe UI', sans-serif; touch-action: none; }
+        canvas { display: block; width: 100vw; height: 100vh; }
+        
+        /* Панель тюнінгу */
+        .tuning-panel { position: absolute; top: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; background: rgba(0,0,0,0.7); padding: 8px 15px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); }
+        .color-btn { width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff; cursor: pointer; }
+        
+        /* Сенсорні кнопки переміщення */
+        .controls { position: absolute; bottom: 20px; left: 20px; display: grid; grid-template-columns: repeat(3, 55px); gap: 8px; z-index: 10; }
+        .btn { width: 55px; height: 55px; background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.5); color: #fff; font-size: 20px; font-weight: bold; border-radius: 50%; display: flex; align-items: center; justify-content: center; user-select: none; }
+        .btn:active { background: rgba(255,153,0,0.8); border-color: #ff9900; }
+        #btn-up { grid-column: 2; }
+        #btn-left { grid-column: 1; grid-row: 2; }
+        #btn-down { grid-column: 2; grid-row: 2; }
+        #btn-right { grid-column: 3; grid-row: 2; }
+        
+        #hint { position: absolute; bottom: 25px; right: 20px; color: rgba(255,255,255,0.6); font-size: 12px; pointer-events: none; text-align: right; }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/PointerLockControls.js"></script>
 </head>
 <body>
 
-    <div id="crosshair"></div>
-    <div id="instructions">
-        <h2>🏎️ Автогараж 3D</h2>
-        <p><strong>Клікни по екрану, щоб почати!</strong></p>
-        <p>🎮 <strong>W, A, S, D</strong> — Ходити</p>
-        <p>🖱️ <strong>Мишка</strong> — Оглядатися</p>
-        <p>🚀 <strong>Пробіл</strong> — Стрибок</p>
-        <p>🔴 <strong>Esc</strong> — Вийти з режиму огляду</p>
+    <!-- Меню вибору кольору -->
+    <div class="tuning-panel">
+        <div class="color-btn" style="background: #e60000;" onclick="setCarColor(0xe60000)"></div>
+        <div class="color-btn" style="background: #0066ff;" onclick="setCarColor(0x0066ff)"></div>
+        <div class="color-btn" style="background: #111111;" onclick="setCarColor(0x111111)"></div>
+        <div class="color-btn" style="background: #00cc44;" onclick="setCarColor(0x00cc44)"></div>
+        <div class="color-btn" style="background: #ffcc00;" onclick="setCarColor(0xffcc00)"></div>
     </div>
+
+    <!-- Джойстик ходьби -->
+    <div class="controls">
+        <div class="btn" id="btn-up">▲</div>
+        <div class="btn" id="btn-left">◄</div>
+        <div class="btn" id="btn-down">▼</div>
+        <div class="btn" id="btn-right">►</div>
+    </div>
+
+    <div id="hint">Права частина екрана — огляд 🔄</div>
 
     <script>
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x111111);
+        scene.background = new THREE.Color(0x0d0d0d);
 
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         document.body.appendChild(renderer.domElement);
 
-        // Освітлення всередині гаража
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        // Освітлення гаража
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
         scene.add(ambientLight);
 
-        const garageLight = new THREE.PointLight(0xffaa00, 2, 30);
-        garageLight.position.set(0, 7, 0);
-        scene.add(garageLight);
+        const spotLight = new THREE.SpotLight(0xffaa00, 2);
+        spotLight.position.set(0, 8, 0);
+        scene.add(spotLight);
 
-        // Стіни, підлога та стеля гаража
-        const wallMat = new THREE.MeshPhongMaterial({ color: 0x333333, side: THREE.DoubleSide });
-        const floorMat = new THREE.MeshPhongMaterial({ color: 0x222222, side: THREE.DoubleSide });
-
-        // Підлога
-        const floor = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), floorMat);
-        floor.rotation.x = Math.PI / 2;
+        // Підлога з сіткою
+        const floorMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.4, metalness: 0.2 });
+        const floor = new THREE.Mesh(new THREE.PlaneGeometry(24, 24), floorMat);
+        floor.rotation.x = -Math.PI / 2;
         scene.add(floor);
 
-        // Стіни
-        const wallBack = new THREE.Mesh(new THREE.PlaneGeometry(20, 8), wallMat);
-        wallBack.position.set(0, 4, -10);
-        scene.add(wallBack);
+        const grid = new THREE.GridHelper(24, 24, 0xff9900, 0x333333);
+        grid.position.y = 0.01;
+        scene.add(grid);
 
-        const wallLeft = new THREE.Mesh(new THREE.PlaneGeometry(20, 8), wallMat);
-        wallLeft.rotation.y = Math.PI / 2;
-        wallLeft.position.set(-10, 4, 0);
-        scene.add(wallLeft);
-
-        const wallRight = new THREE.Mesh(new THREE.PlaneGeometry(20, 8), wallMat);
-        wallRight.rotation.y = -Math.PI / 2;
-        wallRight.position.set(10, 4, 0);
-        scene.add(wallRight);
-
-        // Автомобіль
+        // --- ДЕТАЛІЗОВАНА МОДЕЛЬ АВТО ---
         const carGroup = new THREE.Group();
-        const carMat = new THREE.MeshPhongMaterial({ color: 0xcc0000, shininess: 90 });
-        
-        const carBody = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.7, 4.5), carMat);
-        carBody.position.y = 0.6;
-        carGroup.add(carBody);
+        const carMat = new THREE.MeshStandardMaterial({ color: 0xe60000, metalness: 0.8, roughness: 0.2 });
 
-        const cabin = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.6, 2.2), carMat);
-        cabin.position.set(0, 1.25, -0.2);
+        // Основний кузов
+        const body = new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.65, 4.4), carMat);
+        body.position.y = 0.55;
+        carGroup.add(body);
+
+        // Кабіна та лобове скло
+        const glassMat = new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 0.9, roughness: 0.1 });
+        const cabin = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.55, 2.1), glassMat);
+        cabin.position.set(0, 1.1, -0.2);
         carGroup.add(cabin);
 
+        // Фари
+        const headlightMat = new THREE.MeshBasicMaterial({ color: 0xffffcc });
+        const hl1 = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.15, 0.1), headlightMat);
+        hl1.position.set(-0.7, 0.6, 2.2);
+        const hl2 = hl1.clone();
+        hl2.position.x = 0.7;
+        carGroup.add(hl1);
+        carGroup.add(hl2);
+
+        // Спойлер
+        const spoiler = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.1, 0.4), carMat);
+        spoiler.position.set(0, 1.1, -2.0);
+        carGroup.add(spoiler);
+
         // Колеса
-        const wheelGeo = new THREE.CylinderGeometry(0.45, 0.45, 0.3, 16);
-        const wheelMat = new THREE.MeshBasicMaterial({ color: 0x111111 });
-        const positions = [[-1.2, 0.45, 1.3], [1.2, 0.45, 1.3], [-1.2, 0.45, -1.3], [1.2, 0.45, -1.3]];
-        positions.forEach(pos => {
+        const wheelGeo = new THREE.CylinderGeometry(0.4, 0.4, 0.35, 24);
+        const wheelMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.8 });
+        const rimMat = new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 0.9 });
+
+        const wheelPositions = [[-1.15, 0.4, 1.2], [1.15, 0.4, 1.2], [-1.15, 0.4, -1.2], [1.15, 0.4, -1.2]];
+        wheelPositions.forEach(pos => {
             const wheel = new THREE.Mesh(wheelGeo, wheelMat);
             wheel.rotation.z = Math.PI / 2;
+            
+            const rim = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 0.36, 12), rimMat);
+            rim.rotation.z = Math.PI / 2;
+            wheel.add(rim);
+
             wheel.position.set(...pos);
             carGroup.add(wheel);
         });
 
-        carGroup.position.set(0, 0, 0);
         scene.add(carGroup);
+        camera.position.set(0, 1.6, 5);
 
-        // Керування
-        const controls = new THREE.PointerLockControls(camera, document.body);
-        const instructions = document.getElementById('instructions');
+        // Функція зміни кольору авто
+        function setCarColor(hex) {
+            carMat.color.setHex(hex);
+            spoiler.material.color.setHex(hex);
+        }
 
-        document.body.addEventListener('click', () => { controls.lock(); });
-        controls.addEventListener('lock', () => { instructions.style.display = 'none'; });
-        controls.addEventListener('unlock', () => { instructions.style.display = 'block'; });
+        // Керування кнопками
+        let moveState = { up: false, down: false, left: false, right: false };
+        const bindBtn = (id, key) => {
+            const el = document.getElementById(id);
+            el.addEventListener('touchstart', (e) => { e.preventDefault(); moveState[key] = true; });
+            el.addEventListener('touchend', (e) => { e.preventDefault(); moveState[key] = false; });
+        };
+        bindBtn('btn-up', 'up');
+        bindBtn('btn-down', 'down');
+        bindBtn('btn-left', 'left');
+        bindBtn('btn-right', 'right');
 
-        let moveForward = false, moveBackward = false, moveLeft = false, moveRight = false;
-        let canJump = false;
-        const velocity = new THREE.Vector3();
-        const direction = new THREE.Vector3();
-        let prevTime = performance.now();
+        // Огляд пальцем (Обертання камери)
+        let touchX = 0, touchY = 0;
+        let lon = 0, lat = 0;
 
-        document.addEventListener('keydown', (e) => {
-            switch (e.code) {
-                case 'KeyW': moveForward = true; break;
-                case 'KeyS': moveBackward = true; break;
-                case 'KeyA': moveLeft = true; break;
-                case 'KeyD': moveRight = true; break;
-                case 'Space': if (canJump) velocity.y += 8; canJump = false; break;
+        document.addEventListener('touchstart', (e) => {
+            if(e.touches[0].clientX > window.innerWidth / 2) {
+                touchX = e.touches[0].clientX;
+                touchY = e.touches[0].clientY;
             }
         });
 
-        document.addEventListener('keyup', (e) => {
-            switch (e.code) {
-                case 'KeyW': moveForward = false; break;
-                case 'KeyS': moveBackward = false; break;
-                case 'KeyA': moveLeft = false; break;
-                case 'KeyD': moveRight = false; break;
+        document.addEventListener('touchmove', (e) => {
+            for(let i=0; i<e.touches.length; i++) {
+                if(e.touches[i].clientX > window.innerWidth / 3) {
+                    let movementX = e.touches[i].clientX - touchX;
+                    let movementY = e.touches[i].clientY - touchY;
+                    touchX = e.touches[i].clientX;
+                    touchY = e.touches[i].clientY;
+
+                    lon -= movementX * 0.25;
+                    lat -= movementY * 0.25;
+                    lat = Math.max(-85, Math.min(85, lat));
+                }
             }
         });
 
-        camera.position.set(0, 1.6, 6);
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
 
+        // Цикл рендеру
         function animate() {
             requestAnimationFrame(animate);
 
-            const time = performance.now();
-            if (controls.isLocked) {
-                const delta = (time - prevTime) / 1000;
+            let phi = THREE.MathUtils.degToRad(90 - lat);
+            let theta = THREE.MathUtils.degToRad(lon);
 
-                velocity.x -= velocity.x * 10.0 * delta;
-                velocity.z -= velocity.z * 10.0 * delta;
-                velocity.y -= 9.8 * 2.5 * delta;
+            let target = new THREE.Vector3();
+            target.x = camera.position.x + Math.sin(phi) * Math.cos(theta);
+            target.y = camera.position.y + Math.cos(phi);
+            target.z = camera.position.z + Math.sin(phi) * Math.sin(theta);
+            camera.lookAt(target);
 
-                direction.z = Number(moveForward) - Number(moveBackward);
-                direction.x = Number(moveRight) - Number(moveLeft);
-                direction.normalize();
+            const speed = 0.07;
+            const dir = new THREE.Vector3();
+            camera.getWorldDirection(dir);
+            dir.y = 0; dir.normalize();
 
-                if (moveForward || moveBackward) velocity.z -= direction.z * 35.0 * delta;
-                if (moveLeft || moveRight) velocity.x -= direction.x * 35.0 * delta;
+            const sideDir = new THREE.Vector3(-dir.z, 0, dir.x);
 
-                controls.moveRight(-velocity.x * delta);
-                controls.moveForward(-velocity.z * delta);
+            if (moveState.up) camera.position.addScaledVector(dir, speed);
+            if (moveState.down) camera.position.addScaledVector(dir, -speed);
+            if (moveState.left) camera.position.addScaledVector(sideDir, -speed);
+            if (moveState.right) camera.position.addScaledVector(sideDir, speed);
 
-                controls.getObject().position.y += (velocity.y * delta);
-
-                if (controls.getObject().position.y < 1.6) {
-                    velocity.y = 0;
-                    controls.getObject().position.y = 1.6;
-                    canJump = true;
-                }
-            }
-            prevTime = time;
             renderer.render(scene, camera);
         }
         animate();
