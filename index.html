@@ -1,207 +1,460 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Top 3D Car Garage</title>
-    <style>
-        body { margin: 0; overflow: hidden; background: #0a0a0a; font-family: 'Segoe UI', sans-serif; touch-action: none; }
-        canvas { display: block; width: 100vw; height: 100vh; }
-        
-        /* Панель тюнінгу */
-        .tuning-panel { position: absolute; top: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; background: rgba(0,0,0,0.7); padding: 8px 15px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); }
-        .color-btn { width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff; cursor: pointer; }
-        
-        /* Сенсорні кнопки переміщення */
-        .controls { position: absolute; bottom: 20px; left: 20px; display: grid; grid-template-columns: repeat(3, 55px); gap: 8px; z-index: 10; }
-        .btn { width: 55px; height: 55px; background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.5); color: #fff; font-size: 20px; font-weight: bold; border-radius: 50%; display: flex; align-items: center; justify-content: center; user-select: none; }
-        .btn:active { background: rgba(255,153,0,0.8); border-color: #ff9900; }
-        #btn-up { grid-column: 2; }
-        #btn-left { grid-column: 1; grid-row: 2; }
-        #btn-down { grid-column: 2; grid-row: 2; }
-        #btn-right { grid-column: 3; grid-row: 2; }
-        
-        #hint { position: absolute; bottom: 25px; right: 20px; color: rgba(255,255,255,0.6); font-size: 12px; pointer-events: none; text-align: right; }
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>BMW Mechanic Garage</title>
+
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{
+  margin:0;width:100%;height:100%;overflow:hidden;
+  background:#08090c;color:white;font-family:Arial,sans-serif
+}
+#game{
+  width:100%;height:100%;position:relative;
+  background:
+    radial-gradient(circle at 50% 30%,#343942 0,#15171b 45%,#07080a 100%);
+}
+#garage{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(#0004,#0008),
+    repeating-linear-gradient(90deg,#292c31 0 90px,#22252a 90px 94px);
+}
+.light{
+  position:absolute;width:190px;height:40px;
+  background:#fff;opacity:.12;filter:blur(15px);
+  top:7%;border-radius:50%;
+}
+.l1{left:8%}.l2{left:42%}.l3{right:8%}
+
+#car{
+  position:absolute;
+  left:50%;top:43%;
+  width:310px;height:145px;
+  transform:translate(-50%,-50%);
+  transition:.25s;
+}
+.body{
+  position:absolute;left:35px;top:35px;
+  width:240px;height:78px;
+  background:linear-gradient(#3e8edb,#0e3d72 65%,#07182a);
+  border-radius:55px 65px 28px 25px;
+  box-shadow:0 12px 30px #000;
+}
+.roof{
+  position:absolute;left:75px;top:10px;
+  width:135px;height:65px;
+  background:linear-gradient(130deg,#183957,#7ca8ca,#17334d);
+  border-radius:70px 70px 10px 10px;
+  border:3px solid #0b1722;
+}
+.window{
+  position:absolute;top:17px;width:53px;height:38px;
+  background:#111c26;border:2px solid #5e91b2;
+}
+.w1{left:87px;border-radius:45px 5px 5px 5px}
+.w2{left:143px;border-radius:5px 45px 5px 5px}
+.wheel{
+  position:absolute;top:82px;width:58px;height:58px;
+  background:#080808;border:11px solid #292b30;
+  border-radius:50%;box-shadow:inset 0 0 0 5px #666;
+}
+.wheel:after{
+  content:"";position:absolute;inset:12px;
+  background:#aaa;border-radius:50%;
+}
+.wf{left:50px}.wr{right:48px}
+.headlight{
+  position:absolute;right:23px;top:50px;
+  width:18px;height:14px;background:#dff;
+  border-radius:50%;box-shadow:0 0 15px #bff;
+}
+.grille{
+  position:absolute;right:0;top:58px;
+  width:25px;height:30px;
+  border:3px solid #111;border-radius:50%;
+}
+
+#hood{
+  position:absolute;left:78px;top:25px;
+  width:155px;height:65px;
+  background:linear-gradient(145deg,#4da4ee,#123c6b);
+  border-radius:45px 45px 10px 10px;
+  transform-origin:bottom;
+  transition:.5s;
+  z-index:5;
+}
+#hood.open{transform:rotateX(70deg) translateY(-30px)}
+
+#engine{
+  position:absolute;left:105px;top:25px;
+  width:110px;height:65px;
+  background:#16191d;border:3px solid #777;
+  border-radius:12px;
+  display:none;z-index:3;
+}
+#engine.show{display:block}
+.engineTop{
+  width:70px;height:30px;margin:12px auto;
+  background:linear-gradient(#555,#171717);
+  border-radius:8px;
+}
+.pipe{
+  position:absolute;width:70px;height:12px;
+  border:5px solid #222;border-radius:20px;
+  right:-25px;top:30px;
+}
+
+#player{
+  position:absolute;
+  left:50%;top:72%;
+  width:24px;height:36px;
+  background:#ffbd66;border-radius:12px 12px 5px 5px;
+  box-shadow:0 4px 15px #000;
+  transform:translate(-50%,-50%);
+  z-index:20;
+}
+#player:before{
+  content:"";position:absolute;
+  width:20px;height:20px;top:-15px;left:2px;
+  background:#f2b27a;border-radius:50%;
+}
+
+#ui{
+  position:absolute;inset:0;pointer-events:none;
+}
+.top{
+  position:absolute;top:12px;left:12px;right:12px;
+  display:flex;justify-content:space-between;gap:8px;
+}
+.panel{
+  background:#090b0ed9;border:1px solid #ffffff22;
+  border-radius:14px;padding:9px 12px;
+  backdrop-filter:blur(8px);
+}
+.money{color:#65ff88;font-weight:bold}
+#hint{
+  position:absolute;left:50%;top:13%;
+  transform:translateX(-50%);
+  background:#080a0dcc;padding:10px 16px;
+  border-radius:14px;opacity:0;
+  transition:.3s;text-align:center;
+}
+#hint.show{opacity:1}
+
+#actions{
+  position:absolute;right:15px;bottom:18px;
+  display:flex;flex-direction:column;gap:9px;
+  pointer-events:auto;
+}
+button{
+  border:0;color:white;background:#171a20e8;
+  border:1px solid #ffffff25;border-radius:14px;
+  padding:13px 16px;font-size:15px;font-weight:bold;
+  box-shadow:0 5px 15px #0008;
+}
+button:active{transform:scale(.94)}
+.primary{background:#1675d1}
+.green{background:#13823b}
+.red{background:#a82b2b}
+
+#joystick{
+  position:absolute;left:18px;bottom:18px;
+  width:125px;height:125px;border-radius:50%;
+  background:#ffffff12;border:2px solid #ffffff22;
+  pointer-events:auto;
+}
+#stick{
+  position:absolute;left:37px;top:37px;
+  width:47px;height:47px;border-radius:50%;
+  background:#ffffff38;border:2px solid #fff5;
+}
+
+#inventory{
+  position:absolute;left:50%;bottom:18px;
+  transform:translateX(-50%);
+  display:flex;gap:7px;pointer-events:auto;
+}
+.slot{
+  width:48px;height:48px;border-radius:10px;
+  background:#0b0d11e8;border:1px solid #ffffff25;
+  display:flex;align-items:center;justify-content:center;
+  font-size:23px;
+}
+
+#menu{
+  position:absolute;inset:0;background:#050609ee;
+  z-index:100;display:flex;align-items:center;
+  justify-content:center;text-align:center;
+}
+.menuBox{width:min(90%,430px)}
+.menuBox h1{
+  font-size:42px;margin:0 0 5px;
+  background:linear-gradient(90deg,#fff,#4ca8ff);
+  -webkit-background-clip:text;color:transparent;
+}
+.menuBox p{color:#aaa}
+.big{
+  width:100%;font-size:20px;padding:18px;margin-top:18px;
+}
+#parts{
+  display:none;position:absolute;
+  left:50%;top:50%;transform:translate(-50%,-50%);
+  z-index:60;width:min(90%,360px);
+  background:#0b0d11f5;border:1px solid #ffffff25;
+  border-radius:20px;padding:18px;
+}
+#parts h2{margin-top:0}
+.part{
+  display:flex;justify-content:space-between;
+  align-items:center;padding:12px;
+  margin:7px 0;background:#151920;
+  border-radius:12px;
+}
+</style>
 </head>
+
 <body>
 
-    <!-- Меню вибору кольору -->
-    <div class="tuning-panel">
-        <div class="color-btn" style="background: #e60000;" onclick="setCarColor(0xe60000)"></div>
-        <div class="color-btn" style="background: #0066ff;" onclick="setCarColor(0x0066ff)"></div>
-        <div class="color-btn" style="background: #111111;" onclick="setCarColor(0x111111)"></div>
-        <div class="color-btn" style="background: #00cc44;" onclick="setCarColor(0x00cc44)"></div>
-        <div class="color-btn" style="background: #ffcc00;" onclick="setCarColor(0xffcc00)"></div>
+<div id="game">
+  <div id="garage">
+    <div class="light l1"></div>
+    <div class="light l2"></div>
+    <div class="light l3"></div>
+
+    <div id="car">
+      <div id="engine">
+        <div class="engineTop"></div>
+        <div class="pipe"></div>
+      </div>
+
+      <div id="hood"></div>
+      <div class="body"></div>
+      <div class="roof">
+        <div class="window w1"></div>
+        <div class="window w2"></div>
+      </div>
+
+      <div class="wheel wf"></div>
+      <div class="wheel wr"></div>
+      <div class="headlight"></div>
+      <div class="grille"></div>
     </div>
 
-    <!-- Джойстик ходьби -->
-    <div class="controls">
-        <div class="btn" id="btn-up">▲</div>
-        <div class="btn" id="btn-left">◄</div>
-        <div class="btn" id="btn-down">▼</div>
-        <div class="btn" id="btn-right">►</div>
+    <div id="player"></div>
+  </div>
+
+  <div id="ui">
+    <div class="top">
+      <div class="panel">🔧 BMW MECHANIC</div>
+      <div class="panel">💰 <span class="money" id="money">500</span> ₴</div>
     </div>
 
-    <div id="hint">Права частина екрана — огляд 🔄</div>
+    <div id="hint"></div>
 
-    <script>
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x0d0d0d);
+    <div id="joystick">
+      <div id="stick"></div>
+    </div>
 
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        document.body.appendChild(renderer.domElement);
+    <div id="inventory">
+      <div class="slot">🔧</div>
+      <div class="slot">🔩</div>
+      <div class="slot">🛞</div>
+    </div>
 
-        // Освітлення гаража
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-        scene.add(ambientLight);
+    <div id="actions">
+      <button class="primary" onclick="toggleHood()">🚗 Капот</button>
+      <button onclick="showParts()">🧰 Деталі</button>
+      <button class="green" onclick="repair()">🔧 Ремонтувати</button>
+    </div>
+  </div>
 
-        const spotLight = new THREE.SpotLight(0xffaa00, 2);
-        spotLight.position.set(0, 8, 0);
-        scene.add(spotLight);
+  <div id="parts">
+    <h2>🧰 Деталі BMW</h2>
 
-        // Підлога з сіткою
-        const floorMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.4, metalness: 0.2 });
-        const floor = new THREE.Mesh(new THREE.PlaneGeometry(24, 24), floorMat);
-        floor.rotation.x = -Math.PI / 2;
-        scene.add(floor);
+    <div class="part">
+      <span>🛞 Переднє колесо</span>
+      <button onclick="changePart('wheel')">Зняти / Вставити</button>
+    </div>
 
-        const grid = new THREE.GridHelper(24, 24, 0xff9900, 0x333333);
-        grid.position.y = 0.01;
-        scene.add(grid);
+    <div class="part">
+      <span>🔋 Акумулятор</span>
+      <button onclick="changePart('battery')">Зняти / Вставити</button>
+    </div>
 
-        // --- ДЕТАЛІЗОВАНА МОДЕЛЬ АВТО ---
-        const carGroup = new THREE.Group();
-        const carMat = new THREE.MeshStandardMaterial({ color: 0xe60000, metalness: 0.8, roughness: 0.2 });
+    <div class="part">
+      <span>⚙️ Карбюратор</span>
+      <button onclick="changePart('carb')">Зняти / Вставити</button>
+    </div>
 
-        // Основний кузов
-        const body = new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.65, 4.4), carMat);
-        body.position.y = 0.55;
-        carGroup.add(body);
+    <button class="red" style="width:100%;margin-top:10px"
+            onclick="closeParts()">Закрити</button>
+  </div>
 
-        // Кабіна та лобове скло
-        const glassMat = new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 0.9, roughness: 0.1 });
-        const cabin = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.55, 2.1), glassMat);
-        cabin.position.set(0, 1.1, -0.2);
-        carGroup.add(cabin);
+  <div id="menu">
+    <div class="menuBox">
+      <h1>BMW MECHANIC</h1>
+      <p>Твій власний гараж. Ремонтуй автомобілі та заробляй гроші.</p>
+      <button class="primary big" onclick="startGame()">▶ ПОЧАТИ ГРУ</button>
+    </div>
+  </div>
+</div>
 
-        // Фари
-        const headlightMat = new THREE.MeshBasicMaterial({ color: 0xffffcc });
-        const hl1 = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.15, 0.1), headlightMat);
-        hl1.position.set(-0.7, 0.6, 2.2);
-        const hl2 = hl1.clone();
-        hl2.position.x = 0.7;
-        carGroup.add(hl1);
-        carGroup.add(hl2);
+<script>
+let money=500;
+let started=false;
+let hoodOpen=false;
+let repaired=0;
 
-        // Спойлер
-        const spoiler = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.1, 0.4), carMat);
-        spoiler.position.set(0, 1.1, -2.0);
-        carGroup.add(spoiler);
+const player=document.getElementById("player");
+const hint=document.getElementById("hint");
+const moneyEl=document.getElementById("money");
+const hood=document.getElementById("hood");
+const engine=document.getElementById("engine");
 
-        // Колеса
-        const wheelGeo = new THREE.CylinderGeometry(0.4, 0.4, 0.35, 24);
-        const wheelMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.8 });
-        const rimMat = new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 0.9 });
+let px=50,py=72;
+let vx=0,vy=0;
 
-        const wheelPositions = [[-1.15, 0.4, 1.2], [1.15, 0.4, 1.2], [-1.15, 0.4, -1.2], [1.15, 0.4, -1.2]];
-        wheelPositions.forEach(pos => {
-            const wheel = new THREE.Mesh(wheelGeo, wheelMat);
-            wheel.rotation.z = Math.PI / 2;
-            
-            const rim = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 0.36, 12), rimMat);
-            rim.rotation.z = Math.PI / 2;
-            wheel.add(rim);
+function startGame(){
+  document.getElementById("menu").style.display="none";
+  started=true;
+  message("Підійди до BMW та починай ремонт 🔧");
+}
 
-            wheel.position.set(...pos);
-            carGroup.add(wheel);
-        });
+function message(t){
+  hint.innerText=t;
+  hint.classList.add("show");
+  setTimeout(()=>hint.classList.remove("show"),2500);
+}
 
-        scene.add(carGroup);
-        camera.position.set(0, 1.6, 5);
+function toggleHood(){
+  if(!started)return;
+  hoodOpen=!hoodOpen;
+  hood.classList.toggle("open",hoodOpen);
+  engine.classList.toggle("show",hoodOpen);
 
-        // Функція зміни кольору авто
-        function setCarColor(hex) {
-            carMat.color.setHex(hex);
-            spoiler.material.color.setHex(hex);
-        }
+  if(hoodOpen)
+    message("Капот відкрито. Тут знаходиться двигун 🔥");
+  else
+    message("Капот закрито.");
+}
 
-        // Керування кнопками
-        let moveState = { up: false, down: false, left: false, right: false };
-        const bindBtn = (id, key) => {
-            const el = document.getElementById(id);
-            el.addEventListener('touchstart', (e) => { e.preventDefault(); moveState[key] = true; });
-            el.addEventListener('touchend', (e) => { e.preventDefault(); moveState[key] = false; });
-        };
-        bindBtn('btn-up', 'up');
-        bindBtn('btn-down', 'down');
-        bindBtn('btn-left', 'left');
-        bindBtn('btn-right', 'right');
+function showParts(){
+  document.getElementById("parts").style.display="block";
+}
 
-        // Огляд пальцем (Обертання камери)
-        let touchX = 0, touchY = 0;
-        let lon = 0, lat = 0;
+function closeParts(){
+  document.getElementById("parts").style.display="none";
+}
 
-        document.addEventListener('touchstart', (e) => {
-            if(e.touches[0].clientX > window.innerWidth / 2) {
-                touchX = e.touches[0].clientX;
-                touchY = e.touches[0].clientY;
-            }
-        });
+function changePart(type){
+  if(type==="wheel"){
+    message("🛞 Колесо знято. Тепер можна встановити нове.");
+    repaired++;
+  }
 
-        document.addEventListener('touchmove', (e) => {
-            for(let i=0; i<e.touches.length; i++) {
-                if(e.touches[i].clientX > window.innerWidth / 3) {
-                    let movementX = e.touches[i].clientX - touchX;
-                    let movementY = e.touches[i].clientY - touchY;
-                    touchX = e.touches[i].clientX;
-                    touchY = e.touches[i].clientY;
+  if(type==="battery"){
+    message("🔋 Акумулятор перевірено.");
+    repaired++;
+  }
 
-                    lon -= movementX * 0.25;
-                    lat -= movementY * 0.25;
-                    lat = Math.max(-85, Math.min(85, lat));
-                }
-            }
-        });
+  if(type==="carb"){
+    message("⚙️ Карбюратор знято. Встанови справний.");
+    repaired++;
+  }
+}
 
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
+function repair(){
+  if(!started)return;
 
-        // Цикл рендеру
-        function animate() {
-            requestAnimationFrame(animate);
+  if(!hoodOpen){
+    message("Спочатку відкрий капот!");
+    return;
+  }
 
-            let phi = THREE.MathUtils.degToRad(90 - lat);
-            let theta = THREE.MathUtils.degToRad(lon);
+  money+=150;
+  moneyEl.innerText=money;
+  repaired++;
 
-            let target = new THREE.Vector3();
-            target.x = camera.position.x + Math.sin(phi) * Math.cos(theta);
-            target.y = camera.position.y + Math.cos(phi);
-            target.z = camera.position.z + Math.sin(phi) * Math.sin(theta);
-            camera.lookAt(target);
+  message("✅ Ремонт завершено! +150 ₴");
+}
 
-            const speed = 0.07;
-            const dir = new THREE.Vector3();
-            camera.getWorldDirection(dir);
-            dir.y = 0; dir.normalize();
+/* Керування */
+function move(){
+  px+=vx;
+  py+=vy;
 
-            const sideDir = new THREE.Vector3(-dir.z, 0, dir.x);
+  px=Math.max(8,Math.min(92,px));
+  py=Math.max(15,Math.min(88,py));
 
-            if (moveState.up) camera.position.addScaledVector(dir, speed);
-            if (moveState.down) camera.position.addScaledVector(dir, -speed);
-            if (moveState.left) camera.position.addScaledVector(sideDir, -speed);
-            if (moveState.right) camera.position.addScaledVector(sideDir, speed);
+  player.style.left=px+"%";
+  player.style.top=py+"%";
 
-            renderer.render(scene, camera);
-        }
-        animate();
-    </script>
+  if(Math.abs(vx)+Math.abs(vy)>.01){
+    if(Math.abs(px-50)<17 && Math.abs(py-43)<17)
+      message("Ти біля BMW. Натискай «Капот» або «Деталі».");
+  }
+}
+
+setInterval(move,30);
+
+/* touch joystick */
+const joy=document.getElementById("joystick");
+const stick=document.getElementById("stick");
+
+let dragging=false;
+
+function joystick(e){
+  const r=joy.getBoundingClientRect();
+  const p=e.touches?e.touches[0]:e;
+  let x=p.clientX-(r.left+r.width/2);
+  let y=p.clientY-(r.top+r.height/2);
+
+  const max=39;
+  const d=Math.sqrt(x*x+y*y);
+
+  if(d>max){
+    x=x/d*max;
+    y=y/d*max;
+  }
+
+  stick.style.transform=`translate(${x}px,${y}px)`;
+  vx=x/max*0.65;
+  vy=y/max*0.65;
+}
+
+joy.addEventListener("touchstart",e=>{
+  dragging=true;
+  joystick(e);
+},{passive:false});
+
+joy.addEventListener("touchmove",e=>{
+  if(dragging){
+    e.preventDefault();
+    joystick(e);
+  }
+},{passive:false});
+
+joy.addEventListener("touchend",()=>{
+  dragging=false;
+  vx=0;vy=0;
+  stick.style.transform="translate(0,0)";
+});
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="w"||e.key==="ArrowUp")vy=-.65;
+  if(e.key==="s"||e.key==="ArrowDown")vy=.65;
+  if(e.key==="a"||e.key==="ArrowLeft")vx=-.65;
+  if(e.key==="d"||e.key==="ArrowRight")vx=.65;
+});
+
+document.addEventListener("keyup",e=>{
+  if(["w","s","ArrowUp","ArrowDown"].includes(e.key))vy=0;
+  if(["a","d","ArrowLeft","ArrowRight"].includes(e.key))vx=0;
+});
+</script>
+
 </body>
 </html>
