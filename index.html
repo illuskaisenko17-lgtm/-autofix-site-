@@ -2,195 +2,106 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Auto Mechanic Simulator</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>😎 AUTO MECHANIC PRO</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-}
-
-body{
-  margin:0;
-  overflow:hidden;
-  background:#080b10;
-  font-family:Arial,sans-serif;
-  color:white;
-}
-
-canvas{
-  display:block;
-  width:100vw;
-  height:100vh;
-  background:linear-gradient(#182535,#05070a);
-}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#05080c;color:#fff;font-family:Arial,sans-serif}
+canvas{position:fixed;inset:0;width:100%;height:100%;touch-action:none}
 
 #menu{
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at center,#23394d 0,#080b10 65%);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:20;
+ position:fixed;inset:0;z-index:10;
+ display:flex;align-items:center;justify-content:center;
+ background:radial-gradient(circle,#20394d,#05080c 70%);
 }
-
-.menuBox{
-  width:min(430px,90%);
-  padding:30px;
-  border-radius:25px;
-  background:rgba(10,15,22,.95);
-  border:1px solid #405263;
-  text-align:center;
-  box-shadow:0 20px 80px #000;
+.box{
+ width:min(460px,92%);
+ padding:28px;
+ border-radius:26px;
+ background:rgba(8,13,19,.95);
+ border:1px solid #405463;
+ box-shadow:0 25px 100px #000;
+ text-align:center
 }
-
-h1{
-  margin:0 0 10px;
-  font-size:38px;
-}
-
-h1 span{
-  color:#19d9ff;
-}
-
-p{
-  color:#aab6c2;
-  line-height:1.5;
-}
-
-button{
-  border:0;
-  border-radius:14px;
-  padding:14px 18px;
-  margin:5px;
-  color:white;
-  background:#172534;
-  border:1px solid #34495a;
-  font-size:14px;
-  font-weight:bold;
-}
-
-button:active{
-  transform:scale(.96);
-}
-
+.logo{font-size:36px;font-weight:1000}
+.logo span{color:#18d8ff}
+.sub{color:#9facb7;line-height:1.5}
 .start{
-  width:100%;
-  background:linear-gradient(135deg,#00cfff,#176cff);
+ width:100%;padding:16px;margin-top:15px;
+ border:0;border-radius:15px;
+ background:linear-gradient(135deg,#00d8ff,#236cff);
+ color:white;font-weight:900;font-size:16px
 }
 
-#ui{
-  display:none;
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-}
-
-.top{
-  position:absolute;
-  top:12px;
-  left:12px;
-  right:12px;
-  display:flex;
-  justify-content:space-between;
-}
-
+#ui{display:none;position:fixed;inset:0;pointer-events:none}
 .panel{
-  padding:12px 15px;
-  border-radius:15px;
-  background:rgba(7,12,18,.85);
-  border:1px solid #334553;
-  backdrop-filter:blur(10px);
+ background:rgba(5,10,15,.86);
+ border:1px solid rgba(255,255,255,.13);
+ backdrop-filter:blur(12px);
+ border-radius:15px;
+ padding:10px 13px
 }
-
+.top{
+ position:absolute;top:10px;left:10px;right:10px;
+ display:flex;justify-content:space-between
+}
 #job{
-  position:absolute;
-  top:75px;
-  left:12px;
-  width:min(360px,calc(100% - 24px));
+ position:absolute;top:70px;left:10px;
+ width:min(370px,calc(100% - 20px))
 }
+#title{font-size:18px;font-weight:900}
+#desc{font-size:12px;color:#aab6c0;margin-top:4px;line-height:1.4}
 
-#jobTitle{
-  font-size:18px;
-  font-weight:bold;
+#tools{
+ position:absolute;
+ left:8px;right:8px;bottom:10px;
+ display:flex;justify-content:center;
+ flex-wrap:wrap;
+ pointer-events:auto
 }
+button{
+ padding:12px 14px;margin:4px;
+ border-radius:13px;
+ border:1px solid #415362;
+ background:#12202c;
+ color:white;
+ font-weight:800
+}
+button:active{transform:scale(.95)}
+.blue{background:#087db0}
+.green{background:#07835e}
+.orange{background:#a65f00}
+.red{background:#a52d40}
 
-#jobText{
-  color:#aebbc5;
-  font-size:13px;
-  margin-top:5px;
+#hint{
+ position:absolute;
+ left:50%;bottom:95px;
+ transform:translateX(-50%);
+ background:rgba(0,0,0,.9);
+ padding:10px 15px;
+ border-radius:12px;
+ opacity:0;
+ transition:.2s;
+ white-space:nowrap
 }
-
-#buttons{
-  position:absolute;
-  bottom:15px;
-  left:10px;
-  right:10px;
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  pointer-events:auto;
-}
-
-.good{
-  background:#087c58;
-}
-
-.blue{
-  background:#086eaa;
-}
-
-.orange{
-  background:#a86400;
-}
-
-.red{
-  background:#a32a3c;
-}
-
-#message{
-  position:absolute;
-  bottom:105px;
-  left:50%;
-  transform:translateX(-50%);
-  padding:12px 18px;
-  background:rgba(0,0,0,.9);
-  border-radius:13px;
-  opacity:0;
-  transition:.25s;
-}
-
-#message.show{
-  opacity:1;
-}
+#hint.show{opacity:1}
 
 #finish{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:30;
-  background:rgba(0,0,0,.8);
-  align-items:center;
-  justify-content:center;
+ display:none;
+ position:fixed;inset:0;z-index:20;
+ background:rgba(0,0,0,.8);
+ align-items:center;justify-content:center
 }
-
-.finishBox{
-  background:#0b1118;
-  padding:30px;
-  width:min(400px,90%);
-  text-align:center;
-  border-radius:25px;
-  border:1px solid #3c4d5c;
+.finish{
+ width:min(430px,90%);
+ padding:28px;
+ text-align:center;
+ border-radius:25px;
+ background:#0a1118;
+ border:1px solid #405363
 }
-
-.money{
-  font-size:50px;
-  color:#48f0a5;
-  font-weight:bold;
-}
+.cash{font-size:52px;font-weight:1000;color:#49f0a5}
 </style>
 </head>
 
@@ -199,1149 +110,1063 @@ button:active{
 <canvas id="game"></canvas>
 
 <div id="menu">
-  <div class="menuBox">
-    <h1>AUTO<span>MECHANIC</span></h1>
-
-    <p>
-      Ти автомеханік. Клієнт приїжджає у твою майстерню,
-      а ти сам знаходиш несправності та ремонтуєш машину.
-    </p>
-
-    <button class="start" onclick="startGame()">
-      🚗 ПОЧАТИ ЗМІНУ
-    </button>
-  </div>
+ <div class="box">
+  <div class="logo">AUTO<span>MECHANIC</span> 😎</div>
+  <p class="sub">
+   Твоя власна автомайстерня.<br>
+   Клієнти приїжджають на різних машинах.
+   Шукай поломки сам, ремонтуй деталі та заробляй гроші.
+  </p>
+  <button class="start" onclick="startGame()">
+   🚗 ПОЧАТИ РОБОТУ
+  </button>
+ </div>
 </div>
 
 <div id="ui">
 
-  <div class="top">
-
-    <div class="panel">
-      🔧 GARAGE
-      <br>
-      <small id="phase">Готовність</small>
-    </div>
-
-    <div class="panel">
-      💰 $<span id="money">1200</span>
-    </div>
-
+ <div class="top">
+  <div class="panel">
+   🔧 AUTO MECHANIC
+   <br>
+   <small id="phase">Майстерня</small>
   </div>
 
-  <div id="job" class="panel">
-
-    <div id="jobTitle">
-      Очікування клієнта
-    </div>
-
-    <div id="jobText">
-      Машина зараз заїде в майстерню.
-    </div>
-
+  <div class="panel">
+   💰 $<span id="money">1000</span>
   </div>
+ </div>
 
-  <div id="message"></div>
+ <div id="job" class="panel">
+  <div id="title">Очікування клієнта</div>
+  <div id="desc">Нова машина скоро заїде.</div>
+ </div>
 
-  <div id="buttons"></div>
+ <div id="hint"></div>
+
+ <div id="tools"></div>
 
 </div>
 
 <div id="finish">
-
-  <div class="finishBox">
-
-    <h2>РОБОТУ ЗАВЕРШЕНО 🔧</h2>
-
-    <div class="money">
-      +$420
-    </div>
-
-    <p>
-      Машину успішно відремонтовано.
-    </p>
-
-    <button class="start" onclick="location.reload()">
-      🚗 НАСТУПНА МАШИНА
-    </button>
-
-  </div>
-
+ <div class="finish">
+  <h2>🔥 РЕМОНТ ЗАВЕРШЕНО</h2>
+  <div class="cash">+$420</div>
+  <p>Клієнт задоволений. Ти заробив гроші.</p>
+  <button class="start" onclick="newCar()">
+   🚗 НАСТУПНИЙ КЛІЄНТ
+  </button>
+ </div>
 </div>
 
 <script>
 
-const canvas =
-document.getElementById("game");
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
 
-const ctx =
-canvas.getContext("2d");
-
-let W,H;
+let W=innerWidth,H=innerHeight;
+let DPR=devicePixelRatio||1;
 
 function resize(){
-
-  W =
-  canvas.width =
-  window.innerWidth *
-  devicePixelRatio;
-
-  H =
-  canvas.height =
-  window.innerHeight *
-  devicePixelRatio;
-
-  canvas.style.width =
-  window.innerWidth+"px";
-
-  canvas.style.height =
-  window.innerHeight+"px";
-
-  ctx.setTransform(
-    devicePixelRatio,
-    0,
-    0,
-    devicePixelRatio,
-    0,
-    0
-  );
-
-  W=window.innerWidth;
-  H=window.innerHeight;
+ W=innerWidth;
+ H=innerHeight;
+ canvas.width=W*DPR;
+ canvas.height=H*DPR;
+ canvas.style.width=W+"px";
+ canvas.style.height=H+"px";
+ ctx.setTransform(DPR,0,0,DPR,0,0);
 }
 
-window.addEventListener(
-  "resize",
-  resize
-);
-
+addEventListener("resize",resize);
 resize();
 
+let playing=false;
+let carX=-350;
+let arrived=false;
+let phaseNow=0;
 
-let running=false;
+let cash=1000;
 
-let carX=-300;
+let hood=false;
+let wheel=false;
+let brake=false;
+let oil=false;
+let battery=false;
+let tire=false;
+let light=false;
+let coolant=false;
 
-let carTarget=
-window.innerWidth/2;
+let carType=0;
+let carColor="#d91f35";
+let carName="SPORT";
 
-let carSpeed=3;
+const colors=[
+ "#d91f35",
+ "#1976d2",
+ "#16a56a",
+ "#f0a51b",
+ "#7d46d8",
+ "#e6e6e6",
+ "#252b31"
+];
 
-let carArrived=false;
+const names=[
+ "SPORT",
+ "SEDAN",
+ "RACER",
+ "COUPE",
+ "GT",
+ "PREMIUM",
+ "TURBO"
+];
 
-let step=0;
+function randomCar(){
 
-let money=1200;
+ carType=
+ Math.floor(Math.random()*7);
 
-let engineOn=false;
+ carColor=
+ colors[Math.floor(Math.random()*colors.length)];
 
-let hoodOpen=false;
+ carName=
+ names[Math.floor(Math.random()*names.length)];
 
-let wheelRemoved=false;
-
-let brakeFixed=false;
-
-let oilChanged=false;
-
-let batteryFixed=false;
-
-let liftUp=false;
-
+ hood=false;
+ wheel=false;
+ brake=false;
+ oil=false;
+ battery=false;
+ tire=false;
+ light=false;
+ coolant=false;
+}
 
 function startGame(){
 
-  document.getElementById(
-    "menu"
-  ).style.display="none";
+ document.getElementById("menu").style.display="none";
+ document.getElementById("ui").style.display="block";
 
-  document.getElementById(
-    "ui"
-  ).style.display="block";
+ randomCar();
 
-  running=true;
+ playing=true;
+ arrived=false;
+ carX=-350;
 
-  carX=-300;
+ setJob(
+  "КЛІЄНТ ЇДЕ",
+  carName+" заїжджає у твою майстерню. Підготуй пост."
+ );
 
-  setJob(
-    "Клієнт приїжджає",
-    "Зачекай, поки автомобіль заїде на ремонтний пост."
-  );
+ setPhase("Заїзд автомобіля");
 
-  phase("В'їзд автомобіля");
+ buttons("");
 
-  draw();
+ loop();
 }
 
+function newCar(){
 
-function phase(text){
+ document.getElementById("finish").style.display="none";
 
-  document.getElementById(
-    "phase"
-  ).textContent=text;
+ randomCar();
+
+ arrived=false;
+ carX=-350;
+
+ setPhase("Новий клієнт");
+
+ setJob(
+  "НОВА МАШИНА",
+  "Цього разу автомобіль інший. Сам знайди його проблеми."
+ );
+
+ buttons("");
+
 }
 
-
-function setJob(title,text){
-
-  document.getElementById(
-    "jobTitle"
-  ).textContent=title;
-
-  document.getElementById(
-    "jobText"
-  ).textContent=text;
+function setPhase(t){
+ document.getElementById("phase").textContent=t;
 }
 
+function setJob(t,d){
+ document.getElementById("title").textContent=t;
+ document.getElementById("desc").textContent=d;
+}
 
 function buttons(html){
-
-  document.getElementById(
-    "buttons"
-  ).innerHTML=html;
+ document.getElementById("tools").innerHTML=html;
 }
 
+function hint(t){
 
-function msg(text){
+ const h=document.getElementById("hint");
 
-  const m=
-  document.getElementById(
-    "message"
-  );
+ h.textContent=t;
+ h.classList.add("show");
 
-  m.textContent=text;
+ clearTimeout(h.timer);
 
-  m.classList.add("show");
-
-  clearTimeout(msg.timer);
-
-  msg.timer=setTimeout(()=>{
-    m.classList.remove("show");
-  },1800);
+ h.timer=setTimeout(
+  ()=>h.classList.remove("show"),
+  1800
+ );
 }
 
+function addMoney(n){
 
-function drawGarage(){
+ cash+=n;
 
-  const w=window.innerWidth;
-  const h=window.innerHeight;
+ document.getElementById("money").textContent=cash;
+}
 
-  const grad=
-  ctx.createLinearGradient(
-    0,0,0,h
-  );
+function garage(){
 
-  grad.addColorStop(
-    0,
-    "#1d3043"
-  );
+ let g=ctx.createLinearGradient(0,0,0,H);
 
-  grad.addColorStop(
-    .55,
-    "#0d151d"
-  );
+ g.addColorStop(0,"#172939");
+ g.addColorStop(.55,"#0c131a");
+ g.addColorStop(1,"#030507");
 
-  grad.addColorStop(
-    1,
-    "#050709"
-  );
+ ctx.fillStyle=g;
+ ctx.fillRect(0,0,W,H);
 
-  ctx.fillStyle=grad;
+ // стіни
+
+ ctx.fillStyle="#111b24";
+ ctx.fillRect(0,0,W,H*.57);
+
+ // металеві панелі
+
+ for(let x=0;x<W;x+=80){
+
+  ctx.strokeStyle="rgba(255,255,255,.035)";
+  ctx.beginPath();
+  ctx.moveTo(x,0);
+  ctx.lineTo(x,H*.57);
+  ctx.stroke();
+ }
+
+ // ворота
+
+ ctx.fillStyle="#06090d";
+ ctx.fillRect(
+  W*.08,H*.12,
+  W*.84,H*.44
+ );
+
+ ctx.strokeStyle="#344957";
+ ctx.lineWidth=5;
+ ctx.strokeRect(
+  W*.08,H*.12,
+  W*.84,H*.44
+ );
+ ctx.lineWidth=1;
+
+ // лампи
+
+ for(let x=W*.2;x<W*.9;x+=W*.22){
+
+  ctx.fillStyle="#bff7ff";
+  ctx.shadowBlur=25;
+  ctx.shadowColor="#43dfff";
 
   ctx.fillRect(
-    0,0,w,h
+   x,H*.045,
+   75,7
   );
 
+  ctx.shadowBlur=0;
+ }
 
-  // задня стіна
+ // підлога
 
-  ctx.fillStyle="#101a23";
+ ctx.fillStyle="#151c21";
+
+ ctx.beginPath();
+
+ ctx.moveTo(0,H*.57);
+ ctx.lineTo(W,H*.57);
+ ctx.lineTo(W,H);
+ ctx.lineTo(0,H);
+
+ ctx.fill();
+
+ // плитка
+
+ ctx.strokeStyle="rgba(255,255,255,.045)";
+
+ for(let y=H*.57;y<H;y+=50){
+
+  ctx.beginPath();
+  ctx.moveTo(0,y);
+  ctx.lineTo(W,y);
+  ctx.stroke();
+ }
+
+ for(let x=0;x<W;x+=70){
+
+  ctx.beginPath();
+  ctx.moveTo(x,H*.57);
+  ctx.lineTo(
+   W/2+(x-W/2)*1.7,
+   H
+  );
+  ctx.stroke();
+ }
+
+ // підйомник
+
+ ctx.fillStyle="#303a42";
+
+ ctx.fillRect(
+  W/2-260,
+  H*.72,
+  520,
+  18
+ );
+
+ ctx.fillStyle="#e0a51d";
+
+ ctx.fillRect(
+  W/2-255,
+  H*.73,
+  12,
+  130
+ );
+
+ ctx.fillRect(
+  W/2+243,
+  H*.73,
+  12,
+  130
+ );
+
+ // шафи
+
+ ctx.fillStyle="#202b34";
+
+ ctx.fillRect(
+  25,H*.35,
+  125,170
+ );
+
+ ctx.fillStyle="#27343e";
+
+ for(let y=H*.38;y<H*.65;y+=35){
 
   ctx.fillRect(
-    0,
-    0,
-    w,
-    h*.55
+   35,y,
+   105,23
   );
+ }
+}
 
+function rounded(x,y,w,h,r){
 
-  // панелі
+ ctx.beginPath();
 
-  for(
-    let x=0;
-    x<w;
-    x+=90
-  ){
+ ctx.roundRect(
+  x,y,w,h,r
+ );
 
-    ctx.strokeStyle=
-    "rgba(255,255,255,.035)";
+ ctx.fill();
+}
 
-    ctx.beginPath();
+function wheelDraw(x,y,removed){
 
-    ctx.moveTo(x,0);
+ if(removed)return;
 
-    ctx.lineTo(x,h*.55);
+ ctx.save();
 
-    ctx.stroke();
-  }
+ ctx.translate(x,y);
 
+ ctx.fillStyle="#080a0d";
 
-  // підлога
+ ctx.beginPath();
+ ctx.arc(0,0,43,0,Math.PI*2);
+ ctx.fill();
 
-  ctx.fillStyle="#151c21";
+ ctx.fillStyle="#858d93";
+
+ ctx.beginPath();
+ ctx.arc(0,0,27,0,Math.PI*2);
+ ctx.fill();
+
+ ctx.fillStyle="#20262b";
+
+ ctx.beginPath();
+ ctx.arc(0,0,10,0,Math.PI*2);
+ ctx.fill();
+
+ ctx.strokeStyle="#d8dce0";
+ ctx.lineWidth=4;
+
+ for(let i=0;i<6;i++){
+
+  let a=i*Math.PI/3;
 
   ctx.beginPath();
 
   ctx.moveTo(
-    0,h*.55
+   Math.cos(a)*9,
+   Math.sin(a)*9
   );
 
   ctx.lineTo(
-    w,h*.55
+   Math.cos(a)*24,
+   Math.sin(a)*24
   );
 
-  ctx.lineTo(
-    w,h
-  );
+  ctx.stroke();
+ }
 
-  ctx.lineTo(
-    0,h
-  );
-
-  ctx.fill();
-
-
-  // плитка
-
-  ctx.strokeStyle=
-  "rgba(255,255,255,.055)";
-
-  for(
-    let y=h*.55;
-    y<h;
-    y+=55
-  ){
-
-    ctx.beginPath();
-
-    ctx.moveTo(0,y);
-
-    ctx.lineTo(w,y);
-
-    ctx.stroke();
-  }
-
-  for(
-    let x=0;
-    x<w;
-    x+=70
-  ){
-
-    ctx.beginPath();
-
-    ctx.moveTo(x,h*.55);
-
-    ctx.lineTo(
-      x+(x-w/2)*.5,
-      h
-    );
-
-    ctx.stroke();
-  }
-
-
-  // ворота
-
-  ctx.fillStyle="#080c10";
-
-  ctx.fillRect(
-    w*.1,
-    h*.12,
-    w*.8,
-    h*.43
-  );
-
-  ctx.strokeStyle="#273844";
-
-  ctx.lineWidth=5;
-
-  ctx.strokeRect(
-    w*.1,
-    h*.12,
-    w*.8,
-    h*.43
-  );
-
-  ctx.lineWidth=1;
-
-
-  // лампи
-
-  for(
-    let x=w*.25;
-    x<w*.8;
-    x+=w*.25
-  ){
-
-    ctx.fillStyle=
-    "rgba(180,240,255,.8)";
-
-    ctx.shadowBlur=25;
-
-    ctx.shadowColor="#55dfff";
-
-    ctx.fillRect(
-      x,
-      h*.04,
-      80,
-      7
-    );
-
-    ctx.shadowBlur=0;
-  }
-
-
-  // підйомник
-
-  ctx.fillStyle="#2e3941";
-
-  ctx.fillRect(
-    w/2-260,
-    h*.70,
-    520,
-    18
-  );
-
-  ctx.fillStyle="#e0a51d";
-
-  ctx.fillRect(
-    w/2-255,
-    h*.72,
-    10,
-    130
-  );
-
-  ctx.fillRect(
-    w/2+245,
-    h*.72,
-    10,
-    130
-  );
+ ctx.restore();
 }
-
 
 function drawCar(){
 
-  const w=window.innerWidth;
-  const h=window.innerHeight;
+ const cx=carX;
+ const cy=H*.66;
 
-  const cx=carX;
+ ctx.save();
+ ctx.translate(cx,cy);
 
-  const cy=
-  h*.64 -
-  (liftUp ? 90:0);
+ // тінь
 
+ ctx.fillStyle="rgba(0,0,0,.55)";
 
-  ctx.save();
+ ctx.beginPath();
 
-  ctx.translate(
-    cx,
-    cy
-  );
+ ctx.ellipse(
+  0,115,205,28,0,0,Math.PI*2
+ );
 
+ ctx.fill();
 
-  // тінь
+ // колеса
+
+ wheelDraw(-145,65,wheel);
+ wheelDraw(145,65,false);
+
+ // кузов
+
+ let body=ctx.createLinearGradient(
+  0,-80,0,70
+ );
+
+ body.addColorStop(0,carColor);
+ body.addColorStop(.5,carColor);
+ body.addColorStop(1,"#42070d");
+
+ ctx.fillStyle=body;
+
+ rounded(
+  -195,-35,
+  390,105,
+  25
+ );
+
+ // капот
+
+ ctx.fillStyle=carColor;
+
+ rounded(
+  -145,-78,
+  290,60,
+  18
+ );
+
+ // дах
+
+ ctx.beginPath();
+
+ ctx.moveTo(-120,-78);
+ ctx.lineTo(-70,-145);
+ ctx.lineTo(75,-145);
+ ctx.lineTo(125,-78);
+ ctx.closePath();
+
+ ctx.fill();
+
+ // скло
+
+ ctx.fillStyle="#0b202d";
+
+ ctx.beginPath();
+
+ ctx.moveTo(-96,-82);
+ ctx.lineTo(-58,-130);
+ ctx.lineTo(-8,-130);
+ ctx.lineTo(-8,-82);
+ ctx.closePath();
+
+ ctx.fill();
+
+ ctx.beginPath();
+
+ ctx.moveTo(5,-130);
+ ctx.lineTo(63,-130);
+ ctx.lineTo(101,-82);
+ ctx.lineTo(5,-82);
+ ctx.closePath();
+
+ ctx.fill();
+
+ // фари
+
+ ctx.fillStyle=
+ light
+ ?"white"
+ :"#ffe98c";
+
+ ctx.shadowBlur=20;
+ ctx.shadowColor="#ffe45e";
+
+ rounded(-180,-25,43,20,7);
+ rounded(137,-25,43,20,7);
+
+ ctx.shadowBlur=0;
+
+ // решітка
+
+ ctx.fillStyle="#0a1015";
+
+ rounded(-60,25,120,25,7);
+
+ // двері
+
+ ctx.strokeStyle="rgba(255,255,255,.22)";
+
+ ctx.beginPath();
+ ctx.moveTo(-5,-70);
+ ctx.lineTo(-5,55);
+ ctx.stroke();
+
+ ctx.beginPath();
+ ctx.moveTo(-150,-5);
+ ctx.lineTo(-40,-5);
+ ctx.stroke();
+
+ // ручки
+
+ ctx.fillStyle="#d9d9d9";
+
+ ctx.fillRect(
+  -25,-2,
+  35,5
+ );
+
+ // номер
+
+ ctx.fillStyle="#e8edf0";
+
+ rounded(-55,55,110,20,4);
+
+ ctx.fillStyle="#111";
+
+ ctx.font="bold 11px Arial";
+ ctx.textAlign="center";
+
+ ctx.fillText(
+  "AUTO-"+(100+carType*37),
+  0,69
+ );
+
+ // капот відкритий
+
+ if(hood){
+
+  ctx.fillStyle="#161d23";
+
+  ctx.strokeStyle="#ef3448";
+
+  ctx.lineWidth=4;
+
+  ctx.beginPath();
+
+  ctx.moveTo(-145,-78);
+  ctx.lineTo(-110,-150);
+  ctx.lineTo(110,-150);
+  ctx.lineTo(145,-78);
+  ctx.closePath();
+
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.lineWidth=1;
+
+  // двигун
+
+  ctx.fillStyle="#414b52";
+
+  rounded(-70,-125,140,55,10);
+
+  for(let x=-45;x<60;x+=25){
+
+   ctx.fillStyle="#68747a";
+
+   ctx.fillRect(
+    x,-116,13,36
+   );
+  }
+
+  // акумулятор
 
   ctx.fillStyle=
-  "rgba(0,0,0,.5)";
+  battery
+  ?"#38df91"
+  :"#15191c";
+
+  rounded(-115,-122,48,35,5);
+
+  ctx.fillStyle="#e33";
 
   ctx.beginPath();
 
-  ctx.ellipse(
-    0,
-    115,
-    190,
-    25,
-    0,
-    0,
-    Math.PI*2
+  ctx.arc(
+   -102,-117,
+   6,0,Math.PI*2
   );
 
   ctx.fill();
+ }
 
+ // підняте авто
 
-  // колеса
+ if(phaseNow>=2 && phaseNow<7){
 
-  drawWheel(
-    -145,
-    65,
-    wheelRemoved
-  );
-
-  drawWheel(
-    145,
-    65,
-    false
-  );
-
-
-  // кузов
-
-  const body=
-  ctx.createLinearGradient(
-    0,-60,0,70
-  );
-
-  body.addColorStop(
-    0,
-    "#f02e42"
-  );
-
-  body.addColorStop(
-    .5,
-    "#b50e20"
-  );
-
-  body.addColorStop(
-    1,
-    "#650812"
-  );
-
-  ctx.fillStyle=body;
-
-  roundRect(
-    -190,
-    -35,
-    380,
-    100,
-    25
-  );
-
-
-  // капот
-
-  ctx.fillStyle="#d21a2c";
-
-  roundRect(
-    -145,
-    -75,
-    290,
-    55,
-    17
-  );
-
-
-  // дах
-
-  ctx.fillStyle="#c51b2c";
-
-  ctx.beginPath();
-
-  ctx.moveTo(-115,-78);
-
-  ctx.lineTo(-70,-140);
-
-  ctx.lineTo(72,-140);
-
-  ctx.lineTo(125,-78);
-
-  ctx.closePath();
-
-  ctx.fill();
-
-
-  // скло
-
-  ctx.fillStyle="#102633";
-
-  ctx.beginPath();
-
-  ctx.moveTo(-92,-82);
-
-  ctx.lineTo(-58,-128);
-
-  ctx.lineTo(-8,-128);
-
-  ctx.lineTo(-8,-82);
-
-  ctx.closePath();
-
-  ctx.fill();
-
-  ctx.beginPath();
-
-  ctx.moveTo(4,-128);
-
-  ctx.lineTo(65,-128);
-
-  ctx.lineTo(100,-82);
-
-  ctx.lineTo(4,-82);
-
-  ctx.closePath();
-
-  ctx.fill();
-
-
-  // фари
-
-  ctx.fillStyle="#fff0a0";
-
-  ctx.shadowBlur=20;
-
-  ctx.shadowColor="#ffe66b";
-
-  roundRect(
-    -180,
-    -25,
-    42,
-    20,
-    7
-  );
-
-  roundRect(
-    138,
-    -25,
-    42,
-    20,
-    7
-  );
-
-  ctx.shadowBlur=0;
-
-
-  // решітка
-
-  ctx.fillStyle="#10151a";
-
-  roundRect(
-    -55,
-    25,
-    110,
-    24,
-    7
-  );
-
-
-  // ручки
-
-  ctx.fillStyle="#c8c8c8";
+  ctx.fillStyle="#e3aa21";
 
   ctx.fillRect(
-    -15,
-    -5,
-    30,
-    5
+   -255,98,
+   510,8
   );
+ }
 
-
-  // капот відкритий
-
-  if(hoodOpen){
-
-    ctx.fillStyle="#191f25";
-
-    ctx.strokeStyle="#e72a3c";
-
-    ctx.lineWidth=5;
-
-    ctx.beginPath();
-
-    ctx.moveTo(-145,-75);
-
-    ctx.lineTo(-105,-145);
-
-    ctx.lineTo(105,-145);
-
-    ctx.lineTo(145,-75);
-
-    ctx.closePath();
-
-    ctx.fill();
-
-    ctx.stroke();
-
-    ctx.lineWidth=1;
-
-    // двигун
-
-    ctx.fillStyle="#343c42";
-
-    roundRect(
-      -70,
-      -125,
-      140,
-      55,
-      10
-    );
-
-    ctx.fillStyle="#59646b";
-
-    for(
-      let i=-45;
-      i<60;
-      i+=25
-    ){
-
-      ctx.fillRect(
-        i,
-        -115,
-        13,
-        35
-      );
-    }
-
-    // акумулятор
-
-    if(!batteryFixed){
-
-      ctx.fillStyle="#191919";
-
-      roundRect(
-        -110,
-        -120,
-        45,
-        32,
-        5
-      );
-
-      ctx.fillStyle="#e33";
-
-      ctx.beginPath();
-
-      ctx.arc(
-        -98,
-        -118,
-        6,
-        0,
-        Math.PI*2
-      );
-
-      ctx.fill();
-
-    }else{
-
-      ctx.fillStyle="#36e994";
-
-      roundRect(
-        -110,
-        -120,
-        45,
-        32,
-        5
-      );
-    }
-  }
-
-
-  // підняте авто
-
-  if(liftUp){
-
-    ctx.fillStyle="#e1a81f";
-
-    ctx.fillRect(
-      -250,
-      95,
-      500,
-      8
-    );
-  }
-
-
-  ctx.restore();
+ ctx.restore();
 }
 
+function repairStage(){
 
-function drawWheel(x,y,removed){
-
-  if(removed)
-    return;
-
-  ctx.save();
-
-  ctx.translate(
-    x,
-    y
-  );
-
-  ctx.fillStyle="#090b0d";
-
-  ctx.beginPath();
-
-  ctx.arc(
-    0,
-    0,
-    42,
-    0,
-    Math.PI*2
-  );
-
-  ctx.fill();
-
-  ctx.fillStyle="#777f86";
-
-  ctx.beginPath();
-
-  ctx.arc(
-    0,
-    0,
-    25,
-    0,
-    Math.PI*2
-  );
-
-  ctx.fill();
-
-  ctx.fillStyle="#20262b";
-
-  ctx.beginPath();
-
-  ctx.arc(
-    0,
-    0,
-    10,
-    0,
-    Math.PI*2
-  );
-
-  ctx.fill();
-
-  for(
-    let i=0;
-    i<6;
-    i++
-  ){
-
-    const a=
-    i*Math.PI/3;
-
-    ctx.strokeStyle="#c8cdd0";
-
-    ctx.lineWidth=4;
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-      Math.cos(a)*8,
-      Math.sin(a)*8
-    );
-
-    ctx.lineTo(
-      Math.cos(a)*23,
-      Math.sin(a)*23
-    );
-
-    ctx.stroke();
-  }
-
-  ctx.restore();
-}
-
-
-function roundRect(
-  x,y,w,h,r
-){
-
-  ctx.beginPath();
-
-  ctx.roundRect(
-    x,y,w,h,r
-  );
-
-  ctx.fill();
-}
-
-
-function gameLoop(){
-
-  if(
-    running &&
-    !carArrived
-  ){
-
-    carX += carSpeed;
-
-    if(
-      carX >=
-      window.innerWidth/2
-    ){
-
-      carX=
-      window.innerWidth/2;
-
-      carArrived=true;
-
-      phase(
-        "Машина на посту"
-      );
-
-      setJob(
-        "Машина приїхала",
-        "Починай діагностику. Ти сам керуєш ремонтом."
-      );
-
-      buttons(`
-        <button class="blue"
-          onclick="diagnose()">
-          🔎 ДІАГНОСТИКА
-        </button>
-      `);
-    }
-  }
-
-
-  drawGarage();
-
-  if(running)
-    drawCar();
-
-  requestAnimationFrame(
-    gameLoop
-  );
-}
-
-
-function diagnose(){
-
-  phase(
-    "Діагностика"
-  );
-
-  hoodOpen=true;
+ if(phaseNow===1){
 
   setJob(
-    "Знайдено несправності",
-    "Переднє колесо, гальма, масло та акумулятор потребують обслуговування."
+   "ДІАГНОСТИКА",
+   "Торкнися частин машини: капота, колеса, фари або кузова. Шукай проблему."
   );
 
   buttons(`
-    <button class="orange"
-      onclick="raiseLift()">
-      ⬆️ ПІДНЯТИ АВТО
-    </button>
-  `);
+   <button class="blue" onclick="openHood()">
+    🔓 ВІДКРИТИ КАПОТ
+   </button>
 
-  msg(
-    "Діагностика завершена"
-  );
+   <button class="orange" onclick="raiseLift()">
+    ⬆️ ПІДНЯТИ АВТО
+   </button>
+  `);
+ }
 }
 
+function openHood(){
+
+ hood=true;
+
+ phaseNow=1;
+
+ setPhase("Огляд двигуна");
+
+ setJob(
+  "ПІД КАПОТОМ",
+  "Оглянь двигун та акумулятор. Якщо знайшов проблему — ремонтуй."
+ );
+
+ buttons(`
+  <button class="blue" onclick="fixBattery()">
+   🔋 ПЕРЕВІРИТИ АКУМУЛЯТОР
+  </button>
+
+  <button class="orange" onclick="changeOil()">
+   🛢️ ПЕРЕВІРИТИ МАСЛО
+  </button>
+
+  <button onclick="closeHood()">
+   🔒 ЗАКРИТИ КАПОТ
+  </button>
+ `);
+}
+
+function closeHood(){
+
+ hood=false;
+
+ setJob(
+  "ОГЛЯД",
+  "Тепер оглянь колеса та кузов."
+ );
+
+ buttons(`
+  <button class="orange" onclick="raiseLift()">
+   ⬆️ ПІДНЯТИ АВТО
+  </button>
+ `);
+}
 
 function raiseLift(){
 
-  liftUp=true;
+ phaseNow=2;
 
-  phase(
-    "Підйомник"
-  );
+ setPhase("Підйомник");
 
-  setJob(
-    "Робота №1",
-    "Зніми переднє ліве колесо."
-  );
+ setJob(
+  "АВТО ПІДНЯТО",
+  "Тепер можна самому працювати з колесами."
+ );
 
-  buttons(`
-    <button class="blue"
-      onclick="removeWheel()">
-      🛞 ЗНЯТИ КОЛЕСО
-    </button>
-  `);
+ buttons(`
+  <button class="blue" onclick="removeWheel()">
+   🔩 ВІДКРУТИТИ КОЛЕСО
+  </button>
+
+  <button class="orange" onclick="checkBrake()">
+   🛑 ОГЛЯНУТИ ГАЛЬМА
+  </button>
+ `);
 }
-
 
 function removeWheel(){
 
-  wheelRemoved=true;
+ wheel=true;
 
-  phase(
-    "Гальмівна система"
-  );
+ phaseNow=3;
 
-  setJob(
-    "Робота №2",
-    "Колесо знято. Тепер заміни гальмівний диск."
-  );
+ setPhase("Колесо знято");
 
-  buttons(`
-    <button class="good"
-      onclick="fixBrake()">
-      🛑 ЗАМІНИТИ ГАЛЬМО
-    </button>
-  `);
+ setJob(
+  "ПЕРЕДНЄ КОЛЕСО",
+  "Колесо знято. Оглянь гальмівний диск та шину."
+ );
 
-  msg(
-    "Колесо знято"
-  );
+ buttons(`
+  <button class="red" onclick="fixBrake()">
+   🛑 ЗАМІНИТИ ГАЛЬМІВНИЙ ДИСК
+  </button>
+
+  <button class="orange" onclick="fixTire()">
+   🛞 ПЕРЕВІРИТИ ШИНУ
+  </button>
+ `);
 }
 
+function checkBrake(){
+
+ hint(
+  "🔴 Гальмівний диск зношений!"
+ );
+
+ setTimeout(
+  fixBrake,
+  700
+ );
+}
 
 function fixBrake(){
 
-  brakeFixed=true;
+ brake=true;
 
-  phase(
-    "Гальма"
-  );
+ setJob(
+  "ГАЛЬМА",
+  "Новий гальмівний диск встановлено. Постав колесо назад."
+ );
 
-  setJob(
-    "Гальмо замінено",
-    "Встанови колесо назад."
-  );
+ buttons(`
+  <button class="green" onclick="installWheel()">
+   🛞 ПОСТАВИТИ КОЛЕСО
+  </button>
+ `);
 
-  buttons(`
-    <button class="blue"
-      onclick="installWheel()">
-      🛞 ВСТАНОВИТИ КОЛЕСО
-    </button>
-  `);
+ hint(
+  "🔧 Гальмо відремонтовано!"
+ );
 }
 
+function fixTire(){
+
+ tire=true;
+
+ hint(
+  "🛞 Шину відремонтовано!"
+ );
+
+ if(brake)
+  installWheel();
+}
 
 function installWheel(){
 
-  wheelRemoved=false;
+ wheel=false;
 
-  setJob(
-    "Робота №3",
-    "Тепер заміни масло в двигуні."
-  );
+ phaseNow=4;
 
-  buttons(`
-    <button class="orange"
-      onclick="changeOil()">
-      🛢 ЗМІНИТИ МАСЛО
-    </button>
-  `);
+ setJob(
+  "КОЛЕСО ГОТОВЕ",
+  "Тепер перевір масло та електрику."
+ );
+
+ buttons(`
+  <button class="orange" onclick="changeOil()">
+   🛢️ ЗАМІНИТИ МАСЛО
+  </button>
+
+  <button class="blue" onclick="fixBattery()">
+   🔋 АКУМУЛЯТОР
+  </button>
+ `);
 }
-
 
 function changeOil(){
 
-  oilChanged=true;
+ oil=true;
 
-  phase(
-    "Заміна масла"
-  );
+ setJob(
+  "МАСЛО",
+  "Старе масло злито. Залий свіже."
+ );
 
-  setJob(
-    "Масло злито",
-    "Залий свіже моторне масло."
-  );
-
-  buttons(`
-    <button class="good"
-      onclick="fillOil()">
-      🛢 ЗАЛИТИ НОВЕ
-    </button>
-  `);
+ buttons(`
+  <button class="green" onclick="fillOil()">
+   🛢️ ЗАЛИТИ НОВЕ МАСЛО
+  </button>
+ `);
 }
-
 
 function fillOil(){
 
-  setJob(
-    "Робота №4",
-    "Масло готове. Перевір акумулятор."
-  );
+ oil=true;
 
-  buttons(`
-    <button class="blue"
-      onclick="fixBattery()">
-      🔋 ПЕРЕВІРИТИ АКУМУЛЯТОР
-    </button>
-  `);
+ hint(
+  "🛢️ Нове масло залито!"
+ );
+
+ buttons(`
+  <button class="blue" onclick="fixBattery()">
+   🔋 ПЕРЕВІРИТИ АКУМУЛЯТОР
+  </button>
+ `);
 }
-
 
 function fixBattery(){
 
-  batteryFixed=true;
+ battery=true;
 
-  phase(
-    "Електрика"
-  );
+ hint(
+  "⚡ Клеми акумулятора справні!"
+ );
 
-  setJob(
-    "Акумулятор",
-    "Клеми підключені. Опусти автомобіль."
-  );
+ setJob(
+  "ЕЛЕКТРИКА",
+  "Акумулятор готовий. Зроби фінальну перевірку."
+ );
 
-  buttons(`
-    <button class="orange"
-      onclick="lowerLift()">
-      ⬇️ ОПУСТИТИ АВТО
-    </button>
-  `);
-
-  msg(
-    "Акумулятор працює"
-  );
+ buttons(`
+  <button class="green" onclick="finishCheck()">
+   🚗 ФІНАЛЬНА ПЕРЕВІРКА
+  </button>
+ `);
 }
 
+function finishCheck(){
 
-function lowerLift(){
+ phaseNow=7;
 
-  liftUp=false;
+ setPhase("Фінальна перевірка");
 
-  phase(
-    "Фінальна перевірка"
-  );
+ setJob(
+  "ЗАПУСК ДВИГУНА",
+  "Усі основні роботи виконані. Запускай двигун."
+ );
 
-  setJob(
-    "Усі деталі встановлені",
-    "Запусти двигун і проведи контрольний тест."
-  );
-
-  buttons(`
-    <button class="good"
-      onclick="testCar()">
-      🚗 ЗАПУСТИТИ ДВИГУН
-    </button>
-  `);
+ buttons(`
+  <button class="green" onclick="testDrive()">
+   🚗 ЗАПУСТИТИ ДВИГУН
+  </button>
+ `);
 }
 
+function testDrive(){
 
-function testCar(){
+ setJob(
+  "ТЕСТ-ДРАЙВ",
+  "Двигун працює. Перевіряю автомобіль..."
+ );
 
-  engineOn=true;
+ buttons("");
 
-  phase(
-    "Тест-драйв"
-  );
+ hint(
+  "🔥 ВСІ СИСТЕМИ ПРАЦЮЮТЬ"
+ );
 
-  setJob(
-    "Перевірка автомобіля",
-    "Двигун працює. Перевіряю гальма та всі системи."
-  );
+ setTimeout(()=>{
 
-  buttons("");
-
-  msg(
-    "Тестування..."
-  );
-
-  setTimeout(
-    finish,
-    2500
-  );
-}
-
-
-function finish(){
-
-  money += 420;
+  addMoney(420);
 
   document.getElementById(
-    "money"
-  ).textContent=money;
-
-  document.getElementById(
-    "finish"
+   "finish"
   ).style.display="flex";
+
+ },2500);
 }
 
+/* КЕРУВАННЯ ПАЛЬЦЕМ */
 
-gameLoop();
+let drag=false;
+let lastX=0;
+
+canvas.addEventListener(
+ "pointerdown",
+ e=>{
+  drag=true;
+  lastX=e.clientX;
+ }
+);
+
+canvas.addEventListener(
+ "pointermove",
+ e=>{
+
+  if(!drag)return;
+
+  let dx=e.clientX-lastX;
+
+  lastX=e.clientX;
+
+  if(arrived){
+
+   carX += dx*.15;
+
+   carX=Math.max(
+    W/2-100,
+    Math.min(W/2+100,carX)
+   );
+  }
+ }
+);
+
+canvas.addEventListener(
+ "pointerup",
+ ()=>drag=false
+);
+
+canvas.addEventListener(
+ "pointercancel",
+ ()=>drag=false
+);
+
+/* ТОРКАННЯ ПО МАШИНІ */
+
+canvas.addEventListener(
+ "pointerup",
+ e=>{
+
+  if(!arrived)return;
+
+  const x=e.clientX;
+  const y=e.clientY;
+
+  const cx=carX;
+  const cy=H*.66;
+
+  const dx=x-cx;
+  const dy=y-cy;
+
+  // капот
+
+  if(
+   dx>-160 &&
+   dx<160 &&
+   dy>-180 &&
+   dy<-65
+  ){
+
+   openHood();
+   return;
+  }
+
+  // ліве колесо
+
+  if(
+   Math.abs(dx+145)<55 &&
+   Math.abs(dy-65)<55
+  ){
+
+   if(phaseNow>=2){
+
+    removeWheel();
+
+   }else{
+
+    hint(
+     "🔧 Спочатку підніми автомобіль"
+    );
+   }
+
+   return;
+  }
+
+  // фара
+
+  if(
+   Math.abs(dx)>130 &&
+   Math.abs(dy+15)<35
+  ){
+
+   light=true;
+
+   hint(
+    "💡 Фара перевірена"
+   );
+
+   return;
+  }
+
+  hint(
+   "🔍 Тут усе виглядає нормально"
+  );
+});
+
+function draw(){
+
+ garage();
+
+ if(playing){
+
+  if(!arrived){
+
+   carX+=3;
+
+   if(carX>=W/2){
+
+    carX=W/2;
+    arrived=true;
+    phaseNow=1;
+
+    setPhase("Приймання автомобіля");
+
+    setJob(
+     "🚗 МАШИНА ПРИЇХАЛА",
+     "Тепер ти сам оглядаєш автомобіль. Торкайся деталей."
+    );
+
+    repairStage();
+   }
+  }
+
+  drawCar();
+ }
+
+ requestAnimationFrame(draw);
+}
+
+draw();
 
 </script>
 
