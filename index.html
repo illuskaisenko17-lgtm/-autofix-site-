@@ -1,1970 +1,1287 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Auto Mechanic Pro</title>
+<title>CAR REPAIR CENTER</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-}
-
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{
-  margin:0;
-  padding:0;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#071018;
-  color:#fff;
+margin:0;width:100%;height:100%;overflow:hidden;
+background:#020609;color:white;font-family:Arial,sans-serif;
+}
+body{touch-action:none}
+#game{position:fixed;inset:0;width:100%;height:100%}
+
+.hud{
+position:fixed;inset:0;pointer-events:none;
 }
 
-button{
-  font-family:inherit;
-  cursor:pointer;
-  border:0;
-  color:white;
+.top{
+position:absolute;top:12px;left:12px;right:12px;
+display:flex;gap:10px;
 }
 
-#game{
-  position:relative;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 25%,#263d49 0,#111d25 38%,#05090d 85%);
+.panel{
+background:linear-gradient(145deg,#0b2735,#030b10);
+border:1px solid #1d647b;
+border-radius:22px;
+padding:13px 16px;
+box-shadow:0 0 25px #00cfff22;
 }
 
-/* ---------------- GARAGE ---------------- */
+.title{flex:1}
+.title b{display:block;font-size:21px}
+.title small{display:block;color:#a9c1cb;margin-top:5px}
 
-.garage-wall{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(90deg,
-      transparent 0 9%,
-      rgba(80,110,125,.15) 9% 10%,
-      transparent 10% 90%,
-      rgba(80,110,125,.15) 90% 91%,
-      transparent 91%
-    ),
-    repeating-linear-gradient(
-      0deg,
-      rgba(255,255,255,.025) 0 2px,
-      transparent 2px 80px
-    );
+.money{
+min-width:120px;
+text-align:center;
+border-color:#80651c;
 }
 
-.floor{
-  position:absolute;
-  left:-20%;
-  right:-20%;
-  bottom:-15%;
-  height:48%;
-  transform:perspective(500px) rotateX(55deg);
-  background:
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 70px,
-      rgba(130,160,175,.12) 71px 73px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      transparent 0 70px,
-      rgba(130,160,175,.10) 71px 73px
-    );
+.money b{
+color:#ffd52d;
+font-size:20px;
 }
 
-.neon{
-  position:absolute;
-  top:8%;
-  width:30%;
-  height:5px;
-  background:#a8f5ff;
-  box-shadow:
-    0 0 8px #52eaff,
-    0 0 25px #52eaff,
-    0 0 60px #52eaff;
+.mission{
+position:absolute;
+top:95px;
+left:12px;
+right:12px;
+padding:14px;
+border-radius:22px;
+background:#040d13ee;
+border:1px solid #235568;
 }
 
-.neon.left{left:5%}
-.neon.right{right:5%}
-
-/* ---------------- HUD ---------------- */
-
-#hud{
-  position:absolute;
-  z-index:30;
-  top:10px;
-  left:10px;
-  right:10px;
-  display:flex;
-  gap:8px;
+.mission b{font-size:20px}
+.mission div{
+color:#aebfc8;
+font-size:13px;
+margin-top:5px;
 }
 
-.hud-box{
-  min-height:58px;
-  padding:10px 13px;
-  border-radius:17px;
-  border:1px solid #35515e;
-  background:rgba(4,10,15,.91);
-  box-shadow:0 8px 30px #0008;
-  backdrop-filter:blur(8px);
+.bar{
+height:7px;
+background:#172b34;
+border-radius:10px;
+margin-top:10px;
+overflow:hidden;
 }
 
-.brand{
-  flex:1;
-  font-size:19px;
-  font-weight:900;
+.bar i{
+display:block;
+height:100%;
+width:0;
+background:#16dcff;
 }
 
-.brand small{
-  display:block;
-  color:#9fb1bb;
-  font-size:11px;
-  margin-top:3px;
-}
-
-.cash{
-  color:#ffd95a;
-  font-size:19px;
-  font-weight:900;
-  white-space:nowrap;
-}
-
-/* ---------------- MISSION ---------------- */
-
-#mission{
-  position:absolute;
-  z-index:25;
-  left:10px;
-  right:10px;
-  top:77px;
-  padding:13px 15px;
-  border-radius:19px;
-  background:rgba(4,10,15,.94);
-  border:1px solid #304b58;
-}
-
-#missionTitle{
-  font-size:21px;
-  font-weight:900;
-}
-
-#missionText{
-  margin-top:5px;
-  color:#aebdc5;
-  font-size:14px;
-  line-height:1.3;
-}
-
-.progress{
-  margin-top:9px;
-  width:100%;
-  height:6px;
-  background:#1a2931;
-  border-radius:20px;
-  overflow:hidden;
-}
-
-#progressBar{
-  width:0%;
-  height:100%;
-  background:#35dfff;
-  box-shadow:0 0 14px #35dfff;
-  transition:.3s;
-}
-
-/* ---------------- SCENE ---------------- */
-
-#scene{
-  position:absolute;
-  z-index:5;
-  top:205px;
-  left:0;
-  right:0;
-  bottom:175px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-#car{
-  position:relative;
-  width:min(96vw,700px);
-  height:420px;
-  transition:.4s;
-  filter:drop-shadow(0 35px 25px #000);
-}
-
-#car.lifted{
-  transform:translateY(-60px) scale(.93);
-}
-
-.car-shadow{
-  position:absolute;
-  width:80%;
-  height:65px;
-  left:10%;
-  bottom:22px;
-  border-radius:50%;
-  background:#000;
-  opacity:.75;
-  filter:blur(13px);
-}
-
-/* ---------------- CAR SVG ---------------- */
-
-#carSVG{
-  width:100%;
-  height:100%;
-  overflow:visible;
-}
-
-.part{
-  transition:.2s;
-}
-
-.part.highlight{
-  filter:
-    drop-shadow(0 0 7px #3de8ff)
-    drop-shadow(0 0 17px #3de8ff);
-}
-
-.part.broken{
-  filter:
-    drop-shadow(0 0 7px #ff4545)
-    drop-shadow(0 0 18px #ff1515);
-}
-
-/* ---------------- CAR TARGETS ---------------- */
-
-.target{
-  position:absolute;
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  border:2px solid #39ddff;
-  background:rgba(8,35,45,.95);
-  box-shadow:0 0 18px #39ddff88;
-  font-size:21px;
-  animation:pulse 1.2s infinite;
-}
-
-.target:active{
-  transform:scale(.9);
-}
-
-@keyframes pulse{
-  50%{
-    box-shadow:
-      0 0 8px #39ddff,
-      0 0 30px #39ddff;
-  }
-}
-
-.target-engine{
-  left:45%;
-  top:20%;
-}
-
-.target-wheel{
-  left:9%;
-  bottom:19%;
-}
-
-.target-light{
-  right:7%;
-  bottom:35%;
-}
-
-.target-body{
-  right:31%;
-  top:42%;
-}
-
-.target-battery{
-  left:25%;
-  top:31%;
-}
-
-/* ---------------- BOTTOM ---------------- */
-
-#bottom{
-  position:absolute;
-  z-index:40;
-  left:9px;
-  right:9px;
-  bottom:8px;
-}
-
-.main-buttons{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:7px;
-}
-
-.main-buttons button{
-  min-height:53px;
-  border-radius:15px;
-  font-weight:900;
-  font-size:13px;
-  border:1px solid #36505c;
-  box-shadow:0 7px 15px #0007;
-}
-
-.blue{
-  background:linear-gradient(135deg,#0fa8df,#076a9f);
-}
-
-.orange{
-  background:linear-gradient(135deg,#ed9a00,#9c5000);
-}
-
-.green{
-  background:linear-gradient(135deg,#16b67a,#08724d);
+.status{
+position:absolute;
+left:12px;
+right:12px;
+bottom:140px;
+text-align:center;
+font-size:13px;
+color:#bce8f4;
 }
 
 .tools{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:5px;
-  margin-top:7px;
+position:absolute;
+left:12px;
+right:12px;
+bottom:78px;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:6px;
+pointer-events:auto;
 }
 
-.tool{
-  min-height:53px;
-  border-radius:13px;
-  background:#101c24;
-  border:1px solid #29434e;
-  font-size:10px;
-  font-weight:800;
+.controls{
+position:absolute;
+left:12px;
+right:12px;
+bottom:10px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:8px;
+pointer-events:auto;
 }
 
-.tool span{
-  display:block;
-  font-size:20px;
-  margin-bottom:2px;
+button{
+border:1px solid #2b687b;
+border-radius:18px;
+color:white;
+font-weight:800;
+font-size:12px;
+min-height:55px;
+background:linear-gradient(145deg,#17333f,#09171e);
+box-shadow:0 5px 14px #0008;
 }
 
-/* ---------------- MODAL ---------------- */
-
-#modal{
-  position:absolute;
-  z-index:100;
-  inset:0;
-  display:none;
-  align-items:flex-end;
-  background:rgba(0,0,0,.72);
+button:active{
+transform:scale(.96);
 }
 
-#modal.show{
-  display:flex;
-}
-
-#panel{
-  width:100%;
-  max-height:82%;
-  overflow:auto;
-  padding:18px;
-  border-radius:27px 27px 0 0;
-  background:
-    linear-gradient(#152630,#071015);
-  border:1px solid #355361;
-  box-shadow:0 -10px 40px #000;
-}
-
-.close{
-  float:right;
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  background:#273942;
-  font-size:18px;
-}
-
-.panel-title{
-  font-size:24px;
-  font-weight:900;
-  margin-bottom:5px;
-}
-
-.panel-sub{
-  color:#9eafb8;
-  line-height:1.4;
-}
-
-.info{
-  margin-top:13px;
-  padding:13px;
-  border-radius:15px;
-  background:#0b171e;
-  border:1px solid #253d48;
-}
-
-.row{
-  display:flex;
-  justify-content:space-between;
-  padding:10px 0;
-  border-bottom:1px solid #1c3039;
-}
-
-.row:last-child{
-  border-bottom:0;
-}
-
-.repair-button{
-  width:100%;
-  margin-top:12px;
-  padding:16px;
-  border-radius:15px;
-  background:linear-gradient(135deg,#08b7ed,#0877ae);
-  font-size:16px;
-  font-weight:900;
-}
-
-/* ---------------- REPAIR MINI GAME ---------------- */
-
-.repair-area{
-  height:250px;
-  margin-top:12px;
-  border-radius:18px;
-  background:#061015;
-  border:1px solid #29444f;
-  position:relative;
-  overflow:hidden;
-}
-
-.repair-track{
-  position:absolute;
-  left:8%;
-  right:8%;
-  top:45%;
-  height:28px;
-  border-radius:20px;
-  background:#1d2d35;
-}
-
-.repair-good{
-  position:absolute;
-  left:42%;
-  width:16%;
-  height:100%;
-  background:#39e3a1;
-  box-shadow:0 0 20px #39e3a1;
-}
-
-.needle{
-  position:absolute;
-  top:-12px;
-  left:0;
-  width:5px;
-  height:52px;
-  border-radius:5px;
-  background:white;
-  box-shadow:0 0 12px white;
-}
-
-.repair-hit{
-  position:absolute;
-  bottom:16px;
-  left:50%;
-  transform:translateX(-50%);
-  width:180px;
-  padding:14px;
-  border-radius:14px;
-  background:#079bd1;
-  font-size:15px;
-  font-weight:900;
-}
-
-/* ---------------- TOAST ---------------- */
+.btn-blue{background:linear-gradient(145deg,#10aee8,#075a93)}
+.btn-orange{background:linear-gradient(145deg,#ffad14,#a84e00)}
+.btn-green{background:linear-gradient(145deg,#19bd78,#087148)}
+.btn-purple{background:linear-gradient(145deg,#9c55ef,#4b1b93)}
 
 #toast{
-  position:absolute;
-  z-index:200;
-  left:50%;
-  top:18px;
-  transform:translate(-50%,-130px);
-  padding:12px 18px;
-  border-radius:15px;
-  background:#10232c;
-  border:1px solid #365662;
-  box-shadow:0 8px 25px #0008;
-  font-weight:800;
-  transition:.3s;
-  white-space:nowrap;
+position:fixed;
+left:50%;
+top:55%;
+transform:translate(-50%,-50%);
+padding:14px 20px;
+border-radius:18px;
+background:#071820ee;
+border:1px solid #32d9ff;
+font-weight:bold;
+opacity:0;
+pointer-events:none;
+transition:.2s;
+z-index:50;
+text-align:center;
 }
 
-#toast.show{
-  transform:translate(-50%,0);
+#toast.show{opacity:1}
+
+#modal{
+display:none;
+position:fixed;
+inset:0;
+background:#000b;
+backdrop-filter:blur(6px);
+z-index:30;
+align-items:center;
+justify-content:center;
+padding:18px;
 }
 
-/* ---------------- MOBILE ---------------- */
+.card{
+width:min(650px,95vw);
+max-height:88vh;
+overflow:auto;
+background:linear-gradient(150deg,#0b202a,#050c11);
+border:1px solid #23738a;
+border-radius:24px;
+padding:18px;
+}
 
-@media(max-height:720px){
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
 
-  #scene{
-    top:190px;
-    bottom:160px;
-  }
+.item{
+padding:12px;
+border:1px solid #244653;
+border-radius:16px;
+background:#09161c;
+}
 
-  #car{
-    transform:scale(.84);
-  }
+.item b{display:block;margin-bottom:6px}
+.item small{color:#9db0b8}
 
-  #car.lifted{
-    transform:translateY(-40px) scale(.78);
-  }
+.close{
+margin-top:12px;
+width:100%;
+}
 
-  #mission{
-    top:72px;
-    padding:10px 12px;
-  }
-
-  #missionTitle{
-    font-size:18px;
-  }
-
-  #missionText{
-    font-size:12px;
-  }
-
-  .main-buttons button{
-    min-height:47px;
-    font-size:11px;
-  }
-
-  .tool{
-    min-height:47px;
-  }
+@media(max-width:500px){
+.title b{font-size:18px}
+.mission b{font-size:17px}
+.tools{bottom:73px}
+.controls button{min-height:53px}
 }
 </style>
 </head>
 
 <body>
 
-<div id="game">
+<canvas id="game"></canvas>
 
-  <div class="garage-wall"></div>
-  <div class="floor"></div>
+<div class="hud">
 
-  <div class="neon left"></div>
-  <div class="neon right"></div>
-
-  <!-- HUD -->
-
-  <div id="hud">
-
-    <div class="hud-box brand">
-      🔧 AUTO MECHANIC PRO
-      <small>АВТОМАЙСТЕРНЯ</small>
-    </div>
-
-    <div class="hud-box cash">
-      💰 $<span id="money">2500</span>
-    </div>
-
-  </div>
-
-  <!-- МІСІЯ -->
-
-  <div id="mission">
-
-    <div id="missionTitle">
-      🚗 НОВИЙ КЛІЄНТ
-    </div>
-
-    <div id="missionText">
-      Торкайся деталей автомобіля та знайди несправність.
-    </div>
-
-    <div class="progress">
-      <div id="progressBar"></div>
-    </div>
-
-  </div>
-
-  <!-- МАШИНА -->
-
-  <div id="scene">
-
-    <div id="car">
-
-      <div class="car-shadow"></div>
-
-      <svg
-        id="carSVG"
-        viewBox="0 0 900 520"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-
-        <defs>
-
-          <linearGradient id="paint" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#4bb9ea"/>
-            <stop offset=".45" stop-color="#176b99"/>
-            <stop offset="1" stop-color="#082d43"/>
-          </linearGradient>
-
-          <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#77e6ff"/>
-            <stop offset=".3" stop-color="#234b5c"/>
-            <stop offset="1" stop-color="#06131a"/>
-          </linearGradient>
-
-        </defs>
-
-        <!-- кузов -->
-
-        <path
-          id="bodyPart"
-          class="part"
-          d="
-          M70 350
-          C75 295 115 260 180 248
-          L270 230
-          L340 145
-          C360 122 390 112 430 112
-          L565 112
-          C610 112 640 130 670 163
-          L735 242
-          C795 252 825 290 830 345
-          L830 390
-          C830 420 800 438 755 438
-          L145 438
-          C100 438 70 417 70 390
-          Z"
-          fill="url(#paint)"
-          stroke="#06141e"
-          stroke-width="9"
-        />
-
-        <!-- дах -->
-
-        <path
-          d="
-          M270 230
-          L340 145
-          C360 122 390 112 430 112
-          H565
-          C610 112 640 130 670 163
-          L735 242"
-          fill="none"
-          stroke="#65c8ed"
-          stroke-width="10"
-        />
-
-        <!-- вікно ліве -->
-
-        <path
-          d="
-          M292 220
-          L350 155
-          C365 139 387 133 410 133
-          H432
-          V220
-          Z"
-          fill="url(#glass)"
-          stroke="#112b38"
-          stroke-width="7"
-        />
-
-        <!-- вікно праве -->
-
-        <path
-          d="
-          M448 133
-          H560
-          C590 133 612 145 630 166
-          L670 220
-          H448
-          Z"
-          fill="url(#glass)"
-          stroke="#112b38"
-          stroke-width="7"
-        />
-
-        <!-- відблиски -->
-
-        <path
-          d="M355 160L405 140L385 212H325Z"
-          fill="#c4f6ff"
-          opacity=".18"
-        />
-
-        <path
-          d="M490 145L550 145L535 214H470Z"
-          fill="#c4f6ff"
-          opacity=".12"
-        />
-
-        <!-- капот -->
-
-        <path
-          id="hoodPart"
-          class="part"
-          d="
-          M72 350
-          C78 300 115 267 180 253
-          L270 238
-          L335 230
-          L360 290
-          L330 365
-          H72
-          Z"
-          fill="url(#paint)"
-          stroke="#0a3047"
-          stroke-width="6"
-        />
-
-        <!-- двері -->
-
-        <path
-          id="doorPart"
-          class="part"
-          d="
-          M334 230
-          H442
-          V360
-          H322
-          L322 280
-          Z"
-          fill="#1d719d"
-          stroke="#0b354d"
-          stroke-width="5"
-        />
-
-        <path
-          d="
-          M452 230
-          H650
-          C675 236 698 253 715 276
-          L723 360
-          H452
-          Z"
-          fill="#185f87"
-          stroke="#0b354d"
-          stroke-width="5"
-        />
-
-        <!-- ручка -->
-
-        <rect
-          x="540"
-          y="252"
-          width="45"
-          height="8"
-          rx="4"
-          fill="#dce8ed"
-        />
-
-        <!-- передня фара -->
-
-        <path
-          id="lightPart"
-          class="part"
-          d="
-          M105 304
-          Q132 280 164 286
-          L166 327
-          Q133 332 104 318
-          Z"
-          fill="#fff3a1"
-          stroke="#fff8cf"
-          stroke-width="4"
-        />
-
-        <!-- задня фара -->
-
-        <path
-          d="
-          M750 288
-          Q787 292 808 307
-          L806 331
-          Q778 338 750 330
-          Z"
-          fill="#ef2737"
-          stroke="#8c0d18"
-          stroke-width="5"
-        />
-
-        <!-- решітка -->
-
-        <path
-          id="enginePart"
-          class="part"
-          d="
-          M278 350
-          Q450 330 620 350
-          L596 392
-          Q450 400 302 392
-          Z"
-          fill="#050b0f"
-          stroke="#687981"
-          stroke-width="5"
-        />
-
-        <!-- решітка лінії -->
-
-        <g
-          stroke="#65767e"
-          stroke-width="3"
-          opacity=".7"
-        >
-
-          <path d="M330 349L345 391"/>
-          <path d="M365 344L376 395"/>
-          <path d="M400 341L405 397"/>
-          <path d="M435 340L439 398"/>
-          <path d="M470 340L468 398"/>
-          <path d="M505 342L500 397"/>
-          <path d="M540 344L530 395"/>
-          <path d="M575 348L558 392"/>
-
-        </g>
-
-        <!-- бампер -->
-
-        <path
-          d="
-          M85 365
-          Q450 390 815 365
-          V402
-          Q790 430 755 435
-          H145
-          Q108 428 85 402
-          Z"
-          fill="#11181d"
-        />
-
-        <!-- КОЛЕСА -->
-
-        <g
-          id="wheelPart"
-          class="part"
-        >
-
-          <circle
-            cx="185"
-            cy="395"
-            r="76"
-            fill="#020405"
-            stroke="#11191e"
-            stroke-width="9"
-          />
-
-          <circle
-            cx="185"
-            cy="395"
-            r="48"
-            fill="#29343a"
-            stroke="#aebbc0"
-            stroke-width="6"
-          />
-
-          <circle
-            cx="185"
-            cy="395"
-            r="14"
-            fill="#dce5e8"
-          />
-
-          <path
-            d="
-            M185 350V378
-            M185 412V440
-            M140 395H168
-            M202 395H230"
-            stroke="#f0f5f7"
-            stroke-width="8"
-            stroke-linecap="round"
-          />
-
-          <circle
-            cx="715"
-            cy="395"
-            r="76"
-            fill="#020405"
-            stroke="#11191e"
-            stroke-width="9"
-          />
-
-          <circle
-            cx="715"
-            cy="395"
-            r="48"
-            fill="#29343a"
-            stroke="#aebbc0"
-            stroke-width="6"
-          />
-
-          <circle
-            cx="715"
-            cy="395"
-            r="14"
-            fill="#dce5e8"
-          />
-
-          <path
-            d="
-            M715 350V378
-            M715 412V440
-            M670 395H698
-            M732 395H760"
-            stroke="#f0f5f7"
-            stroke-width="8"
-            stroke-linecap="round"
-          />
-
-        </g>
-
-        <!-- номер -->
-
-        <rect
-          x="380"
-          y="403"
-          width="140"
-          height="32"
-          rx="6"
-          fill="#f3f6f7"
-        />
-
-        <text
-          x="450"
-          y="425"
-          text-anchor="middle"
-          font-size="18"
-          font-weight="900"
-          fill="#15232b"
-        >
-          AUTO PRO
-        </text>
-
-      </svg>
-
-      <!-- КНОПКИ ДЕТАЛЕЙ -->
-
-      <button
-        class="target target-engine"
-        onclick="inspect('engine')"
-      >⚙️</button>
-
-      <button
-        class="target target-wheel"
-        onclick="inspect('wheel')"
-      >🛞</button>
-
-      <button
-        class="target target-light"
-        onclick="inspect('light')"
-      >💡</button>
-
-      <button
-        class="target target-body"
-        onclick="inspect('body')"
-      >🔩</button>
-
-      <button
-        class="target target-battery"
-        onclick="inspect('battery')"
-      >🔋</button>
-
-    </div>
-  </div>
-
-  <!-- НИЖНЄ МЕНЮ -->
-
-  <div id="bottom">
-
-    <div class="main-buttons">
-
-      <button
-        class="blue"
-        onclick="toggleHood()"
-      >
-        🔓 КАПОТ
-      </button>
-
-      <button
-        class="orange"
-        onclick="toggleLift()"
-      >
-        ⬆️ ПІДЙОМНИК
-      </button>
-
-      <button
-        class="green"
-        onclick="openGarage()"
-      >
-        🧰 ГАРАЖ
-      </button>
-
-    </div>
-
-    <div class="tools">
-
-      <button
-        class="tool"
-        onclick="selectTool('scanner')"
-      >
-        <span>📡</span>
-        СКАНЕР
-      </button>
-
-      <button
-        class="tool"
-        onclick="selectTool('wrench')"
-      >
-        <span>🔧</span>
-        КЛЮЧ
-      </button>
-
-      <button
-        class="tool"
-        onclick="selectTool('hammer')"
-      >
-        <span>🔨</span>
-        МОЛОТОК
-      </button>
-
-      <button
-        class="tool"
-        onclick="selectTool('pump')"
-      >
-        <span>💨</span>
-        НАСОС
-      </button>
-
-      <button
-        class="tool"
-        onclick="selectTool('battery')"
-      >
-        <span>🔋</span>
-        АКБ
-      </button>
-
-    </div>
-
-  </div>
-
-  <!-- МОДАЛЬНЕ ВІКНО -->
-
-  <div id="modal">
-
-    <div id="panel">
-
-    </div>
-
-  </div>
-
-  <div id="toast"></div>
+<div class="top">
+
+<div class="panel title">
+<b>🔧 CAR REPAIR CENTER</b>
+<small>Автомайстерня • Рівень <span id="lvl">1</span></small>
+<div style="font-size:11px;color:#7ddfff;margin-top:4px">
+XP <span id="xp">0</span> /
+<span id="xpMax">100</span>
+</div>
+</div>
+
+<div class="panel money">
+💰 <b>$<span id="money">1840</span></b>
+</div>
+
+</div>
+
+<div class="mission">
+
+<b id="missionTitle">
+ПРИЙМАННЯ АВТОМОБІЛЯ
+</b>
+
+<div id="missionText">
+Оглянь машину та знайди несправні деталі.
+</div>
+
+<div class="bar">
+<i id="progress"></i>
+</div>
+
+</div>
+
+<div class="status" id="status">
+Натисни «ДІАГНОСТИКА», потім торкайся деталей.
+</div>
+
+<div class="tools">
+
+<button data-tool="scan">
+📡<br>ДІАГНОСТИКА
+</button>
+
+<button data-tool="wrench">
+🔧<br>КЛЮЧ
+</button>
+
+<button data-tool="hammer">
+🔨<br>МОЛОТОК
+</button>
+
+<button data-tool="pump">
+💨<br>НАСОС
+</button>
+
+<button data-tool="battery">
+🔋<br>АКБ
+</button>
+
+</div>
+
+<div class="controls">
+
+<button class="btn-blue" id="hood">
+🔓 КАПОТ
+</button>
+
+<button class="btn-orange" id="lift">
+⬆️ ПІДЙОМНИК
+</button>
+
+<button class="btn-green" id="garage">
+🧰 ГАРАЖ
+</button>
+
+<button class="btn-purple" id="shop">
+🛒 МАГАЗИН
+</button>
+
+</div>
+
+</div>
+
+<div id="toast"></div>
+
+<div id="modal">
+
+<div class="card">
+
+<h2 id="modalTitle">Гараж</h2>
+
+<div id="modalBody"></div>
+
+<button class="close" id="closeModal">
+ЗАКРИТИ
+</button>
+
+</div>
 
 </div>
 
 <script>
 
-/* =====================================================
-   AUTO MECHANIC PRO
-   GAME ENGINE
-===================================================== */
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
 
-const game = {
+let W=innerWidth;
+let H=innerHeight;
+let DPR=devicePixelRatio||1;
 
-  money:2500,
+function resize(){
 
-  xp:0,
+W=innerWidth;
+H=innerHeight;
 
-  level:1,
+canvas.width=W*DPR;
+canvas.height=H*DPR;
 
-  repaired:0,
+canvas.style.width=W+"px";
+canvas.style.height=H+"px";
 
-  carIndex:0,
+ctx.setTransform(DPR,0,0,DPR,0,0);
+}
 
-  lifted:false,
+addEventListener("resize",resize);
+resize();
 
-  hood:false,
+const $=id=>document.getElementById(id);
 
-  selectedTool:"scanner",
+let save;
 
-  discovered:[],
+try{
+save=JSON.parse(localStorage.getItem("CAR_REPAIR_SAVE")||"{}");
+}catch{
+save={};
+}
 
-  repairedParts:[]
-
+let game={
+money:save.money||1840,
+level:save.level||1,
+xp:save.xp||0,
+repairs:save.repairs||0,
+color:save.color||"#d51e3b",
+wheels:save.wheels||0,
+spoiler:save.spoiler||0,
+bumper:save.bumper||0,
+hood:false,
+lift:false,
+tool:"scan"
 };
 
-
-/* =====================================================
-   АВТОМОБІЛІ
-===================================================== */
-
-const cars = [
-
-  {
-    name:"BLUE STREET",
-    type:"Sport Sedan",
-    reward:650,
-    faults:["engine","wheel","light"]
-  },
-
-  {
-    name:"BLACK BEAST",
-    type:"SUV",
-    reward:850,
-    faults:["wheel","battery","body"]
-  },
-
-  {
-    name:"RED ROCKET",
-    type:"Coupe",
-    reward:1000,
-    faults:["engine","light","body"]
-  },
-
-  {
-    name:"SILVER GT",
-    type:"Performance",
-    reward:1400,
-    faults:["engine","wheel","battery","light"]
-  }
-
+const colors=[
+"#d51e3b",
+"#16a6ff",
+"#f2d20b",
+"#20c979",
+"#9b45ef",
+"#f27a1a",
+"#eeeeee",
+"#111820"
 ];
 
+const parts=[
+{
+id:"battery",
+name:"АКБ",
+x:-.33,
+y:-.22,
+tool:"battery",
+cost:95
+},
+{
+id:"engine",
+name:"ДВИГУН",
+x:-.05,
+y:-.27,
+tool:"wrench",
+cost:240
+},
+{
+id:"wheelL",
+name:"КОЛЕСО",
+x:-.57,
+y:.24,
+tool:"wrench",
+cost:140
+},
+{
+id:"wheelR",
+name:"КОЛЕСО",
+x:.55,
+y:.24,
+tool:"pump",
+cost:75
+},
+{
+id:"light",
+name:"ФАРА",
+x:.67,
+y:-.05,
+tool:"hammer",
+cost:110
+},
+{
+id:"body",
+name:"КУЗОВ",
+x:.18,
+y:.02,
+tool:"hammer",
+cost:180
+}
+];
 
-const partNames = {
+let broken=[];
 
-  engine:"Двигун",
+function newJob(){
 
-  wheel:"Колеса та підвіска",
+broken=parts
+.slice()
+.sort(()=>Math.random()-.5)
+.slice(0,3+Math.floor(Math.random()*2))
+.map(p=>({...p,fixed:false}));
 
-  light:"Передня фара",
+game.tool="scan";
 
-  body:"Кузов",
+$("missionTitle").textContent="ПРИЙМАННЯ АВТОМОБІЛЯ";
+$("missionText").textContent=
+"Знайди несправні деталі та відремонтуй автомобіль.";
 
-  battery:"Акумулятор"
-
-};
-
-
-/* =====================================================
-   DOM
-===================================================== */
-
-const moneyElement =
-  document.getElementById("money");
-
-const missionTitle =
-  document.getElementById("missionTitle");
-
-const missionText =
-  document.getElementById("missionText");
-
-const progressBar =
-  document.getElementById("progressBar");
-
-const modal =
-  document.getElementById("modal");
-
-const panel =
-  document.getElementById("panel");
-
-const toastElement =
-  document.getElementById("toast");
-
-const carElement =
-  document.getElementById("car");
-
-
-/* =====================================================
-   ОСНОВА
-===================================================== */
-
-function currentCar(){
-
-  return cars[game.carIndex];
+progress();
 
 }
 
+newJob();
 
-function updateHUD(){
+function saveGame(){
 
-  moneyElement.textContent =
-    Math.floor(game.money);
-
-}
-
-
-function updateProgress(){
-
-  const car=currentCar();
-
-  const total=car.faults.length;
-
-  const done=game.repairedParts.length;
-
-  progressBar.style.width=
-    Math.min(
-      100,
-      done/total*100
-    )+"%";
+localStorage.setItem(
+"CAR_REPAIR_SAVE",
+JSON.stringify({
+money:game.money,
+level:game.level,
+xp:game.xp,
+repairs:game.repairs,
+color:game.color,
+wheels:game.wheels,
+spoiler:game.spoiler,
+bumper:game.bumper
+})
+);
 
 }
 
+function progress(){
 
-/* =====================================================
-   ПОВІДОМЛЕННЯ
-===================================================== */
+let fixed=broken.filter(x=>x.fixed).length;
 
-let toastTimer;
+$("progress").style.width=
+(fixed/broken.length*100)+"%";
+
+}
+
+function ui(){
+
+$("money").textContent=Math.floor(game.money);
+$("lvl").textContent=game.level;
+$("xp").textContent=game.xp;
+$("xpMax").textContent=game.level*100;
+
+}
 
 function toast(text){
 
-  toastElement.textContent=text;
+const t=$("toast");
 
-  toastElement.classList.add("show");
+t.textContent=text;
+t.classList.add("show");
 
-  clearTimeout(toastTimer);
+clearTimeout(toast.timer);
 
-  toastTimer=setTimeout(()=>{
-
-    toastElement.classList.remove("show");
-
-  },2200);
-
-}
-
-
-/* =====================================================
-   ДІАГНОСТИКА
-===================================================== */
-
-function inspect(part){
-
-  const car=currentCar();
-
-  if(
-    game.discovered.includes(part)
-  ){
-
-    if(
-      game.repairedParts.includes(part)
-    ){
-
-      toast("✅ Ця деталь вже відремонтована");
-
-    }else{
-
-      openRepair(part);
-
-    }
-
-    return;
-  }
-
-
-  if(
-    !car.faults.includes(part)
-  ){
-
-    toast(
-      "🟢 "+partNames[part]+" працює нормально"
-    );
-
-    return;
-
-  }
-
-
-  game.discovered.push(part);
-
-  highlightPart(part);
-
-  missionTitle.textContent=
-    "⚠️ ЗНАЙДЕНО НЕСПРАВНІСТЬ";
-
-  missionText.textContent=
-    partNames[part]+
-    " потребує ремонту.";
-
-  updateProgress();
-
-  showDiagnostic(part);
+toast.timer=setTimeout(()=>{
+t.classList.remove("show");
+},1600);
 
 }
 
+function addXP(amount){
 
-/* =====================================================
-   ПІДСВІТКА
-===================================================== */
+game.xp+=amount;
 
-function highlightPart(part){
+while(game.xp>=game.level*100){
 
-  const map={
+game.xp-=game.level*100;
 
-    engine:"enginePart",
+game.level++;
 
-    wheel:"wheelPart",
+game.money+=500;
 
-    light:"lightPart",
-
-    body:"doorPart",
-
-    battery:"hoodPart"
-
-  };
-
-  const element=
-    document.getElementById(map[part]);
-
-  if(!element)return;
-
-  element.classList.add("broken");
-
-  setTimeout(()=>{
-
-    element.classList.remove("broken");
-
-  },1800);
+toast("🎉 НОВИЙ РІВЕНЬ! +$500");
 
 }
 
-
-/* =====================================================
-   ДІАГНОСТИКА PANEL
-===================================================== */
-
-function showDiagnostic(part){
-
-  modal.classList.add("show");
-
-  panel.innerHTML=`
-
-    <button
-      class="close"
-      onclick="closePanel()"
-    >
-      ✕
-    </button>
-
-    <div class="panel-title">
-      📡 ДІАГНОСТИКА
-    </div>
-
-    <div class="panel-sub">
-      Автомобіль: ${currentCar().name}
-    </div>
-
-    <div class="info">
-
-      <div class="row">
-        <span>Деталь</span>
-        <b>${partNames[part]}</b>
-      </div>
-
-      <div class="row">
-        <span>Стан</span>
-        <b style="color:#ff5b5b">
-          НЕСПРАВНО
-        </b>
-      </div>
-
-      <div class="row">
-        <span>Код помилки</span>
-        <b>P-${randomCode()}</b>
-      </div>
-
-      <div class="row">
-        <span>Ремонт</span>
-        <b>$${repairPrice(part)}</b>
-      </div>
-
-    </div>
-
-    <button
-      class="repair-button"
-      onclick="openRepair('${part}')"
-    >
-      🔧 ПОЧАТИ РЕМОНТ
-    </button>
-
-  `;
+ui();
+saveGame();
 
 }
 
+function finish(){
 
-function randomCode(){
+let reward=500;
 
-  return Math.floor(
-    1000+Math.random()*8999
-  );
+game.money+=reward;
+game.repairs++;
 
-}
+addXP(60);
 
+$("missionTitle").textContent=
+"РОБОТУ ЗАВЕРШЕНО ✅";
 
-function repairPrice(part){
+$("missionText").textContent=
+"Автомобіль повністю відремонтований.";
 
-  const prices={
+$("status").textContent=
+"💰 Нагорода: +$"+reward+
+" • Торкнися автомобіля для нового клієнта.";
 
-    engine:220,
+toast("💰 КЛІЄНТ ЗАПЛАТИВ +$"+reward);
 
-    wheel:160,
-
-    light:90,
-
-    body:180,
-
-    battery:130
-
-  };
-
-  return prices[part]||100;
+saveGame();
 
 }
 
+function toolName(t){
 
-/* =====================================================
-   РЕМОНТ
-===================================================== */
-
-let needleTimer=null;
-
-let needlePosition=0;
-
-let needleDirection=1;
-
-
-function openRepair(part){
-
-  modal.classList.add("show");
-
-  panel.innerHTML=`
-
-    <button
-      class="close"
-      onclick="closePanel()"
-    >
-      ✕
-    </button>
-
-    <div class="panel-title">
-      🔧 РЕМОНТ
-    </div>
-
-    <div class="panel-sub">
-      ${partNames[part]}
-    </div>
-
-    <div class="repair-area">
-
-      <div class="repair-track">
-
-        <div class="repair-good"></div>
-
-        <div
-          id="needle"
-          class="needle"
-        ></div>
-
-      </div>
-
-      <button
-        class="repair-hit"
-        onclick="finishRepair('${part}')"
-      >
-        ЗАФІКСУВАТИ
-      </button>
-
-    </div>
-
-    <div class="info">
-
-      <div class="row">
-        <span>Порада</span>
-        <b>
-          Натисни в зеленій зоні
-        </b>
-      </div>
-
-    </div>
-
-  `;
-
-
-  needlePosition=0;
-
-  needleDirection=1;
-
-  clearInterval(needleTimer);
-
-  needleTimer=setInterval(()=>{
-
-    needlePosition+=
-      needleDirection*2;
-
-    if(
-      needlePosition>=100
-    ){
-
-      needlePosition=100;
-
-      needleDirection=-1;
-
-    }
-
-    if(
-      needlePosition<=0
-    ){
-
-      needlePosition=0;
-
-      needleDirection=1;
-
-    }
-
-    const needle=
-      document.getElementById("needle");
-
-    if(needle){
-
-      needle.style.left=
-        needlePosition+"%";
-
-    }
-
-  },25);
+return {
+scan:"ДІАГНОСТИКА",
+wrench:"КЛЮЧ",
+hammer:"МОЛОТОК",
+pump:"НАСОС",
+battery:"АКБ"
+}[t];
 
 }
 
+function repair(part){
 
-/* =====================================================
-   ЗАКІНЧЕННЯ РЕМОНТУ
-===================================================== */
+if(part.fixed)return;
 
-function finishRepair(part){
+if(game.tool==="scan"){
 
-  clearInterval(needleTimer);
+toast("📡 Несправність: "+part.name);
 
-  const distance=
-    Math.abs(
-      needlePosition-50
-    );
+$("status").textContent=
+"Для ремонту використай: "+toolName(part.tool);
 
-  let reward=100;
-
-  if(distance<8){
-
-    reward=220;
-
-  }else if(distance<18){
-
-    reward=170;
-
-  }else if(distance<30){
-
-    reward=130;
-
-  }
-
-
-  if(
-    !game.repairedParts.includes(part)
-  ){
-
-    game.repairedParts.push(part);
-
-  }
-
-
-  game.money+=reward;
-
-  game.xp+=80;
-
-  game.repaired++;
-
-  updateHUD();
-
-  updateProgress();
-
-  closePanel();
-
-  toast(
-    "🔧 Ремонт виконано +$"+reward
-  );
-
-
-  if(game.xp>=500){
-
-    game.xp-=500;
-
-    game.level++;
-
-    toast(
-      "🔥 НОВИЙ РІВЕНЬ "+game.level
-    );
-
-  }
-
-
-  checkCarComplete();
+return;
 
 }
 
+if(game.tool!==part.tool){
 
-/* =====================================================
-   ЗАВЕРШЕННЯ АВТО
-===================================================== */
+toast("❌ Потрібен "+toolName(part.tool));
 
-function checkCarComplete(){
-
-  const car=currentCar();
-
-  if(
-    game.repairedParts.length <
-    car.faults.length
-  ){
-
-    return;
-
-  }
-
-
-  setTimeout(()=>{
-
-    game.money+=car.reward;
-
-    updateHUD();
-
-    modal.classList.add("show");
-
-    panel.innerHTML=`
-
-      <div
-        style="
-        text-align:center;
-        padding:10px 0 20px;
-        "
-      >
-
-        <div
-          style="
-          font-size:65px;
-          margin-bottom:8px;
-          "
-        >
-          🏆
-        </div>
-
-        <div class="panel-title">
-          АВТО ГОТОВЕ!
-        </div>
-
-        <div class="panel-sub">
-          ${car.name} повністю
-          відремонтовано.
-        </div>
-
-        <div class="info">
-
-          <div class="row">
-            <span>Оплата клієнта</span>
-            <b style="color:#ffd95a">
-              +$${car.reward}
-            </b>
-          </div>
-
-          <div class="row">
-            <span>Досвід</span>
-            <b style="color:#39e3a1">
-              +80 XP
-            </b>
-          </div>
-
-          <div class="row">
-            <span>Рівень</span>
-            <b>
-              ${game.level}
-            </b>
-          </div>
-
-        </div>
-
-        <button
-          class="repair-button"
-          onclick="nextCar()"
-        >
-          🚗 ПРИЙНЯТИ НОВЕ АВТО
-        </button>
-
-      </div>
-
-    `;
-
-  },600);
+return;
 
 }
 
+part.fixed=true;
 
-/* =====================================================
-   НАСТУПНА МАШИНА
-===================================================== */
+game.money+=part.cost;
 
-function nextCar(){
-
-  game.carIndex++;
-
-  if(
-    game.carIndex>=cars.length
-  ){
-
-    game.carIndex=0;
-
-  }
-
-  game.discovered=[];
-
-  game.repairedParts=[];
-
-  closePanel();
-
-  const car=currentCar();
-
-  missionTitle.textContent=
-    "🚗 НОВИЙ КЛІЄНТ";
-
-  missionText.textContent=
-    car.name+
-    " • "+
-    car.type+
-    ". Торкайся деталей і шукай проблеми.";
-
-  updateProgress();
-
-  toast(
-    "🚘 Приїхав "+car.name
-  );
-
-}
-
-
-/* =====================================================
-   КАПОТ
-===================================================== */
-
-function toggleHood(){
-
-  game.hood=!game.hood;
-
-  if(game.hood){
-
-    missionText.textContent=
-      "🔓 Капот відкритий. Перевір двигун та акумулятор.";
-
-    toast("🔓 Капот відкрито");
-
-  }else{
-
-    toast("🔒 Капот закрито");
-
-    missionText.textContent=
-      "Торкайся деталей автомобіля та знайди несправність.";
-
-  }
-
-}
-
-
-/* =====================================================
-   ПІДЙОМНИК
-===================================================== */
-
-function toggleLift(){
-
-  game.lifted=!game.lifted;
-
-  carElement.classList.toggle(
-    "lifted",
-    game.lifted
-  );
-
-  if(game.lifted){
-
-    toast("⬆️ Автомобіль піднято");
-
-    missionText.textContent=
-      "⬆️ Авто на підйомнику. Перевір колеса та підвіску.";
-
-  }else{
-
-    toast("⬇️ Автомобіль опущено");
-
-  }
-
-}
-
-
-/* =====================================================
-   ІНСТРУМЕНТИ
-===================================================== */
-
-function selectTool(tool){
-
-  game.selectedTool=tool;
-
-  const names={
-
-    scanner:"📡 Сканер вибрано",
-
-    wrench:"🔧 Гайковий ключ вибрано",
-
-    hammer:"🔨 Молоток вибрано",
-
-    pump:"💨 Насос вибрано",
-
-    battery:"🔋 АКБ вибрано"
-
-  };
-
-  toast(names[tool]);
-
-}
-
-
-/* =====================================================
-   ГАРАЖ
-===================================================== */
-
-function openGarage(){
-
-  modal.classList.add("show");
-
-  panel.innerHTML=`
-
-    <button
-      class="close"
-      onclick="closePanel()"
-    >
-      ✕
-    </button>
-
-    <div class="panel-title">
-      🧰 МОЯ МАЙСТЕРНЯ
-    </div>
-
-    <div class="panel-sub">
-      Твоя статистика механіка
-    </div>
-
-    <div class="info">
-
-      <div class="row">
-        <span>👨‍🔧 Рівень</span>
-        <b>${game.level}</b>
-      </div>
-
-      <div class="row">
-        <span>⭐ XP</span>
-        <b>${game.xp}/500</b>
-      </div>
-
-      <div class="row">
-        <span>🚗 Відремонтовано</span>
-        <b>${game.repaired}</b>
-      </div>
-
-      <div class="row">
-        <span>💰 Гроші</span>
-        <b style="color:#ffd95a">
-          $${game.money}
-        </b>
-      </div>
-
-    </div>
-
-    <div class="info">
-
-      <div
-        style="
-        font-size:18px;
-        font-weight:900;
-        margin-bottom:7px;
-        "
-      >
-        🏭 РОЗВИТОК МАЙСТЕРНІ
-      </div>
-
-      <div class="panel-sub">
-
-        ${
-          game.level<3
-          ?"Маленький гараж"
-          :game.level<6
-          ?"Міська автомайстерня"
-          :game.level<10
-          ?"PRO AUTO CENTER"
-          :"🏆 ELITE AUTO CENTER"
-        }
-
-      </div>
-
-    </div>
-
-    <button
-      class="repair-button"
-      onclick="nextCar()"
-    >
-      🚘 ПРИЙНЯТИ КЛІЄНТА
-    </button>
-
-  `;
-
-}
-
-
-/* =====================================================
-   ЗАКРИТТЯ
-===================================================== */
-
-function closePanel(){
-
-  modal.classList.remove("show");
-
-  clearInterval(needleTimer);
-
-}
-
-
-modal.addEventListener(
-  "click",
-  function(e){
-
-    if(e.target===modal){
-
-      closePanel();
-
-    }
-
-  }
+toast(
+"🔧 "+part.name+
+" відремонтовано +$"+part.cost
 );
 
+progress();
+ui();
+saveGame();
 
-/* =====================================================
-   СТАРТ
-===================================================== */
+if(broken.every(p=>p.fixed)){
 
-updateHUD();
+finish();
 
-updateProgress();
+}
 
-setTimeout(()=>{
+}
 
-  toast(
-    "🔧 Клієнт чекає! Знайди несправність."
-  );
+document.querySelectorAll("[data-tool]").forEach(button=>{
 
-},700);
+button.onclick=()=>{
+
+game.tool=button.dataset.tool;
+
+$("status").textContent=
+"Обрано: "+toolName(game.tool)+
+". Торкнися потрібної деталі.";
+
+toast("🔧 "+toolName(game.tool));
+
+};
+
+});
+
+function openModal(title,html){
+
+$("modalTitle").textContent=title;
+$("modalBody").innerHTML=html;
+$("modal").style.display="flex";
+
+}
+
+$("closeModal").onclick=()=>{
+
+$("modal").style.display="none";
+
+};
+
+$("garage").onclick=()=>{
+
+openModal(
+"🧰 ГАРАЖ",
+`
+<div class="grid">
+
+<div class="item">
+<b>Ремонти</b>
+<small>${game.repairs}</small>
+</div>
+
+<div class="item">
+<b>Рівень</b>
+<small>${game.level}</small>
+</div>
+
+<div class="item">
+<b>XP</b>
+<small>${game.xp}/${game.level*100}</small>
+</div>
+
+<div class="item">
+<b>Баланс</b>
+<small>$${game.money}</small>
+</div>
+
+</div>
+
+<br>
+
+<button id="newJob" class="btn-green" style="width:100%">
+🚗 НОВИЙ КЛІЄНТ
+</button>
+`
+);
+
+$("newJob").onclick=()=>{
+
+$("modal").style.display="none";
+
+newJob();
+
+toast("🚗 НОВИЙ КЛІЄНТ ПРИЇХАВ!");
+
+};
+
+};
+
+$("shop").onclick=()=>{
+
+openModal(
+"🛒 МАГАЗИН",
+`
+<div class="grid">
+
+<div class="item">
+<b>🎨 ФАРБУВАННЯ</b>
+<small>Змінити колір — $350</small>
+<button data-buy="paint" style="width:100%;margin-top:8px">
+КУПИТИ
+</button>
+</div>
+
+<div class="item">
+<b>🛞 СПОРТ-КОЛЕСА</b>
+<small>Ціна — $600</small>
+<button data-buy="wheels" style="width:100%;margin-top:8px">
+КУПИТИ
+</button>
+</div>
+
+<div class="item">
+<b>🪽 СПОЙЛЕР</b>
+<small>Ціна — $750</small>
+<button data-buy="spoiler" style="width:100%;margin-top:8px">
+КУПИТИ
+</button>
+</div>
+
+<div class="item">
+<b>💨 БАМПЕР PRO</b>
+<small>Ціна — $900</small>
+<button data-buy="bumper" style="width:100%;margin-top:8px">
+КУПИТИ
+</button>
+</div>
+
+</div>
+`
+);
+
+document.querySelectorAll("[data-buy]").forEach(button=>{
+
+button.onclick=()=>{
+
+const type=button.dataset.buy;
+
+const prices={
+paint:350,
+wheels:600,
+spoiler:750,
+bumper:900
+};
+
+const price=prices[type];
+
+if(game.money<price){
+
+toast("❌ НЕ ВИСТАЧАЄ ГРОШЕЙ");
+
+return;
+
+}
+
+game.money-=price;
+
+if(type==="paint"){
+
+let i=colors.indexOf(game.color);
+
+game.color=
+colors[(i+1)%colors.length];
+
+}
+
+if(type==="wheels")game.wheels=1;
+if(type==="spoiler")game.spoiler=1;
+if(type==="bumper")game.bumper=1;
+
+ui();
+saveGame();
+
+toast("✅ КУПЛЕНО!");
+
+};
+
+});
+
+};
+
+$("hood").onclick=()=>{
+
+game.hood=!game.hood;
+
+toast(
+game.hood?
+"🔓 КАПОТ ВІДКРИТО":
+"🔒 КАПОТ ЗАКРИТО"
+);
+
+};
+
+$("lift").onclick=()=>{
+
+game.lift=!game.lift;
+
+toast(
+game.lift?
+"⬆️ АВТО ПІДНЯТО":
+"⬇️ АВТО ОПУЩЕНО"
+);
+
+};
+
+function lighten(hex,amount){
+
+return mix(hex,"#ffffff",amount);
+
+}
+
+function darken(hex,amount){
+
+return mix(hex,"#000000",amount);
+
+}
+
+function mix(a,b,t){
+
+let A=parseInt(a.slice(1),16);
+let B=parseInt(b.slice(1),16);
+
+let ar=A>>16;
+let ag=(A>>8)&255;
+let ab=A&255;
+
+let br=B>>16;
+let bg=(B>>8)&255;
+let bb=B&255;
+
+return "#"+
+[
+ar+(br-ar)*t,
+ag+(bg-ag)*t,
+ab+(bb-ab)*t
+]
+.map(v=>Math.round(v).toString(16).padStart(2,"0"))
+.join("");
+
+}
+
+function drawBackground(){
+
+let g=ctx.createLinearGradient(0,0,0,H);
+
+g.addColorStop(0,"#071923");
+g.addColorStop(.6,"#061018");
+g.addColorStop(1,"#020508");
+
+ctx.fillStyle=g;
+ctx.fillRect(0,0,W,H);
+
+ctx.strokeStyle="rgba(40,135,160,.16)";
+ctx.lineWidth=1;
+
+for(let x=0;x<W;x+=55){
+
+ctx.beginPath();
+ctx.moveTo(x,0);
+ctx.lineTo(x,H);
+ctx.stroke();
+
+}
+
+for(let y=0;y<H;y+=55){
+
+ctx.beginPath();
+ctx.moveTo(0,y);
+ctx.lineTo(W,y);
+ctx.stroke();
+
+}
+
+}
+
+function drawCar(){
+
+const cx=W/2;
+
+const base=Math.min(W*.88,600);
+
+const s=base/600;
+
+const cy=
+H*.57-
+(game.lift?55*s:0);
+
+ctx.save();
+
+ctx.translate(cx,cy);
+ctx.scale(s,s);
+
+ctx.fillStyle="#0009";
+
+ctx.beginPath();
+
+ctx.ellipse(
+0,
+145,
+290,
+30,
+0,
+0,
+Math.PI*2
+);
+
+ctx.fill();
+
+if(game.lift){
+
+ctx.fillStyle="#233842";
+
+ctx.fillRect(-250,118,500,14);
+
+ctx.fillStyle="#334d59";
+
+ctx.fillRect(-190,132,22,80);
+ctx.fillRect(168,132,22,80);
+
+}
+
+for(const wx of [-205,205]){
+
+ctx.fillStyle="#080b0e";
+
+ctx.beginPath();
+
+ctx.arc(wx,90,58,0,Math.PI*2);
+ctx.fill();
+
+ctx.fillStyle=
+game.wheels?
+"#9db4c0":
+"#26343b";
+
+ctx.beginPath();
+
+ctx.arc(wx,90,31,0,Math.PI*2);
+ctx.fill();
+
+ctx.fillStyle="#111820";
+
+ctx.beginPath();
+
+ctx.arc(wx,90,12,0,Math.PI*2);
+ctx.fill();
+
+}
+
+let body=ctx.createLinearGradient(
+-280,-70,280,110
+);
+
+body.addColorStop(
+0,
+game.color
+);
+
+body.addColorStop(
+.5,
+lighten(game.color,.25)
+);
+
+body.addColorStop(
+1,
+darken(game.color,.28)
+);
+
+ctx.fillStyle=body;
+
+ctx.beginPath();
+
+ctx.moveTo(-278,70);
+
+ctx.quadraticCurveTo(
+-275,10,
+-215,-2
+);
+
+ctx.lineTo(-155,-83);
+
+ctx.quadraticCurveTo(
+-125,-115,
+-65,-120
+);
+
+ctx.lineTo(105,-120);
+
+ctx.quadraticCurveTo(
+165,-110,
+205,-55
+);
+
+ctx.lineTo(260,-22);
+
+ctx.quadraticCurveTo(
+286,0,
+280,75
+);
+
+ctx.lineTo(225,88);
+ctx.lineTo(-230,88);
+
+ctx.closePath();
+
+ctx.fill();
+
+let glass=ctx.createLinearGradient(
+0,-110,0,-20
+);
+
+glass.addColorStop(0,"#9ee9ff");
+glass.addColorStop(1,"#183c4d");
+
+ctx.fillStyle=glass;
+
+ctx.beginPath();
+ctx.moveTo(-140,-75);
+ctx.lineTo(-72,-108);
+ctx.lineTo(-8,-108);
+ctx.lineTo(-8,-27);
+ctx.lineTo(-132,-27);
+ctx.closePath();
+ctx.fill();
+
+ctx.beginPath();
+ctx.moveTo(2,-108);
+ctx.lineTo(98,-106);
+ctx.lineTo(155,-55);
+ctx.lineTo(171,-27);
+ctx.lineTo(2,-27);
+ctx.closePath();
+ctx.fill();
+
+ctx.fillStyle="#182229";
+ctx.fillRect(-5,-112,9,90);
+
+if(game.hood){
+
+ctx.fillStyle="#182126";
+
+ctx.fillRect(
+-205,
+-24,
+75,
+48
+);
+
+ctx.fillStyle="#d39b2a";
+
+ctx.fillRect(
+-170,
+-10,
+35,
+20
+);
+
+}
+
+ctx.fillStyle=
+game.bumper?
+"#b9d3df":
+"#17252c";
+
+ctx.fillRect(-270,54,55,20);
+ctx.fillRect(215,54,55,20);
+
+ctx.fillStyle="#ffe8a2";
+
+ctx.beginPath();
+
+ctx.ellipse(
+-257,
+8,
+20,
+13,
+0,
+0,
+Math.PI*2
+);
+
+ctx.fill();
+
+ctx.fillStyle="#ff2638";
+
+ctx.beginPath();
+
+ctx.ellipse(
+257,
+9,
+18,
+13,
+0,
+0,
+Math.PI*2
+);
+
+ctx.fill();
+
+ctx.strokeStyle="#0006";
+ctx.lineWidth=3;
+
+ctx.strokeRect(-88,-20,86,75);
+ctx.strokeRect(5,-20,93,75);
+
+if(game.spoiler){
+
+ctx.fillStyle="#151d22";
+
+ctx.fillRect(130,-18,105,8);
+
+ctx.fillRect(155,-28,10,20);
+ctx.fillRect(205,-28,10,20);
+
+}
+
+ctx.fillStyle="#081015";
+
+ctx.fillRect(-70,55,140,24);
+
+ctx.fillStyle="#33474f";
+
+for(let i=-60;i<60;i+=15){
+
+ctx.fillRect(i,58,6,18);
+
+}
+
+ctx.fillStyle="#fff";
+
+ctx.font="bold 12px Arial";
+ctx.textAlign="center";
+
+ctx.fillText(
+"AUTO GARAGE",
+0,
+110
+);
+
+ctx.restore();
+
+}
+
+function partPosition(part){
+
+const base=Math.min(W*.88,600);
+const cy=H*.57-(game.lift?55:0);
+
+return{
+
+x:W/2+part.x*base,
+y:cy+part.y*base,
+r:32
+
+};
+
+}
+
+function drawHotspots(){
+
+for(const p of broken){
+
+if(p.fixed)continue;
+
+const q=partPosition(p);
+
+ctx.save();
+
+ctx.shadowBlur=25;
+ctx.shadowColor="#15ddff";
+
+ctx.fillStyle="#092936aa";
+
+ctx.beginPath();
+
+ctx.arc(q.x,q.y,q.r,0,Math.PI*2);
+
+ctx.fill();
+
+ctx.strokeStyle="#21ddff";
+ctx.lineWidth=3;
+
+ctx.stroke();
+
+ctx.shadowBlur=0;
+
+ctx.textAlign="center";
+
+ctx.font="25px Arial";
+
+const icons={
+battery:"🔋",
+engine:"🔧",
+wheelL:"🛞",
+wheelR:"🛞",
+light:"💡",
+body:"🔨"
+};
+
+ctx.fillText(
+icons[p.id],
+q.x,
+q.y+8
+);
+
+ctx.font="10px Arial";
+
+ctx.fillStyle="#bdeeff";
+
+ctx.fillText(
+p.name,
+q.x,
+q.y+47
+);
+
+ctx.restore();
+
+}
+
+}
+
+function draw(){
+
+drawBackground();
+
+drawCar();
+
+drawHotspots();
+
+ui();
+
+requestAnimationFrame(draw);
+
+}
+
+canvas.addEventListener(
+"pointerdown",
+e=>{
+
+const rect=canvas.getBoundingClientRect();
+
+const x=e.clientX-rect.left;
+const y=e.clientY-rect.top;
+
+for(const p of broken){
+
+if(p.fixed)continue;
+
+const q=partPosition(p);
+
+if(
+Math.hypot(
+x-q.x,
+y-q.y
+)<q.r+15
+){
+
+repair(p);
+
+return;
+
+}
+
+}
+
+if(
+broken.length&&
+broken.every(p=>p.fixed)&&
+y>H*.35&&
+y<H*.8
+){
+
+newJob();
+
+toast("🚗 НОВИЙ КЛІЄНТ!");
+
+}
+
+}
+);
+
+addEventListener("keydown",e=>{
+
+if(e.key==="1")game.tool="scan";
+if(e.key==="2")game.tool="wrench";
+if(e.key==="3")game.tool="hammer";
+if(e.key==="4")game.tool="pump";
+if(e.key==="5")game.tool="battery";
+
+if(e.key.toLowerCase()==="h")game.hood=!game.hood;
+if(e.key.toLowerCase()==="l")game.lift=!game.lift;
+
+});
+
+ui();
+draw();
 
 </script>
 
